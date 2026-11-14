@@ -38,7 +38,7 @@ Raw data is not committed. `make data` downloads it.
 - Exchange timestamps are in whole milliseconds, so nothing below 1 ms is resolvable.
 - The simulator assumes our order does not move the market, and queue position is modelled, not seen.
 - Three crypto days and one 2012 equity day: enough to falsify a claim but not to generalise one.
-- The free crypto days are all the first of a month, so any month-start effect is baked in.
+- The free crypto days are all the first of a month, so any month start effect is baked in.
 - A positive result would still not prove faster routing improves trading performance.
 
 ## Results

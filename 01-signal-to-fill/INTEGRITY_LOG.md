@@ -7,7 +7,7 @@ After each work session I check three things and write down what I found, includ
 
 ## 2026-11-14
 **Found and fixed**
-- The literature review said every entry was checked at the publisher page. Not true. Perold (1988) and Almgren & Chriss (2001) were not re-checked, and every paper was checked at abstract level only. Wording corrected.
+- The literature review said every entry was checked at the publisher page. Not true. Perold (1988) and Almgren & Chriss (2001) were not checked again, and every paper was checked at abstract level only. Wording corrected.
 - The novelty claim said the delay grid starts at 0 ms. The audit showed exchange timestamps are whole milliseconds, so 0 and 1 ms are indistinguishable. Corrected to 1 to 500 ms.
 - The README stated "the passive side is where delay should matter most" as a current belief. It is a hypothesis from one measured fact (a one tick spread on 95.5% of updates). Relabelled as untested.
 - "Prior art" is a patent term; renamed to literature review.
