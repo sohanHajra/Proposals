@@ -2,7 +2,7 @@
 
 # Proposals
 
-**One research question a week, taken from a one-page proposal to running code.**
+**Research questions, each taken from a one-page proposal to running code.**
 Hypotheses are written down before results. Dead ends stay in the log. Null results get published.
 
 *Sohan Hajra · UIUC B.S. Mathematics & Computer Science · [sohanhajra.github.io](https://sohanhajra.github.io)*
@@ -13,7 +13,7 @@ Hypotheses are written down before results. Dead ends stay in the log. Null resu
 
 ```mermaid
 flowchart LR
-    A[One-page proposal] --> B[Prior art<br/>what is already known]
+    A[One-page proposal] --> B[Literature review<br/>what published work already shows]
     B --> C[Preregistration<br/>hypotheses, metrics, pass/fail<br/>committed before test data]
     C --> D[Dev data<br/>build and debug]
     D --> E[Locked test data<br/>run once]
@@ -39,7 +39,7 @@ flowchart LR
 
 **What broke.** LOBSTER's main site serves an HTML shell where sample zips used to be. A 2025 live-trading study on Binance and Bybit turned out to be close to my first research question, so I narrowed what I claim is new.
 
-**What I believe now.** BTCUSDT's spread is one tick on 95.5% of book updates, so the passive side is where delay should matter most. Updated daily in the [lab notebook](01-signal-to-fill/LAB_NOTEBOOK.md).
+**What I believe now.** Measured: BTCUSDT's spread is one tick on 95.5% of book updates on the dev day. Hypothesis, not yet tested: that makes queue position, and so the passive side, where delay should cost most. Full history in the [lab notebook](01-signal-to-fill/LAB_NOTEBOOK.md).
 
 </details>
 
@@ -47,4 +47,5 @@ flowchart LR
 - Every number comes from code in the repo, rerunnable with `make reproduce` (pinned environment, fixed seeds).
 - Test data stays locked until the preregistration is committed; the download script refuses otherwise.
 - Out-of-sample checks, trading costs and alternative specifications before any claim.
-- If a week's proposal isn't good enough, it ships late rather than thin.
+- A proposal that isn't good enough ships late rather than thin.
+- Each proposal keeps an [integrity log](01-signal-to-fill/INTEGRITY_LOG.md): logic, sources and bias checked after every work session, with what was found and fixed.

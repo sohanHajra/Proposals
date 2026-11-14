@@ -1,6 +1,6 @@
-# Prior art
+# Literature review
 
-What is already known, and where this project tries to add something. Every entry was checked against the publisher or author page on 2026-11-14.
+What published work already shows, and where this project tries to add something. Entries with a DOI link were checked against the publisher or author page (abstract level) on 2026-11-14. Perold (1988) and Almgren & Chriss (2001) are cited from standard references and were not re-checked at the source. None of the papers has been read in full yet.
 
 | Work | What it establishes | What it leaves open for this project |
 |---|---|---|
@@ -15,7 +15,7 @@ What is already known, and where this project tries to add something. Every entr
 | *The good, the bad, and latency: exploratory trading on Bybit and Binance* (2025), Quantitative Finance 25(6), [doi:10.1080/14697688.2025.2515933](https://doi.org/10.1080/14697688.2025.2515933) | Live experiment: millions of taker orders on Binance/Bybit; slippage vs snapshot tied to volatility, latency, liquidity; adverse selection for takers | **Closest prior work.** Live, taker-only, one realised latency per order. This project instead replays the *same* decision across a controlled delay grid using only public data, adds the passive leg, and splits cost into drift vs queue loss |
 
 ## What is new here (claimed modestly)
-1. A paired counterfactual design: identical decision moments at 0 to 500 ms, so the latency effect is not confounded by when slow orders happen to occur.
+1. A paired counterfactual design: identical decision moments replayed at 1 to 500 ms of added delay (exchange timestamps are whole milliseconds, so 0 and 1 ms cannot be told apart), so the latency effect is not confounded by when slow orders happen to occur.
 2. A decomposition of latency cost into price drift and queue-position loss, on public data anyone can rerun.
 3. A test of whether latency cost is a tail phenomenon (RQ3) rather than a mean shift.
 

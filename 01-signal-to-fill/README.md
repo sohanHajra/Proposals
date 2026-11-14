@@ -6,7 +6,7 @@
 |---|---|
 | Status | 🟡 Data audited; preregistration next |
 | Proposal | [PROPOSAL.md](PROPOSAL.md) |
-| Prior art | [PRIOR_ART.md](PRIOR_ART.md) |
+| Literature review | [LITERATURE_REVIEW.md](LITERATURE_REVIEW.md) |
 | Lab notebook | [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) |
 | Reproduce | `make reproduce` |
 
@@ -38,6 +38,7 @@ Raw data is not committed. `make data` downloads it.
 - Millisecond exchange timestamps: nothing below 1 ms is resolvable.
 - The simulator assumes our order does not move the market, and queue position is modelled, not seen.
 - Three crypto days and one 2012 equity day: enough to falsify a claim, not to generalise one.
+- The free crypto days are all the first of a month, so any month-start effect is baked in.
 - A positive result would still not prove faster routing improves trading performance.
 
 ## Results
