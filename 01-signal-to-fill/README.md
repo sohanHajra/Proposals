@@ -33,5 +33,12 @@ sequenceDiagram
 
 Raw data is not committed. `make data` downloads it.
 
+## Limits (what this cannot show)
+- Decision-to-send latency is injected in simulation, not observed; no public data has decision timestamps.
+- Millisecond exchange timestamps: nothing below 1 ms is resolvable.
+- The simulator assumes our order does not move the market, and queue position is modelled, not seen.
+- Three crypto days and one 2012 equity day: enough to falsify a claim, not to generalise one.
+- A positive result would still not prove faster routing improves trading performance.
+
 ## Results
 None yet. This section fills only from files in `results/`.
