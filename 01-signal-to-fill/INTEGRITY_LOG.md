@@ -19,3 +19,4 @@ After each work session I check three things and write down what I found, includ
 
 **Checked, no issue**
 - Every number in the README and lab notebook traces to `results/audit/tardis_2026-09-01.json`.
+- Adopted from a researcher friend's method: every source now records how deeply it was read, sources I have not opened sit in an Unverified list, and absence claims are worded as "not found in this review". Perold (1988) and Almgren & Chriss (2001) moved to Unverified.
