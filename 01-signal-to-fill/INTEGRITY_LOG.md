@@ -39,6 +39,7 @@ No second reviewer was available for this pass, so I did it myself by rereading 
 - The notebook rounded both INTC and MSFT to a quarter of orders living 1.5 ms or less. INTC is 1.29 ms and MSFT 1.528 ms, so both values are now given.
 - The literature review called the Albers et al. slippage fits weighted R². Their text gives the R² values but I could not confirm from the text alone that these are the weighted version. The word is removed.
 - The first draft of the materiality bar for H1 cited 0.1 to 0.3 bps from Albers et al. Their text gives 0.1, 0.07 and 0.3 bps across three markets, and the number is conditional on a 2 bps markout. Range corrected and the conditioning stated next to the bar.
+- The repository description on GitHub promised a pace of new proposals. I don't want to promise one, so it now just says what the repo is.
 - H2c compared markouts of fills at 1 ms and 500 ms. Those are different sets of decisions, so the comparison carries selection. Added a second comparison on decisions that fill at both delays.
 
 **Open**
