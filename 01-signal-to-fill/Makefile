@@ -9,6 +9,7 @@ data:
 
 audit:
 	$(PY) -m s2f.data_audit 2026-09-01
+	$(PY) -m s2f.lobster_audit
 
 test:
 	$(PY) -m pytest -q tests

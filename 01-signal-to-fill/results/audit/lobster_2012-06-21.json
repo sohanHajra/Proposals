@@ -1,0 +1,237 @@
+{
+  "AAPL": {
+    "ticker": "AAPL",
+    "day": "2012-06-21",
+    "message_rows": 400391,
+    "orderbook_rows": 400391,
+    "rows_match": true,
+    "type_counts": {
+      "1": 191015,
+      "2": 3260,
+      "3": 171126,
+      "4": 23658,
+      "5": 11332
+    },
+    "time_first_last_s": [
+      34200.004241176,
+      57599.913117637
+    ],
+    "nonmonotone_time": 0,
+    "min_positive_gap_ns": 243.0,
+    "share_messages_same_time_as_previous": 0.0401,
+    "rows_one_side_empty": 0,
+    "crossed_or_locked_rows": 0,
+    "spread_1tick_share": 0.0052,
+    "spread_ticks_median_p99": [
+      15.0,
+      36.0
+    ],
+    "mid_median_usd": 583.235,
+    "tick_bps_at_median_mid": 0.171,
+    "orders_submitted_in_file": 191015,
+    "orders_acted_on_without_submission_in_file": 7652,
+    "submitted_with_end_in_file": 180947,
+    "submitted_still_open_at_close": 10068,
+    "ended_with_any_visible_execution": 16818,
+    "ended_by_delete_without_execution": 164129,
+    "share_of_ended_with_any_visible_execution": 0.0929,
+    "lifetime_ms_quantiles": {
+      "0.1": 1.869,
+      "0.25": 18.476,
+      "0.5": 328.27,
+      "0.75": 1875.686,
+      "0.9": 6965.467
+    },
+    "deleted_without_fill_share_within_100ms": 0.3582,
+    "hidden_execution_rows": 11332,
+    "halt_rows": 0
+  },
+  "AMZN": {
+    "ticker": "AMZN",
+    "day": "2012-06-21",
+    "message_rows": 269748,
+    "orderbook_rows": 269748,
+    "rows_match": true,
+    "type_counts": {
+      "1": 131954,
+      "2": 2917,
+      "3": 123458,
+      "4": 8974,
+      "5": 2445
+    },
+    "time_first_last_s": [
+      34200.017459617,
+      57599.95935965
+    ],
+    "nonmonotone_time": 0,
+    "min_positive_gap_ns": 230.0,
+    "share_messages_same_time_as_previous": 0.0314,
+    "rows_one_side_empty": 0,
+    "crossed_or_locked_rows": 0,
+    "spread_1tick_share": 0.0059,
+    "spread_ticks_median_p99": [
+      13.0,
+      32.0
+    ],
+    "mid_median_usd": 222.655,
+    "tick_bps_at_median_mid": 0.449,
+    "orders_submitted_in_file": 131954,
+    "orders_acted_on_without_submission_in_file": 6339,
+    "submitted_with_end_in_file": 123649,
+    "submitted_still_open_at_close": 8305,
+    "ended_with_any_visible_execution": 6589,
+    "ended_by_delete_without_execution": 117060,
+    "share_of_ended_with_any_visible_execution": 0.0533,
+    "lifetime_ms_quantiles": {
+      "0.1": 2.035,
+      "0.25": 39.096,
+      "0.5": 834.483,
+      "0.75": 4633.989,
+      "0.9": 13670.763
+    },
+    "deleted_without_fill_share_within_100ms": 0.3068,
+    "hidden_execution_rows": 2445,
+    "halt_rows": 0
+  },
+  "GOOG": {
+    "ticker": "GOOG",
+    "day": "2012-06-21",
+    "message_rows": 147916,
+    "orderbook_rows": 147916,
+    "rows_match": true,
+    "type_counts": {
+      "1": 71258,
+      "2": 19,
+      "3": 64961,
+      "4": 7765,
+      "5": 3913
+    },
+    "time_first_last_s": [
+      34200.015105074,
+      57599.871751084
+    ],
+    "nonmonotone_time": 0,
+    "min_positive_gap_ns": 303.0,
+    "share_messages_same_time_as_previous": 0.0577,
+    "rows_one_side_empty": 0,
+    "crossed_or_locked_rows": 0,
+    "spread_1tick_share": 0.0013,
+    "spread_ticks_median_p99": [
+      28.0,
+      75.0
+    ],
+    "mid_median_usd": 569.88,
+    "tick_bps_at_median_mid": 0.175,
+    "orders_submitted_in_file": 71258,
+    "orders_acted_on_without_submission_in_file": 3210,
+    "submitted_with_end_in_file": 67320,
+    "submitted_still_open_at_close": 3938,
+    "ended_with_any_visible_execution": 5480,
+    "ended_by_delete_without_execution": 61840,
+    "share_of_ended_with_any_visible_execution": 0.0814,
+    "lifetime_ms_quantiles": {
+      "0.1": 1.671,
+      "0.25": 84.528,
+      "0.5": 1692.502,
+      "0.75": 7350.634,
+      "0.9": 19882.983
+    },
+    "deleted_without_fill_share_within_100ms": 0.2625,
+    "hidden_execution_rows": 3913,
+    "halt_rows": 0
+  },
+  "INTC": {
+    "ticker": "INTC",
+    "day": "2012-06-21",
+    "message_rows": 624040,
+    "orderbook_rows": 624040,
+    "rows_match": true,
+    "type_counts": {
+      "1": 304790,
+      "2": 8028,
+      "3": 278739,
+      "4": 28924,
+      "5": 3559
+    },
+    "time_first_last_s": [
+      34200.005742728,
+      57599.948441634
+    ],
+    "nonmonotone_time": 0,
+    "min_positive_gap_ns": 171.0,
+    "share_messages_same_time_as_previous": 0.1056,
+    "rows_one_side_empty": 0,
+    "crossed_or_locked_rows": 0,
+    "spread_1tick_share": 0.767,
+    "spread_ticks_median_p99": [
+      1.0,
+      2.0
+    ],
+    "mid_median_usd": 27.025,
+    "tick_bps_at_median_mid": 3.7,
+    "orders_submitted_in_file": 304790,
+    "orders_acted_on_without_submission_in_file": 1525,
+    "submitted_with_end_in_file": 300264,
+    "submitted_still_open_at_close": 4526,
+    "ended_with_any_visible_execution": 23535,
+    "ended_by_delete_without_execution": 276729,
+    "share_of_ended_with_any_visible_execution": 0.0784,
+    "lifetime_ms_quantiles": {
+      "0.1": 0.066,
+      "0.25": 1.29,
+      "0.5": 1187.354,
+      "0.75": 16084.06,
+      "0.9": 78497.48
+    },
+    "deleted_without_fill_share_within_100ms": 0.391,
+    "hidden_execution_rows": 3559,
+    "halt_rows": 0
+  },
+  "MSFT": {
+    "ticker": "MSFT",
+    "day": "2012-06-21",
+    "message_rows": 668765,
+    "orderbook_rows": 668765,
+    "rows_match": true,
+    "type_counts": {
+      "1": 329566,
+      "2": 5602,
+      "3": 300183,
+      "4": 29798,
+      "5": 3616
+    },
+    "time_first_last_s": [
+      34200.01399412,
+      57599.907796528
+    ],
+    "nonmonotone_time": 0,
+    "min_positive_gap_ns": 169.0,
+    "share_messages_same_time_as_previous": 0.0855,
+    "rows_one_side_empty": 0,
+    "crossed_or_locked_rows": 0,
+    "spread_1tick_share": 0.7686,
+    "spread_ticks_median_p99": [
+      1.0,
+      2.0
+    ],
+    "mid_median_usd": 30.51,
+    "tick_bps_at_median_mid": 3.278,
+    "orders_submitted_in_file": 329566,
+    "orders_acted_on_without_submission_in_file": 1659,
+    "submitted_with_end_in_file": 322670,
+    "submitted_still_open_at_close": 6896,
+    "ended_with_any_visible_execution": 24891,
+    "ended_by_delete_without_execution": 297779,
+    "share_of_ended_with_any_visible_execution": 0.0771,
+    "lifetime_ms_quantiles": {
+      "0.1": 0.068,
+      "0.25": 1.528,
+      "0.5": 1546.089,
+      "0.75": 16655.113,
+      "0.9": 75000.099
+    },
+    "deleted_without_fill_share_within_100ms": 0.3859,
+    "hidden_execution_rows": 3616,
+    "halt_rows": 0
+  }
+}
