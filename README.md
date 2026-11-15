@@ -28,7 +28,7 @@ flowchart LR
 
 | # | Proposal | The question | Status | Headline |
 |---|---|---|---|---|
-| 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟡 In progress, data audited | No result yet |
+| 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟡 In progress, preregistered | No result yet |
 
 <details>
 <summary><b>01 · From Signal to Fill</b> · what I believed, what I tried, what broke, what I believe now</summary>
@@ -39,7 +39,7 @@ flowchart LR
 
 **What broke.** LOBSTER's main site serves an HTML shell where sample zips used to be. A 2025 live trading study on Binance and Bybit turned out to be close to my first research question, so I narrowed what I claim is new.
 
-**What I believe now.** Measured: BTCUSDT's spread is one tick on 95.5% of book updates on the dev day. Hypothesis, not yet tested: that makes queue position, and so the passive side, where delay should cost most. Full history in the [lab notebook](01-signal-to-fill/LAB_NOTEBOOK.md).
+**What I believe now.** I measured that BTCUSDT's spread is one tick on 95.5% of book updates on the dev day. My hypothesis, not yet tested, is that this makes queue position, and so the passive side, where delay should cost most. Full history in the [lab notebook](01-signal-to-fill/LAB_NOTEBOOK.md).
 
 </details>
 

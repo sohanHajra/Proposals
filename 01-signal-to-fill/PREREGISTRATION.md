@@ -1,0 +1,119 @@
+# Preregistration
+
+Written 2026-11-15, before the replay engine exists and before any test day is downloaded. The git commit that adds this file is the timestamp. `python -m s2f.get_data test` refuses to run until this file is in git history.
+
+## What I had seen when I wrote this
+- The dev day audit for Binance USD-M BTCUSDT on 2026-09-01 (`results/audit/tardis_2026-09-01.json`).
+- The LOBSTER audit for AAPL, AMZN, GOOG, INTC and MSFT on 2012-06-21 (`results/audit/lobster_2012-06-21.json`).
+- No replay output of any kind. No test day data. No Alpaca orders.
+
+Anything below that turns out to be unworkable gets changed only through the Deviations section at the bottom, dated, with the reason, and before the test days are run. After the test days are run, nothing in the primary tests changes.
+
+## Data
+| Role | Data | Days |
+|---|---|---|
+| Dev | Tardis free CSVs for Binance USD-M BTCUSDT. `book_ticker` (top of book), `book_snapshot_5` (five levels), `trades` | 2026-09-01 |
+| Test | Same files | 2026-10-01 and 2026-11-01, each analysed on its own |
+| RQ2 | LOBSTER Nasdaq samples, 10 levels, with order IDs | 2012-06-21 |
+
+Events are ordered by exchange timestamp. Within one millisecond, trades go before book updates, and each file keeps its own order.
+
+## Decisions
+A decision is a moment `t` (exchange time) and a side. The book seen at `t` is the last update with exchange time at or before `t`.
+1. **Random decisions (primary).** Poisson times with a mean gap of 10 s, side chosen by a fair coin. Seed 20261115.
+2. **Signal decisions (secondary).** Top of book imbalance `I = (bid size − ask size) / (bid size + ask size)`. A decision fires when `|I|` is at or above the 90th percentile of `|I|` on the dev day, side equal to the sign of `I`, at most one decision per second. The threshold is computed once on the dev day and then frozen for the test days.
+
+Order size is 0.01 BTC. Decisions closer than 60 s to either of the dev day's two feed gaps over 1 s, or to any gap over 1 s on a test day, are dropped.
+
+## Delay grid and timing
+Added delay `d` in {1, 2, 5, 10, 25, 50, 100, 250, 500} ms. The order reaches the book at `t + d`. Exchange timestamps are whole milliseconds, so 1 ms is the smallest delay I can resolve and it is the baseline.
+
+Tie rule (primary). My order is processed after every event stamped at or before `t + d`. This is the cautious choice. Robustness flips it so my order goes before events stamped exactly at `t + d`.
+
+Every decision is replayed at every delay on the same path. All comparisons are paired within a decision.
+
+## RQ1a Taker orders
+A marketable order of 0.01 BTC walks the five level snapshot at arrival.
+- **Shortfall** `S(d)` in bps is `side × (fill VWAP − mid at t) / mid at t × 10^4`.
+- **Split.** `S(d)` = drift `side × (mid at t+d − mid at t)` plus arrival cost `side × (VWAP − mid at t+d)`, both in bps.
+- **Latency cost** `ΔS(d) = S(d) − S(1 ms)`, per decision.
+
+**H1.** Latency cost rises with delay. I estimate the slope `β` of `ΔS(d)` on `log(d)` across all decisions and delays, with a block bootstrap over 5 minute blocks (2,000 resamples, 95% interval).
+
+**H1 counts as a finding** only if on each test day separately the interval for `β` is above zero, and the mean `ΔS(500 ms)` is at least 0.1 bps on each test day. I chose 0.1 bps because Albers et al. (2025) report roughly 0.07 to 0.3 bps of average slippage for a market order whose markout would have been 2 bps (about 0.1 on Bybit BTC, 0.07 on Bybit ETH, 0.3 on Binance BTC inverse), so a smaller effect would sit below what a live study already sees. The anchor is loose. Their number is conditional on a 2 bps markout and comes from colocated orders, while mine is an average over all decisions at 500 ms.
+
+**H1 is a null** if the interval covers zero on either test day or the signs differ between days. I will report it as a null.
+
+**H1b (secondary).** Albers et al. found that orders that would have made money are the ones that slip. I split decisions by the sign of `side × (mid at t+1 s − mid at t)` and compare mean `ΔS(100 ms)` between the positive and the rest, with the same bootstrap. Supported if the positive group's latency cost is larger, with the interval above zero, on both test days.
+
+## RQ1b Passive orders
+A limit order of 0.01 BTC joins the best price on its own side at `t + d`. Queue ahead is the displayed size at that price at arrival. The order never changes the book.
+
+Inside one book update I apply trades first, then cancellations, then additions (following Danait, Zamora and Boier, 2026).
+- Trades at my price reduce the queue ahead. Once it is used up, further traded size fills me.
+- A drop in displayed size not explained by trades is a cancellation. Where it lands is set by one of three rules, run on the same path, seeds and trades.
+  - **Front.** Cancels remove the oldest quantity first. Best case for me.
+  - **Random.** Cancels land at a position drawn in proportion to quantity. Seed 20261115.
+  - **Back.** Cancels remove the newest quantity first. Worst case for me.
+- A rise in displayed size joins behind me.
+- A trade at a price through mine fills the rest of my order.
+- I track my level with the five level snapshot. If it leaves the top five, I count the order as unfilled from that moment.
+
+Horizon `H` = 10 s. Metrics per decision and delay.
+- Fill probability within `H` (full fills; partial fills reported separately).
+- For filled orders, markout at 1 s and 10 s from the maker side.
+- **Post then cross cost.** If the order is not filled by `H`, it crosses the spread at `H` as a marketable order. The total cost in bps against the mid at `t` gives one number that is comparable to the taker leg.
+
+**H2.** Passive fill probability falls with delay. Slope of fill probability on `log(d)`, same bootstrap.
+
+**H2 counts as a finding** only if, under all three cancellation rules and on both test days, the interval for the slope is below zero. If the sign holds under some rules and not others, I report that the data cannot decide it. Every passive number is reported as a range across the three rules, never as one value.
+
+**H2b (my own hypothesis, labelled).** Delay and the cancellation rule interact. The drop in fill probability from 1 ms to 500 ms is larger under the back rule than under the front rule. Supported only if the paired difference has an interval excluding zero on both test days. Otherwise it stays a hypothesis.
+
+**H2c (secondary, from Yueshen 2026).** In Yueshen's model, orders at the end of a queue lose money when they fill. If that shows up here, fills at 500 ms have worse 10 s markouts than fills at 1 ms. Reported under all three rules, not counted as a finding unless the sign holds under all three on both test days. The comparison is conditional on filling, so the orders that fill at 500 ms are not the same decisions as those that fill at 1 ms. I will also report the comparison on decisions that fill at both delays.
+
+## RQ3 Is latency cost a tail
+- Regime split by realised volatility of the mid over the 10 s before `t` (top fifth against the rest), and by `|I|` at `t` (top fifth against the rest).
+- **H3.** Mean `ΔS(100 ms)` is higher in the high volatility fifth. Same bootstrap. Finding only if the interval is above zero on both test days.
+- Descriptive, not tested. The share of total `ΔS(100 ms)` that comes from the worst 10% of decisions.
+
+## RQ2 Real order lifecycles (LOBSTER, observational)
+Main sample INTC and MSFT, the two names in the sample where the spread is one tick on about 77% of book updates. AAPL, AMZN and GOOG are reported descriptively.
+- Orders submitted at the best price on their side, with at least one visible execution in the file.
+- Rest time is submission to first visible execution, in ms.
+- Outcome is the markout of the mid 1 s after the first fill, from the resting order's side, in bps.
+- Controls are spread, displayed size at the order's price at submission, top of book imbalance, mid volatility over the previous minute, and half hour of the day.
+
+**H4.** Longer rest before the first fill goes with a worse markout for the resting order. OLS of markout on `log(rest time)` plus controls, standard errors clustered by minute. Supported only if the coefficient is negative with a 95% interval below zero in both INTC and MSFT. A coefficient that loses its sign after controls is reported as a null. This is one Nasdaq day in 2012 and describes that day only.
+
+**Exploratory.** Where cancellations land inside a queue, from order IDs. Which of the three rules looks closer on this day. Labelled as Nasdaq 2012 only, not as evidence about Binance.
+
+## Real decision to acknowledgement latency (Alpaca paper account)
+The replay injects delay. I also want to know what one real retail stack looks like, so that I can mark it on the delay grid.
+- From this project's machine, send 200 limit buy orders for the smallest quantity Alpaca's paper crypto venue accepts on BTC/USD, priced at half the current best bid so they cannot fill, one every 3 s, each cancelled right after its acknowledgement.
+- Measure local monotonic time from just before the HTTP request to the HTTP response. Also record the `submitted_at` time Alpaca returns.
+- Report median, 90th and 99th percentile, and the failure count.
+- Used only to locate one realistic point on the delay grid. Alpaca paper fills are simulated, so no fill, price or shortfall from Alpaca is ever used. The path is to a broker API, not to Binance's matching engine, and the result says nothing about colocated latency.
+
+## Robustness (run on the test days after the primary tests, all reported)
+1. Fees. Binance USD-M published base tier taker and maker fees, read on the day of the run and cited, added to shortfall and to the post then cross cost.
+2. Tie rule flipped.
+3. Event order by local capture time instead of exchange time.
+4. Signal decisions instead of random decisions.
+5. Order size 1 BTC instead of 0.01 BTC.
+6. Passive horizon 1 s and 60 s.
+7. Placebo. Delay labels shuffled within each decision. The slope should be indistinguishable from zero.
+8. Five minute blocks replaced by 15 minute blocks in the bootstrap.
+
+## Primary and secondary
+Primary tests are H1 and H2. Everything else is secondary or exploratory and will be called that in the report. Because each primary test must hold on two separate test days (and H2 under three rules), I do not add a further multiple testing correction, and I say so here so it is a choice on record rather than an omission.
+
+## Known limits, stated in advance
+- Decision to send latency is injected, never observed in market data.
+- Nothing below 1 ms is resolvable.
+- My simulated order never moves the market and never competes for the same liquidity in the same millisecond. A replay cannot capture other traders reacting to my own order. Albers et al. (2025) argue that a synthetic study would need latency that depends on future returns. The replay keeps the real future of the book but cannot model my order's place in a race.
+- Queue position is modelled, which is why the passive leg carries three rules.
+- Three crypto days, all the first of a month, and one 2012 equity day.
+
+## Deviations
+None yet.
