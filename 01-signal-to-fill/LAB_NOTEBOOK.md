@@ -15,3 +15,12 @@ Dated entries, never edited after the fact. Hypotheses, what I tried, what broke
   - *Fell short:* Tardis exchange timestamps are whole milliseconds, so sub millisecond latency (where colocated firms compete) is out of reach. One free day per month means three days total. That is enough to falsify but not enough to estimate regime dependence.
   - *Not yet read:* the full text of the closest prior work (Quantitative Finance 2025). Novelty is provisional until it is.
   - *More resources would buy:* paid Tardis access (many days, full L2 depth) for regime and seasonality tests; a live paper trading account on Binance testnet to measure real stage 1 and 2 latency instead of assuming it.
+
+## 2026-11-14 (Sat, evening) · a paper that changes the queue model
+- **Read in full.** Danait, Zamora & Boier, *Same Book, Different Fills* (arXiv 2609.13597 v3). On the same L2 path, changing only which quantity a cancellation removes moves passive completion by 8.01 points on 1301.T and 7.39 points on 7911.T. The aggressive benchmark does not move.
+- **Why it matters here.** My passive leg runs on Binance L2 data, which has no order IDs. One queue rule would have quietly decided my passive result.
+- **Change, made before any passive result exists.** Three matched cancellation rules (front, random, back). A passive latency effect counts only if its sign holds under all three, and every passive number is reported as a range. This goes into PREREGISTRATION.md.
+- **Limits and gaps.**
+  - *Missing:* I have no ground truth for where cancellations land in a Binance queue. LOBSTER order IDs might give a check on Nasdaq, not on Binance.
+  - *Fell short:* my first plan used a single queue rule. This paper caught that before it cost anything.
+  - *Not yet read:* Yueshen (2025) on queue uncertainty from latency, which may be close to my passive leg.

@@ -21,3 +21,12 @@ After each work session I check three things and write down what I found, includ
 - Every number in the README and lab notebook traces to `results/audit/tardis_2026-09-01.json`.
 - Adopted from a researcher friend's method: every source now records how deeply it was read, sources I have not opened sit in an Unverified list, and absence claims are worded as "not found in this review". Perold (1988) and Almgren & Chriss (2001) moved to Unverified.
 - Style pass on all public notes. I write without dashes and keep colons out of prose, so the notes read the way I talk. Hyphens stay only where they belong to someone else's words or to identifiers (paper titles, dates, DOIs, file and folder names). PROPOSAL.md is left exactly as I wrote the original PDF.
+
+## 2026-11-14 (evening)
+**Found and fixed**
+- The planned passive model relied on one queue rule. After reading Danait et al. (2026) in full, the passive leg now uses three matched cancellation rules and a sign must hold under all three.
+**Open**
+- Three papers found in their reference list are listed as Unverified, not used as evidence.
+- My guess that delay and the cancellation rule interact is labelled as my inference and untested.
+**Checked, no issue**
+- Every number quoted from the paper (8.01 and 7.39 points, 18.15% and 10.14% completion, 1.010 and 0.384 bps) matches its abstract, Table 2 and Section 7 in v3.

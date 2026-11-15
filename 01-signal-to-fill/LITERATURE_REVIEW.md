@@ -10,10 +10,27 @@ What published work already shows, and where this project tries to add something
 | Moallemi & Yuan (2017), *A Model for Queue Position Valuation in a Limit Order Book*, SSRN 2996221 | Queue position has economic value, large for large tick assets | The passive leg here measures queue loss empirically per ms of delay | SSRN listing |
 | Cartea & Sánchez-Betancourt (2021), *The Shadow Price of Latency*, SIAM J. Financial Math 12(1), [doi:10.1137/19M1258888](https://doi.org/10.1137/19M1258888) | Latency driven missed fills in FX, concentrated in high volatility | Taker side only; proprietary LMAX data | abstract |
 | Cartea & Sánchez-Betancourt (2023), *Optimal execution with stochastic delay*, Finance and Stochastics, [doi:10.1007/s00780-022-00491-w](https://doi.org/10.1007/s00780-022-00491-w) | Optimal marketable limit orders under random latency | Theory plus FX data | abstract |
+| Danait, Zamora & Boier (2026), *Same Book, Different Fills: Partial Identification of FIFO Execution from Aggregate Order Books*, arXiv 2609.13597 v3, [doi:10.48550/arXiv.2609.13597](https://doi.org/10.48550/arXiv.2609.13597) | Holding an L2 path fixed and changing only which resting quantity a cancellation removes (front, quantity weighted random, back) moves passive completion by 8.01 points on 1301.T (18.15% vs 10.14%) and 7.39 points on 7911.T, and passive shortfall by 1.010 and 0.384 bps. The aggressive benchmark does not move. Proprietary 2025 Tokyo data, 18 held out days, zero latency | Any passive fill rate I estimate from Binance L2 data depends on a cancellation rule I cannot observe. They hold latency at zero, I vary it. Bears directly on the queue model (see below) | full text |
 | *The good, the bad, and latency: exploratory trading on Bybit and Binance* (2025), Quantitative Finance 25(6), [doi:10.1080/14697688.2025.2515933](https://doi.org/10.1080/14697688.2025.2515933) | Live experiment with millions of taker orders on Binance/Bybit; slippage vs snapshot tied to volatility, latency, liquidity; adverse selection for takers | **Closest prior work.** Live, taker only, one realised latency per order. This project instead replays the *same* decision across a controlled delay grid using only public data, adds the passive leg, and splits cost into drift vs queue loss | abstract |
+
+## How Danait et al. (2026) changes my queue model
+My plan for the passive leg used one queue rule. Queue ahead was the displayed size when my order arrives, and I fill once traded volume at my price exceeds it, with a pro rata cancellation variant as a side check. Their paper shows that this single choice can move passive fill rates by about 8 points on its own, on data with the same prices, sizes and trades. So a passive result from one rule would really be a result about the rule.
+
+What I am changing, before any passive result exists.
+1. Three matched cancellation rules. Front (cancels remove the oldest quantity, best case for me), quantity weighted random, and back (cancels remove the newest quantity, worst case). Same book path, same seeds, same trades for all three.
+2. A passive latency effect only counts as a finding if its sign is the same under all three rules. If the sign flips between rules, I report that the data cannot decide it.
+3. Every passive number is reported as a range across the three rules, not as one value.
+4. Inside one book update I apply trades first, then cancellations, then additions, as they do, and my simulated order never changes the book.
+
+My own inference, not in their paper. Delay and the cancellation rule may interact. Under the back rule, cancellations never shrink the queue in front of me, so the cost of arriving late comes mostly from quantity that joined ahead during the delay. Under the front rule, early cancellations can partly undo that loss. If so, the queue part of my latency cost could be smallest under front and largest under back. This is a hypothesis to test, not a result.
+
+Limits of the transfer. Their numbers come from two Tokyo equities with proprietary data and zero latency. Binance BTCUSDT has a far larger queue relative to typical order size and a different tick regime, so I do not expect the same 8 point gap. Their front and back rules are endpoints of one reconstruction method, not true bounds on what the real queue did. LOBSTER has order IDs, so it may let me see where cancellations actually land in a queue and which rule is closer to reality. That is an idea, not yet checked.
 
 ## Unverified (not yet opened at the source)
 - Perold (1988), *The Implementation Shortfall: Paper versus Reality*, Journal of Portfolio Management. Origin of the decision price benchmark used here.
+- Yueshen (2025), *Queuing Uncertainty of Limit Orders*, Management Science 72(6), doi:10.1287/mnsc.2023.03371. Cited by Danait et al. as studying queue uncertainty caused by latency and fragmentation. Possibly close to my passive leg, so it is the next paper to open.
+- Maglaras, Moallemi & Wang (2022), *A Deep Learning Approach to Estimating Fill Probabilities in a Limit Order Book*, Quantitative Finance 22(11). Cited by Danait et al.; fill probability estimation from observed states.
+- Gu et al. (2013), *The Position Profiles of Order Cancellations in an Emerging Stock Market*, J. Stat. Mech. Cited by Danait et al. for the point that cancellations are not spread evenly through a queue.
 - Almgren & Chriss (2001), *Optimal Execution of Portfolio Transactions*, Journal of Risk. Impact vs risk in execution; context only.
 
 ## What is new here (claimed modestly)
