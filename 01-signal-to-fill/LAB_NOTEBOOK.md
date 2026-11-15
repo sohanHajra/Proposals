@@ -38,3 +38,13 @@ Dated entries, never edited after the fact. Hypotheses, what I tried, what broke
   - *Weakness in the LOBSTER files:* they only carry messages inside the 10 level window. An order that drifts out of the window can look open at the close, and fill and delete shares are for orders whose whole life stayed in view.
   - *Judgement call on record:* the 0.1 bps materiality bar for H1 is anchored loosely on Albers et al., whose figure is conditional on a 2 bps markout. A reader could argue for a different bar.
   - *More resources would buy:* LOBSTER data for recent years and more days, which would show whether the 2012 pattern still holds.
+
+## 2026-11-15 (Sun, afternoon) · the Albers et al. tables
+- The tables that did not render this morning are in the open access PDF on the Oxford repository. I read all nine tables and the main figures.
+- **The H1 bar holds.** Table 7 slopes give about 0.10, 0.31 and 0.07 bps of slippage at a 2 bps markout, the same numbers I had taken from their text. Nothing in the committed preregistration changes.
+- **Context I did not have.** Best public Binance USDT margined taker fee at the time was 1.7 bps (Table 1). Their markout horizon has a median of 1.14 s (Table 4), close to my 1 s. Colocated send time was about 2 ms (text, Section 5.1).
+- **Limits and gaps.**
+  - *Still missing:* the replay engine. No latency result yet.
+  - *Not checked:* their supplementary material (latency and liquidity analysis, robustness of the fits). I have not opened it.
+  - *Fees:* Table 1 is the best tier in 2023. My account tier and today's schedule may differ.
+

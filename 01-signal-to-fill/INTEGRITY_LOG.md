@@ -53,3 +53,16 @@ No second reviewer was available for this pass, so I did it myself by rereading 
 - Albers et al. counts (3,138,814 market orders on Bybit BTC, 40,588 on Binance, about 1.06 million on Bybit ETH, 1.354% failure rate) match Sections 3.2, 3.3.2 and 5.2 of the full text.
 - Yueshen is described as a theory paper and its predictions are labelled as model predictions, not measurements.
 - The preregistration states what had been seen before it was written. No replay output and no test day data existed.
+
+## 2026-11-15 (afternoon)
+**Found and fixed**
+- The literature review still said the Albers et al. tables were not viewed. Updated after reading the PDF.
+
+**Open**
+- Their supplementary material is unread.
+
+**Checked, no issue**
+- Table 7 slopes reproduce the 0.07 to 0.3 bps range used for the H1 bar (slope × 2 bps).
+- Table 6 R² is weighted per their text. Table 7 R² is not described, so the review does not call it weighted.
+- Self check. No second reviewer was available for this short session.
+
