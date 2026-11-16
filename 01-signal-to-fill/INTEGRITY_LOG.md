@@ -66,3 +66,9 @@ No second reviewer was available for this pass, so I did it myself by rereading 
 - Table 6 R² is weighted per their text. Table 7 R² is not described, so the review does not call it weighted.
 - Self check. No second reviewer was available for this short session.
 
+
+## 2026-11-16
+Done by me, not an independent pass, because no separate reviewer agent is available in this environment.
+- **Found and fixed.** The first replay sanity wording implied a reason for the 58% exact print share. Rewritten as an untested guess.
+- **Open.** The 58% and 54% exact print shares are unexplained. Top of book only, so no walk through deeper levels.
+- **Checked, no issue.** Every number in today's notebook entry matches `results/replay/sanity_2026-09-01.json` and the audit row count. Tests pass. No test day touched. No Alpaca order sent. No cadence claims or dash, hyphen or colon slips found in today's prose.

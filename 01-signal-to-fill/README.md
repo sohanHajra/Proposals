@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Status | 🟡 Preregistered; replay engine next |
+| Status | 🟡 Preregistered; replay engine built, taker grid next |
 | Preregistration | [PREREGISTRATION.md](PREREGISTRATION.md) |
 | Proposal | [PROPOSAL.md](PROPOSAL.md) |
 | Literature review | [LITERATURE_REVIEW.md](LITERATURE_REVIEW.md) |

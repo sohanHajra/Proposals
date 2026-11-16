@@ -48,3 +48,13 @@ Dated entries, never edited after the fact. Hypotheses, what I tried, what broke
   - *Not checked:* their supplementary material (latency and liquidity analysis, robustness of the fits). I have not opened it.
   - *Fees:* Table 1 is the best tier in 2023. My account tier and today's schedule may differ.
 
+
+## 2026-11-16 (Mon) · replay engine
+- **Built** `src/s2f/replay.py`. It loads the dev day book ticker and trades on exchange time, orders trades before book updates inside one timestamp, and answers one question for a marketable order, which is what touch it sees when it arrives at decision time plus delay. Primary tie rule is that my order sees every update stamped at or before arrival. A flag flips this for the robustness check. The order never changes the book. Six unit tests pass (`make test`), covering event order, both tie rules, no book seen yet, buy and sell fills, and a quantity larger than the touch.
+- **Memory.** My first load read every column and the machine killed it. The file has 36,920,623 book rows. Loading five columns takes about 8 seconds.
+- **Sanity check against the real data** (`results/replay/sanity_2026-09-01.json`). 99.78% of buyer initiated trades print at or above the ask shown by the previous book update, and 58.2% print exactly at it. For seller initiated trades 53.6% print exactly at the previous bid. I expected the exact share to be higher. I have not tested why. One likely cause is that a trade sweeping several levels prints at more than one price, but that is a guess I have not checked.
+- **Limits and gaps.**
+  - *Missing:* no latency result yet. The taker grid is next.
+  - *Fell short:* top of book only. An order larger than the touch is flagged and not walked into deeper levels, and I have not yet decided whether the 5 level snapshots are worth using to walk the book.
+  - *Fell short:* a match between trade and book timestamps at the same millisecond cannot be resolved with this data, so the tie rule matters and is tested both ways.
+  - *Not done:* the queue marker for passive orders, planned for Wednesday.

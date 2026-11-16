@@ -11,6 +11,9 @@ audit:
 	$(PY) -m s2f.data_audit 2026-09-01
 	$(PY) -m s2f.lobster_audit
 
+replay:
+	$(PY) -m pytest -q tests
+
 test:
 	$(PY) -m pytest -q tests
 
