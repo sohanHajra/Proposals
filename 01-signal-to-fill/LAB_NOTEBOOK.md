@@ -58,3 +58,14 @@ Dated entries, never edited after the fact. Hypotheses, what I tried, what broke
   - *Fell short:* top of book only. An order larger than the touch is flagged and not walked into deeper levels, and I have not yet decided whether the 5 level snapshots are worth using to walk the book.
   - *Fell short:* a match between trade and book timestamps at the same millisecond cannot be resolved with this data, so the tie rule matters and is tested both ways.
   - *Not done:* the queue marker for passive orders, planned for Wednesday.
+
+## 2026-11-16 (Mon, evening) · the Danait et al. tables as page images
+- **What I checked.** Their Table 1 (data and reconciliation), Table 2 (held out outcomes by cancellation rule) and the figure with shortfall by rule and policy ranking reversals, read as page images.
+- **The numbers I already cite hold.** Passive completion on 1301.T is 18.15% (front), 15.29% (random), 10.14% (back), a gap of 8.01 points. On 7911.T it is 97.20%, 95.52%, 89.81%, a gap of 7.39 points. Passive at touch shortfall on 1301.T runs 8.008 to 9.018 bps (gap 1.010), and on 7911.T 0.765 to 1.149 bps (gap 0.384). The aggressive benchmark is 10.010 and 2.400 bps under every rule.
+- **New to me.** Table 2 gives 95% equal date resampling intervals over 18 held out dates. On 1301.T the front and back passive intervals do not overlap ([7.480, 8.531] vs [8.656, 9.401]). On 7911.T they touch ([0.547, 0.974] vs [0.932, 1.357]). So the rule gap is clear on the thin queue name and only marginal on the deep one.
+- **Ranking reversals.** Their figure shows how often the best policy changes when only the rule changes. Read off the bars, the largest share is about 4.5% of decisions on 1301.T and about 14% on 7911.T. These are read from a chart, not a table, so treat them as approximate.
+- **Data quality context.** Unresolved transitions are 4.14 to 6.11% (1301.T) and 5.09 to 6.59% (7911.T) of rows, and boundary transitions 11.10 to 16.00% and 8.39 to 12.32%. Even their clean reconstruction leaves a few percent of the book unexplained.
+- **What this changes.** Nothing in the preregistration. One idea for the write up, labelled exploratory because it came after the prereg. Alongside the three rule range, report how often the best delay setting changes when only the rule changes, in the spirit of their reversal chart.
+- **Limits and gaps.**
+  - *Fell short:* ranking reversal values come from bar heights, not printed numbers.
+  - *Missing:* I have not checked whether their intervals are percentile or another bootstrap form.
