@@ -116,4 +116,4 @@ Primary tests are H1 and H2. Everything else is secondary or exploratory and wil
 - Three crypto days, all the first of a month, and one 2012 equity day.
 
 ## Deviations
-None yet.
+**2026-11-17, before any test day is touched.** The taker leg as built fills at the best price shown at arrival and flags an order if the displayed size is smaller than 0.01 BTC, instead of walking the five level snapshot. On the dev day that flag fires on 0.17% to 0.31% of decisions across the delay grid (`results/taker/taker_dev_2026-09-01.json`), so for 0.01 BTC the two methods should differ very little. I have not run the walk, so I do not know that. The 1 BTC robustness check will need the walk, and I will build it before that check runs.

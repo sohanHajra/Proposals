@@ -72,3 +72,9 @@ Done by me, not an independent pass, because no separate reviewer agent is avail
 - **Found and fixed.** The first replay sanity wording implied a reason for the 58% exact print share. Rewritten as an untested guess.
 - **Open.** The 58% and 54% exact print shares are unexplained. Top of book only, so no walk through deeper levels.
 - **Checked, no issue.** Every number in today's notebook entry matches `results/replay/sanity_2026-09-01.json` and the audit row count. Tests pass. No test day touched. No Alpaca order sent. No cadence claims or dash, hyphen or colon slips found in today's prose.
+
+## 2026-11-17
+Done by me, not an independent pass, because no separate reviewer agent is available in this environment.
+- **Found and fixed.** The first draft of the notebook entry called the tail share a result. It is a ratio over a near zero total (negative 170), so it is now labelled not interpretable. The prereg said a five level walk and the code does not walk. Logged under Deviations with the flag rate.
+- **Open.** Dev day only, so H1 is untested. The H1b split uses the future second of the book and is descriptive. Random decisions make a small cost likely by construction.
+- **Checked, no issue.** Every number in today's entry matches `results/taker/taker_dev_2026-09-01.json`. Tests pass. No test day touched, no Alpaca order sent.

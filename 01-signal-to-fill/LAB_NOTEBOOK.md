@@ -69,3 +69,17 @@ Dated entries, never edited after the fact. Hypotheses, what I tried, what broke
 - **Limits and gaps.**
   - *Fell short:* ranking reversal values come from bar heights, not printed numbers.
   - *Missing:* I have not checked whether their intervals are percentile or another bootstrap form.
+
+## 2026-11-17 (Tue) · taker orders across the delay grid, dev day
+- **Built** `src/s2f/taker.py` (`make taker`, three more tests, ten pass). On the dev day 2026-09-01 it draws 8,425 random decisions (Poisson, mean gap 10 s, fair coin side, seed 20261115) after dropping those within 60 s of the day's two feed gaps. Each decision is replayed at all nine delays on the same path.
+- **Result (`results/taker/taker_dev_2026-09-01.json`).** The latency cost is close to zero. Mean extra shortfall at 500 ms over 1 ms is 0.0040 bps (95% block bootstrap interval negative 0.0034 to 0.0114). The slope on log delay is 0.00038 bps per log ms, interval negative 0.00056 to 0.00130. That covers zero and sits far below the 0.1 bps bar I committed to for H1. Flipping the tie rule gives the same slope to four decimals. With delay labels shuffled the slope is negative 0.00019 (interval negative 0.00066 to 0.00031), as it should be.
+- **Why it is so small.** At 500 ms the mean shortfall is 0.0104 bps, made of 0.0038 bps of drift and 0.0065 bps of arrival cost. The arrival cost is the half spread (a tick is about 0.013 bps at this price) and does not move with delay. The drift term averages out because random decisions have no direction.
+- **What stood out.** The average hides a split. In the 12.6% of decisions where the mid rose in my favour over the next second (the side times the 1 s mid change was positive), the extra cost at 100 ms is 0.085 bps. For all other decisions it is negative 0.012 bps. This is the same shape Albers et al. report, where the orders that would have paid are the ones that slip. It is one day, and the split uses the future by construction, so it only describes a pattern and cannot be traded. The pattern is H1b and it is secondary.
+- **Not interpretable.** I also computed the share of the 100 ms cost carried by the worst 10% of decisions. The total is so close to zero that the ratio came out at −170. I do not report it as a result. A tail measure needs a different form when the mean is near zero.
+- **Preregistration note.** I fill at the touch and flag small displayed size instead of walking five levels. The flag fires on 0.17% to 0.31% of decisions. This is logged under Deviations in PREREGISTRATION.md, dated today, before any test day.
+- **Limits and gaps.**
+  - *This is the dev day only.* No hypothesis test has been run. H1 is judged on the two test days, and today's number is a preview that could change.
+  - *Missing:* random decisions have no signal, so a near zero cost is partly built in. The signal decisions (secondary) are not run yet, and that is where a real cost is more likely to show.
+  - *Fell short:* the five level walk is not built, so the 1 BTC check cannot run yet.
+  - *Fell short:* whole millisecond timestamps. Anything faster than 1 ms is invisible, and a colocated stack would live there.
+  - *Resources that would help:* more days at other volatility levels, and live decision timestamps.

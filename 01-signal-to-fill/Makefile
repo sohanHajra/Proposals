@@ -18,3 +18,6 @@ test:
 	$(PY) -m pytest -q tests
 
 reproduce: env data audit test
+
+taker:
+	$(PY) -m s2f.taker 2026-09-01
