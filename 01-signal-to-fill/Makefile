@@ -11,13 +11,16 @@ audit:
 	$(PY) -m s2f.data_audit 2026-09-01
 	$(PY) -m s2f.lobster_audit
 
-replay:
-	$(PY) -m pytest -q tests
+sanity:
+	$(PY) -m s2f.sanity 2026-09-01
+	$(PY) -m s2f.tie_share 2026-09-01
 
 test:
 	$(PY) -m pytest -q tests
 
-reproduce: env data audit test
+.PHONY: env data audit test sanity taker passive reproduce
+
+reproduce: env data audit test sanity taker passive
 
 taker:
 	$(PY) -m s2f.taker 2026-09-01

@@ -35,7 +35,7 @@ flowchart LR
 
 **What I believed.** Latency costs takers through price drift and costs makers through lost queue position.
 
-**What I tried.** Turned the proposal into two arms: replaying the *same* decision moment at controlled delays on public Binance BTCUSDT data, and real order lifecycles from Nasdaq LOBSTER samples.
+**What I tried.** Turned the proposal into two arms. One replays the *same* decision moment at controlled delays on public Binance BTCUSDT data, and the other reads real order lifecycles from Nasdaq LOBSTER samples.
 
 **What broke.** LOBSTER's main site serves an HTML shell where sample zips used to be. A 2025 live trading study on Binance and Bybit turned out to be close to my first research question, so I narrowed what I claim is new.
 

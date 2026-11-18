@@ -142,7 +142,6 @@ def one(book, S, t, side, d_us, rule_rng_seed, tie_after=True):
     my_px = (book.bid_px[k] if side > 0 else book.ask_px[k]) * side
     q0 = float(book.bid_qty[k] if side > 0 else book.ask_qty[k])
     tend = ta + H_US
-    side_ = "right" if not tie_after else "right"
     lo_t = np.searchsorted(s["tr_ts"], ta, "right"); hi_t = np.searchsorted(s["tr_ts"], tend, "right")
     lo_k = np.searchsorted(s["tick_ts"], ta, "right"); hi_k = np.searchsorted(s["tick_ts"], tend, "right")
     lo_s = np.searchsorted(s["snap_ts"], ta, "right"); hi_s = np.searchsorted(s["snap_ts"], tend, "right")

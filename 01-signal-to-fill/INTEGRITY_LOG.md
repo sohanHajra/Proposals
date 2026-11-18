@@ -84,3 +84,31 @@ Done by me, not an independent pass, because no separate reviewer agent is avail
 - **Found and fixed.** Added a note that flat fill probability across delay is partly built into the design, so it is not read as proof that delay is harmless for passive orders. Choices the prereg left open are logged under Deviations.
 - **Open.** Dev day only, so H2 and H2b are untested. Cancels are inferred from size drops and the rate of misclassified trade versus book timing is unmeasured.
 - **Checked, no issue.** Notebook numbers match `results/passive/passive_dev_2026-09-01.json`. Fifteen tests pass. No test day touched, no Alpaca order sent.
+
+## 2026-11-18 (second reader)
+A second reader went through the notes, the code and every results file at commit a16dd69. This is what they found and what I did about each.
+
+**Found and fixed**
+- Both primary tests reprice on arrival, so with random decisions H1 and H2 are close to zero by construction. Logged under Deviations before any test day, with a fixed price passive arm (H5) added as exploratory. H1 and H2 stay as registered.
+- Yueshen (2026) was recorded as read in full. It was not. The files I saved as the paper were bot challenge pages. Moved to the Unverified list at abstract level, year given as 2026, a claim not in the abstract removed, and a dated correction added to the lab notebook. H2c stays because the abstract supports it. The 11-15 entries of this log that mention Yueshen figure pages were wrong for the same reason. A copy of the paper has since arrived and is being read.
+- No committed code produced `results/replay/sanity_2026-09-01.json`. Added `src/s2f/sanity.py` and `make sanity`. The rerun reproduces the file exactly.
+- `make reproduce` left out the sanity check, the taker and the passive leg. It now runs the audits, the tests, the sanity check, the taker and the passive leg. The rerun taker file matched the committed one byte for byte.
+- The flag rate was 0.13% to 0.31%, not 0.17% to 0.31%. My 11-17 entry here said every number matched. That was wrong. Corrected in the notebook and with a dated note under Deviations.
+- The taker tie flip affects only 6 of 8,425 decisions, so it was a weak check presented as robustness. Measured with `src/s2f/tie_share.py` and said so in the notebook and under Deviations.
+- The 11-18 notebook entry left out the matched markouts, which run against H2c under all three rules, and the share of orders whose level left the top five (about 38%). Both added. The phrasings that read as support for Yueshen, and "does not depend on delay", are removed.
+- The H1b split is partly mechanical, and the comparison with Albers et al. was worded too strongly. Corrected in the notebook and noted under Deviations.
+- The passive code nets each book update instead of applying trades, then cancellations, then additions. Logged under Deviations. The 600 s end of day cut was also unlogged and is now there.
+- The LOBSTER note said the INTC and MSFT choice came before anything about fills was computed. Fill shares came from the same audit. Corrected to say only that it came before any markout.
+- PROPOSAL.md had an added section and was missing the line "I have not run the study". Restored to the PDF as written, and the added section moved to the project README.
+- Smaller items. A colon in the root README, "about 21 points" now "about 22", the Albers PDF described as the published version, the decomposition claim marked as planned, the Danait zero latency point marked as my reading, a dead line in `passive.py` removed, and the project status line updated.
+
+**Disclosed**
+- On 2026-11-15, before the preregistration commit, I rewrote the messages of the commits made up to then with `git filter-branch` and pushed the result, which replaced commits that were already public (for example 754cc9e). Only messages changed. The branch `backup-before-msg-rewrite` holds the old commits and its tree is identical to 759cf4c. I should have said this at the time.
+
+**Open**
+- No interval yet for H1b or for the matched H2c markouts. The RQ3 split and a working tie flip in the passive leg are not built. All are due before the test days.
+- The ranking reversal shares from Danait et al. are read off a chart. Their supplementary material and that of Albers et al. are unread.
+
+**Checked, no issue**
+- The second reader found no test day data on disk, and the preregistration commit comes before the replay engine and every taker and passive result.
+- All other audit, taker and passive numbers in the notes match their results files. Seventeen tests pass.

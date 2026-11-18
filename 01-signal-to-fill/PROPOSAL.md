@@ -1,5 +1,7 @@
+SOHAN HAJRA RESEARCH PROPOSAL / OCTOBER 2026
+
 # From Signal to Fill
-*A question about execution delays and order outcomes.* Sohan Hajra, research proposal, October 2026.
+A question about execution delays and order outcomes
 
 **The question.** When market conditions are similar, do orders that take longer to reach an outcome tend to receive worse execution prices or have a lower chance of filling?
 
@@ -18,15 +20,13 @@ I would compare similar orders by side, size, time of day, spread and liquidity,
 ### 03 What I would look for
 I would plot fill probability and execution shortfall across delay ranges, with sample sizes alongside the results. If the relationship disappears once market conditions are comparable, that would be useful to know. If it persists on later dates, it would give me a more specific question to investigate. It would not, by itself, prove that faster routing improves trading performance.
 
+*This is a question I would like to explore. I have not run the study, and the approach would depend on what order event data is available.*
+
 ### 04 What led me to this question
-- **Nasdaq auction research.** Working with fixed time horizons taught me how much the timing of information matters. [sohanHajra/nasdaq-closing-auction-research](https://github.com/sohanHajra/nasdaq-closing-auction-research)
-- **Walk forward trading system.** Testing unseen periods with transaction costs made me more skeptical of results that look good under one set of assumptions. [sohanHajra/quant_trading_system](https://github.com/sohanHajra/quant_trading_system)
-- **ChainDEX prototype.** Looking again at swap quotes and slippage reminded me that a quoted price and an executed trade are different things. [sohanHajra/ChainDEX](https://github.com/sohanHajra/ChainDEX)
+**Nasdaq auction research** Working with fixed time horizons taught me how much the timing of information matters. [sohanHajra/nasdaq-closing-auction-research](https://github.com/sohanHajra/nasdaq-closing-auction-research)
 
----
-### From proposal to experiment (what changes when there are no private order logs)
-Public data has no decision timestamps for anyone's orders. So the experiment splits the question in two:
-1. **Counterfactual replay (causal, simulated).** Take a decision moment from real Binance USD-M BTCUSDT data and replay *the same* decision at several injected delays. Market conditions are identical across delays by construction.
-2. **Real-order lifecycles (observational).** LOBSTER's Nasdaq message files carry order IDs, so the third stage (acknowledgement to fill or cancel) is observable for real orders, though decision time is not.
+**Walk forward trading system** Testing unseen periods with transaction costs made me more skeptical of results that look good under one set of assumptions. [sohanHajra/quant_trading_system](https://github.com/sohanHajra/quant_trading_system)
 
-The full design and pass/fail rules live in [PREREGISTRATION.md](PREREGISTRATION.md); everything that went wrong lives in [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md).
+**ChainDEX prototype** Looking again at swap quotes and slippage reminded me that a quoted price and an executed trade are different things. [sohanHajra/ChainDEX](https://github.com/sohanHajra/ChainDEX)
+
+**UIUC / B.S. MATHEMATICS & COMPUTER SCIENCE** linkedin.com/in/sohan-hajra | github.com/sohanHajra | sohanhajra.github.io | sohancollege27@gmail.com
