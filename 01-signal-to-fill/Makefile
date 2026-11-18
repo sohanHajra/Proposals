@@ -21,3 +21,6 @@ reproduce: env data audit test
 
 taker:
 	$(PY) -m s2f.taker 2026-09-01
+
+passive:
+	$(PY) -m s2f.passive 2026-09-01

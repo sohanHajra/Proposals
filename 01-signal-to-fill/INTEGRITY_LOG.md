@@ -78,3 +78,9 @@ Done by me, not an independent pass, because no separate reviewer agent is avail
 - **Found and fixed.** The first draft of the notebook entry called the tail share a result. It is a ratio over a near zero total (negative 170), so it is now labelled not interpretable. The prereg said a five level walk and the code does not walk. Logged under Deviations with the flag rate.
 - **Open.** Dev day only, so H1 is untested. The H1b split uses the future second of the book and is descriptive. Random decisions make a small cost likely by construction.
 - **Checked, no issue.** Every number in today's entry matches `results/taker/taker_dev_2026-09-01.json`. Tests pass. No test day touched, no Alpaca order sent.
+
+## 2026-11-18
+Done by me, not an independent pass, because no separate reviewer agent is available in this environment.
+- **Found and fixed.** Added a note that flat fill probability across delay is partly built into the design, so it is not read as proof that delay is harmless for passive orders. Choices the prereg left open are logged under Deviations.
+- **Open.** Dev day only, so H2 and H2b are untested. Cancels are inferred from size drops and the rate of misclassified trade versus book timing is unmeasured.
+- **Checked, no issue.** Notebook numbers match `results/passive/passive_dev_2026-09-01.json`. Fifteen tests pass. No test day touched, no Alpaca order sent.
