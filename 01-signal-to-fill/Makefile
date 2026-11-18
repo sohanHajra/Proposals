@@ -18,12 +18,15 @@ sanity:
 test:
 	$(PY) -m pytest -q tests
 
-.PHONY: env data audit test sanity taker passive reproduce
+.PHONY: env data audit test sanity taker passive fixed_price reproduce
 
-reproduce: env data audit test sanity taker passive
+reproduce: env data audit test sanity taker passive fixed_price
 
 taker:
 	$(PY) -m s2f.taker 2026-09-01
 
 passive:
 	$(PY) -m s2f.passive 2026-09-01
+
+fixed_price:
+	$(PY) -m s2f.fixed_price 2026-09-01

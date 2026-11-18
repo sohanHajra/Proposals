@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Status | 🟡 Preregistered. Replay engine, taker grid and passive leg built and previewed on the dev day only, fixed price passive arm next. Test days not yet run |
+| Status | 🟡 Preregistered. Replay engine, taker grid, passive leg and the fixed price passive arm built and previewed on the dev day only. Test days not yet run |
 | Preregistration | [PREREGISTRATION.md](PREREGISTRATION.md) |
 | Proposal | [PROPOSAL.md](PROPOSAL.md) |
 | Literature review | [LITERATURE_REVIEW.md](LITERATURE_REVIEW.md) |

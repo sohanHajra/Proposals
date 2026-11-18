@@ -23,7 +23,7 @@ RULES = ("front", "random", "back")
 T_TRADE, T_TICK, T_SNAP = 0, 1, 2
 
 
-def walk(p, ahead0, ev_kind, ev_a, ev_b, ev_snap_px, ev_snap_q, rng, qty=QTY):
+def walk(p, ahead0, ev_kind, ev_a, ev_b, ev_snap_px, ev_snap_q, rng, qty=QTY, best_above0=False):
     """Walk the queue marker through ordered events, all three rules at once.
     Events by kind.
       trade  a = opposing trade price (buy like), b = size
@@ -36,7 +36,7 @@ def walk(p, ahead0, ev_kind, ev_a, ev_b, ev_snap_px, ev_snap_q, rng, qty=QTY):
     filled = np.zeros(3)
     fill_ev = np.full(3, -1)
     lost = -1
-    best_above = False   # a better price than mine is on the book (last tick)
+    best_above = best_above0   # a better price than mine is on the book (last tick)
     for e in range(len(ev_kind)):
         k = ev_kind[e]
         if k == T_TRADE:
