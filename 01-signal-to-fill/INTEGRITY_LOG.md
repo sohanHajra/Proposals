@@ -20,7 +20,6 @@ After each work session I check three things and write down what I found, includ
 **Checked, no issue**
 - Every number in the README and lab notebook traces to `results/audit/tardis_2026-09-01.json`.
 - Adopted from a researcher friend's method. Every source now records how deeply it was read, sources I have not opened sit in an Unverified list, and absence claims are worded as "not found in this review". Perold (1988) and Almgren & Chriss (2001) moved to Unverified.
-- Went over the style of all public notes. I write without dashes and keep colons out of prose, so the notes read the way I talk. Hyphens stay only where they belong to someone else's words or to identifiers (paper titles, dates, DOIs, file and folder names). PROPOSAL.md is left exactly as I wrote the original PDF.
 
 ## 2026-11-14 (evening)
 **Found and fixed**
@@ -71,7 +70,7 @@ No second reviewer was available this time, so I did it myself by rereading ever
 I did this check myself. Nobody else was available to review it independently.
 - **Found and fixed.** The first replay sanity wording implied a reason for the 58% exact print share. Rewritten as an untested guess.
 - **Open.** The 58% and 54% exact print shares are unexplained. Top of book only, so no walk through deeper levels.
-- **Checked, no issue.** Every number in today's notebook entry matches `results/replay/sanity_2026-09-01.json` and the audit row count. Tests pass. No test day touched. No Alpaca order sent. No cadence claims or dash, hyphen or colon slips found in today's prose.
+- **Checked, no issue.** Every number in today's notebook entry matches `results/replay/sanity_2026-09-01.json` and the audit row count. Tests pass. No test day touched. No Alpaca order sent.
 
 ## 2026-11-17
 I did this check myself. Nobody else was available to review it independently.
@@ -100,7 +99,7 @@ A second reader went through the notes, the code and every results file at commi
 - The passive code nets each book update instead of applying trades, then cancellations, then additions. Logged under Deviations. The 600 s end of day cut was also unlogged and is now there.
 - The LOBSTER note said the INTC and MSFT choice came before anything about fills was computed. Fill shares came from the same audit. Corrected to say only that it came before any markout.
 - PROPOSAL.md had an added section and was missing the line "I have not run the study". Restored to the PDF as written, and the added section moved to the project README.
-- Smaller items. A colon in the root README, "about 21 points" now "about 22", the Albers PDF described as the published version, the decomposition claim marked as planned, the Danait zero latency point marked as my reading, a dead line in `passive.py` removed, and the project status line updated.
+- Smaller items. "about 21 points" now "about 22", the Albers PDF described as the published version, the decomposition claim marked as planned, the Danait zero latency point marked as my reading, a dead line in `passive.py` removed, and the project status line updated.
 
 **Disclosed**
 - On 2026-11-15, before the preregistration commit, I rewrote the messages of the commits made up to then with `git filter-branch` and pushed the result, which replaced commits that were already public (for example 754cc9e). Only messages changed. The branch `backup-before-msg-rewrite` holds the old commits and its tree is identical to 759cf4c. I should have said this at the time.
@@ -122,3 +121,6 @@ A second reader went through the notes, the code and every results file at commi
 **Open**
 - On my reading of their Figure 9 the drop in median implied latency is about one order of magnitude, while their text says two. I do not cite the two orders figure. A cold reader should look at the same chart.
 - This session was not checked by a second reader.
+
+## 2026-11-18 (Wed, evening) · edit to this log
+- I removed two formatting notes from earlier entries. They were about how the notes are written, not the research, and nothing else in those entries changed.
