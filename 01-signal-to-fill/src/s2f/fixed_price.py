@@ -57,7 +57,7 @@ def one_fixed(book, S, t, side, d_us, rule_rng_seed, tie_after=True):
     opp_real = book.ask_px[k] if side > 0 else book.bid_px[k]
     opp_best = opp_real * side
     opp_q = float(book.ask_qty[k] if side > 0 else book.bid_qty[k])
-    ks = np.searchsorted(s["snap_ts"], ta, "right") - 1
+    ks = np.searchsorted(s["snap_ts"], ta, "right" if tie_after else "left") - 1
     spx = s["snap_px"][ks] if ks >= 0 else np.full(5, np.inf)
     sq = s["snap_q"][ks] if ks >= 0 else np.zeros(5)
     state, tq, ahead, above = arrival_state(p, my_best, my_q, opp_best, opp_q, spx, sq)
@@ -69,9 +69,10 @@ def one_fixed(book, S, t, side, d_us, rule_rng_seed, tie_after=True):
         fill_t[:] = ta
     elif not lost:
         tend = ta + H_US
-        lo_t = np.searchsorted(s["tr_ts"], ta, "right"); hi_t = np.searchsorted(s["tr_ts"], tend, "right")
-        lo_k = np.searchsorted(s["tick_ts"], ta, "right"); hi_k = np.searchsorted(s["tick_ts"], tend, "right")
-        lo_s = np.searchsorted(s["snap_ts"], ta, "right"); hi_s = np.searchsorted(s["snap_ts"], tend, "right")
+        lo_side = "right" if tie_after else "left"          # same tie handling as passive.one
+        lo_t = np.searchsorted(s["tr_ts"], ta, lo_side); hi_t = np.searchsorted(s["tr_ts"], tend, "right")
+        lo_k = np.searchsorted(s["tick_ts"], ta, lo_side); hi_k = np.searchsorted(s["tick_ts"], tend, "right")
+        lo_s = np.searchsorted(s["snap_ts"], ta, lo_side); hi_s = np.searchsorted(s["snap_ts"], tend, "right")
         nt, nk, ns = hi_t - lo_t, hi_k - lo_k, hi_s - lo_s
         ts = np.concatenate([s["tr_ts"][lo_t:hi_t], s["tick_ts"][lo_k:hi_k], s["snap_ts"][lo_s:hi_s]])
         kind = np.concatenate([np.zeros(nt, int), np.ones(nk, int), np.full(ns, 2)])
@@ -93,9 +94,10 @@ def one_fixed(book, S, t, side, d_us, rule_rng_seed, tie_after=True):
     return dict(state=state, filled=tot, vwap=vwap, fill_t=fill_t, lost=bool(lost), ta=ta)
 
 
-def run(day="2026-09-01", lo=0, hi=None, tie_after=True):
-    book, tr, S = prep_day(day)
-    t, side, ngaps = make_decisions(book)
+def run(day="2026-09-01", lo=0, hi=None, tie_after=True, decisions=None, prepped=None):
+    """decisions=(t, side, ngaps) replaces the random decisions; prepped=(book, tr, S) skips loading."""
+    book, tr, S = prepped if prepped is not None else prep_day(day)
+    t, side, ngaps = decisions if decisions is not None else make_decisions(book)
     hi = len(t) if hi is None else min(hi, len(t))
     idx = np.arange(lo, hi)
     n, nd = len(idx), len(DELAYS_MS)

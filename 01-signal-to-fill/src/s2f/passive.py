@@ -142,9 +142,12 @@ def one(book, S, t, side, d_us, rule_rng_seed, tie_after=True):
     my_px = (book.bid_px[k] if side > 0 else book.ask_px[k]) * side
     q0 = float(book.bid_qty[k] if side > 0 else book.ask_qty[k])
     tend = ta + H_US
-    lo_t = np.searchsorted(s["tr_ts"], ta, "right"); hi_t = np.searchsorted(s["tr_ts"], tend, "right")
-    lo_k = np.searchsorted(s["tick_ts"], ta, "right"); hi_k = np.searchsorted(s["tick_ts"], tend, "right")
-    lo_s = np.searchsorted(s["snap_ts"], ta, "right"); hi_s = np.searchsorted(s["snap_ts"], tend, "right")
+    # tie after: events stamped exactly ta are already in the book I see, so the walk starts after them.
+    # tie before: I see the book strictly before ta and every event stamped ta is replayed after I arrive.
+    lo_side = "right" if tie_after else "left"
+    lo_t = np.searchsorted(s["tr_ts"], ta, lo_side); hi_t = np.searchsorted(s["tr_ts"], tend, "right")
+    lo_k = np.searchsorted(s["tick_ts"], ta, lo_side); hi_k = np.searchsorted(s["tick_ts"], tend, "right")
+    lo_s = np.searchsorted(s["snap_ts"], ta, lo_side); hi_s = np.searchsorted(s["snap_ts"], tend, "right")
     nt, nk, ns = hi_t - lo_t, hi_k - lo_k, hi_s - lo_s
     ts = np.concatenate([s["tr_ts"][lo_t:hi_t], s["tick_ts"][lo_k:hi_k], s["snap_ts"][lo_s:hi_s]])
     kind = np.concatenate([np.zeros(nt, int), np.ones(nk, int), np.full(ns, 2)])
@@ -155,13 +158,14 @@ def one(book, S, t, side, d_us, rule_rng_seed, tie_after=True):
     o = np.lexsort((kind, ts))
     rng = np.random.default_rng(rule_rng_seed)
     filled, fev, lost = walk(my_px, q0, kind[o], a[o], b[o], spx[o], sq[o], rng)
-    return dict(p=my_px * side, filled=filled, fill_t=np.where(fev >= 0, ts[o][np.maximum(fev, 0)], -1),
+    return dict(p=my_px * side, filled=filled, fill_t=np.where(fev >= 0, ts[o][np.maximum(fev, 0)] if len(ts) else -1, -1),
                 lost=lost >= 0, ta=ta)
 
 
-def run(day="2026-09-01", tie_after=True, max_n=None):
-    book, tr, S = prep_day(day)
-    t, side, ngaps = make_decisions(book)
+def run(day="2026-09-01", tie_after=True, max_n=None, decisions=None, prepped=None):
+    """decisions=(t, side, ngaps) replaces the random decisions; prepped=(book, tr, S) skips loading."""
+    book, tr, S = prepped if prepped is not None else prep_day(day)
+    t, side, ngaps = decisions if decisions is not None else make_decisions(book)
     if max_n:
         t, side = t[:max_n], side[:max_n]
     n, nd = len(t), len(DELAYS_MS)
