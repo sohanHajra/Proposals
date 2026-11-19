@@ -113,3 +113,12 @@ A second reader went through the notes, the code and every results file at commi
 - The second reader found no test day data on disk, and the preregistration commit comes before the replay engine and every taker and passive result.
 - All other audit, taker and passive numbers in the notes match their results files. Seventeen tests pass.
 - Later the same afternoon the full text of Yueshen (2026) was read, all pages viewed, the proofs for structure only and the online appendix not at all. It moves back into the main table of the literature review with that depth. The size ratio claim removed this morning is in Proposition 4(i) and is restored with its condition (fast and slow makers together). The delay to markout step in H2c is not in the paper. It is my inference, now said so in the notebook, the review and under Deviations.
+
+## 2026-11-18 (evening, Moallemi & Sağlam read)
+**Checked, no issue**
+- The one line in the literature review that cites Moallemi & Sağlam (2013) was checked against the full text, claim by claim. Venue, closed form, stylised model, calibration on equities and the missing drift against queue split all hold. Its reading depth is raised to full text and the row now says what the model leaves out.
+- No hypothesis, metric or test changed. No test day data touched. No Alpaca order sent.
+
+**Open**
+- On my reading of their Figure 9 the drop in median implied latency is about one order of magnitude, while their text says two. I do not cite the two orders figure. A cold reader should look at the same chart.
+- This session was not checked by a second reader.
