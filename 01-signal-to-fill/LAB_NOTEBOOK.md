@@ -253,3 +253,11 @@ My reading, not tested. In the one tick names a lot of cancelling seems to come 
 - *Markout reference.* The markout is against the first fill price only. Later partial fills of the same order aren't in it.
 - *Missing.* Order lifetimes for the back of queue cancellations, more days, and Nasdaq data from recent years, which would need a paid LOBSTER licence.
 - Not checked by a second reader.
+
+## 2026-11-19 (Thu, evening) · six breadth days written down before the test days
+- **Why.** Two test days are enough to knock a claim down and not enough to show it holds in general. Tardis gives one free day a month. I checked that the files for 2026-03-01 through 2026-08-01 exist (each returns a redirect to the file, and a non first of month day is refused). I read nothing in them.
+- **What I wrote down.** The days, how they run, when a day is left out, and what counts as consistent, mixed or contradicted across the eight days, all in the Deviations section of the preregistration before any download. The verdicts on H1 to H5 still come from the two test days only. I also fixed what would count as the H5 slope without marketable orders holding up, since it was the one exploratory result that looked like it might be real.
+- **Limits and gaps.**
+  - *Still first of month:* any month start effect stays baked into all eight days.
+  - *Not independent of time:* six months is one stretch of 2026, so regime dependence is still thin.
+  - *Cost:* each day is about 310 MB and the full pipeline per day, so the run after the test days takes longer.
