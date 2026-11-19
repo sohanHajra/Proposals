@@ -133,3 +133,9 @@ A second reader went through the notes, the code and every results file at commi
 
 ## 2026-11-18 (Wed, night) · Albers supplement read
 - Read the Albers supplement in full. Main paper page refs still match the journal pages, and the SSRN page mapping is recorded in the library note. One contradiction with my notes, the colocated 2 ms point, corrected with a pointer. The journal text's pointer to bootstrap standard errors in Supplementary Material E finds nothing there. No hypothesis, metric or test changed, and no test day data was touched. Not checked by a second reader.
+
+## 2026-11-18 (Wed, late night) · Budish, Cramton & Shim read
+- **Checked, no issue.** The one review line citing the paper was checked claim by claim against the full manuscript. Sniping costs for stale quotes are there as a model result (Proposition 1, Remark 1), and the RQ3 motivation fits the comparative statics and the volatility link in the data, with "concentrated" marked as my framing. Reading depth raised to full text, with the version named. The companion is added with its own depth. No hypothesis, metric or test changed. No test day data touched.
+- **Found, noted.** The copy I hold is the February 2015 manuscript, not the journal article, so its pages are cited and the QJE pages are kept only from the DOI record. The paper's calibration product is misprinted by a factor of 1,000, while its stated bounds are right.
+- **Bias check.** The paper argues for a design, so its facts were not read as a neutral survey. What it adds against my own results went in plainly. The missing race likely inflates the replay's delay cost in jump moments, which would flatter H3 if it passes.
+- **Open.** Not checked by a second reader.
