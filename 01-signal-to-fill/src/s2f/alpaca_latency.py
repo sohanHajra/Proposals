@@ -49,8 +49,15 @@ def main(out):
     for i in range(N):
         due = start + i * GAP
         time.sleep(max(0, due - time.monotonic()))
-        q, *_ = call("GET", f"{DATA}/v1beta3/crypto/us/latest/quotes?symbols=BTC/USD", key=False)
-        bid = q["quotes"]["BTC/USD"]["bp"]
+        bid = None
+        for _try in range(4):
+            q, *_ = call("GET", f"{DATA}/v1beta3/crypto/us/latest/quotes?symbols=BTC/USD", key=False)
+            if isinstance(q, dict) and "quotes" in q:
+                bid = q["quotes"]["BTC/USD"]["bp"]; break
+            time.sleep(0.5)
+        if bid is None:
+            rows.append({"i": i, "ok": False, "err": "no quote", "http": 0, "latency_ms": None}); fails += 1
+            print(i, "no quote", flush=True); continue
         px = round(bid / 2, 2)
         # the venue refuses orders under 10 USD of cost, so the smallest accepted
         # quantity is the one that just clears 10 USD at this limit price
