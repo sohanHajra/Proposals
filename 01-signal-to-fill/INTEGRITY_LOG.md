@@ -157,3 +157,19 @@ I went back over this session myself. No second reader looked at it.
 - No test day file was downloaded or read. Both new scripts refuse any day other than the dev day unless that is turned on on purpose.
 - Every number in today's notebook entry was read back from the two results files. Thirty two tests pass.
 - Bias. Two pieces lean toward a tidy story and both are labelled exploratory. Split B for H1b, written today before it ran, and H5 without the marketable orders, which picks decisions by an outcome of delay. The big signal decision taker cost rests partly on a thin 1 ms touch that a live order would likely lose to someone faster, and the notebook calls it an upper end. The H2c and RQ3 results that went against my hypotheses are reported as plainly as the rest.
+
+## 2026-11-19 (Thu, evening) · RQ2 and queue positions on LOBSTER
+I went back over this session myself. No second reader looked at it.
+
+**Checked, no issue**
+- Spec before outcome. The Deviations entry and `lobster_rq2.py` went into commit f3f5623, pushed before the first run. Only the earlier audit file had been seen. No spec, threshold or sample rule changed after the run.
+- Every number in the notebook entry was read back from `results/lobster/rq2_2012-06-21.json`.
+- H4 judged as registered. The raw negative coefficient is reported, and so is its loss after controls, which the preregistration calls a null.
+- The tests for the distance and the book reader pass.
+
+**Open**
+- The queue position result keeps under half of deletions in INTC and MSFT, and the filter may favour levels built during the day. Stated as a limit.
+- "Back is closest" is closest of three, not a fit. The notebook says how far off it is.
+- The reading that back of queue cancels come from quick in and out orders is untested and labelled so.
+
+**Bias check.** The queue result points to my back rule being nearer reality, which makes passive numbers look worse for me, and it's reported as found. H4 failing goes against my own hypothesis and is stated as plainly as the rest. No test day data was touched.

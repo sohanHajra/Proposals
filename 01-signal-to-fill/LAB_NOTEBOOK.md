@@ -228,3 +228,28 @@ Everything here is the dev day, 2026-09-01. No test day was opened. I wrote down
 - *Not checked.* Whether the momentum behind H1b split B is a real feature of the book or an artefact of 100 ms mid sampling on a one tick book.
 - *Stale levels.* The five level walk reads a snapshot that updates every 26 ms at the median, so its deeper prices can lag the ticker.
 - *Resources that would help.* Order level data (Tardis incremental book) to walk the real book at arrival, and live fills to size the race.
+
+## 2026-11-19 (Thu, evening) · RQ2 on the LOBSTER day, and where cancellations sit in the queue
+I wrote down how both pieces are built and pushed that with the code before the first run (Deviations, 2026-11-19 evening, commit f3f5623). Before that I had only seen the audit of the LOBSTER files. Code `src/s2f/lobster_rq2.py`, run with `make lobster`, result `results/lobster/rq2_2012-06-21.json`. Everything here is Nasdaq on 2012-06-21 and describes that day only. It isn't evidence about Binance.
+
+**H4 is a null.** Without controls, a longer rest before the first fill goes with a worse markout in both main names. The coefficient on log rest time is negative 0.082 bps (INTC, interval negative 0.107 to negative 0.056) and negative 0.043 (MSFT, negative 0.066 to negative 0.019). Once spread, displayed size, imbalance, volatility and half hour go in, it shrinks to negative 0.013 (INTC, negative 0.040 to 0.015) and negative 0.003 (MSFT, negative 0.029 to 0.023). Both intervals cover zero. The preregistration says a coefficient that loses its sign after controls is a null, so H4 fails. The raw link seems to come from conditions that also set how long an order waits. Restricting to orders that joined an existing best changes nothing (negative 0.010 and negative 0.003, both covering zero). Samples are 20,418 orders in INTC and 20,765 in MSFT.
+
+A few things about these orders. Median rest before the first fill is 10.6 s in INTC and 6.9 s in MSFT. The mean markout 1 s after the first fill is negative 0.84 bps (INTC) and negative 0.90 bps (MSFT), so a resting fill loses a bit on average whether it waited long or not. Only about 1 in 10 orders submitted at the best got a visible fill in the file (20,707 of 202,231 in INTC).
+
+The other three names are wider tick names and only descriptive. AMZN and GOOG go the other way, positive coefficients with controls whose intervals sit above zero (0.031 and 0.020). AAPL is positive and covers zero. In those names 49% to 63% of orders at the best set a new best inside a wide spread, against about 1% in INTC and MSFT, so it is a different kind of order. I wouldn't read much into it.
+
+**Where cancellations sit, exploratory.** The queue at each price is rebuilt from order ids. A full deletion counts only when the rebuilt queue adds up to the displayed size just before it and has at least two orders. Position 0 is the front of the queue and 1 is the back.
+- *INTC and MSFT, at the best.* Cancelled orders sit toward the back. Mean position 0.803 (INTC, interval 0.795 to 0.812, 85,102 deletions) and 0.790 (MSFT, 0.774 to 0.805, 73,212). About half sit in the last tenth of the queue, and under 2% are at the very front. Distance to the back rule is 0.197 (INTC) and 0.210 (MSFT), against about 0.30 for random and about 0.80 for front. So back is the closest of my three rules, in all 500 resamples I checked. It still isn't a good fit. Only 17% (INTC) and 16% (MSFT) of these deletions are the very last order in the queue.
+- *Partial cancels in INTC and MSFT* sit further forward, mean 0.715 and 0.646 at the best, and random is the closest rule for them. There are far fewer of them (2,670 and 1,277).
+- *AAPL, AMZN, GOOG at the best.* Split almost in half between the very front and the very back, with mean position close to 0.5 (0.518, 0.507, 0.489). The uniform line is the closest by the measure I set, but the shape is two spikes, not uniform. I didn't measure queue length, so I can't say how much of that is short queues.
+
+My reading, not tested. In the one tick names a lot of cancelling seems to come from orders that join the back and leave again quickly. If that holds on Binance too, my back rule is not just a worst case to bracket things, and the passive numbers sit nearer the back end of the range than the middle. I haven't checked lifetimes of these orders, and this is a 2012 equity book, so it goes no further than a reason to look.
+
+**Limits and gaps.**
+- *One day, one venue, 2012.* Nothing here transfers to BTCUSDT without a check on crypto order level data, which I don't have.
+- *Selection in the queue check.* Only 48% (INTC) and 39% (MSFT) of deletions pass the rule that the rebuilt queue matches the displayed size. Levels holding orders from before the open, or from outside the 10 level window, fail it. Those orders tend to be old ones near the front, so the levels I keep may lean toward queues built during the day.
+- *Hidden liquidity.* Hidden executions (type 5) aren't in the queues or in H4, and there are thousands of them per name.
+- *H4 is observational.* Rest time is chosen by the market and by whoever sent the order. The controls are the ones I registered, nothing more, and the R² is under 0.09.
+- *Markout reference.* The markout is against the first fill price only. Later partial fills of the same order aren't in it.
+- *Missing.* Order lifetimes for the back of queue cancellations, more days, and Nasdaq data from recent years, which would need a paid LOBSTER licence.
+- Not checked by a second reader.
