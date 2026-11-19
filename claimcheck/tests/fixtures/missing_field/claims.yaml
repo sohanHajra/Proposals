@@ -1,0 +1,5 @@
+taker.dS1000:
+  file: results/run.json
+  path: by_delay.1000.mean_dS_bps
+  value: 0.0040
+  tol: 0.00005

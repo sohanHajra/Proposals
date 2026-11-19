@@ -1,0 +1,17 @@
+taker.dS500:
+  file: results/run.json
+  path: by_delay.500.mean_dS_bps
+  value: 0.0040
+  tol: 0.00005
+  unit: bps
+fill.share:
+  file: results/run.json
+  path: fills.0.share
+  value: 3.1
+  tol: 0.05
+  scale: 100
+orders:
+  file: results/run.json
+  path: n_orders
+  value: 1204
+  tol: 0

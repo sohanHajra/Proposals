@@ -40,6 +40,14 @@ Exit codes. `0` means every check passed. `1` means at least one claim failed. `
 
 The report lists every claim against its results file, then every tag in the proposal's markdown with its file and line. Claims that no tag uses are listed as warnings and do not fail the run.
 
+The checker has its own tests, also run from the repo root.
+
+```bash
+python -m unittest discover claimcheck/tests
+```
+
+Each folder in `claimcheck/tests/fixtures/` is a tiny proposal built to pass or to fail one way (a wrong number in the prose, a results file that changed after a rerun, a missing field, a missing file, a tag with no entry, a broken tag). The tests check that each one gives the right exit code and names the right problem.
+
 ## How a new proposal adopts it
 
 1. Write results to JSON files inside the proposal folder, for example under `results/`.
