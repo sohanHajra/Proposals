@@ -9,6 +9,8 @@ TARDIS = "https://datasets.tardis.dev/v1/binance-futures/{dtype}/{y}/{m}/{d}/{sy
 DTYPES = ["trades", "book_ticker", "book_snapshot_5"]
 DEV_DAYS = ["2026-09-01"]
 TEST_DAYS = ["2026-10-01", "2026-11-01"]
+# Registered 2026-11-19 before any download. Secondary breadth check, run after the registered tests.
+BREADTH_DAYS = ["2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"]
 LOBSTER = "https://php.lobsterdata.com/info/sample/LOBSTER_SampleFile_{t}_2012-06-21_10.zip"
 TICKERS = ["AAPL", "AMZN", "GOOG", "INTC", "MSFT"]
 
@@ -53,5 +55,9 @@ if __name__ == "__main__":
         if not prereg_committed():
             sys.exit("Refusing: commit PREREGISTRATION.md before touching test days.")
         tardis(TEST_DAYS)
+    elif what == "breadth":
+        if not prereg_committed():
+            sys.exit("Refusing: commit PREREGISTRATION.md before touching breadth days.")
+        tardis(BREADTH_DAYS)
     elif what == "lobster":
         lobster()
