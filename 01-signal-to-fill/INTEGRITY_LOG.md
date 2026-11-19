@@ -20,7 +20,7 @@ After each work session I check three things and write down what I found, includ
 **Checked, no issue**
 - Every number in the README and lab notebook traces to `results/audit/tardis_2026-09-01.json`.
 - Adopted from a researcher friend's method. Every source now records how deeply it was read, sources I have not opened sit in an Unverified list, and absence claims are worded as "not found in this review". Perold (1988) and Almgren & Chriss (2001) moved to Unverified.
-- Style pass on all public notes. I write without dashes and keep colons out of prose, so the notes read the way I talk. Hyphens stay only where they belong to someone else's words or to identifiers (paper titles, dates, DOIs, file and folder names). PROPOSAL.md is left exactly as I wrote the original PDF.
+- Went over the style of all public notes. I write without dashes and keep colons out of prose, so the notes read the way I talk. Hyphens stay only where they belong to someone else's words or to identifiers (paper titles, dates, DOIs, file and folder names). PROPOSAL.md is left exactly as I wrote the original PDF.
 
 ## 2026-11-14 (evening)
 **Found and fixed**
@@ -32,7 +32,7 @@ After each work session I check three things and write down what I found, includ
 - Every number quoted from the paper (8.01 and 7.39 points, 18.15% and 10.14% completion, 1.010 and 0.384 bps) matches its abstract, Table 2 and Section 7 in v3.
 
 ## 2026-11-15
-No second reviewer was available for this pass, so I did it myself by rereading every changed file against its source (the two papers, `results/audit/lobster_2012-06-21.json`, `results/audit/tardis_2026-09-01.json`).
+No second reviewer was available this time, so I did it myself by rereading every changed file against its source (the two papers, `results/audit/lobster_2012-06-21.json`, `results/audit/tardis_2026-09-01.json`).
 
 **Found and fixed**
 - The lab notebook said AAPL, AMZN and GOOG have a one tick spread on 0.5% or less of updates. AMZN is 0.59%. Now reads under 1%.
@@ -68,19 +68,19 @@ No second reviewer was available for this pass, so I did it myself by rereading 
 
 
 ## 2026-11-16
-Done by me, not an independent pass, because no separate reviewer agent is available in this environment.
+I did this check myself. Nobody else was available to review it independently.
 - **Found and fixed.** The first replay sanity wording implied a reason for the 58% exact print share. Rewritten as an untested guess.
 - **Open.** The 58% and 54% exact print shares are unexplained. Top of book only, so no walk through deeper levels.
 - **Checked, no issue.** Every number in today's notebook entry matches `results/replay/sanity_2026-09-01.json` and the audit row count. Tests pass. No test day touched. No Alpaca order sent. No cadence claims or dash, hyphen or colon slips found in today's prose.
 
 ## 2026-11-17
-Done by me, not an independent pass, because no separate reviewer agent is available in this environment.
+I did this check myself. Nobody else was available to review it independently.
 - **Found and fixed.** The first draft of the notebook entry called the tail share a result. It is a ratio over a near zero total (negative 170), so it is now labelled not interpretable. The prereg said a five level walk and the code does not walk. Logged under Deviations with the flag rate.
 - **Open.** Dev day only, so H1 is untested. The H1b split uses the future second of the book and is descriptive. Random decisions make a small cost likely by construction.
 - **Checked, no issue.** Every number in today's entry matches `results/taker/taker_dev_2026-09-01.json`. Tests pass. No test day touched, no Alpaca order sent.
 
 ## 2026-11-18
-Done by me, not an independent pass, because no separate reviewer agent is available in this environment.
+I did this check myself. Nobody else was available to review it independently.
 - **Found and fixed.** Added a note that flat fill probability across delay is partly built into the design, so it is not read as proof that delay is harmless for passive orders. Choices the prereg left open are logged under Deviations.
 - **Open.** Dev day only, so H2 and H2b are untested. Cancels are inferred from size drops and the rate of misclassified trade versus book timing is unmeasured.
 - **Checked, no issue.** Notebook numbers match `results/passive/passive_dev_2026-09-01.json`. Fifteen tests pass. No test day touched, no Alpaca order sent.

@@ -3,7 +3,7 @@
 # Proposals
 
 **Research questions, each taken from a one page proposal to running code.**
-Hypotheses are written down before results. Dead ends stay in the log. Null results get published.
+I write the hypotheses down before I look at any results. Dead ends stay in the log, and a null result gets published like any other.
 
 *Sohan Hajra · UIUC B.S. Mathematics & Computer Science · [sohanhajra.github.io](https://sohanhajra.github.io)*
 
@@ -35,7 +35,7 @@ flowchart LR
 
 **What I believed.** Latency costs takers through price drift and costs makers through lost queue position.
 
-**What I tried.** Turned the proposal into two arms. One replays the *same* decision moment at controlled delays on public Binance BTCUSDT data, and the other reads real order lifecycles from Nasdaq LOBSTER samples.
+**What I tried.** I turned the proposal into two arms. One replays the *same* decision moment at controlled delays on public Binance BTCUSDT data, and the other reads real order lifecycles from Nasdaq LOBSTER samples.
 
 **What broke.** LOBSTER's main site serves an HTML shell where sample zips used to be. A 2025 live trading study on Binance and Bybit turned out to be close to my first research question, so I narrowed what I claim is new.
 
@@ -43,9 +43,9 @@ flowchart LR
 
 </details>
 
-## Rules this repo holds itself to
-- Every number comes from code in the repo, rerunnable with `make reproduce` (pinned environment, fixed seeds).
-- Test data stays locked until the preregistration is committed; the download script refuses otherwise.
-- Out of sample checks, trading costs and alternative specifications before any claim.
+## Rules I hold this repo to
+- Every number comes from code in the repo, and `make reproduce` reruns it (pinned environment, fixed seeds).
+- Test data stays locked until the preregistration is committed. The download script refuses to fetch it before then.
+- No claim before out of sample checks, trading costs and a few alternative specifications.
 - A proposal that isn't good enough ships late rather than thin.
-- Each proposal keeps an [integrity log](01-signal-to-fill/INTEGRITY_LOG.md). Logic, sources and bias are checked after every work session, with what was found and fixed.
+- Each proposal keeps an [integrity log](01-signal-to-fill/INTEGRITY_LOG.md). After each work session I go back over the logic, the sources and any bias, and write down what I found and what I fixed.

@@ -1,10 +1,10 @@
 # Library
 
-Notes on the papers my proposals lean on, one note per paper. Each note says which version I read, how deeply, and which proposals use it and for what, so a later proposal can start from what I already know instead of reading the same paper again.
+Notes on the papers my proposals lean on, one note per paper. Each one says which version I read, how deeply, and which proposals use it and for what. The idea is that a later proposal can start from what I already know instead of me reading the same paper twice.
 
-Every note says up front how much of the paper I read and what I left out. Page numbers point to the published version unless a note says otherwise. Where I add my own reading of a paper, the note marks it as mine.
+Every note says up front how much of the paper I read and what I left out. Page numbers point to the published version unless a note says otherwise. Where I add my own reading of a paper, I mark it as mine.
 
-The PDFs are not in this repo, for copyright reasons. Each note gives the DOI or the public link.
+I don't keep the PDFs here, for copyright reasons. Each note gives the DOI or the public link instead.
 
 | Paper | Note | Used in |
 |---|---|---|

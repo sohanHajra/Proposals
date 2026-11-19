@@ -1,6 +1,6 @@
 # Literature review
 
-What published work already shows, and where this project tries to add something. Entries with a DOI link were checked against the publisher or author page on 2026-11-14. Rows added or changed after that day (Danait et al., Albers et al.) were checked on the day they were read, and Yueshen (2026) was checked against its Crossref record and its open access copy on 2026-11-18. Four papers are read in full so far (Danait et al. 2026, Albers et al. 2025, Yueshen 2026, Moallemi & Sağlam 2013). Moallemi & Sağlam was checked against its published PDF on 2026-11-18. The *Read at* column says how deeply each was read. Anything I have not opened myself sits in the Unverified list and is not relied on as fact.
+What published work already shows, and where I think this project can add something. Entries with a DOI link were checked against the publisher or author page on 2026-11-14. Rows added or changed after that day (Danait et al., Albers et al.) were checked on the day they were read, and Yueshen (2026) was checked against its Crossref record and its open access copy on 2026-11-18. Four papers are read in full so far (Danait et al. 2026, Albers et al. 2025, Yueshen 2026, Moallemi & Sağlam 2013). Moallemi & Sağlam was checked against its published PDF on 2026-11-18. The *Read at* column says how deeply each was read. Anything I have not opened myself sits in the Unverified list, and I don't rely on it as fact.
 
 | Work | What it establishes | What it leaves open for this project | Read at |
 |---|---|---|---|
@@ -15,7 +15,7 @@ What published work already shows, and where this project tries to add something
 | Yueshen (2026), *Queuing Uncertainty of Limit Orders*, Management Science 72(6):4760-4779, online September 2025, [doi:10.1287/mnsc.2023.03371](https://doi.org/10.1287/mnsc.2023.03371) | Theory, a one shot model of a one tick book. Limit orders sent at about the same time get random latencies and so random queue positions. In equilibrium end of queue orders lose money and depth overshoots (Lemma 1, Proposition 1), and deeper units that fill are more likely to meet an informed market order. Predictions include clustered submissions followed by immediate cancellations at the tail of new queues, and a cancel to add size ratio below one when the sector mixes fast and slow makers, since the fast orders are larger and sit near the front (Proposition 4(i)). With identical makers that ratio goes to one | A model, not an empirical study. It has no price path after a fill, no markout horizon and no delay in milliseconds. Its "late" order sits behind competitors who posted in the same burst, while my late order joins whatever queue stands at arrival. H2c (a later order has a worse 10 s markout) is my own inference from the end of queue result, not a statement in the paper | full text of the Articles in Advance version (pp 1 to 20); online appendix not read |
 
 ## How Danait et al. (2026) changes my queue model
-My plan for the passive leg used one queue rule. Queue ahead was the displayed size when my order arrives, and I fill once traded volume at my price exceeds it, with a pro rata cancellation variant as a side check. Their paper shows that this single choice can move passive fill rates by about 8 points on its own, on data with the same prices, sizes and trades. So a passive result from one rule would really be a result about the rule.
+My plan for the passive leg used one queue rule. Queue ahead was the displayed size when my order arrives, and I fill once traded volume at my price exceeds it, with a pro rata cancellation variant as a side check. Their paper shows that this one choice can move passive fill rates by about 8 points on its own, on data with the same prices, sizes and trades. So a passive result from one rule would really be a result about the rule.
 
 What I am changing, before any passive result exists.
 1. Three matched cancellation rules. Front (cancels remove the oldest quantity, best case for me), quantity weighted random, and back (cancels remove the newest quantity, worst case). Same book path, same seeds, same trades for all three.
@@ -39,7 +39,7 @@ Limits of the transfer. Their numbers come from two Tokyo equities with propriet
 3. A test of whether latency cost is a tail phenomenon (RQ3) rather than a mean shift.
 
 ## Not found in this review
-I did not find published work that replays the same decision across a controlled delay grid on public data. That is a statement about this review's coverage, not proof it does not exist.
+I did not find published work that replays the same decision across a controlled delay grid on public data. That says how far my search went, not that nobody has done it.
 
 ## What reading Albers et al. in full changed
 I read the full text on 2026-11-15. They do not replay one decision across a controlled set of delays. Each of their orders has one realised latency, and they relate outcomes to measured latency, volatility and liquidity. So claim 1 above stands, as far as this review goes. Three things changed in my plan.
