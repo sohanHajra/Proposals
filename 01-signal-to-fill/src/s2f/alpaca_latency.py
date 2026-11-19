@@ -43,7 +43,7 @@ def pct(xs, p):
 
 def main(out):
     asset, *_ = call("GET", f"{BASE}/v2/assets/BTC/USD")
-    qty = asset["min_order_size"]
+    qty = "10 USD cost, set per order"
     rows, fails = [], 0
     start = time.monotonic()
     for i in range(N):
@@ -52,6 +52,9 @@ def main(out):
         q, *_ = call("GET", f"{DATA}/v1beta3/crypto/us/latest/quotes?symbols=BTC/USD", key=False)
         bid = q["quotes"]["BTC/USD"]["bp"]
         px = round(bid / 2, 2)
+        # the venue refuses orders under 10 USD of cost, so the smallest accepted
+        # quantity is the one that just clears 10 USD at this limit price
+        qty = f"{max(float(asset['min_order_size']), 10.01 / px ) :.9f}"
         body = {"symbol": "BTC/USD", "qty": qty, "side": "buy", "type": "limit",
                 "time_in_force": "gtc", "limit_price": str(px)}
         js, code, err, t0, t1 = call("POST", f"{BASE}/v2/orders", body)
