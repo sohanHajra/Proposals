@@ -124,3 +124,9 @@ A second reader went through the notes, the code and every results file at commi
 
 ## 2026-11-18 (Wed, evening) · edit to this log
 - I removed two formatting notes from earlier entries. They were about how the notes are written, not the research, and nothing else in those entries changed.
+
+## 2026-11-18 (Wed, night) · library notes for Danait, Albers and Yueshen
+- **Found and fixed.** The literature review said Danait's zero latency was my reading, but the paper states it (Section 9). Fixed and logged in the notebook.
+- **Open.** The 11-16 Danait entry says the tables were read from a PDF, and no PDF copy is in my files now. Table 2 and Figure 1 need checking against the PDF pages. The Albers supplement is still unread.
+- **Checked, no issue.** Albers Tables 1, 4, 6 and 7 and the Yueshen Lemma 1, Proposition 1 and Proposition 4 references match the papers. I did this check myself.
+

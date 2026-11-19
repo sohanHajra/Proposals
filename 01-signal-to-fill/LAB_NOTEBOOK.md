@@ -149,3 +149,11 @@ A second reader went through the notes, the code and the results files today. Th
   - *Not checked:* how they turn daily volatility into the per second volatility the formula needs. The paper does not say.
   - *Approximate:* figure values are read off charts. On my reading of their Figure 9 the median implied latency falls by about one order of magnitude, not the two the text states, so I do not repeat the two orders figure.
   - *Not proved in the paper:* the jump results in its Appendix D.
+
+## 2026-11-18 (Wed, evening) · corrections from writing the Danait, Albers and Yueshen library notes
+- **Danait zero latency.** I had written that their marker having no latency was my reading of the method. It is in the paper. Section 9 says shadow policies assume zero latency, fees and rebates. The literature review row now cites Section 9.
+- **Danait copy.** The copy I can find in my files now is the arXiv v3 HTML, not a PDF, so the library note cites sections, tables and equations instead of pages. My 11-16 entry says the tables were read from the PDF. I can't show that copy any more, so I'm not leaning on it. I'll check Table 2 and Figure 1 against the PDF pages once I have the PDF again.
+- **Danait things I had marked as missing.** Section 7.2 prints the ranking reversal shares (0.83% to 4.49% on 1301.T, 3.63% to 14.26% on 7911.T), and they agree with what I read off the bars. Section 6.4 describes their intervals (2.5th to 97.5th percentiles over 5,000 replicates resampling whole dates). I still haven't checked that method myself.
+- **Albers.** Their conclusion calls the Binance run a few hours, but Section 5.2 gives 14:02 to 15:00 UTC on 20 July 2023. I go with Section 5.2. The evidence that failures rise with latency and thinner books is in their supplement, which I haven't read.
+- Nothing here changes a registered hypothesis, metric or test.
+
