@@ -130,3 +130,6 @@ A second reader went through the notes, the code and every results file at commi
 - **Open.** The 11-16 Danait entry says the tables were read from a PDF, and no PDF copy is in my files now. Table 2 and Figure 1 need checking against the PDF pages. The Albers supplement is still unread.
 - **Checked, no issue.** Albers Tables 1, 4, 6 and 7 and the Yueshen Lemma 1, Proposition 1 and Proposition 4 references match the papers. I did this check myself.
 
+
+## 2026-11-18 (Wed, night) · Albers supplement read
+- Read the Albers supplement in full. Main paper page refs still match the journal pages, and the SSRN page mapping is recorded in the library note. One contradiction with my notes, the colocated 2 ms point, corrected with a pointer. The journal text's pointer to bootstrap standard errors in Supplementary Material E finds nothing there. No hypothesis, metric or test changed, and no test day data was touched. Not checked by a second reader.
