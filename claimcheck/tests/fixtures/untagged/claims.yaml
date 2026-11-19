@@ -1,0 +1,2 @@
+fill500: {file: results/r.json, path: fill.500, value: 68.3, tol: 0.05, scale: 100, unit: "%"}
+dS500: {file: results/r.json, path: dS, value: 0.0040, tol: 0.00005, unit: bps}

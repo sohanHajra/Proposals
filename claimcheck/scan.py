@@ -1,7 +1,7 @@
 """Find claim tags in markdown and the number printed right before each one.
 
 Fenced code blocks and inline code are skipped, so examples of the tag format in docs are not read as claims.
-Finding untagged numbers is not built yet.
+Numbers with no tag are listed by untagged.py.
 """
 
 import re

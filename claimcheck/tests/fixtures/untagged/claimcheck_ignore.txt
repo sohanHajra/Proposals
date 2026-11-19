@@ -1,0 +1,2 @@
+# design settings, not results
+250 ms
