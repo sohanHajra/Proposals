@@ -188,3 +188,14 @@ A second reader went through the notes, the code and the results files today. Th
   - *Approximate:* durations and profits read off their Figures 5.3 and 5.4 are by eye. Table values are as printed.
   - *Doesn't transfer:* their durations and profits are for a 2011 cross city futures and ETF pair. I have no measure of how long stale prices last on BTCUSDT, and my data are one venue.
   - Nothing here touches the preregistration or any test day data.
+
+## 2026-11-19 (Thu) · Real order to acknowledgement time on a broker paper account
+- **What I ran.** The test as written in the preregistration. 200 limit buys on BTC/USD at half the best bid, one every 3 s, each cancelled right after its acknowledgement, timed from just before the HTTP request to the response. Script `src/s2f/alpaca_latency.py`, result `results/latency/alpaca_paper_latency.json`.
+- **Result.** All 200 orders were acknowledged and none failed. Median 255.9 ms, 90th percentile 283.3 ms, 99th percentile 360.0 ms, fastest 238.1 ms, slowest 368.1 ms.
+- **Where it sits on the grid.** The median is close to the 250 ms point of my delay grid and the 99th percentile sits between 250 and 500 ms. This marks one reference point only. It says nothing about fills.
+- **What changed on the way.** Both changes are in the Deviations section of the preregistration, dated today and written before the run that counts. The venue refuses orders under 10 USD of cost, so each order is sized to just clear 10 USD (about 0.0003 BTC) instead of the listed minimum quantity. The first full run also stopped at order 13 when a quote call returned nothing. I added retries and reran all 200 from the start. Those 13 orders (all acknowledged at about 250 to 280 ms) are not in the result.
+- **Limits and gaps.**
+  - *One path:* one machine, one 10 minute stretch on one morning, a broker API and not an exchange matching engine. It says nothing about colocated or exchange latency.
+  - *Paper venue:* a paper account may not route like a live one, so live acknowledgement times could differ.
+  - *Not measured:* the time from signal to my own code sending, which is part of any real decision to send latency. The timer starts at the request.
+  - *Missing:* a second time of day, and a live account, to see whether 256 ms is typical.
