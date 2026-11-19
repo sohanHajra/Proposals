@@ -19,11 +19,11 @@ It checks that a number matches a file. It does not check that the code which wr
 
 ## Status
 
-The package skeleton and the claim format are in place. The checks above are being built one at a time, and this section says which ones run. Right now none of them do, and the command exits with code 2 rather than pretending to pass.
+The checks above are being built one at a time, and this table says which ones run. Only the first does so far. The other three are not run at all yet, so a green result today says nothing about them.
 
 | Check | Runs |
 |---|---|
-| Numbers match results | not yet |
+| Numbers match results | yes |
 | Untagged numbers | not yet |
 | Sources | not yet |
 | Preregistration order | not yet |
@@ -36,7 +36,9 @@ From the repo root, with Python 3.10 or newer and PyYAML.
 python -m claimcheck 01-signal-to-fill
 ```
 
-Exit codes. `0` means every check passed. `1` means at least one claim failed. `2` means the run could not check anything (no `claims.yaml`, or a check that is not built yet).
+Exit codes. `0` means every check passed. `1` means at least one claim failed. `2` means the run could not check anything (no `claims.yaml`, or an empty one with no tags).
+
+The report lists every claim against its results file, then every tag in the proposal's markdown with its file and line. Claims that no tag uses are listed as warnings and do not fail the run.
 
 ## How a new proposal adopts it
 

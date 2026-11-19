@@ -8,7 +8,9 @@ A claim tag is an HTML comment placed directly after the number it covers, with 
 Waiting 500 ms moved the taker's shortfall by 0.0040 bps<!--c:taker.dS500--> on the dev day.
 ```
 
-GitHub renders this as plain text with the comment hidden. The checker reads the number immediately before the tag (sign, digits, decimal point, and an optional `%`) and the claim id inside it.
+GitHub renders this as plain text with the comment hidden. The checker reads the number before the tag (sign, digits, thousands commas, decimal point, and an optional `%`) and the claim id inside it. One short unit word may sit between the number and the tag, as `bps` does above. Anything else in between and the tag fails with no number found.
+
+Tags inside fenced code blocks or inline code are not read, so the format can be shown in docs without becoming a claim. A comment that starts like a tag but is not exactly `<!--c:id-->` fails as malformed.
 
 Claim ids use letters, digits, dots and underscores, and must be unique within a proposal. A good id says where the number comes from, for example `taker.dS500` or `passive.front.fill500`.
 
