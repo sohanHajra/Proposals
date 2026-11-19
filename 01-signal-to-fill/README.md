@@ -13,8 +13,8 @@
 
 ## From proposal to experiment
 This part isn't in the proposal, which I've kept as written. Public data has no decision timestamps for anyone's orders, so I split the question in two.
-1. **Counterfactual replay (simulated).** Take a decision moment from real Binance USD-M BTCUSDT data and replay *the same* decision at several injected delays. Market conditions are identical across delays by construction.
-2. **Real order lifecycles (observational).** LOBSTER's Nasdaq message files carry order IDs, so the third stage (acknowledgement to fill or cancel) is observable for real orders, though decision time is not.
+1. **Counterfactual replay (simulated):** Take a decision moment from real Binance USD-M BTCUSDT data and replay *the same* decision at several injected delays. Market conditions are identical across delays by construction.
+2. **Real order lifecycles (observational):** LOBSTER's Nasdaq message files carry order IDs, so the third stage (acknowledgement to fill or cancel) is observable for real orders, though decision time is not.
 
 The full design and its pass and fail rules are in [PREREGISTRATION.md](PREREGISTRATION.md). Everything that went wrong is in [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md).
 
