@@ -18,9 +18,9 @@ sanity:
 test:
 	$(PY) -m pytest -q tests
 
-.PHONY: env data audit test sanity taker passive fixed_price reproduce
+.PHONY: env data audit test sanity taker passive fixed_price followups_taker followups_passive followups reproduce
 
-reproduce: env data audit test sanity taker passive fixed_price
+reproduce: env data audit test sanity taker passive fixed_price followups
 
 taker:
 	$(PY) -m s2f.taker 2026-09-01
@@ -30,3 +30,13 @@ passive:
 
 fixed_price:
 	$(PY) -m s2f.fixed_price 2026-09-01
+
+# dev day follow ups (H1b and H2c intervals, RQ3 split, cost by arrival state, tie flip, signal decisions)
+followups_taker:
+	$(PY) -m s2f.taker_followups 2026-09-01
+
+followups_passive:
+	$(PY) -m s2f.passive_followups 2026-09-01 run
+	$(PY) -m s2f.passive_followups 2026-09-01 summarize
+
+followups: followups_taker followups_passive

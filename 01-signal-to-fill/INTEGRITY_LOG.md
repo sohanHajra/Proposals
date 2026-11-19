@@ -139,3 +139,21 @@ A second reader went through the notes, the code and every results file at commi
 - **Found, noted.** The copy I hold is the February 2015 manuscript, not the journal article, so its pages are cited and the QJE pages are kept only from the DOI record. The paper's calibration product is misprinted by a factor of 1,000, while its stated bounds are right.
 - **Bias check.** The paper argues for a design, so its facts were not read as a neutral survey. What it adds against my own results went in plainly. The missing race likely inflates the replay's delay cost in jump moments, which would flatter H3 if it passes.
 - **Open.** Not checked by a second reader.
+
+## 2026-11-19 (Thu, afternoon) · dev day follow ups
+I went back over this session myself. No second reader looked at it.
+
+**Found and fixed**
+- The passive code's flipped tie rule changed only the book my order sees and quietly dropped every trade, ticker row and snapshot stamped exactly at arrival. It had never been run, so no result was affected. It now replays those events after my order, with a test.
+- `passive.one` failed on an empty event window. That never happens on the real day (the reruns of both passive legs reproduce the committed summaries exactly), but the small test case hit it. Guarded.
+- The registered tail share is meaningless when the total latency cost is near zero. On random decisions it comes out as negative 170. Said so in the notebook rather than reporting it as a number.
+
+**Open**
+- The five level walk reads a snapshot that updates every 26 ms at the median, and on signal decisions it runs out of levels on 40.7% of cases at 1 ms. Its deeper prices can be stale. Not fixable with these files.
+- The Budish jump split and stale liquidity count are not built. Their thresholds must be set on the dev day before the test days or they are dropped.
+
+**Checked, no issue**
+- Spec before outcome. The Deviations entry and all the follow up code went into commit 1fa991e, pushed before the first run. The only values seen before writing it were the 11-18 point values, the signal threshold and the decision count, and the entry says so.
+- No test day file was downloaded or read. Both new scripts refuse any day other than the dev day unless that is turned on on purpose.
+- Every number in today's notebook entry was read back from the two results files. Thirty two tests pass.
+- Bias. Two pieces lean toward a tidy story and both are labelled exploratory. Split B for H1b, written today before it ran, and H5 without the marketable orders, which picks decisions by an outcome of delay. The big signal decision taker cost rests partly on a thin 1 ms touch that a live order would likely lose to someone faster, and the notebook calls it an upper end. The H2c and RQ3 results that went against my hypotheses are reported as plainly as the rest.
