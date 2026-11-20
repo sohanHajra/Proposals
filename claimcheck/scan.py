@@ -11,8 +11,9 @@ from pathlib import Path
 
 TAG_START = re.compile(r"<!--\s*c:")
 TAG = re.compile(r"<!--c:(?P<id>[A-Za-z0-9_.]+)-->")
-# number, optional %, optional short unit word, then the tag with nothing in between
+# optional word "negative", number, optional %, optional short unit word, then the tag with nothing in between
 NUMBER_BEFORE_TAG = re.compile(
+    r"(?:(?<![\w.])(?P<neg>[Nn]egative)[ \u00a0]+)?"
     r"(?<![\w.])(?P<num>[-+\u2212]?\d[\d,]*(?:\.\d+)?)(?P<pct>%)?(?:[ \u00a0]?(?P<unit>[A-Za-z\u00b5]{1,12}))?$"
 )
 FENCE = re.compile(r"^\s*(```|~~~)")
@@ -53,6 +54,11 @@ def scan_text(text, fname="<text>"):
                 t.problem = "no number right before the tag"
             else:
                 t.printed = before.group("num").replace("\u2212", "-").replace(",", "")
+                if before.group("neg"):
+                    if t.printed[0] in "+-":
+                        t.problem = "sign written twice (the word negative and a sign)"
+                    else:
+                        t.printed = "-" + t.printed
                 t.pct = bool(before.group("pct"))
                 t.unit = before.group("unit") or ""
             tags.append(t)

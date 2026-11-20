@@ -10,6 +10,8 @@ Waiting 500 ms moved the taker's shortfall by 0.0040 bps<!--c:taker.dS500--> on 
 
 GitHub renders this as plain text with the comment hidden. The checker reads the number before the tag (sign, digits, thousands commas, decimal point, and an optional `%`) and the claim id inside it. One short unit word may sit between the number and the tag, as `bps` does above. Anything else in between and the tag fails with no number found.
 
+The word `negative` right before the number counts as its sign, since the notes write negative 0.0034 and not a minus sign. A number with both the word and a sign fails.
+
 Tags inside fenced code blocks or inline code are not read, so the format can be shown in docs without becoming a claim. A comment that starts like a tag but is not exactly `<!--c:id-->` fails as malformed.
 
 Claim ids use letters, digits, dots and underscores, and must be unique within a proposal. A good id says where the number comes from, for example `taker.dS500` or `passive.front.fill500`.

@@ -196,6 +196,18 @@ class TestScan(unittest.TestCase):
         self.assertEqual(got["plus"], ("+2", False, ""))
         self.assertTrue(all(not t.problem for t in tags))
 
+    def test_word_negative_is_a_sign(self):
+        tags = scan_text(
+            "interval negative 0.0034<!--c:a--> to 0.0114<!--c:b-->, Negative 1.0 bps<!--c:c-->,"
+            " nonnegative 2<!--c:d--> and negative \u22123<!--c:e-->"
+        )
+        got = {t.claim_id: (t.printed, t.unit, t.problem) for t in tags}
+        self.assertEqual(got["a"], ("-0.0034", "", ""))
+        self.assertEqual(got["b"], ("0.0114", "", ""))
+        self.assertEqual(got["c"], ("-1.0", "bps", ""))
+        self.assertEqual(got["d"], ("2", "", ""))
+        self.assertIn("sign written twice", got["e"][2])
+
     def test_space_before_tag_is_not_a_number(self):
         (t,) = scan_text("moved 0.004 <!--c:x-->")
         self.assertEqual(t.problem, "no number right before the tag")

@@ -1,0 +1,8 @@
+# Breadth days, registered under Deviations on 2026-11-19 before any download.
+# They run after the registered tests, so their results count as test day results here.
+results/*2026-03-01*
+results/*2026-04-01*
+results/*2026-05-01*
+results/*2026-06-01*
+results/*2026-07-01*
+results/*2026-08-01*
