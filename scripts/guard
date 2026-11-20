@@ -1,0 +1,174 @@
+#!/usr/bin/env python3
+"""Local git hooks for this repo.
+
+  scripts/guard commit-msg FILE   check a commit message before it is recorded
+  scripts/guard pre-commit        check staged markdown before a commit
+
+Install both with `make hooks` from the repo root. Hooks in .git/hooks are not versioned,
+so this file is the copy that is kept.
+"""
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+# whole words, matched case insensitive
+WORDS = ["AI", "LLM", "Hark", "Claude", "GPT", "rule", "style"]
+# words that also catch their longer forms (colons, hyphens, overstated, reviewers)
+STEMS = ["integrity", "hyphen", "colon", "overclaim", "overstat", "wording", "reviewer"]
+PHRASES = ["house style", "em dash", "en dash", "cold review", "claimcheck warning"]
+
+DASHES = "\u2014\u2013"
+
+
+def bad_message_words(msg):
+    """Return the banned words found in a commit message, in the order checked."""
+    text = "\n".join(l for l in msg.splitlines() if not l.startswith("#"))
+    found = []
+    for p in PHRASES:
+        if re.search(r"\b" + r"\s+".join(map(re.escape, p.split())) + r"e?s?\b", text, re.I):
+            found.append(p)
+    for s in STEMS:
+        if re.search(r"\b" + re.escape(s) + r"\w*", text, re.I):
+            found.append(s)
+    for w in WORDS:
+        if re.search(r"\b" + re.escape(w) + r"\b", text, re.I):
+            found.append(w)
+    if any(c in text for c in DASHES):
+        found.append("dash character")
+    return found
+
+
+def commit_msg(path):
+    msg = Path(path).read_text(encoding="utf-8")
+    bad = bad_message_words(msg)
+    if bad:
+        for b in bad:
+            print(f"commit message refused, it contains: {b}", file=sys.stderr)
+        return 1
+    return 0
+
+
+# ---- staged markdown ----
+
+def is_public_md(path):
+    p = Path(path)
+    if p.suffix.lower() != ".md":
+        return False
+    parts = p.parts
+    if p.name == "PROPOSAL.md" or "plans" in parts or ".venv" in parts:
+        return False
+    if parts[:1] == ("claimcheck",) and "fixtures" in parts:
+        return False
+    return True
+
+
+def staged_files():
+    r = subprocess.run(["git", "diff", "--cached", "--name-only", "--diff-filter=ACMR"],
+                       cwd=ROOT, capture_output=True, text=True, check=True)
+    return [l for l in r.stdout.splitlines() if l]
+
+
+def added_lines(path):
+    """(line number, text) of every line the staged change adds to path."""
+    r = subprocess.run(["git", "diff", "--cached", "-U0", "--", path], cwd=ROOT,
+                       capture_output=True, text=True, check=True)
+    out, n = [], 0
+    for l in r.stdout.splitlines():
+        m = re.match(r"@@ -\S+ \+(\d+)", l)
+        if m:
+            n = int(m.group(1)); continue
+        if l.startswith("+") and not l.startswith("+++"):
+            out.append((n, l[1:])); n += 1
+    return out
+
+
+CODE = re.compile(r"`[^`]*`")
+LINK = re.compile(r"\[([^\]]*)\]\([^)]*\)|<[^>]+>|https?://\S+")
+TAG = re.compile(r"<!--.*?-->")
+TIME = re.compile(r"\b\d{1,2}:\d{2}(:\d{2})?\b")
+
+
+def prose(line):
+    """The line with code spans, links, URLs and claim tags taken out."""
+    s = TAG.sub("", line)
+    s = CODE.sub("", s)
+    s = LINK.sub(lambda m: m.group(1) or "", s)
+    return s
+
+
+def skip_line(line):
+    s = line.strip()
+    return (not s or s.startswith("#") or s.startswith("|") or s.startswith("```")
+            or s.startswith("---") or re.match(r"^[A-Za-z_][\w.]*:\s", s) is not None)
+
+
+def scan_md(path):
+    """Returns (errors, warnings) for one staged markdown file. Only added lines are read."""
+    errs, warns = [], []
+    fence = False
+    lines = added_lines(path)
+    for n, line in lines:
+        if line.strip().startswith("```"):
+            fence = not fence
+            continue
+        if fence:
+            continue
+        if any(c in line for c in DASHES):
+            errs.append(f"{path}:{n}  em or en dash")
+        if skip_line(line):
+            continue
+        s = prose(line)
+        s2 = TIME.sub("", s)
+        if re.search(r"[A-Za-z)\]*_]:(\s|$)", s2):
+            warns.append(f"{path}:{n}  colon in prose  {line.strip()[:70]}")
+        for m in re.finditer(r"\b[A-Za-z]+(?:-[A-Za-z]+)+\b", s):
+            w = m.group(0)
+            if re.search(r"[./\\]", s[max(0, m.start() - 1):m.end() + 1]):
+                continue
+            warns.append(f"{path}:{n}  hyphen in prose  {w}")
+    return errs, warns
+
+
+def python_for_claimcheck():
+    v = ROOT / "01-signal-to-fill" / ".venv" / "bin" / "python"
+    return str(v) if v.exists() else sys.executable
+
+
+def pre_commit():
+    files = staged_files()
+    errs, warns = [], []
+    for f in files:
+        if is_public_md(f):
+            e, w = scan_md(f)
+            errs += e; warns += w
+    for w in warns:
+        print("warning  " + w, file=sys.stderr)
+    for e in errs:
+        print("error    " + e, file=sys.stderr)
+    status = 1 if errs else 0
+    proposals = sorted({f.split("/")[0] for f in files if re.match(r"^\d\d-", f)})
+    for p in proposals:
+        r = subprocess.run([python_for_claimcheck(), "-m", "claimcheck", p], cwd=ROOT,
+                           capture_output=True, text=True)
+        fails = [l for l in r.stdout.splitlines() if re.search(r"\bFAIL\b", l)]
+        if r.returncode != 0 or fails:
+            print(f"claimcheck on {p} exited {r.returncode}", file=sys.stderr)
+            for l in fails[:40]:
+                print("  " + l, file=sys.stderr)
+            status = 1
+        else:
+            print(f"claimcheck on {p}: no failures", file=sys.stderr)
+    return status
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        sys.exit(__doc__)
+    if sys.argv[1] == "commit-msg":
+        sys.exit(commit_msg(sys.argv[2]))
+    if sys.argv[1] == "pre-commit":
+        sys.exit(pre_commit())
+    sys.exit(__doc__)
