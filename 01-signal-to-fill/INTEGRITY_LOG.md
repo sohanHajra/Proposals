@@ -255,3 +255,26 @@ A second reader went over commits 4718a82 to 47bc3ae cold. No test day or breadt
 - Runner. Only the two test days and six breadth days pass, the dev day only through the dry run. One argument, no options, seed 20261115 checked, outputs and saved arrays checked before anything runs, and each write refuses an existing file. Test day steps run the primary tests first, then the follow ups with H1b, H2c, RQ3, signal decisions and H5 without the marketable orders, then the robustness checks, then the jump split. The H5 code without the marketable orders is unchanged since 2d31501. Every module stops on a test day unless the runner sets the switch. The dry run output in `/tmp/s2f_dryrun_ae07swwy` matches all fourteen committed files.
 - Hooks. `.git/hooks/pre-commit` and `.git/hooks/commit-msg` are installed and executable and call `scripts/guard`. Every commit message in the range passes it, and no dash, prose colon or prose hyphen was added to the notes.
 - Unit tests 64 passed, claimcheck tests 81 passed. claimcheck on 01 exits 0 with no failure and 34 untagged warnings.
+
+## 2026-11-20 (Fri, morning) · claimcheck on the whole folder, and the 11-18 second reader's list
+I checked this myself. No second reader looked at this entry.
+
+**What claimcheck caught**
+- The 0.067 bps in the 11-18 passive entry, where the file gives 0.0665. Found when the dev day numbers were first tagged on 11-19 and corrected then with a pointer.
+- Two right numbers flagged as wrong because they sat exactly half a unit from the stored value and floating point put them just outside the tolerance. Fixed in the checker, not in the notes.
+- Nothing else. Today's full run has 458 claims and 501 tags all agreeing with the files, every literature row with a depth, nothing on the Unverified list cited, the preregistration first committed in 913347d with no test results yet, and 56 untagged numbers as warnings. Exit 0.
+
+**The 11-18 second reader's findings, where each ended up**
+- High items. Primary tests null by construction, logged under Deviations with the fixed price arm as exploratory. Yueshen depth corrected, then read in full the same afternoon. Sanity code added with `make sanity`, and it reproduces the file. All on 11-18.
+- Medium items. `make reproduce` now covers sanity, taker and passive. Flag range corrected to 0.13% to 0.31%. Tie flip reported as a weak check and measured. Matched H2c markouts and the 38% left the top five added. Yueshen framing removed. H1b split called partly mechanical. Netted updates and the 600 s cut logged. LOBSTER selection statement narrowed. All on 11-18.
+- Low items. All handled on 11-18 as listed in that entry, including the disclosure of the commit message rewrite.
+- What was still open after 11-18. The H1b interval, an interval for the matched H2c markouts, the RQ3 split and a working tie flip in the passive leg were all built on the dev day on 11-19 (afternoon entry in the notebook), before any test day. H2c fails on the dev day under all three rules with intervals above zero. The Danait ranking reversal shares now come from the printed values in their Section 7.2, which agree with what I read off the chart. The Albers supplement was read in full on 11-18.
+
+**Open**
+- 56 untagged numbers in the notebook, which must reach zero before release.
+- Whether the result files regenerate exactly was checked for the taker on 11-18 and for all fourteen dev day files in the 11-20 dry run. Not rechecked today.
+- No file can prove test day data was never fetched outside `get_data.py`. The preregistration check only reads git history.
+- I haven't looked for a supplement to Danait et al.
+
+**Checked**
+- claimcheck tests 84 pass. No dash, prose colon or prose hyphen in these two entries. No test day or breadth day file was downloaded, read or run.

@@ -456,3 +456,19 @@ Exploratory. The registered H2 placebo is one shuffle, and on the dev day its in
 - *Size of the check.* If the true miss rate were 12%<!--nc--> the cutoff would flag it about nine times in ten, at 10%<!--nc--> about seven in ten, and a small excess over 5%<!--nc--> would mostly go unseen. Those odds treat the shuffles as independent, which they aren't.
 - *Dev day only.* This says the placebo behaves on the dev day. It wasn't registered for the test days and isn't run there.
 - *Fill only.* As with the placebo itself, only the H2 fill slope is covered.
+
+## 2026-11-20 (Fri, morning) · full claimcheck run on 01 before the test days
+claimcheck is finished for now, so I ran the whole thing on this folder once more before the test day session. `python -m claimcheck 01-signal-to-fill` from the repo root, at commit 8a8de19, nothing in the folder changed first.
+
+- **Numbers.** 458<!--nc--> claims in `claims.yaml` and 501<!--nc--> tags in the notes. Every claim matches its results file within its tolerance and every tagged number matches its claim as printed. No failure, no unknown tag, no claim left unused.
+- **Sources.** All 10<!--nc--> rows of the literature review carry a reading depth (eight full text, one abstract, one listing). The four works on the Unverified list aren't cited anywhere else in the notes.
+- **Preregistration.** First committed in 913347d on 2026-11-15. No test day or breadth day results are in the folder yet, so the order check passes with nothing to compare against. That changes today.
+- **Untagged numbers.** 56<!--nc--> warnings, all in this notebook. Most are numbers I worked out in the text (the tick in bps, sums and gaps between two tagged values, bounds like "under 2.5%"), round figures, and the settings of the placebo calibration rule in this morning's entries. Warnings don't fail the run.
+- **The checker's own tests.** 84<!--nc--> pass. Exit code 0<!--nc-->.
+- **What it caught while I built it.** One real slip, the 0.067<!--nc--> bps I wrote on 11-18 for a gap the file gives as 0.0665<!--c:passive.front.m10diff.full-->, already corrected with a pointer. And two right numbers it called wrong, negative 0.082<!--c:rq2.INTC.bare--> and 0.646<!--c:cancel.MSFT.partial-->, which sit exactly half a unit from the stored value. Floating point put them a hair past the tolerance, so the checker now accepts a value on the edge. Nothing else in the notes disagreed with the files.
+
+**Limits and gaps.**
+- *A tag checks a number, not a sentence.* A right number in a wrong claim still passes, and so does a wrong reading of a right number. Logic and framing still need a second reader.
+- *Reading depth is taken on trust.* The check sees that a depth is written down, not that it is true.
+- *Untagged numbers.* The 56<!--nc--> have to reach zero before 01 goes out, either by writing the derived values into results files or by rewording.
+- *Test days not covered yet.* Today's numbers get tagged when I write them up.
