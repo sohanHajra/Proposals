@@ -19,7 +19,7 @@ import os
 import sys
 import numpy as np
 
-from .paths import ROOT
+from .paths import ROOT, result_path, guard_day
 from .replay import book_index_at
 from .passive import walk, prep_day, QTY, H_US, RULES
 from .taker import DELAYS_MS, SEED, BLOCK_US, make_decisions, slope_blocks, mean_ci
@@ -200,10 +200,14 @@ def load_chunks(paths):
     return r
 
 
+def results(day, prepped=None):
+    return {"random_decisions": summarize(run(day, prepped=prepped))}
+
+
 def write(day, res):
-    outp = ROOT / "results" / "passive"
-    outp.mkdir(parents=True, exist_ok=True)
-    (outp / f"fixed_price_dev_{day}.json").write_text(json.dumps({"random_decisions": res}, indent=1))
+    p = result_path("passive", "fixed_price", day)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps({"random_decisions": res}, indent=1))
 
 
 if __name__ == "__main__":
@@ -211,8 +215,7 @@ if __name__ == "__main__":
     # python -m s2f.fixed_price DAY chunk LO HI F   one slice of decisions to an npz file
     # python -m s2f.fixed_price DAY merge F1 F2 ... merge slices and write the results file
     day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
-    if day != "2026-09-01" and os.environ.get("S2F_ALLOW_TEST_DAY") != "1":
-        sys.exit("fixed price arm runs on the dev day only until the test day run is started on purpose")
+    guard_day(day)
     mode = sys.argv[2] if len(sys.argv) > 2 else "full"
     if mode == "chunk":
         save_chunk(day, int(sys.argv[3]), int(sys.argv[4]), sys.argv[5])

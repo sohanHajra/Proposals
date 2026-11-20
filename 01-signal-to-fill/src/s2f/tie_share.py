@@ -8,7 +8,7 @@ import json
 import sys
 import numpy as np
 
-from .paths import ROOT
+from .paths import result_path, guard_day
 from .replay import load_day
 from .taker import make_decisions, DELAYS_MS
 
@@ -23,8 +23,7 @@ def tie_share(book_ts, t):
     return np.array(hits).T          # decisions x delays, True where arrival sits on a book stamp
 
 
-if __name__ == "__main__":
-    day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
+def results(day):
     book, _ = load_day(day)
     t, side, _ = make_decisions(book)
     H = tie_share(book.ts, t)
@@ -34,7 +33,14 @@ if __name__ == "__main__":
                share_decisions_on_a_stamp_at_any_delay=float(H.any(1).mean()),
                share_by_delay_ms={int(d): float(H[:, j].mean()) for j, d in enumerate(DELAYS_MS)},
                share_decision_times_whole_ms=float((t % 1000 == 0).mean()))
-    out = ROOT / "results" / "taker"
-    out.mkdir(parents=True, exist_ok=True)
-    (out / f"tie_share_dev_{day}.json").write_text(json.dumps(res, indent=1))
+    return res
+
+
+if __name__ == "__main__":
+    day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
+    guard_day(day)
+    res = results(day)
+    p = result_path("taker", "tie_share", day)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(res, indent=1))
     print(json.dumps(res, indent=1))

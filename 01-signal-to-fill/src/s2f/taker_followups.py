@@ -17,7 +17,7 @@ import os
 import sys
 import numpy as np
 
-from .paths import ROOT
+from .paths import ROOT, result_path, guard_day
 from .replay import book_index_at
 from .passive import prep_day
 from .taker import DELAYS_MS, QTY, make_decisions, slope_blocks, mean_ci
@@ -158,8 +158,8 @@ def signal_decisions(book):
     return make_signal_decisions(book, frozen_threshold())
 
 
-def main(day):
-    book, tr, S = prep_day(day)
+def results(day, prepped=None):
+    book, tr, S = prepped if prepped is not None else prep_day(day)
     t, side, ngaps = make_decisions(book)
     ts, ss, ngs, thr = signal_decisions(book)
     res = dict(day=day)
@@ -170,14 +170,18 @@ def main(day):
     tg = t - t % 1000
     res["tie_flip_random_ms_grid_exploratory"] = tie_compare(book, S, tg, side)
     res["tie_flip_signal"] = tie_compare(book, S, ts, ss)
-    out = ROOT / "results" / "taker"
-    out.mkdir(parents=True, exist_ok=True)
-    (out / f"followups_dev_{day}.json").write_text(json.dumps(res, indent=1))
+    return res
+
+
+def main(day):
+    res = results(day)
+    p = result_path("taker", "followups", day)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(res, indent=1))
     print(json.dumps({k: res[k]["n_decisions"] for k in ("random", "signal")}))
 
 
 if __name__ == "__main__":
     day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
-    if day != "2026-09-01" and os.environ.get("S2F_ALLOW_TEST_DAY") != "1":
-        sys.exit("dev day only until the test day run is started on purpose")
+    guard_day(day)
     main(day)

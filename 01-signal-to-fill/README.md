@@ -10,13 +10,14 @@
 | Literature review | [LITERATURE_REVIEW.md](LITERATURE_REVIEW.md) |
 | Lab notebook | [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) |
 | Reproduce | `make reproduce` |
+| Test day run | `make run_day DAY=2026-10-01` |
 
 ## From proposal to experiment
 This part isn't in the proposal, which I've kept as written. Public data has no decision timestamps for anyone's orders, so I split the question in two.
 1. **Counterfactual replay (simulated):** Take a decision moment from real Binance USD-M BTCUSDT data and replay *the same* decision at several injected delays. Market conditions are identical across delays by construction.
 2. **Real order lifecycles (observational):** LOBSTER's Nasdaq message files carry order IDs, so the third stage (acknowledgement to fill or cancel) is observable for real orders, though decision time is not.
 
-The full design and its pass and fail rules are in [PREREGISTRATION.md](PREREGISTRATION.md). Everything that went wrong is in [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md).
+The full design and its pass and fail rules are in [PREREGISTRATION.md](PREREGISTRATION.md). Each test day and breadth day runs once with `python -m s2f.run_test_day DATE`. It takes the date and nothing else, refuses any date that isn't registered, and won't run a day whose outputs already exist. Everything that went wrong is in [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md).
 
 ## The three stages of delay
 

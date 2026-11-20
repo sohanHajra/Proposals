@@ -13,7 +13,7 @@ import sys
 import time
 import numpy as np
 
-from .paths import ROOT
+from .paths import ROOT, result_path, guard_day
 from . import passive, fixed_price
 from .passive import RULES
 from .fixed_price import STATES, slope_blocks
@@ -36,9 +36,9 @@ def decisions(book, which):
     return ts, ss, ng
 
 
-def run_configs(day, names):
+def run_configs(day, names, prepped=None):
     DERIVED.mkdir(parents=True, exist_ok=True)
-    prepped = passive.prep_day(day)
+    prepped = prepped if prepped is not None else passive.prep_day(day)
     for name in names:
         path = DERIVED / f"{name}_{day}.npz"
         if path.exists():
@@ -124,14 +124,14 @@ def tie_compare(ra, rb, kind):
     return out
 
 
-def summarize(day):
+def summarize(day, root=None):
     res = dict(day=day, nboot=NBOOT)
     pr = load("passive_random_after", day)
     fr = load("fixed_random_after", day)
     rt = lambda x: json.loads(json.dumps(x))         # int keys become strings, as in the files
     res["rerun_check"] = dict(
-        passive=rt(passive.summarize(pr)) == json.loads((ROOT / "results/passive" / f"passive_dev_{day}.json").read_text())["primary"],
-        fixed=rt(fixed_price.summarize(fr)) == json.loads((ROOT / "results/passive" / f"fixed_price_dev_{day}.json").read_text())["random_decisions"])
+        passive=rt(passive.summarize(pr)) == json.loads(result_path("passive", "passive", day, root).read_text())["primary"],
+        fixed=rt(fixed_price.summarize(fr)) == json.loads(result_path("passive", "fixed_price", day, root).read_text())["random_decisions"])
     res["H2c_matched_passive_random"] = dict(m10=matched_markouts(pr, "m10"), m1=matched_markouts(pr, "m1"))
     res["H2c_matched_fixed_price_random_exploratory"] = dict(m10=matched_markouts(fr, "m10"))
     res["fixed_price_state_costs_random"] = state_costs(fr)
@@ -147,15 +147,16 @@ def summarize(day):
     res["signal_fixed_price"] = fixed_price.summarize(fs)
     res["signal_fixed_price"]["state_costs"] = state_costs(fs)
     res["signal_fixed_price"]["drop_marketable_exploratory"] = drop_marketable(fs)
-    out = ROOT / "results" / "passive"
-    (out / f"followups_dev_{day}.json").write_text(json.dumps(res, indent=1, default=float))
+    p = result_path("passive", "followups", day, root)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(res, indent=1, default=float))
     print(json.dumps(res["rerun_check"]))
+    return res
 
 
 if __name__ == "__main__":
     day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
-    if day != "2026-09-01" and os.environ.get("S2F_ALLOW_TEST_DAY") != "1":
-        sys.exit("dev day only until the test day run is started on purpose")
+    guard_day(day)
     if sys.argv[2] == "run":
         run_configs(day, sys.argv[3:] or CONFIGS)
     else:

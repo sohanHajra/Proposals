@@ -54,7 +54,7 @@ import os
 import sys
 import numpy as np
 
-from .paths import ROOT
+from .paths import ROOT, guard_day
 from .replay import load_day, book_index_at
 from .taker import DELAYS_MS, QTY, SEED, BLOCK_US, make_decisions
 from .signals import make_signal_decisions, frozen_threshold, last_row_per_stamp, first_per_gap, drop_near_gaps
@@ -206,7 +206,7 @@ def run_spec(book, name, spec, rt, rside, rd100, st, sside, sd100, rng_seed=JUMP
     return res
 
 
-def main(day):
+def results(day):
     book, _ = load_day(day)
     rt, rside, _ = make_decisions(book)
     st, sside, _, thr = make_signal_decisions(book, frozen_threshold())
@@ -215,6 +215,11 @@ def main(day):
     res = dict(day=day, config=CONFIG, n_random=int(len(rt)), n_signal=int(len(st)), signal_threshold=thr,
                check_random_mean_dS100=float(rd100.mean()))
     res["specs"] = {name: run_spec(book, name, sp, rt, rside, rd100, st, sside, sd100) for name, sp in SPECS.items()}
+    return res
+
+
+def main(day):
+    res = results(day)
     out = ROOT / "results" / "jump"
     out.mkdir(parents=True, exist_ok=True)
     (out / f"jump_split_{day}.json").write_text(json.dumps(res, indent=1))
@@ -224,6 +229,5 @@ def main(day):
 
 if __name__ == "__main__":
     day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
-    if day != "2026-09-01" and os.environ.get("S2F_ALLOW_TEST_DAY") != "1":
-        sys.exit("dev day only until the test day run is started on purpose")
+    guard_day(day)
     main(day)

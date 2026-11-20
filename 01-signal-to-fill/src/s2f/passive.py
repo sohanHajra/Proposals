@@ -13,7 +13,7 @@ import sys
 import numpy as np
 import polars as pl
 
-from .paths import ROOT, RAW
+from .paths import ROOT, RAW, result_path, guard_day
 from .replay import load_day, book_index_at, CLOCKS
 from .taker import DELAYS_MS, SEED, make_decisions, slope_blocks, mean_ci
 
@@ -246,11 +246,16 @@ def summarize(r):
     return out
 
 
+def results(day, prepped=None):
+    return {"primary": summarize(run(day, True, prepped=prepped))}
+
+
 if __name__ == "__main__":
     day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
+    guard_day(day)
     max_n = int(sys.argv[2]) if len(sys.argv) > 2 else None
     res = {"primary": summarize(run(day, True, max_n))}
-    outp = ROOT / "results" / "passive"
-    outp.mkdir(parents=True, exist_ok=True)
-    (outp / f"passive_dev_{day}.json").write_text(json.dumps(res, indent=1))
+    p = result_path("passive", "passive", day)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(res, indent=1))
     print(json.dumps({k: {r: (v["by_rule"][r]["H2_slope_fill_per_logms"], v["by_rule"][r]["fill_prob_by_delay"][1], v["by_rule"][r]["fill_prob_by_delay"][500]) for r in RULES} for k, v in res.items()}, indent=1))

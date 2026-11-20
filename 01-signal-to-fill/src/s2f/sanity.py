@@ -8,8 +8,13 @@ import json
 import sys
 import numpy as np
 
-from .paths import ROOT
+from .paths import ROOT, guard_day
 from .replay import load_day
+
+
+def results(day):
+    book, tr = load_day(day)
+    return sanity(book, tr)
 
 
 def sanity(book, tr):
@@ -33,8 +38,8 @@ def sanity(book, tr):
 
 if __name__ == "__main__":
     day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
-    book, tr = load_day(day)
-    res = sanity(book, tr)
+    guard_day(day)
+    res = results(day)
     out = ROOT / "results" / "replay"
     out.mkdir(parents=True, exist_ok=True)
     (out / f"sanity_{day}.json").write_text(json.dumps(res, indent=1))

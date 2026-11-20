@@ -18,9 +18,9 @@ sanity:
 test:
 	$(PY) -m pytest -q tests
 
-.PHONY: env data audit test sanity taker passive fixed_price followups_taker followups_passive followups lobster jump verify reproduce
+.PHONY: env data audit test sanity taker passive fixed_price followups_taker followups_passive followups lobster jump robustness verify reproduce run_day dry_run
 
-reproduce: env data audit test sanity taker passive fixed_price followups lobster jump verify
+reproduce: env data audit test sanity taker passive fixed_price followups robustness lobster jump verify
 
 taker:
 	$(PY) -m s2f.taker 2026-09-01
@@ -53,3 +53,16 @@ jump:
 # (claimcheck lives at the top of the repo, so it runs from there; exits 1 on any mismatch)
 verify:
 	cd .. && $(abspath $(PY)) -m claimcheck 01-signal-to-fill
+
+# robustness checks 1, 3, 5, 6 and 8 on the dev day (after followups, which saves the passive arrays)
+robustness:
+	$(PY) -m s2f.robustness 2026-09-01
+
+# one registered test or breadth day, run once, every output named by the date
+# make run_day DAY=2026-10-01
+run_day:
+	$(PY) -m s2f.run_test_day $(DAY)
+
+# the same steps on the dev day, written to a temporary folder and compared with the committed files
+dry_run:
+	$(PY) -m s2f.dry_run
