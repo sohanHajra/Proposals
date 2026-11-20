@@ -9,6 +9,7 @@ import yaml
 
 REQUIRED = ("file", "path", "value", "tol")
 KNOWN = set(REQUIRED) | {"unit", "scale"}
+FLOAT_SLACK = 1e-9
 
 
 class ClaimsFileError(Exception):
@@ -82,11 +83,36 @@ def load_claims(claims_path):
     return claims
 
 
+def split_path(dotted):
+    """Split a dotted path into parts. A part in square brackets is a key taken as written, dots and all,
+    so `quantiles.[0.5]` reads the key "0.5". Raises KeyError on an unclosed bracket or a stray character."""
+    parts = []
+    i = 0
+    n = len(dotted)
+    while i <= n:
+        if i < n and dotted[i] == "[":
+            j = dotted.find("]", i)
+            if j < 0:
+                raise KeyError(dotted)
+            parts.append(dotted[i + 1:j])
+            i = j + 1
+            if i < n and dotted[i] != ".":
+                raise KeyError(dotted)
+            i += 1
+        else:
+            j = dotted.find(".", i)
+            if j < 0:
+                j = n
+            parts.append(dotted[i:j])
+            i = j + 1
+    return parts
+
+
 def resolve(data, dotted):
     """Follow a dotted path through nested dicts and lists. Raises KeyError with the part that failed."""
     node = data
     walked = []
-    for part in dotted.split("."):
+    for part in split_path(dotted):
         walked.append(part)
         if isinstance(node, dict):
             if part not in node:
@@ -131,7 +157,9 @@ def check_data(claim, proposal_dir, _cache=None):
         return DataResult(claim, False, stored=stored, reason=f"field {claim.path} is not a number ({stored!r})")
     scaled = stored * claim.scale
     gap = abs(scaled - claim.value)
-    if gap > claim.tol:
+    # a field sitting exactly on the tolerance (0.6455 written 0.646 with tol 0.0005) must pass, but
+    # binary floats put it a hair over, so allow a few parts in a billion of slack
+    if gap > claim.tol + FLOAT_SLACK * max(abs(scaled), abs(claim.value), claim.tol):
         return DataResult(
             claim, False, stored=scaled,
             reason=f"file has {scaled:.10g}, claim says {claim.value:.10g}, off by {gap:.3g} (tol {claim.tol:g})",

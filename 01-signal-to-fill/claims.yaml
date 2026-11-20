@@ -1215,3 +1215,444 @@ jump.C.thin1:
   value: 36.6
   tol: 0.05
   scale: 100
+
+# Audits, replay sanity, Alpaca paper latency and the LOBSTER day (added 2026-11-19 night).
+audit.book_rows:
+  file: results/audit/tardis_2026-09-01.json
+  path: book_ticker_rows
+  value: 36920623
+  tol: 0.5
+audit.trade_rows:
+  file: results/audit/tardis_2026-09-01.json
+  path: trade_rows
+  value: 3602361
+  tol: 0.5
+audit.btc:
+  file: results/audit/tardis_2026-09-01.json
+  path: trade_volume_btc
+  value: 149388
+  tol: 0.5
+audit.gaps1s:
+  file: results/audit/tardis_2026-09-01.json
+  path: gaps_over_1s_bt
+  value: 2
+  tol: 0.5
+audit.maxgap:
+  file: results/audit/tardis_2026-09-01.json
+  path: max_gap_s_bt_local
+  value: 1.193
+  tol: 0.0005
+audit.lat_bt.p50:
+  file: results/audit/tardis_2026-09-01.json
+  path: "feed_latency_ms_bt_quantiles.[0.5]"
+  value: 2.9
+  tol: 0.05
+audit.lat_bt.p99:
+  file: results/audit/tardis_2026-09-01.json
+  path: "feed_latency_ms_bt_quantiles.[0.99]"
+  value: 19.5
+  tol: 0.05
+audit.lat_bt.p999:
+  file: results/audit/tardis_2026-09-01.json
+  path: "feed_latency_ms_bt_quantiles.[0.999]"
+  value: 108.5
+  tol: 0.05
+audit.lat_tr.p50:
+  file: results/audit/tardis_2026-09-01.json
+  path: "feed_latency_ms_trades_quantiles.[0.5]"
+  value: 3.1
+  tol: 0.05
+audit.lat_tr.p99:
+  file: results/audit/tardis_2026-09-01.json
+  path: "feed_latency_ms_trades_quantiles.[0.99]"
+  value: 142
+  tol: 0.5
+audit.lat_tr.p999:
+  file: results/audit/tardis_2026-09-01.json
+  path: "feed_latency_ms_trades_quantiles.[0.999]"
+  value: 589
+  tol: 0.5
+audit.onetick:
+  file: results/audit/tardis_2026-09-01.json
+  path: spread_1tick_share
+  value: 95.5
+  tol: 0.05
+  scale: 100
+audit.mid_open:
+  file: results/audit/tardis_2026-09-01.json
+  path: mid_open_close.0
+  value: 78550
+  tol: 0.5
+audit.mid_close:
+  file: results/audit/tardis_2026-09-01.json
+  path: mid_open_close.1
+  value: 77400
+  tol: 0.5
+sanity.book_rows:
+  file: results/replay/sanity_2026-09-01.json
+  path: book_rows
+  value: 36920623
+  tol: 0.5
+sanity.buy_ge:
+  file: results/replay/sanity_2026-09-01.json
+  path: buy_trade_px_ge_prior_ask
+  value: 99.78
+  tol: 0.005
+  scale: 100
+sanity.buy_eq:
+  file: results/replay/sanity_2026-09-01.json
+  path: buy_trade_px_equals_prior_ask
+  value: 58.2
+  tol: 0.05
+  scale: 100
+sanity.sell_eq:
+  file: results/replay/sanity_2026-09-01.json
+  path: sell_trade_px_equals_prior_bid
+  value: 53.6
+  tol: 0.05
+  scale: 100
+lobster.mingap.MSFT:
+  file: results/audit/lobster_2012-06-21.json
+  path: MSFT.min_positive_gap_ns
+  value: 169
+  tol: 0.5
+lobster.mingap.GOOG:
+  file: results/audit/lobster_2012-06-21.json
+  path: GOOG.min_positive_gap_ns
+  value: 303
+  tol: 0.5
+lobster.onetick.INTC:
+  file: results/audit/lobster_2012-06-21.json
+  path: INTC.spread_1tick_share
+  value: 76.7
+  tol: 0.05
+  scale: 100
+lobster.onetick.MSFT:
+  file: results/audit/lobster_2012-06-21.json
+  path: MSFT.spread_1tick_share
+  value: 76.9
+  tol: 0.05
+  scale: 100
+lobster.spread.AAPL:
+  file: results/audit/lobster_2012-06-21.json
+  path: AAPL.spread_ticks_median_p99.0
+  value: 15
+  tol: 0.5
+lobster.spread.AMZN:
+  file: results/audit/lobster_2012-06-21.json
+  path: AMZN.spread_ticks_median_p99.0
+  value: 13
+  tol: 0.5
+lobster.spread.GOOG:
+  file: results/audit/lobster_2012-06-21.json
+  path: GOOG.spread_ticks_median_p99.0
+  value: 28
+  tol: 0.5
+lobster.exec.AMZN:
+  file: results/audit/lobster_2012-06-21.json
+  path: AMZN.share_of_ended_with_any_visible_execution
+  value: 5.3
+  tol: 0.05
+  scale: 100
+lobster.exec.AAPL:
+  file: results/audit/lobster_2012-06-21.json
+  path: AAPL.share_of_ended_with_any_visible_execution
+  value: 9.3
+  tol: 0.05
+  scale: 100
+lobster.life25.INTC:
+  file: results/audit/lobster_2012-06-21.json
+  path: "INTC.lifetime_ms_quantiles.[0.25]"
+  value: 1.3
+  tol: 0.05
+lobster.life25.MSFT:
+  file: results/audit/lobster_2012-06-21.json
+  path: "MSFT.lifetime_ms_quantiles.[0.25]"
+  value: 1.5
+  tol: 0.05
+lobster.del100.GOOG:
+  file: results/audit/lobster_2012-06-21.json
+  path: GOOG.deleted_without_fill_share_within_100ms
+  value: 26
+  tol: 0.5
+  scale: 100
+lobster.del100.INTC:
+  file: results/audit/lobster_2012-06-21.json
+  path: INTC.deleted_without_fill_share_within_100ms
+  value: 39
+  tol: 0.5
+  scale: 100
+latency.orders:
+  file: results/latency/alpaca_paper_latency.json
+  path: summary.orders
+  value: 200
+  tol: 0.5
+latency.acked:
+  file: results/latency/alpaca_paper_latency.json
+  path: summary.acknowledged
+  value: 200
+  tol: 0.5
+latency.p50:
+  file: results/latency/alpaca_paper_latency.json
+  path: summary.median_ms
+  value: 255.9
+  tol: 0.05
+latency.p90:
+  file: results/latency/alpaca_paper_latency.json
+  path: summary.p90_ms
+  value: 283.3
+  tol: 0.05
+latency.p99:
+  file: results/latency/alpaca_paper_latency.json
+  path: summary.p99_ms
+  value: 360.0
+  tol: 0.05
+latency.min:
+  file: results/latency/alpaca_paper_latency.json
+  path: summary.min_ms
+  value: 238.1
+  tol: 0.05
+latency.max:
+  file: results/latency/alpaca_paper_latency.json
+  path: summary.max_ms
+  value: 368.1
+  tol: 0.05
+latency.p50r:
+  file: results/latency/alpaca_paper_latency.json
+  path: summary.median_ms
+  value: 256
+  tol: 0.5
+rq2.INTC.bare:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.bare.coef_log_rest
+  value: -0.082
+  tol: 0.0005
+rq2.INTC.bare.lo:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.bare.ci95.0
+  value: -0.107
+  tol: 0.0005
+rq2.INTC.bare.hi:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.bare.ci95.1
+  value: -0.056
+  tol: 0.0005
+rq2.MSFT.bare:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.MSFT.bare.coef_log_rest
+  value: -0.043
+  tol: 0.0005
+rq2.MSFT.bare.lo:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.MSFT.bare.ci95.0
+  value: -0.066
+  tol: 0.0005
+rq2.MSFT.bare.hi:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.MSFT.bare.ci95.1
+  value: -0.019
+  tol: 0.0005
+rq2.INTC.ctrl:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.controls.coef_log_rest
+  value: -0.013
+  tol: 0.0005
+rq2.INTC.ctrl.lo:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.controls.ci95.0
+  value: -0.040
+  tol: 0.0005
+rq2.INTC.ctrl.hi:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.controls.ci95.1
+  value: 0.015
+  tol: 0.0005
+rq2.MSFT.ctrl:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.MSFT.controls.coef_log_rest
+  value: -0.003
+  tol: 0.0005
+rq2.MSFT.ctrl.lo:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.MSFT.controls.ci95.0
+  value: -0.029
+  tol: 0.0005
+rq2.MSFT.ctrl.hi:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.MSFT.controls.ci95.1
+  value: 0.023
+  tol: 0.0005
+rq2.INTC.joined:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.controls_joined_existing_best_only.coef_log_rest
+  value: -0.010
+  tol: 0.0005
+rq2.MSFT.joined:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.MSFT.controls_joined_existing_best_only.coef_log_rest
+  value: -0.003
+  tol: 0.0005
+rq2.INTC.n:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.n_used
+  value: 20418
+  tol: 0.5
+rq2.MSFT.n:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.MSFT.n_used
+  value: 20765
+  tol: 0.5
+rq2.INTC.rest50:
+  file: results/lobster/rq2_2012-06-21.json
+  path: "rq2.INTC.rest_ms_quantiles.[0.5]"
+  value: 10.6
+  tol: 0.05
+  scale: 0.001
+rq2.MSFT.rest50:
+  file: results/lobster/rq2_2012-06-21.json
+  path: "rq2.MSFT.rest_ms_quantiles.[0.5]"
+  value: 6.9
+  tol: 0.05
+  scale: 0.001
+rq2.INTC.markout:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.markout_bps_mean
+  value: -0.84
+  tol: 0.005
+rq2.MSFT.markout:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.MSFT.markout_bps_mean
+  value: -0.90
+  tol: 0.005
+rq2.INTC.nexec:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.counts.with_visible_exec
+  value: 20707
+  tol: 0.5
+rq2.INTC.atbest:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.counts.at_best
+  value: 202231
+  tol: 0.5
+rq2.AMZN.ctrl:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.AMZN.controls.coef_log_rest
+  value: 0.031
+  tol: 0.0005
+rq2.GOOG.ctrl:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.GOOG.controls.coef_log_rest
+  value: 0.020
+  tol: 0.0005
+cancel.INTC.mean:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.delete_at_best.mean_p
+  value: 0.803
+  tol: 0.0005
+cancel.INTC.lo:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.delete_at_best.mean_p_ci95.0
+  value: 0.795
+  tol: 0.0005
+cancel.INTC.hi:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.delete_at_best.mean_p_ci95.1
+  value: 0.812
+  tol: 0.0005
+cancel.INTC.n:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.delete_at_best.n
+  value: 85102
+  tol: 0.5
+cancel.MSFT.mean:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.MSFT.delete_at_best.mean_p
+  value: 0.790
+  tol: 0.0005
+cancel.MSFT.lo:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.MSFT.delete_at_best.mean_p_ci95.0
+  value: 0.774
+  tol: 0.0005
+cancel.MSFT.hi:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.MSFT.delete_at_best.mean_p_ci95.1
+  value: 0.805
+  tol: 0.0005
+cancel.MSFT.n:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.MSFT.delete_at_best.n
+  value: 73212
+  tol: 0.5
+cancel.INTC.wback:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.delete_at_best.w1_distance.back
+  value: 0.197
+  tol: 0.0005
+cancel.MSFT.wback:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.MSFT.delete_at_best.w1_distance.back
+  value: 0.210
+  tol: 0.0005
+cancel.INTC.last:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.delete_at_best.share_p_eq_1
+  value: 17
+  tol: 0.5
+  scale: 100
+cancel.MSFT.last:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.MSFT.delete_at_best.share_p_eq_1
+  value: 16
+  tol: 0.5
+  scale: 100
+cancel.INTC.partial:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.partial_at_best.mean_p
+  value: 0.715
+  tol: 0.0005
+cancel.MSFT.partial:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.MSFT.partial_at_best.mean_p
+  value: 0.646
+  tol: 0.0005
+cancel.INTC.partial.n:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.partial_at_best.n
+  value: 2670
+  tol: 0.5
+cancel.MSFT.partial.n:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.MSFT.partial_at_best.n
+  value: 1277
+  tol: 0.5
+cancel.AAPL.mean:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.AAPL.delete_at_best.mean_p
+  value: 0.518
+  tol: 0.0005
+cancel.AMZN.mean:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.AMZN.delete_at_best.mean_p
+  value: 0.507
+  tol: 0.0005
+cancel.GOOG.mean:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.GOOG.delete_at_best.mean_p
+  value: 0.489
+  tol: 0.0005
+passive.front.m10diff.full:
+  file: results/passive/followups_dev_2026-09-01.json
+  path: H2c_matched_passive_random.m10.front.matched_500_minus_1.mean
+  value: 0.0665
+  tol: 0.00005
+rq2.INTC.bare.file:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.bare.coef_log_rest
+  value: -0.0815
+  tol: 0.00005
+cancel.MSFT.partial.file:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.MSFT.partial_at_best.mean_p
+  value: 0.6455
+  tol: 0.00005

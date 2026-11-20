@@ -36,6 +36,8 @@ From the repo root, with Python 3.10 or newer and PyYAML.
 python -m claimcheck 01-signal-to-fill
 ```
 
+Inside a proposal folder with a Makefile, `make verify` runs the same thing from the right place. In 01 it is also the last step of `make reproduce`.
+
 Exit codes. `0` means every check that ran passed. `1` means at least one failed. `2` means the run could not check anything (no `claims.yaml` or an empty one with no tags, no LITERATURE_REVIEW.md and no PREREGISTRATION.md). The report says which checks ran, so a proposal with a literature review but no `claims.yaml` yet can exit `0` with its numbers not checked.
 
 The report lists every claim against its results file, then every tag in the proposal's markdown with its file and line. Claims that no tag uses are listed as warnings and do not fail the run.
@@ -48,7 +50,7 @@ Then comes the list of numbers with no tag, each with its file, line and a bit o
 
 - Tag the number if it reports a result.
 - Put `<!--cite-->` right after a number quoted from a paper, or `<!--nc-->` right after one that is not a result (a delay I chose, a count of book levels).
-- Add a phrase to `claimcheck_ignore.txt` in the proposal folder, one per line, for a setting that comes up again and again, like `500 ms`. Any number inside that phrase is skipped everywhere. Lines starting with `#` are comments.
+- Add a phrase to `claimcheck_ignore.txt` in the proposal folder, one per line, for a setting that comes up again and again, like `500 ms`. Any number inside that phrase is skipped everywhere. A phrase only matches whole, so `1 ms` leaves `0.1 ms` and `21 ms` alone, and a longer phrase is tried before a shorter one inside it. Lines starting with `#` are comments.
 
 The checker has its own tests, also run from the repo root.
 
@@ -65,4 +67,4 @@ Each folder in `claimcheck/tests/fixtures/` is a tiny proposal built to pass or 
 3. Name the test days in the Test row of the data table in PREREGISTRATION.md, give it a Deviations heading, and commit it before any test day result. If some test results don't carry a test date in their path, list globs for them in `claimcheck_tests.txt`.
 4. Add a `claims.yaml` in the proposal folder with one entry per number you report.
 5. Put the tag right after each number in the markdown, for example `0.0040 bps<!--c:taker.dS500-->`. The tag is an HTML comment, so GitHub does not show it.
-6. Run the command above before every push.
+6. Add a `verify` target to the proposal's Makefile that runs the command above from the repo root, and run it before every push.

@@ -16,7 +16,8 @@ Skipped without a warning
 - ordered list markers, and numbers right after Table, Figure, Section, page, Step, Appendix, Proposition, Lemma, seed and similar words
 - numbers glued to a dot and a letter, like the ticker 1301.T
 - numbers followed by a claim tag, by <!--cite--> (a number quoted from a paper) or by <!--nc--> (not a result)
-- any number inside a phrase listed in the proposal's claimcheck_ignore.txt (one phrase per line, # for comments)
+- any number inside a phrase listed in the proposal's claimcheck_ignore.txt (one phrase per line, # for comments),
+  matched as a whole, so a phrase never hides part of a longer number
 """
 
 import re
@@ -91,7 +92,9 @@ def _context(line, start, end, width=30):
 def scan_untagged_text(text, fname="<text>", ignore=()):
     found = []
     in_fence = False
-    ignore_res = [re.compile(re.escape(p)) for p in ignore]
+    # a phrase only matches as a whole, so "1 ms" does not hide part of "0.1 ms" or "21 ms";
+    # longer phrases go first so "5 ms" does not break up "1, 2 and 5 ms"
+    ignore_res = [re.compile(r"(?<![\w.,])" + re.escape(p) + r"(?![\w%])") for p in sorted(ignore, key=len, reverse=True)]
     for lineno, original in enumerate(text.splitlines(), start=1):
         if FENCE.match(original):
             in_fence = not in_fence

@@ -48,4 +48,5 @@ flowchart LR
 - Test data stays locked until the preregistration is committed. The download script refuses to fetch it before then.
 - No claim before out of sample checks, trading costs and a few alternative specifications.
 - A proposal that isn't good enough ships late rather than thin.
+- Every result number in a proposal's notes carries a hidden tag that points to the field in the results file it came from. [claimcheck](claimcheck/) rereads those files and fails when a number in the prose and the file disagree. It also checks that every source says how deeply I read it and that the preregistration was committed before any test day result. Run it with `make verify` in a proposal folder. It can't tell whether a result is right, only that the notes report what the code wrote.
 - Each proposal keeps an [integrity log](01-signal-to-fill/INTEGRITY_LOG.md). After each work session I go back over the logic, the sources and any bias, and write down what I found and what I fixed.

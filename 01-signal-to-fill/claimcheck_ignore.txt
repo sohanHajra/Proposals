@@ -1,0 +1,45 @@
+# Settings I chose for 01, not results. Numbers inside these phrases are not listed as untagged.
+# Each phrase matches only as a whole, so "1 ms" does not hide 0.1 ms or 21 ms.
+
+# the delay grid and the horizons
+Delay grid 1, 2, 5, 10, 25, 50, 100, 250, 500 ms
+0 ms
+1 ms
+5 ms
+100 ms
+250 ms
+500 ms
+1 s
+10 s
+1.1 s
+1, 2 and 5 ms
+1 to 5 ms
+mean gap 10 s
+every 10 s
+within 60 s
+
+# order sizes and data windows
+0.01 BTC
+1 BTC
+10 level
+10 levels
+5 level
+
+# test settings from the preregistration and the jump split
+95% block bootstrap
+5 minute
+0.1 bps
+2 bps markout
+worst 10%
+K = 2 bps
+K = 5 bps
+W = 10 ms
+W = 100 ms
+under 30 decisions
+under 10 five minute blocks
+
+# labels and numbering in prose
+stage 1 and 2
+stage 1
+claim 1
+type 5

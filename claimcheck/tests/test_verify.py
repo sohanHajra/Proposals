@@ -167,6 +167,20 @@ class TestClaimsFile(unittest.TestCase):
             self.assertFalse(check_data(claims["outside"], root).ok)
 
 
+class TestEdgeOfTolerance(unittest.TestCase):
+    def test_value_on_the_edge_passes_and_past_it_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "r.json").write_text('{"a": 0.6455, "b": -0.0815, "c": 0.64551}')
+            (root / "claims.yaml").write_text(
+                "x: {file: r.json, path: a, value: 0.646, tol: 0.0005}\n"
+                "y: {file: r.json, path: b, value: -0.082, tol: 0.0005}\n"
+                "z: {file: r.json, path: c, value: 0.645, tol: 0.0005}\n"
+            )
+            got = {c.id: check_data(c, root).ok for c in load_claims(root / "claims.yaml").values()}
+        self.assertEqual(got, {"x": True, "y": True, "z": False})
+
+
 class TestResolve(unittest.TestCase):
     DATA = {"a": {"b": [10, {"c": 3}]}, "500": {"m": 1}}
 
@@ -175,6 +189,15 @@ class TestResolve(unittest.TestCase):
         self.assertEqual(resolve(self.DATA, "a.b.1.c"), 3)
         self.assertEqual(resolve(self.DATA, "a.b.-1.c"), 3)
         self.assertEqual(resolve(self.DATA, "500.m"), 1)
+
+    def test_keys_with_dots_in_brackets(self):
+        data = {"q": {"0.5": 2.9, "0.99": {"x": 7}}, "a": [1]}
+        self.assertEqual(resolve(data, "q.[0.5]"), 2.9)
+        self.assertEqual(resolve(data, "q.[0.99].x"), 7)
+        self.assertEqual(resolve(data, "[a].0"), 1)
+        for bad in ("q.[0.5", "q.[0.5]x", "q.0.5"):
+            with self.assertRaises(KeyError):
+                resolve(data, bad)
 
     def test_failures_name_the_part(self):
         for path, part in [("a.x", "a.x"), ("a.b.5", "a.b.5"), ("a.b.first", "a.b.first"), ("a.b.0.z", "a.b.0.z")]:

@@ -54,6 +54,10 @@ class TestFixture(unittest.TestCase):
         self.assertFalse(any(u.file == "NOTES.md" for u in found))
 
 
+def numbers_ignoring(text, ignore):
+    return [u.number for u in scan_untagged_text(text, ignore=ignore)]
+
+
 class TestRules(unittest.TestCase):
     def test_plain_results_are_listed(self):
         self.assertEqual(numbers("shortfall 0.0104 bps, fill 46.7%, negative \u22120.4 and -0.7"),
@@ -62,6 +66,15 @@ class TestRules(unittest.TestCase):
     def test_tagged_and_marked_numbers(self):
         text = "a 0.0040 bps<!--c:x--> b 3.1%<!--c:y--> c 1.7 bps<!--cite--> d 500 ms<!--nc--> e 9"
         self.assertEqual(numbers(text), ["9"])
+
+    def test_ignore_phrase_matches_only_whole(self):
+        text = "waited 1 ms, then 0.1 ms, 21 ms and 1 ms."
+        got = [u.number for u in scan_untagged_text(text, ignore=["1 ms"])]
+        self.assertEqual(got, ["0.1", "21"])
+
+    def test_longer_ignore_phrase_wins(self):
+        text = "horizons of 1, 2 and 5 ms, and a 5 ms window"
+        self.assertEqual(numbers_ignoring(text, ["5 ms", "1, 2 and 5 ms"]), [])
 
     def test_tag_must_touch_the_number(self):
         self.assertEqual(numbers("moved 0.004 <!--c:x-->"), ["0.004"])

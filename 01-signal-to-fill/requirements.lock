@@ -61,6 +61,8 @@ python-dateutil==4.0.0
     # via
     #   matplotlib
     #   pandas
+pyyaml==6.0.3
+    # via -r requirements.in
 scipy==1.18.1
     # via
     #   -r requirements.in

@@ -34,7 +34,7 @@ taker.dS500:
 | Field | Meaning |
 |---|---|
 | `file` | Results file, relative to the proposal folder. JSON for now. |
-| `path` | Dotted path to the field. Each part is a dict key, or a list index written as a number. Keys that contain dots are not supported yet. |
+| `path` | Dotted path to the field. Each part is a dict key, or a list index written as a number. A key that contains dots goes in square brackets, so `quantiles.[0.5]` reads the key `0.5`. |
 | `value` | The number as I state it in prose. |
 | `tol` | How far the field in the file may sit from `value` and still pass. |
 | `unit` | Optional. Shown in the report, not compared. |
@@ -45,7 +45,7 @@ taker.dS500:
 All three must hold.
 
 1. The file exists and the path resolves to a number.
-2. `abs(field * scale - value) <= tol`.
+2. `abs(field * scale - value) <= tol`. A field exactly on the edge passes, so a stored 0.6455 written as 0.646 with tol 0.0005 is fine even though binary floats land a hair past it.
 3. The number printed before each tag equals `value` once `value` is rounded to the number of decimals printed. A printed `%` is part of the text and is not converted.
 
 ## Example of a failure
@@ -63,7 +63,7 @@ Their taker fee was 1.7 bps<!--cite--> (Table 1).
 The order waits 500 ms<!--nc--> before it is sent.
 ```
 
-A proposal can also keep `claimcheck_ignore.txt` next to its `claims.yaml`. Each line is a phrase, matched exactly, and numbers inside it are not listed.
+A proposal can also keep `claimcheck_ignore.txt` next to its `claims.yaml`. Each line is a phrase, matched exactly and only as a whole (the phrase `1 ms` does not match inside `0.1 ms` or `21 ms`), and numbers inside it are not listed.
 
 ```text
 # design settings, not results
