@@ -1,0 +1,10 @@
+{
+ "book_rows": 21532653,
+ "trade_rows": 3166686,
+ "book_sorted": true,
+ "trades_sorted": true,
+ "buy_trade_px_equals_prior_ask": 0.5424658249082184,
+ "buy_trade_px_ge_prior_ask": 0.9973743042001587,
+ "buy_trade_px_equals_ask_incl_same_ts_update": 0.4414128101627028,
+ "sell_trade_px_equals_prior_bid": 0.5817382762915653
+}
