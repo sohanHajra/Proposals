@@ -11,7 +11,7 @@ down, not something this script does.
 
 Test days, in order
   audit, sanity, tie_share, taker (H1), passive (H2), fixed_price (H5), taker_followups,
-  passive_followups, robustness (checks 1, 3, 5, 6 and 8), jumps
+  passive_followups, robustness (checks 1, 3, 5, 6 and 8), placebo_h2 (check 7 for H2), jumps
 Breadth days (secondary, registered 2026-11-19), in order
   audit, sanity, tie_share, taker, passive, fixed_price, taker_followups, passive_followups
 Robustness and the jump split were registered for the test days only, so breadth days skip them.
@@ -29,7 +29,7 @@ from .get_data import TEST_DAYS, BREADTH_DAYS, DTYPES
 
 REGISTERED_SEED = 20261115
 STEPS_TEST = ("audit", "sanity", "tie_share", "taker", "passive", "fixed_price",
-              "taker_followups", "passive_followups", "robustness", "jumps")
+              "taker_followups", "passive_followups", "robustness", "placebo_h2", "jumps")
 STEPS_BREADTH = STEPS_TEST[:8]
 
 
@@ -60,6 +60,7 @@ def outputs(day, steps, root):
         "taker_followups": [rp("taker", "followups")],
         "passive_followups": [rp("passive", "followups")],
         "robustness": [rp("robustness", c) for c in robustness.CHECKS],
+        "placebo_h2": [rp("robustness", "placebo_h2")],
         "jumps": [root / "jump" / f"jump_split_{day}.json"],
     }
     out = [p for s in steps for p in files[s]]
@@ -142,6 +143,8 @@ def run_day(day, root=RESULTS, derived=None, allow_dev=False):
                 prepped = None                     # free the exchange time arrays before the local clock load
                 gc.collect()
                 robustness.run_checks(day, ("local_order",), root=root, derived=derived)
+            elif s == "placebo_h2":
+                passive_followups.placebo(day, root=root, derived=derived, prepped=prepped)
             elif s == "jumps":
                 _write(root / "jump" / f"jump_split_{day}.json", jumps.results(day))
     print("done", day, flush=True)

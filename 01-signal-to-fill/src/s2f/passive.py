@@ -246,6 +246,26 @@ def summarize(r):
     return out
 
 
+def placebo_h2(r):
+    """Robustness item 7 for H2 (Deviation of 2026-11-20). Under each rule the fill values of every
+    decision are reordered across delays with the same draws as the H1 placebo (taker.shuffle_rows,
+    seed SEED + 1, a fresh generator per rule), then the H2 slope and its bootstrap are computed as in
+    summarize. It passes on a day if the interval covers zero under all three rules."""
+    from .taker import shuffle_rows
+    t = r["t"]; out = dict(n_decisions=int(len(t)), shuffle_seed=SEED + 1, by_rule={})
+    for q, name in enumerate(RULES):
+        F = r["fill"][:, :, q]
+        Fs = shuffle_rows(F)
+        beta, ci = slope_blocks(Fs, t)
+        b0, ci0 = slope_blocks(F, t)
+        out["by_rule"][name] = dict(placebo_H2_slope_fill_per_logms=dict(est=beta, ci95=ci),
+                                    interval_covers_zero=bool(ci[0] <= 0 <= ci[1]),
+                                    placebo_fill_prob_by_delay={int(d): float(Fs[:, j].mean()) for j, d in enumerate(DELAYS_MS)},
+                                    unshuffled_H2_slope_fill_per_logms=dict(est=b0, ci95=ci0))
+    out["passes_all_three_rules"] = all(v["interval_covers_zero"] for v in out["by_rule"].values())
+    return out
+
+
 def results(day, prepped=None):
     return {"primary": summarize(run(day, True, prepped=prepped))}
 

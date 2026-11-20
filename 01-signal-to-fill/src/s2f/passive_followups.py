@@ -2,6 +2,7 @@
 
   run NAME ...   replay one configuration and keep its per decision arrays in data/derived
   summarize      read the arrays and write results/passive/followups_dev_<day>.json
+  placebo        H2 placebo on the primary arrays, results/robustness/placebo_h2_dev_<day>.json
 
 Configurations are KIND_DECISIONS_TIE with KIND in passive, fixed; DECISIONS in random, msgrid,
 signal; TIE in after, before. msgrid is the random decisions floored to the whole millisecond.
@@ -154,10 +155,38 @@ def summarize(day, root=None):
     return res
 
 
+def placebo(day, root=None, derived=None, prepped=None):
+    """H2 placebo (robustness item 7, Deviation of 2026-11-20) on the primary passive arrays.
+    Writes results/robustness/placebo_h2_<day>.json, with dev_ in the name on the dev day."""
+    from .robustness import primary_passive
+    from pathlib import Path
+    d = DERIVED if derived is None else Path(derived)
+    if prepped is None and not (d / f"passive_random_after_{day}.npz").exists():
+        prepped = passive.prep_day(day)
+    pr, src = primary_passive(day, prepped, d)
+    res = dict(day=day, check="placebo_h2", passive_arrays_from=src, **passive.placebo_h2(pr))
+    f = result_path("passive", "passive", day, root)
+    if f.exists():
+        prim = json.loads(f.read_text())["primary"]["by_rule"]
+        res["unshuffled_matches_passive_file"] = {
+            nm: res["by_rule"][nm]["unshuffled_H2_slope_fill_per_logms"]["est"] == prim[nm]["H2_slope_fill_per_logms"]["est"]
+            and res["by_rule"][nm]["unshuffled_H2_slope_fill_per_logms"]["ci95"] == prim[nm]["H2_slope_fill_per_logms"]["ci95"]
+            for nm in RULES}
+    p = result_path("robustness", "placebo_h2", day, root)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    if p.exists():
+        raise SystemExit(f"{p} exists, not overwriting it")
+    p.write_text(json.dumps(res, indent=1, default=float))
+    print("wrote", p, flush=True)
+    return res
+
+
 if __name__ == "__main__":
     day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
     guard_day(day)
     if sys.argv[2] == "run":
         run_configs(day, sys.argv[3:] or CONFIGS)
+    elif sys.argv[2] == "placebo":
+        placebo(day)
     else:
         summarize(day)
