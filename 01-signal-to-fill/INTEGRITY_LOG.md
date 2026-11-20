@@ -185,3 +185,22 @@ I went back over this session myself. No second reader looked at it.
 - **Found and fixed.** Nothing was wrong. The row was thin and now says what the paper found and where it stops.
 - **Bias check.** The paper's Table 2 makes my untested back of queue reading look plausible, and it would be easy to lean on that. It is written as one possible story, from 2007 data, and the idea that follows from it is a single descriptive count with its stop point set now. The paper's weaker spots (the volatility link without instruments, the effective spread coefficients bunched around zero stock by stock) are in the library note next to its headline.
 - **Open.** Not checked by a second reader.
+
+## 2026-11-19 (Thu, late night) · jump moment split
+I went back over this session myself. No second reader looked at it.
+
+**Checked, no issue**
+- Spec before outcome. The specs, window, horizons, thinning, seed and the too small rule went into commit 281affd at 23:04 CST, and the first run wrote its results 31 s later. Nothing in `jumps.py` changed after the run. All three specs are reported, including B, which is too small to read.
+- Spec A's counts and its 1 ms stale share were recomputed by a different route (a time join in polars) and match. Every number in the notebook entry carries a tag and claimcheck agrees with the results file. 39 tests pass.
+- No test day file downloaded or read. The script refuses any day but the dev day unless that is turned on on purpose.
+- Sources. The 7 ms median duration and the 100 ms batch example are from the Budish et al. library note, the 2 to 3 ms reaction time from Hasbrouck and Saar, both as read in full. The fee tiers are from the Binance USD-M fee page as shown on 2026-11-19, and the notebook says it may differ from September.
+
+**Found and fixed**
+- While tagging, I had written 18.5% for the spec C stale share at 1 ms. The file gives 18.4%. Corrected before commit.
+
+**Open**
+- Signal decisions fire when one side of the touch is nearly empty, which is also what a fast move tends to leave behind. So the A signal split mixes the two and rests on 39 decisions.
+- The stale baseline is taken at random microsecond times, while jumps sit on a ticker stamp in the middle of activity. A fairer baseline would be the same count at random ticker stamps. Not run, and not added after the look.
+- The spread refill reading is my subtraction of two means, not a direct measure.
+
+**Bias check.** The stale count came out the way my reading of Budish, Cramton and Shim led me to expect, which is a reason to be careful with it. The notebook says plainly that part of it is the move carrying on, that the baseline isn't like for like, and that the H3 split on random decisions came out empty. Nothing about H1 to H5 changed.

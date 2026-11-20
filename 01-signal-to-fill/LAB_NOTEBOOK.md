@@ -323,3 +323,30 @@ Exploratory, added 2026-11-19, not a registered test. This is the split I wrote 
 **Limits and gaps.**
 - *Fee date.* The fee schedule is the one shown today. It may have been different on 2026-09-01, and fast firms may pay less than the top VIP tier through rebates I can't see.
 - *One venue.* Their jumps are in a related market. Mine are moves in the same book, which is the race already over, so this is a loose stand in for their idea.
+
+## 2026-11-19 (Thu, late night) · jump moment split, dev day
+Exploratory, added 2026-11-19, not a registered test. Run once on the dev day with the specs as committed in 281affd, nothing changed after. Code `src/s2f/jumps.py`, run with `make jump`, result `results/jump/jump_split_2026-09-01.json`. ΔS is in bps, and a negative ΔS(100 ms) means waiting 100 ms got a better price than 1 ms.
+
+**How many jumps.** Spec A finds 1554<!--c:jump.A.stamps--> jump stamps, 194<!--c:jump.A.n--> once thinned to one per second. B finds 156<!--c:jump.B.stamps--> and 15<!--c:jump.B.n-->. C finds 41640<!--c:jump.C.stamps--> and 721<!--c:jump.C.n-->. The day fell from about 78,550 to 77,400, so most thinned jumps are down moves.
+
+**The split the idea asked for can't be read on random decisions.** Only 1<!--c:jump.A.random.n--> random decision lands within 5 ms after a jump under A, none under B, and 4<!--c:jump.C.random.n--> under C. That is too small to say anything, which I expected with one decision every 10 s. So H3 gets nothing from this on random decisions.
+
+**Signal decisions after a jump.** Under A there are 39<!--c:jump.A.signal.n--> of them, just enough by the rule I set. Their ΔS(100 ms) is lower than the rest by negative 1.13<!--c:jump.A.signal.diff--> bps (interval negative 1.64<!--c:jump.A.signal.diff.lo--> to negative 0.61<!--c:jump.A.signal.diff.hi-->). Under C, with 85<!--c:jump.C.signal.n-->, the gap is negative 0.25<!--c:jump.C.signal.diff--> and covers zero (negative 0.55<!--c:jump.C.signal.diff.lo--> to 0.02<!--c:jump.C.signal.diff.hi-->). Under B there is one. With 39 decisions I wouldn't lean on the A number.
+
+**Jump decisions.** Under A, an order going with the jump has a mean ΔS(100 ms) of negative 0.107<!--c:jump.A.with--> bps, interval negative 0.28<!--c:jump.A.with.lo--> to 0.06<!--c:jump.A.with.hi-->, so no clear cost from waiting. An order against the jump does better by waiting, negative 0.60<!--c:jump.A.against--> (negative 0.83<!--c:jump.A.against.lo--> to negative 0.38<!--c:jump.A.against.hi-->). My reading, from the two means and not tested. Both sides gain from waiting, so the spread seems to be wide right after a fast move and refills within 100 ms, while the mid keeps going a little in the jump's direction. Under C, slower moves, it is different. Going with the move costs 0.397<!--c:jump.C.with--> bps (0.31<!--c:jump.C.with.lo--> to 0.48<!--c:jump.C.with.hi-->) and going against it gains, negative 0.635<!--c:jump.C.against-->. That looks like a move that carries on over the next 100 ms. B has 15 jumps and is too small to read.
+
+**Stale top of book.** This is the clearest thing here. Under A, the touch a taker going with the jump would hit is gone 1 ms later after 12.4%<!--c:jump.A.gone1--> of jumps (8.0%<!--c:jump.A.gone1.lo--> to 16.9%<!--c:jump.A.gone1.hi-->), against 0.09%<!--c:jump.A.base1--> at the random decisions. At 5 ms it is 16.0%<!--c:jump.A.gone5--> (11.1%<!--c:jump.A.gone5.lo--> to 21.3%<!--c:jump.A.gone5.hi-->) against 0.25%<!--c:jump.A.base5-->. The other side of the book almost never goes, 0.5%<!--c:jump.A.opp1--> at 1 ms. Under C the touch is gone 1 ms later after 18.4%<!--c:jump.C.gone1--> of jumps (15.2%<!--c:jump.C.gone1.lo--> to 21.8%<!--c:jump.C.gone1.hi-->) and 36.1%<!--c:jump.C.gone5--> at 5 ms, and counting a touch under 0.01 BTC as gone too, 36.6%<!--c:jump.C.thin1--> at 1 ms. B points the same way but has 15 jumps.
+
+**What it means for the replay.** Right after a move, the liquidity my 1 ms order is handed is the kind that disappears fast, on one in eight jumps or more. Live, a slow order would often lose it to someone faster. That backs what I wrote after reading Budish, Cramton and Shim, that in these moments the 1 ms baseline is too kind. It gives a rough size. It doesn't say what a live order would get.
+
+**Checked.** An independent recount of spec A by a different route (a join on time in polars, not the helpers in `jumps.py`) gives the same 1554 stamps, 194 thinned jumps and the same 12.4% at 1 ms. 39 tests pass.
+
+**Frozen for the test days.** Nothing changes. Specs A, B and C, the 5 ms window, the 1, 2 and 5 ms horizons, the thinning and the seed run once on each test day after the registered tests. I already know the random decision split will be close to empty there too, and I'll report it that way.
+
+**Limits and gaps.**
+- *Small samples.* B is too small to read on this day, and the A signal split rests on 39 decisions. The random split is empty in practice.
+- *Mechanics.* A jump stamp sits in the middle of a move, so some of the touch going away is the move carrying on, not a race. The baseline at random moments doesn't separate those two.
+- *Spread and mid.* The spread refill reading comes from subtracting two means. I didn't measure the spread after jumps directly.
+- *One day.* A trending day with mostly down jumps. Nothing here is a test.
+- *Not a race.* The recorded book shows the outcome of races other traders ran. It can't show how often a fast order would have won one.
+- *Resources that would help.* Order level data to see who took the vanished touch, and a second venue to define jumps the way the paper does, in a related market.

@@ -999,3 +999,219 @@ signal.fixed.back.h5.hi:
   path: signal_fixed_price.by_rule.back.H5_post_then_cross_cost_slope_bps_per_logms.ci95.1
   value: 0.0033
   tol: 0.00005
+
+# Jump moment split, exploratory, added 2026-11-19 (dev day).
+jump.A.stamps:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.n_jump_stamps
+  value: 1554
+  tol: 0.5
+jump.A.n:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.n_spaced_jumps
+  value: 194
+  tol: 0.5
+jump.A.random.n:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.random.group.n
+  value: 1
+  tol: 0.5
+jump.A.signal.n:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.signal.group.n
+  value: 39
+  tol: 0.5
+jump.A.signal.diff:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.signal.dS100_after_jump_minus_rest.diff
+  value: -1.13
+  tol: 0.005
+jump.A.signal.diff.lo:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.signal.dS100_after_jump_minus_rest.ci95.0
+  value: -1.64
+  tol: 0.005
+jump.A.signal.diff.hi:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.signal.dS100_after_jump_minus_rest.ci95.1
+  value: -0.61
+  tol: 0.005
+jump.A.with:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.jump_decisions.with_jump.mean_dS100.mean
+  value: -0.107
+  tol: 0.0005
+jump.A.with.lo:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.jump_decisions.with_jump.mean_dS100.ci95.0
+  value: -0.28
+  tol: 0.005
+jump.A.with.hi:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.jump_decisions.with_jump.mean_dS100.ci95.1
+  value: 0.06
+  tol: 0.005
+jump.A.against:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.jump_decisions.against_jump.mean_dS100.mean
+  value: -0.60
+  tol: 0.005
+jump.A.against.lo:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.jump_decisions.against_jump.mean_dS100.ci95.0
+  value: -0.83
+  tol: 0.005
+jump.A.against.hi:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.jump_decisions.against_jump.mean_dS100.ci95.1
+  value: -0.38
+  tol: 0.005
+jump.A.gone1:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.stale_top_of_book.1ms.with_jump.gone.mean
+  value: 12.4
+  tol: 0.05
+  scale: 100
+jump.A.gone1.lo:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.stale_top_of_book.1ms.with_jump.gone.ci95.0
+  value: 8.0
+  tol: 0.05
+  scale: 100
+jump.A.gone1.hi:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.stale_top_of_book.1ms.with_jump.gone.ci95.1
+  value: 16.9
+  tol: 0.05
+  scale: 100
+jump.A.base1:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.stale_top_of_book.1ms.baseline_random.gone.mean
+  value: 0.09
+  tol: 0.005
+  scale: 100
+jump.A.gone5:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.stale_top_of_book.5ms.with_jump.gone.mean
+  value: 16.0
+  tol: 0.05
+  scale: 100
+jump.A.gone5.lo:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.stale_top_of_book.5ms.with_jump.gone.ci95.0
+  value: 11.1
+  tol: 0.05
+  scale: 100
+jump.A.gone5.hi:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.stale_top_of_book.5ms.with_jump.gone.ci95.1
+  value: 21.3
+  tol: 0.05
+  scale: 100
+jump.A.base5:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.stale_top_of_book.5ms.baseline_random.gone.mean
+  value: 0.25
+  tol: 0.005
+  scale: 100
+jump.A.opp1:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.A.stale_top_of_book.1ms.against_jump.gone.mean
+  value: 0.5
+  tol: 0.05
+  scale: 100
+jump.B.stamps:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.B.n_jump_stamps
+  value: 156
+  tol: 0.5
+jump.B.n:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.B.n_spaced_jumps
+  value: 15
+  tol: 0.5
+jump.C.stamps:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.n_jump_stamps
+  value: 41640
+  tol: 0.5
+jump.C.n:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.n_spaced_jumps
+  value: 721
+  tol: 0.5
+jump.C.random.n:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.random.group.n
+  value: 4
+  tol: 0.5
+jump.C.signal.n:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.signal.group.n
+  value: 85
+  tol: 0.5
+jump.C.signal.diff:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.signal.dS100_after_jump_minus_rest.diff
+  value: -0.25
+  tol: 0.005
+jump.C.signal.diff.lo:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.signal.dS100_after_jump_minus_rest.ci95.0
+  value: -0.55
+  tol: 0.005
+jump.C.signal.diff.hi:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.signal.dS100_after_jump_minus_rest.ci95.1
+  value: 0.02
+  tol: 0.005
+jump.C.with:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.jump_decisions.with_jump.mean_dS100.mean
+  value: 0.397
+  tol: 0.0005
+jump.C.with.lo:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.jump_decisions.with_jump.mean_dS100.ci95.0
+  value: 0.31
+  tol: 0.005
+jump.C.with.hi:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.jump_decisions.with_jump.mean_dS100.ci95.1
+  value: 0.48
+  tol: 0.005
+jump.C.against:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.jump_decisions.against_jump.mean_dS100.mean
+  value: -0.635
+  tol: 0.0005
+jump.C.gone1:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.stale_top_of_book.1ms.with_jump.gone.mean
+  value: 18.4
+  tol: 0.05
+  scale: 100
+jump.C.gone1.lo:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.stale_top_of_book.1ms.with_jump.gone.ci95.0
+  value: 15.2
+  tol: 0.05
+  scale: 100
+jump.C.gone1.hi:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.stale_top_of_book.1ms.with_jump.gone.ci95.1
+  value: 21.8
+  tol: 0.05
+  scale: 100
+jump.C.gone5:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.stale_top_of_book.5ms.with_jump.gone.mean
+  value: 36.1
+  tol: 0.05
+  scale: 100
+jump.C.thin1:
+  file: results/jump/jump_split_2026-09-01.json
+  path: specs.C.stale_top_of_book.1ms.with_jump.gone_or_below_size.mean
+  value: 36.6
+  tol: 0.05
+  scale: 100
