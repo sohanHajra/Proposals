@@ -30,7 +30,7 @@ flowchart LR
 
 | # | Proposal | The question | Status | Headline |
 |---|---|---|---|---|
-| 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟡 In progress, preregistered | No result yet |
+| 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟡 In progress, test days run | H1 and H2 null on both test days |
 
 <details>
 <summary><b>01 · From Signal to Fill</b> · what I believed, what I tried, what broke, what I believe now</summary>

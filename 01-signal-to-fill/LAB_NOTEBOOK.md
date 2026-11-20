@@ -472,3 +472,75 @@ claimcheck is finished for now, so I ran the whole thing on this folder once mor
 - *Reading depth is taken on trust.* The check sees that a depth is written down, not that it is true.
 - *Untagged numbers.* The 56<!--nc--> have to reach zero before 01 goes out, either by writing the derived values into results files or by rewording.
 - *Test days not covered yet.* Today's numbers get tagged when I write them up.
+
+## 2026-11-20 (Fri) · the two test days, run once
+Both test days ran through `python -m s2f.run_test_day`, with nothing changed in any calculation after the dev day and nothing rerun after a look. The seed is 20261115 and the signal threshold is the stored dev day value 0.98630194.
+
+**The first start on 2026-10-01 stopped part way.** I started `python -m s2f.run_test_day 2026-10-01` at about 10:01 CST. The machine I run on ends any single job after 20 minutes, and a full day takes about half an hour, so it was cut off inside the robustness step at about 10:21 CST. What it had written by then was the audit, sanity, tie share, taker, passive, fixed price and both follow up files, the fees and 15 minute block files from the robustness step, and all twelve saved replays in `data/derived`. The 1 BTC, horizon and local order checks, the H2 placebo and the jump split had not been written. The log in /tmp was gone by the time I looked.
+
+What I did, in this order. I moved every 2026-10-01 output and saved replay out of the repo into a scratch folder with checksums, so the day had no outputs left. Then I gave `run_test_day` a `--part K` option (commit dfe8b61). It runs a fixed slice of the same steps, in the same order, with the same code and seed, each in its own process short enough to finish. Part K refuses unless every output of the parts before it exists and nothing from part K on does. The grouping was written into the code before any part ran. Then I reran 2026-10-01 once, from the start, in nine parts. The ten results files and twelve saved replays the stopped start had written came back identical, the json byte for byte and the arrays exactly, so the cut changed nothing that had already been computed. 2026-11-01 then ran the same way.
+
+**Data.** 2026-10-01 has 35,384,160 top of book rows, 3,246,752 trades and 55 local gaps over 1 s, the longest 3.366 s (`results/audit/tardis_2026-10-01.json`). 2026-11-01 is a Saturday and much quieter, with 13,834,893 rows, 1,190,743 trades and 15 gaps over 1 s, the longest 1.096 s (`results/audit/tardis_2026-11-01.json`). After the gap rule there are 8,443 random decisions on 2026-10-01 and 8,323 on 2026-11-01.
+
+**H1, primary.** Null on both days. Slope of latency cost on log delay under the five level walk, in bps per log ms.
+- 2026-10-01. 0.00079, interval negative 0.00021 to 0.00183. Mean extra shortfall at 500 ms is 0.0038 bps.
+- 2026-11-01. 0.0000044, interval negative 0.00041 to 0.00042. Mean extra shortfall at 500 ms is negative 0.0004 bps.
+- Both intervals cover zero and both 500 ms means are far below the 0.1 bps bar. Top of book gives the same picture (`results/taker/taker_2026-10-01.json`, `results/taker/taker_2026-11-01.json`). As the Deviation of 2026-11-18 says, an uninformed order that reprices on arrival should lose almost nothing, so this null says little about whether latency matters for an order that knows something.
+
+**H2, primary.** Null on both days, under all three cancellation rules. Slope of fill probability on log delay.
+- 2026-10-01. Front 0.00025 (negative 0.00061 to 0.00112), random 0.00004 (negative 0.00083 to 0.00091), back negative 0.00015 (negative 0.00080 to 0.00051). Fill probability at 1 ms runs from 45% (back) to 71% (front).
+- 2026-11-01. Front 0.00002 (negative 0.00045 to 0.00052), random negative 0.00051 (negative 0.00115 to 0.00018), back 0.00027 (negative 0.00010 to 0.00062). Fill at 1 ms runs from 22% to 59%, lower on the quiet day.
+- Every one of the six intervals covers zero (`results/passive/passive_2026-10-01.json`, `results/passive/passive_2026-11-01.json`).
+
+**Secondary tests.**
+- *H1b.* Supported on both days by its registered rule. Decisions whose 1 s move went their way pay more latency cost at 100 ms than the rest, by 0.099 bps (0.084 to 0.115) on 2026-10-01 and 0.060 bps (0.036 to 0.088) on 2026-11-01 (`results/taker/followups_*.json`, `H1b_registered`). The split is partly mechanical, since the 100 ms cost contains part of the 1 s move that defines the groups, so I read this as weak support at most.
+- *H2b.* Not supported. Back minus front drop is 0.0019 (negative 0.0039 to 0.0079) on 2026-10-01 and negative 0.0024 (negative 0.0065 to 0.0023) on 2026-11-01.
+- *H2c.* Not supported, and again pointing the other way where it points at all. The registered comparison of all fills covers zero under every rule on both days. On decisions that fill at both delays, the 10 s markout is better at 500 ms under all three rules on both days, by 0.062 to 0.086 bps on 2026-10-01 and 0.013 to 0.042 bps on 2026-11-01, every interval above zero (`results/passive/followups_*.json`, `H2c_matched_passive_random`). Same direction as the dev day.
+- *H3.* Null. High volatility fifth minus the rest at 100 ms is negative 0.0037 bps (negative 0.0155 to 0.0083) on 2026-10-01 and 0.0009 bps (negative 0.0040 to 0.0061) on 2026-11-01. The worst decile share of total 100 ms cost comes out above one on both days (5.8 and 5.2) because the total is close to zero, so it doesn't describe a tail here.
+- *H5.* Not supported. On 2026-10-01 the post then cross cost slope is below zero under random (negative 0.0035, negative 0.0050 to negative 0.0021) and back (negative 0.0042, negative 0.0055 to negative 0.0029) and covers zero under front. On 2026-11-01 it covers zero under all three (`results/passive/fixed_price_*.json`). Cost falling with delay is what the dev day showed too.
+
+**H5 without the orders that are marketable on arrival, exploratory, rule from 2d31501.** It holds by the rule I fixed before the test days. On each day and under each rule the slope is positive with its interval above zero.
+- 2026-10-01, 682 decisions dropped and 7,761 kept. Front 0.0058 (0.0043 to 0.0074), random 0.0029 (0.0017 to 0.0041), back 0.0022 (0.0012 to 0.0033).
+- 2026-11-01, 160 dropped and 8,163 kept. Front 0.0016 (0.0010 to 0.0023), random 0.0013 (0.0008 to 0.0019), back 0.0010 (0.0007 to 0.0014).
+- Source `results/passive/followups_*.json`, `fixed_price_drop_marketable_random_exploratory`. The function is the same as in 2d31501. This stays a description. Which decisions drop depends on delay, so the kept set isn't the same population across delays, and H5 itself is still not supported. By the scope rule this is the one deeper check, and it held, so it goes forward as a candidate hypothesis for later work, not as a result of this proposal. The slopes are small, a few thousandths of a bp per log ms.
+
+**Signal decisions, secondary.** This is where delay costs something. On imbalance decisions the walk slope is 0.090 bps per log ms (0.088 to 0.093) on 2026-10-01 and 0.070 (0.065 to 0.075) on 2026-11-01. Mean top of book shortfall goes from 0.085 bps at 1 ms to 0.66 bps at 500 ms on 2026-10-01, and from 0.071 to 0.52 bps on 2026-11-01, with 16,448 and 4,706 decisions (`results/taker/followups_*.json`, `signal`). The dev day showed the same thing. It isn't a registered primary test, and the decisions bunch together, but it is the clearest thing these two days show.
+
+**Placebos.** The H1 placebo covers zero on both days. The H2 placebo covers zero under all three rules on both days, so it passes by the rule in the Deviation of 2026-11-20 (`results/robustness/placebo_h2_*.json`). The unshuffled slopes match the passive files exactly.
+
+**Robustness, all reported.** Fees, 15 minute blocks, 1 BTC orders and local capture order leave every H1 and H2 interval covering zero on both days (`results/robustness/*_2026-10-01.json`, `*_2026-11-01.json`). Three intervals out of all the horizon lines miss zero. On 2026-10-01 at a 1 s horizon the post then cross cost slope is above zero under random and back. On 2026-11-01 at a 60 s horizon the H2 fill slope under random is below zero (negative 0.00068, negative 0.00120 to negative 0.00015). None of them holds across rules or days, and I don't read anything into them.
+
+**Jump split, exploratory.** Random decisions again never land within 5 ms after a jump. Placing orders right after each 2 bps jump, the touch a sniper would hit is gone 1 ms later after 21.6% of 194 jumps on 2026-10-01 and 15.0% of 80 jumps on 2026-11-01, against 0.07% and 0.01% at random moments (`results/jump/jump_split_*.json`). The dev day gave 12.4%.
+
+**Verdicts.** H1 null. H2 null. H1b supported by its rule with the mechanical caveat. H2b, H2c, H3 and H5 not supported. These come only from the two test days, as registered. The breadth days below can qualify them but can't turn a null into a finding.
+
+**Limits and gaps.**
+- *The cut run.* The first start was killed by the machine, not by anything in the code. The rerun reproduced everything it had written, but the steps it hadn't reached were only ever run in parts, never in one process on a test day. The dev day dry run is the only check that one process and parts agree for those steps.
+- *Two days.* One busy weekday and one quiet Saturday. They can knock a claim down, not show it holds generally.
+- *The fixed price exploration.* The kept set changes with delay, so the positive slope could come partly from which orders drop. I haven't separated that.
+- *Signal decisions.* Strong on both days but overlapping, bunched in time, and secondary. The interval comes from 5 minute blocks, which may not cover how those decisions cluster.
+- *Untagged.* None of today's numbers are tied to claims yet. That is tomorrow's write up.
+
+## 2026-11-20 (Fri, afternoon) · the six breadth days
+Fetched with `python -m s2f.get_data breadth` once both test days were done, then run one at a time with `run_test_day`, each once. The eight day table is `python -m s2f.breadth`, written and committed (68093fd) before I read any breadth day number, output in `results/breadth/breadth_table.json`.
+
+- *Exclusions.* None. All 18 files downloaded. The audit keeps the count of gaps over 1 s and the longest one, so I bound the total by count times longest. The largest bound is 235 s on 2026-05-01, far under the hour in the rule.
+- *Two restarts, no reruns.* 2026-03-01 stopped in its audit because its file opens with whole number prices and the csv reader guessed an integer column. Nothing had been written. Price and amount columns are now always read as decimals (c3a1861), which reads the dev and test day files exactly as before. 2026-07-01 stopped in its audit on a disk read error, with nothing written and the raw files intact, and went through on the restart.
+
+**Across the eight days** (registered side / opposite / covering zero, and the label from the 2026-11-19 rule).
+- *H1.* 1 / 0 / 7, mixed. Only 2026-07-01 has its interval above zero (0.0015, 0.00004 to 0.0029).
+- *H2.* 0 / 0 / 8 under each of front, random and back. Mixed by the rule, which here only means no day on either side.
+- *H1b.* 8 / 0 / 0, consistent. The mechanical caveat still applies.
+- *H2b.* 0 / 1 / 7, mixed. 2026-06-01 points the other way.
+- *H2c* (all fills, as registered). 0 / 0 / 8 under every rule.
+- *H3.* 0 / 0 / 8.
+- *H5.* Contradicted under all three rules. Cost falls with delay with the interval below zero on 3 days under front and 7 under random and back.
+- *Signal decisions, secondary.* The taker walk slope is positive with its interval above zero on all six breadth days too, from 0.068 to 0.113 bps per log ms. Mean top of book shortfall at 500 ms runs from 0.47 to 0.76 bps on these days, against 0.04 to 0.07 bps at 1 ms (`results/taker/followups_2026-0*-01.json`).
+- *Fixed price without the marketable orders, exploratory.* Above zero under all three rules on five of the six breadth days. On 2026-07-01 back covers zero. The rule from 2d31501 was about the two test days only, so this is description.
+
+**What I make of it.** The breadth days back up the test days rather than change them. Random decisions that reprice on arrival lose nothing measurable to delay on any of eight days, taker or passive. A decision that acts on top of book imbalance loses roughly half a bp to three quarters of a bp by 500 ms, on every day. The fixed price arm keeps pointing the wrong way for H5. All eight days are first of the month, so this is breadth across months, not across kinds of day.
+
+**Limits and gaps.**
+- *Gap rule bound.* I used count times longest instead of the actual total, which can only overstate the total. A day near the hour would have needed the real sum.
+- *Same kind of day.* All first of month, two on weekends. Nothing here speaks to news days or other venues.
+- *H2c breadth line.* The table uses the registered comparison of all fills. The matched comparison, which pointed the other way on both test days, isn't in the eight day table.

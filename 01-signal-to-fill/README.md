@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Status | 🟡 Preregistered. Replay engine, taker grid, passive leg, the fixed price passive arm, signal decisions and the dev day intervals built and previewed on the dev day only. RQ2 run on the LOBSTER day (H4 null). An exploratory jump moment split fixed and previewed on the dev day. Test days not yet run |
+| Status | 🟡 Test days run once on 2026-11-20. H1 and H2 are null on both days under every cancellation rule. On signal decisions a late taker pays about 0.5 to 0.66 bps at 500 ms. Six breadth days run as a secondary check. Write up and claim tags next |
 | Preregistration | [PREREGISTRATION.md](PREREGISTRATION.md) |
 | Proposal | [PROPOSAL.md](PROPOSAL.md) |
 | Literature review | [LITERATURE_REVIEW.md](LITERATURE_REVIEW.md) |

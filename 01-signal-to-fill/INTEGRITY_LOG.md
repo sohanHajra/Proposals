@@ -278,3 +278,24 @@ I checked this myself. No second reader looked at this entry.
 
 **Checked**
 - claimcheck tests 84 pass. No dash, prose colon or prose hyphen in these two entries. No test day or breadth day file was downloaded, read or run.
+
+## 2026-11-20 (Fri) · test days, breadth days and the cut first start
+I checked this myself. No second reader looked at it, because I couldn't start one from this session. A cold read is still owed before release.
+
+**Found and fixed**
+- The first start on 2026-10-01 was cut off by the machine's 20 minute job limit inside the robustness step. Partial outputs were moved out of the repo with checksums, the runner got fixed parts (dfe8b61) and the day was rerun once from the start. All ten files and twelve saved replays the cut start had written came back identical.
+- The 2026-03-01 file opens with whole number prices and the csv reader guessed an integer column, so its first start stopped in the audit before writing anything. Price and amount columns are now always read as decimals (c3a1861). On the dev day the audit and sanity files come out the same, and on both test days the trade and five level files read identically with and without the change. No output for 2026-03-01 existed when it was restarted.
+- The first start on 2026-07-01 stopped in the audit with a read error from the disk. The three raw files test as intact gzip, nothing had been written, and the restart went through.
+
+**Open**
+- Steps after the cut on 2026-10-01 and every step on 2026-11-01 ran only in parts. Parts reload the day where one process would pass it along. The dev day dry run and the identical rerun of the first ten files are the evidence that this changes nothing. I haven't run a full test day in one process.
+- The breadth gap rule is about the total of gaps over 1 s. The audit stores only the count and the longest gap, so the table uses count times longest as an upper bound. Every day used is far under an hour on that bound.
+- The fixed price slope without marketable orders held by the 2d31501 rule. The kept set changes with delay, so this is a description and a candidate for later work, not a result.
+- Today's numbers are not tagged for claimcheck yet.
+
+**Checked**
+- Order. Prereg 913347d, the H5 rule 2d31501 and the breadth rule 1a87f6e all predate the first test day result (4854717). The breadth table code was committed (68093fd) before any breadth day number was read. No calculation module changed between the dev day dry run and the test days except the csv reading, which is checked above.
+- Each test and breadth day ran once. Nothing was rerun after a look, no seed or threshold or window was changed, and every spec in the runner is reported.
+- Source fidelity. No new source was read or cited today.
+- Bias. The two nulls are stated as nulls, H5 and H2c are reported as pointing the other way, and the signal decision costs are kept secondary.
+- No dash, prose colon or prose hyphen in today's notebook and log entries.
