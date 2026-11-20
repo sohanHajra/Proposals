@@ -1,0 +1,44 @@
+{
+ "day": "2026-07-01",
+ "symbol": "BTCUSDT",
+ "book_ticker_rows": 40459753,
+ "trade_rows": 5218302,
+ "exchange_ts_all_whole_ms_bt": true,
+ "feed_latency_ms_bt_quantiles": {
+  "0.01": 1.853,
+  "0.5": 2.873,
+  "0.9": 4.961,
+  "0.99": 39.481,
+  "0.999": 309.878
+ },
+ "feed_latency_ms_trades_quantiles": {
+  "0.01": 2.2,
+  "0.5": 3.43,
+  "0.9": 11.663,
+  "0.99": 194.355,
+  "0.999": 1051.874
+ },
+ "negative_feed_latency_rows_bt": 0,
+ "crossed_or_locked_rows": 0,
+ "spread_1tick_share": 0.947833,
+ "spread_ticks_quantiles": {
+  "0.01": 1.0,
+  "0.5": 1.0,
+  "0.9": 1.0,
+  "0.99": 9.0,
+  "0.999": 69.0
+ },
+ "max_gap_s_bt_local": 1.379,
+ "gaps_over_1s_bt": 8,
+ "nonmonotone_exchange_ts_bt": 0,
+ "trade_volume_btc": 260274.695,
+ "trade_buy_share": 0.4969,
+ "mid_open_close": [
+  58605.45,
+  59999.55
+ ],
+ "mid_min_max": [
+  57760.649999999994,
+  61321.95
+ ]
+}
