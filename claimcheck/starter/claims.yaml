@@ -1,0 +1,21 @@
+# One entry per reported number. value is the number as written, tol is half a unit in its last printed digit.
+example.effect:
+  file: results/dev/example_dev_2030-01-01.json
+  path: by_delay.500.mean_bps
+  value: 0.42
+  tol: 0.005
+example.n:
+  file: results/dev/example_dev_2030-01-01.json
+  path: n_decisions
+  value: 1204
+  tol: 0.5
+example.lo:
+  file: results/dev/example_dev_2030-01-01.json
+  path: by_delay.500.ci95.0
+  value: -0.10
+  tol: 0.005
+example.hi:
+  file: results/dev/example_dev_2030-01-01.json
+  path: by_delay.500.ci95.1
+  value: 0.95
+  tol: 0.005

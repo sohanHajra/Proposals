@@ -1,0 +1,1 @@
+# Globs for test day results whose path has no Test row date. Leave empty if none.
