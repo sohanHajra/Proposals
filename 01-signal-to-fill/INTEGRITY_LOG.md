@@ -241,7 +241,7 @@ A second reader went over commits 4718a82 to 47bc3ae cold. No test day or breadt
 
 **Open**
 - Robustness item 7, the placebo, exists for H1 under both fills but not for H2. The registered text names no leg. Either a dated Deviation says it applies to H1 only, or an H2 placebo is built and committed before 2026-10-01 is run.
-- H1b and H3 stay on the top of book cost (Deviation 0ce7979), while RQ1a defines ΔS on the five level walk. On random decisions the two fills differ on under 0.3% of decisions, so the effect is small there, but on signal decisions the touch is thin half the time. The reason given is only that the code was committed that way.
+- H1b and H3 stay on the top of book cost (Deviation 0ce7979), while RQ1a defines ΔS on the five level walk. On random decisions the touch is short of the order on at most 0.31% of decisions, so the effect is small there, but on signal decisions the touch is thin half the time. The reason given is only that the code was committed that way.
 - Fees are frozen at 2 and 5 bps from the page as read on 2026-11-19. The Deviation says the page is not read during the run but that a changed tier would be noted. Someone has to open the page on the day and write down what it shows.
 - `run_test_day` does not check that both test days have run before it accepts a breadth day, and it does not apply the one hour gap cut for breadth days. The order and the cut are left to the person running it.
 - `data_audit.py` run on its own has no dev day guard. Only the runner reaches it on a test day today.
