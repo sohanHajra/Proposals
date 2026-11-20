@@ -230,3 +230,28 @@ A second reader went over tonight's work and the test day setup cold. No test da
 - Unit tests 39 passed, claimcheck tests 81 passed. claimcheck on 01 exits 0, 676 PASS lines, no failure, 33 untagged warnings.
 - Sources. Spot checks of the Cartea and Sánchez-Betancourt and Hasbrouck and Saar notes against the article text (the 36.5% and 40.0% shares, 20.02 ms to 2.34 ms, 9,483 misses, footnote 4, the 2 to 3 ms peak, footnote 22) all match. Both rows say full text and the PDFs are on file.
 - Dashes, prose hyphens and colons in prose added since 2026-11-19, and commit messages. Nothing else found.
+
+## 2026-11-20 independent pass on pre test fixes
+A second reader went over commits 4718a82 to 47bc3ae cold. No test day or breadth day file was downloaded or read, and nothing was run on any date but the dev day.
+
+**Found and fixed**
+- LAB_NOTEBOOK, H1 under both fills. It said the walk Deviation went in before I computed or read any walk number in this session. Before 0ce7979 I did see two signal decision walk values while searching the files, the 0.104 slope and the 40.7% share past five levels. Both had been in the results since 85ec66f and in the notes since the 2026-11-19 follow ups, so nothing new was learned, and the entry now names them. The Deviation text is registered and is left as written.
+- LAB_NOTEBOOK, dry run. It said all fourteen files matched with no difference at all. Thirteen match byte for byte and the audit file matches in every value but is written with a different indent. The entry now says so.
+- `scripts/guard` refused any commit message with the word rule, which would have stopped messages about the tie rule or the back rule on the test days. It now refuses only the longer phrases it was meant for.
+
+**Open**
+- Robustness item 7, the placebo, exists for H1 under both fills but not for H2. The registered text names no leg. Either a dated Deviation says it applies to H1 only, or an H2 placebo is built and committed before 2026-10-01 is run.
+- H1b and H3 stay on the top of book cost (Deviation 0ce7979), while RQ1a defines ΔS on the five level walk. On random decisions the two fills differ on under 0.3% of decisions, so the effect is small there, but on signal decisions the touch is thin half the time. The reason given is only that the code was committed that way.
+- Fees are frozen at 2 and 5 bps from the page as read on 2026-11-19. The Deviation says the page is not read during the run but that a changed tier would be noted. Someone has to open the page on the day and write down what it shows.
+- `run_test_day` does not check that both test days have run before it accepts a breadth day, and it does not apply the one hour gap cut for breadth days. The order and the cut are left to the person running it.
+- `data_audit.py` run on its own has no dev day guard. Only the runner reaches it on a test day today.
+- If a run stops part way, the script refuses a second start and leaves the call to the person running it.
+
+**Checked**
+- Order. 0ce7979 at 23:41:31 CST came before any new walk computation. The taker follow ups rerun was written at 23:43:27 and the new walk lines in the taker file at 23:54:03. The robustness spec 4b23f3a at 23:47:15 came before the first robustness file at 23:47:44, `robustness.py` has not changed since, and no robustness output is in git before dea0e59. The local order check ran before the runner refactor was committed, as the notebook says, and the dry run on the committed code reproduces it byte for byte.
+- The random decision walk numbers for H1 were already in `results/taker/followups_dev_2026-09-01.json` from 85ec66f, as the Deviation says, and `primary_five_level_walk` equals them. The return to the walk is the registered spec, and both fills are null on the dev day.
+- Robustness choices against the registered list. Fees frozen rather than read on the day, horizon counted from arrival, local capture order with decisions redrawn, 1 BTC on the walk for both legs, 15 minute blocks, and the scope of H1 and H2 on random decisions are all in the Deviation of 4b23f3a. The tie flip, the placebo for H1 and signal decisions (items 2, 4 and 7) run inside `taker.py` and the follow ups.
+- Threshold. Every signal path in `taker_followups.py`, `passive_followups.py` and `jumps.py` reads 0.9863019382810347 from the stored dev file through `frozen_threshold`, and nothing calls the percentile function. The three dev files are the same bytes before and after de18889.
+- Runner. Only the two test days and six breadth days pass, the dev day only through the dry run. One argument, no options, seed 20261115 checked, outputs and saved arrays checked before anything runs, and each write refuses an existing file. Test day steps run the primary tests first, then the follow ups with H1b, H2c, RQ3, signal decisions and H5 without the marketable orders, then the robustness checks, then the jump split. The H5 code without the marketable orders is unchanged since 2d31501. Every module stops on a test day unless the runner sets the switch. The dry run output in `/tmp/s2f_dryrun_ae07swwy` matches all fourteen committed files.
+- Hooks. `.git/hooks/pre-commit` and `.git/hooks/commit-msg` are installed and executable and call `scripts/guard`. Every commit message in the range passes it, and no dash, prose colon or prose hyphen was added to the notes.
+- Unit tests 64 passed, claimcheck tests 81 passed. claimcheck on 01 exits 0 with no failure and 34 untagged warnings.
