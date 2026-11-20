@@ -7,6 +7,7 @@ from pathlib import Path
 from . import __version__
 from .claims import ClaimsFileError, check_data, load_claims
 from .scan import printed_matches, scan_dir
+from .sources import REVIEW_FILE, check_sources
 from .untagged import scan_untagged
 
 EXIT_PASS = 0
@@ -27,33 +28,63 @@ def report_untagged(root, out=print):
     return len(found)
 
 
-def verify(root, out=print, untagged=True):
-    """Run the numbers check on one proposal folder. Returns an exit code."""
-    root = Path(root)
+def report_sources(root, out=print):
+    """Reading depth and Unverified citations. Returns (checked, failures)."""
+    rep = check_sources(root)
+    out("")
+    if not rep.found:
+        out(f"Sources: no {REVIEW_FILE}, not checked")
+        return False, 0
+    out(f"Sources in {REVIEW_FILE}")
+    for p in rep.problems:
+        out(f"  FAIL  {p}")
+    for r in rep.rows:
+        if r.depth:
+            out(f"  PASS  {REVIEW_FILE}:{r.line}  {r.work}  read at {r.depth}")
+        else:
+            out(f"  FAIL  {REVIEW_FILE}:{r.line}  {r.work}  no reading depth (full text, abstract or listing)")
+    for e in rep.unverified:
+        if e.problem:
+            out(f"  FAIL  {REVIEW_FILE}:{e.line}  unverified entry  {e.problem}  ({e.text})")
+    cited = {}
+    for c in rep.citations:
+        where = f"{c.file}:{c.line}"
+        name = f"{c.entry.surname} {c.entry.year}"
+        if c.marked:
+            out(f"  PASS  {where}  {name} is unverified, marked as not relied on")
+        else:
+            out(f"  FAIL  {where}  {name} is on the Unverified list but cited here ({c.context})")
+        cited.setdefault(id(c.entry), True)
+    clean = [e for e in rep.unverified if not e.problem and id(e) not in cited]
+    if clean:
+        names = ", ".join(f"{e.surname} {e.year}" for e in clean)
+        out(f"  PASS  unverified and not cited elsewhere: {names}")
+    elif not rep.unverified and rep.unverified_section:
+        out("  PASS  Unverified list is empty")
+    return True, rep.failures
+
+
+def check_numbers(root, out=print):
+    """Claims against results files and tags in markdown. Returns (checked, failures)."""
     claims_file = root / "claims.yaml"
     if not claims_file.is_file():
-        out(f"claimcheck: no claims.yaml in {root}, nothing checked")
-        if untagged:
-            report_untagged(root, out)
-        return EXIT_NOTHING_CHECKED
+        out(f"Numbers: no claims.yaml in {root}, not checked")
+        return False, 0
     try:
         claims = load_claims(claims_file)
     except ClaimsFileError as exc:
         out(f"claimcheck: {exc}")
-        return EXIT_FAIL
+        return True, 1
 
     tags = scan_dir(root)
     if not claims and not tags:
-        out(f"claimcheck: {claims_file} is empty and no tags found, nothing checked")
-        if untagged:
-            report_untagged(root, out)
-        return EXIT_NOTHING_CHECKED
+        out(f"Numbers: {claims_file} is empty and no tags found, not checked")
+        return False, 0
 
     failures = 0
     cache = {}
     results = {cid: check_data(c, root, cache) for cid, c in claims.items()}
 
-    out(f"claimcheck {__version__}: {root}")
     out(f"{len(claims)} claims in claims.yaml, {len(tags)} tags in markdown")
     out("")
     out("Claims against results files")
@@ -99,7 +130,18 @@ def verify(root, out=print, untagged=True):
         out("Claims never cited in markdown (warning only)")
         for cid in unused:
             out(f"  WARN  {cid}")
+    return True, failures
 
+
+def verify(root, out=print, untagged=True, sources=True):
+    """Run every check on one proposal folder. Returns an exit code."""
+    root = Path(root)
+    out(f"claimcheck {__version__}: {root}")
+    checked, failures = check_numbers(root, out)
+    if sources:
+        s_checked, s_failures = report_sources(root, out)
+        checked = checked or s_checked
+        failures += s_failures
     if untagged:
         report_untagged(root, out)
 
@@ -107,7 +149,10 @@ def verify(root, out=print, untagged=True):
     if failures:
         out(f"{failures} failure(s)")
         return EXIT_FAIL
-    out("all claims and tags agree")
+    if not checked:
+        out("nothing checked")
+        return EXIT_NOTHING_CHECKED
+    out("all checks agree")
     return EXIT_PASS
 
 
@@ -118,6 +163,7 @@ def main(argv=None):
     )
     parser.add_argument("proposal_dir", help="proposal folder, for example 01-signal-to-fill")
     parser.add_argument("--no-untagged", action="store_true", help="skip the list of numbers with no tag")
+    parser.add_argument("--no-sources", action="store_true", help="skip the reading depth and Unverified checks")
     parser.add_argument("--version", action="version", version=f"claimcheck {__version__}")
     args = parser.parse_args(argv)
 
@@ -125,7 +171,7 @@ def main(argv=None):
     if not root.is_dir():
         print(f"claimcheck: {root} is not a folder", file=sys.stderr)
         return EXIT_NOTHING_CHECKED
-    return verify(root, untagged=not args.no_untagged)
+    return verify(root, untagged=not args.no_untagged, sources=not args.no_sources)
 
 
 if __name__ == "__main__":

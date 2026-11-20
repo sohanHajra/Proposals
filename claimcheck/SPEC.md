@@ -70,3 +70,32 @@ A proposal can also keep `claimcheck_ignore.txt` next to its `claims.yaml`. Each
 ```
 
 These are warnings. They never change the exit code.
+
+## Sources
+
+The check reads the proposal's `LITERATURE_REVIEW.md`. With no such file the source checks are skipped and the report says so.
+
+Reading depth. Any table whose header has a column named `Read at`, `Reading depth` or `Depth` is a list of sources. Each row's depth cell must contain `full text`, `abstract` or `listing`. Words around it are fine, and the first of the three in the cell is the depth reported. An empty cell, or one like `skimmed`, fails. A review with no such table fails.
+
+```markdown
+| Work | What it shows | Read at |
+|---|---|---|
+| Lee & Park (2020), *Queues* | Queue position matters | full text, appendix not read |
+```
+
+Unverified. A heading with the word Unverified in it starts the list of works I have not opened. It runs until the next heading at the same level or higher. Each bullet must start with the authors and a year in brackets, as in `Smith & Jones (2019), *Title*`, so the check can take the first author's surname and the year. A bullet it can't read that way fails rather than being skipped. A review with no Unverified heading fails; an empty list under the heading is fine.
+
+```markdown
+## Unverified
+- Smith & Jones (2019), *Implementation shortfall*, Journal C.
+```
+
+Every markdown file in the proposal is then searched for each unverified work, apart from the Unverified list itself, INTEGRITY_LOG.md, code, and anything under `data/` or a dot folder. A hit is the surname as a whole word with the year after it on the same line, at most 60 characters on. `Smith (2019)`, `Smith 2019`, `Smith, 2019` and `Smith et al. (2019)` all count. A hit fails unless `<!--unread-->` comes right after it, which marks a mention for context.
+
+```markdown
+The benchmark goes back to Smith (2019)<!--unread-->, which I have not read yet.
+```
+
+A work that has a row in a depth table and also sits on the Unverified list fails, since it can't be both.
+
+What this can't catch. A mention by surname alone, a work cited under a second author's name, or a depth that is written down but not true.
