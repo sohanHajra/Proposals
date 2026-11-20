@@ -30,21 +30,26 @@ class Trades:
     qty: np.ndarray
 
 
-def load_day(day="2026-09-01", sym="BTCUSDT"):
-    """Load only the columns the replay needs. Prices stay float64 (float32 cannot hold 78549.6)."""
+CLOCKS = {"exchange": "timestamp", "local": "local_timestamp"}
+
+
+def load_day(day="2026-09-01", sym="BTCUSDT", clock="exchange"):
+    """Load only the columns the replay needs. Prices stay float64 (float32 cannot hold 78549.6).
+    clock="local" puts every row on its local capture time instead of exchange time (robustness 3)."""
+    col = CLOCKS[clock]
     d = RAW / "tardis"
     b = pl.read_csv(d / f"binance-futures_book_ticker_{day}_{sym}.csv.gz",
-                    columns=["timestamp", "bid_price", "bid_amount", "ask_price", "ask_amount"],
-                    schema_overrides={"timestamp": pl.Int64, "bid_price": pl.Float64, "ask_price": pl.Float64,
+                    columns=[col, "bid_price", "bid_amount", "ask_price", "ask_amount"],
+                    schema_overrides={col: pl.Int64, "bid_price": pl.Float64, "ask_price": pl.Float64,
                                       "bid_amount": pl.Float32, "ask_amount": pl.Float32})
     t = pl.read_csv(d / f"binance-futures_trades_{day}_{sym}.csv.gz",
-                    columns=["timestamp", "side", "price", "amount"])
+                    columns=[col, "side", "price", "amount"])
     # stable sorts keep the file order inside one timestamp
-    b = b.sort("timestamp", maintain_order=True)
-    t = t.sort("timestamp", maintain_order=True)
-    book = Book(b["timestamp"].to_numpy(), b["bid_price"].to_numpy(), b["bid_amount"].to_numpy(),
+    b = b.sort(col, maintain_order=True)
+    t = t.sort(col, maintain_order=True)
+    book = Book(b[col].to_numpy(), b["bid_price"].to_numpy(), b["bid_amount"].to_numpy(),
                 b["ask_price"].to_numpy(), b["ask_amount"].to_numpy())
-    tr = Trades(t["timestamp"].to_numpy(), np.where(t["side"].to_numpy() == "buy", 1, -1),
+    tr = Trades(t[col].to_numpy(), np.where(t["side"].to_numpy() == "buy", 1, -1),
                 t["price"].to_numpy(), t["amount"].to_numpy())
     return book, tr
 

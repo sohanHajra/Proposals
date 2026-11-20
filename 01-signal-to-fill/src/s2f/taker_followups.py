@@ -79,7 +79,7 @@ def walk_px(book, S, ta, side, tie_after=True, qty=QTY):
     return notional / qty, flag
 
 
-def taker_arrays(book, S, t, side, tie_after=True):
+def taker_arrays(book, S, t, side, tie_after=True, qty=QTY):
     n, nd = len(t), len(DELAYS_MS)
     mid0 = mid_vec(book, t, True)
     S_top = np.zeros((n, nd)); S_walk = np.zeros((n, nd)); flag_top = np.zeros((n, nd), bool)
@@ -90,8 +90,8 @@ def taker_arrays(book, S, t, side, tie_after=True):
         px = np.where(side > 0, book.ask_px[k], book.bid_px[k])
         av = np.where(side > 0, book.ask_qty[k], book.bid_qty[k])
         S_top[:, j] = side * (px - mid0) / mid0 * 1e4
-        flag_top[:, j] = av < QTY
-        wp, fl = walk_px(book, S, ta, side, tie_after)
+        flag_top[:, j] = av < qty
+        wp, fl = walk_px(book, S, ta, side, tie_after, qty)
         S_walk[:, j] = side * (wp - mid0) / mid0 * 1e4
         flag_walk[:, j] = fl
     return dict(mid0=mid0, S=S_top, dS=S_top - S_top[:, [0]], S_walk=S_walk,

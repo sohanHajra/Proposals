@@ -64,10 +64,10 @@ def run(day="2026-09-01", tie_after=True, shuffle=False):
                 flagged=flagged, book=book, ngaps=ngaps)
 
 
-def slope_blocks(dS, t, nboot=2000, seed=SEED):
+def slope_blocks(dS, t, nboot=2000, seed=SEED, block_us=BLOCK_US):
     x = np.log(DELAYS_MS.astype(float)); xc = x - x.mean(); sxx = (xc ** 2).sum()
     per = (dS * xc).sum(1)
-    blk = ((t - t.min()) // BLOCK_US).astype(int)
+    blk = ((t - t.min()) // block_us).astype(int)
     ub, inv = np.unique(blk, return_inverse=True)
     bsum = np.bincount(inv, per); bn = np.bincount(inv)
     est = per.sum() / (len(t) * sxx)
@@ -77,8 +77,8 @@ def slope_blocks(dS, t, nboot=2000, seed=SEED):
     return float(est), [float(np.percentile(boots, 2.5)), float(np.percentile(boots, 97.5))]
 
 
-def mean_ci(v, t, nboot=2000, seed=SEED):
-    blk = ((t - t.min()) // BLOCK_US).astype(int)
+def mean_ci(v, t, nboot=2000, seed=SEED, block_us=BLOCK_US):
+    blk = ((t - t.min()) // block_us).astype(int)
     ub, inv = np.unique(blk, return_inverse=True)
     bs = np.bincount(inv, v); bn = np.bincount(inv)
     rng = np.random.default_rng(seed)

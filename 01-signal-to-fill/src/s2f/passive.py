@@ -14,7 +14,7 @@ import numpy as np
 import polars as pl
 
 from .paths import ROOT, RAW
-from .replay import load_day, book_index_at
+from .replay import load_day, book_index_at, CLOCKS
 from .taker import DELAYS_MS, SEED, make_decisions, slope_blocks, mean_ci
 
 QTY = 0.01
@@ -106,11 +106,13 @@ def walk(p, ahead0, ev_kind, ev_a, ev_b, ev_snap_px, ev_snap_q, rng, qty=QTY, be
     return filled, fill_ev, lost
 
 
-def prep_day(day):
-    book, tr = load_day(day)
+def prep_day(day, clock="exchange"):
+    """clock="local" puts every file on local capture time (robustness 3)."""
+    book, tr = load_day(day, clock=clock)
+    col = CLOCKS[clock]
     snap = pl.read_csv(RAW / "tardis" / f"binance-futures_book_snapshot_5_{day}_BTCUSDT.csv.gz")
-    snap = snap.sort("timestamp", maintain_order=True)
-    sts = snap["timestamp"].to_numpy()
+    snap = snap.sort(col, maintain_order=True)
+    sts = snap[col].to_numpy()
     sd = {}
     for side in (1, -1):
         name = "bids" if side > 0 else "asks"
@@ -131,8 +133,9 @@ def prep_day(day):
     return book, tr, S
 
 
-def one(book, S, t, side, d_us, rule_rng_seed, tie_after=True):
-    """Run one decision at one delay. Returns dict or None when no book was seen yet."""
+def one(book, S, t, side, d_us, rule_rng_seed, tie_after=True, qty=QTY, h_us=H_US):
+    """Run one decision at one delay. Returns dict or None when no book was seen yet.
+    qty and h_us differ from 0.01 BTC and 10 s only in the robustness checks."""
     s = S[side]
     ta = t + d_us
     k = book_index_at(book, ta, tie_after)
@@ -141,7 +144,7 @@ def one(book, S, t, side, d_us, rule_rng_seed, tie_after=True):
     mid0 = None
     my_px = (book.bid_px[k] if side > 0 else book.ask_px[k]) * side
     q0 = float(book.bid_qty[k] if side > 0 else book.ask_qty[k])
-    tend = ta + H_US
+    tend = ta + h_us
     # tie after: events stamped exactly ta are already in the book I see, so the walk starts after them.
     # tie before: I see the book strictly before ta and every event stamped ta is replayed after I arrive.
     lo_side = "right" if tie_after else "left"
@@ -157,13 +160,16 @@ def one(book, S, t, side, d_us, rule_rng_seed, tie_after=True):
     spx[nt + nk:] = s["snap_px"][lo_s:hi_s]; sq[nt + nk:] = s["snap_q"][lo_s:hi_s]
     o = np.lexsort((kind, ts))
     rng = np.random.default_rng(rule_rng_seed)
-    filled, fev, lost = walk(my_px, q0, kind[o], a[o], b[o], spx[o], sq[o], rng)
+    filled, fev, lost = walk(my_px, q0, kind[o], a[o], b[o], spx[o], sq[o], rng, qty=qty)
     return dict(p=my_px * side, filled=filled, fill_t=np.where(fev >= 0, ts[o][np.maximum(fev, 0)] if len(ts) else -1, -1),
                 lost=lost >= 0, ta=ta)
 
 
-def run(day="2026-09-01", tie_after=True, max_n=None, decisions=None, prepped=None):
-    """decisions=(t, side, ngaps) replaces the random decisions; prepped=(book, tr, S) skips loading."""
+def run(day="2026-09-01", tie_after=True, max_n=None, decisions=None, prepped=None,
+        qty=QTY, h_us=H_US, cross_walk=False):
+    """decisions=(t, side, ngaps) replaces the random decisions; prepped=(book, tr, S) skips loading.
+    qty, h_us and cross_walk are for the robustness checks only. cross_walk prices the part that
+    crosses at the horizon with the five level walk instead of the touch."""
     book, tr, S = prepped if prepped is not None else prep_day(day)
     t, side, ngaps = decisions if decisions is not None else make_decisions(book)
     if max_n:
@@ -172,30 +178,41 @@ def run(day="2026-09-01", tie_after=True, max_n=None, decisions=None, prepped=No
     fill = np.zeros((n, nd, 3)); frac = np.zeros((n, nd, 3))
     cost = np.full((n, nd, 3), np.nan); m1 = np.full((n, nd, 3), np.nan); m10 = np.full((n, nd, 3), np.nan)
     lost = np.zeros((n, nd), bool); valid = np.ones(n, bool)
+    xflag = np.zeros((n, nd, 3), bool)
+    if cross_walk:
+        from .taker_followups import walk_px
     mid = lambda tt: 0.5 * (book.bid_px[book_index_at(book, tt, True)] + book.ask_px[book_index_at(book, tt, True)])
     for i in range(n):
         mid0 = mid(t[i])
         for j, dms in enumerate(DELAYS_MS):
-            r = one(book, S, t[i], side[i], int(dms) * 1000, (SEED, i, j), tie_after)
+            r = one(book, S, t[i], side[i], int(dms) * 1000, (SEED, i, j), tie_after, qty, h_us)
             if r is None:
                 valid[i] = False; continue
             lost[i, j] = r["lost"]
-            kx = book_index_at(book, r["ta"] + H_US, True)
+            kx = book_index_at(book, r["ta"] + h_us, True)
             cross = (book.ask_px[kx] if side[i] > 0 else book.bid_px[kx])
             for q in range(3):
-                f = r["filled"][q] / QTY
+                f = r["filled"][q] / qty
                 frac[i, j, q] = f
                 fill[i, j, q] = float(f >= 1 - 1e-9)
                 c_m = side[i] * (r["p"] - mid0) / mid0 * 1e4
-                c_x = side[i] * (cross - mid0) / mid0 * 1e4
+                cx = cross
+                if cross_walk and f < 1 - 1e-9:
+                    wp, fl = walk_px(book, S, np.array([r["ta"] + h_us]), np.array([side[i]]), True,
+                                     qty * (1 - f))
+                    cx = float(wp[0]); xflag[i, j, q] = bool(fl[0])
+                c_x = side[i] * (cx - mid0) / mid0 * 1e4
                 cost[i, j, q] = f * c_m + (1 - f) * c_x
                 if fill[i, j, q]:
                     tf = r["fill_t"][q]
                     m1[i, j, q] = side[i] * (mid(tf + 10**6) - r["p"]) / r["p"] * 1e4
                     m10[i, j, q] = side[i] * (mid(tf + 10 * 10**6) - r["p"]) / r["p"] * 1e4
     v = valid
-    return dict(t=t[v], side=side[v], fill=fill[v], frac=frac[v], cost=cost[v], m1=m1[v], m10=m10[v],
-                lost=lost[v], ngaps=ngaps)
+    out = dict(t=t[v], side=side[v], fill=fill[v], frac=frac[v], cost=cost[v], m1=m1[v], m10=m10[v],
+               lost=lost[v], ngaps=ngaps)
+    if cross_walk:
+        out["cross_flag"] = xflag[v]
+    return out
 
 
 def summarize(r):
