@@ -1656,3 +1656,8 @@ cancel.MSFT.partial.file:
   path: cancel_position.MSFT.partial_at_best.mean_p
   value: 0.6455
   tol: 0.00005
+signal.threshold8:
+  file: results/taker/followups_dev_2026-09-01.json
+  path: signal.threshold_abs_imbalance
+  value: 0.98630194
+  tol: 0.000000005

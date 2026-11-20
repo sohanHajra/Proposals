@@ -80,3 +80,40 @@ def test_passive_tie_flip_replays_events_on_the_arrival_stamp():
     before = passive.one(b, S, 1000, 1, 1000, 1, tie_after=False)
     assert (after["filled"] == 0).all()
     assert np.allclose(before["filled"], 0.01)
+
+
+def _no_recompute(monkeypatch):
+    from s2f import signals
+    def boom(*a, **k):
+        raise AssertionError("threshold recomputed")
+    monkeypatch.setattr(signals, "threshold", boom)
+    return signals
+
+
+def test_signal_threshold_is_never_recomputed_on_a_non_dev_day(monkeypatch, tmp_path):
+    """With the stored dev file missing, the follow ups fail instead of taking the day's own quantile."""
+    import pytest
+    from s2f import taker_followups, passive_followups
+    signals = _no_recompute(monkeypatch)
+    monkeypatch.setattr(signals, "FROZEN_FILE", tmp_path / "missing.json")
+    b = _book()          # stands in for a test day book
+    with pytest.raises(FileNotFoundError):
+        taker_followups.signal_decisions(b)
+    with pytest.raises(FileNotFoundError):
+        passive_followups.decisions(b, "signal")
+    with pytest.raises(ValueError):
+        make_signal_decisions(b, None)
+
+
+def test_signal_threshold_comes_from_the_stored_file(monkeypatch, tmp_path):
+    import json
+    from s2f import taker_followups, passive_followups
+    signals = _no_recompute(monkeypatch)
+    f = tmp_path / "followups_dev_2026-09-01.json"
+    f.write_text(json.dumps({"signal": {"threshold_abs_imbalance": 0.9}}))
+    monkeypatch.setattr(signals, "FROZEN_FILE", f)
+    b = _book()
+    t, side, ng, thr = taker_followups.signal_decisions(b)
+    assert thr == 0.9
+    t2, s2, ng2 = passive_followups.decisions(b, "signal")
+    assert (t == t2).all() and (side == s2).all()

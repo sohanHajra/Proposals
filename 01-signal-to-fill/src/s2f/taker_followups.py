@@ -21,7 +21,7 @@ from .paths import ROOT
 from .replay import book_index_at
 from .passive import prep_day
 from .taker import DELAYS_MS, QTY, make_decisions, slope_blocks, mean_ci
-from .signals import make_signal_decisions, imbalance
+from .signals import make_signal_decisions, imbalance, frozen_threshold
 from .stats import group_diff, group_mean
 
 J100 = list(DELAYS_MS).index(100)
@@ -153,10 +153,15 @@ def tie_compare(book, S, t, side):
                 mean_S_before_minus_after_by_delay_ms={int(d): float((ab["S"][:, j] - aa["S"][:, j]).mean()) for j, d in enumerate(DELAYS_MS)})
 
 
+def signal_decisions(book):
+    """Signal decisions at the frozen dev day threshold, on any day."""
+    return make_signal_decisions(book, frozen_threshold())
+
+
 def main(day):
     book, tr, S = prep_day(day)
     t, side, ngaps = make_decisions(book)
-    ts, ss, ngs, thr = make_signal_decisions(book)
+    ts, ss, ngs, thr = signal_decisions(book)
     res = dict(day=day)
     res["random"], _ = analyse(book, S, t, side, True)
     res["signal"], _ = analyse(book, S, ts, ss, True)

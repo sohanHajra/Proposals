@@ -57,7 +57,7 @@ import numpy as np
 from .paths import ROOT
 from .replay import load_day, book_index_at
 from .taker import DELAYS_MS, QTY, SEED, BLOCK_US, make_decisions
-from .signals import make_signal_decisions, last_row_per_stamp, first_per_gap, drop_near_gaps
+from .signals import make_signal_decisions, frozen_threshold, last_row_per_stamp, first_per_gap, drop_near_gaps
 from .stats import group_diff, group_mean
 
 SPECS = {
@@ -209,7 +209,7 @@ def run_spec(book, name, spec, rt, rside, rd100, st, sside, sd100, rng_seed=JUMP
 def main(day):
     book, _ = load_day(day)
     rt, rside, _ = make_decisions(book)
-    st, sside, _, thr = make_signal_decisions(book, thr=0.9863 if day != "2026-09-01" else None)
+    st, sside, _, thr = make_signal_decisions(book, frozen_threshold())
     rd100 = dS_all(book, rt, rside)[:, J100]
     sd100 = dS_all(book, st, sside)[:, J100]
     res = dict(day=day, config=CONFIG, n_random=int(len(rt)), n_signal=int(len(st)), signal_threshold=thr,

@@ -18,7 +18,7 @@ from . import passive, fixed_price
 from .passive import RULES
 from .fixed_price import STATES, slope_blocks
 from .taker import DELAYS_MS, make_decisions
-from .signals import make_signal_decisions
+from .signals import make_signal_decisions, frozen_threshold
 from .stats import group_mean, contribution, unmatched_diff, NBOOT
 from .taker import mean_ci
 
@@ -32,7 +32,7 @@ def decisions(book, which):
         return t, side, ngaps
     if which == "msgrid":
         return t - t % 1000, side, ngaps
-    ts, ss, ng, thr = make_signal_decisions(book)
+    ts, ss, ng, thr = make_signal_decisions(book, frozen_threshold())
     return ts, ss, ng
 
 

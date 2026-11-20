@@ -2,17 +2,40 @@
 
 The book seen at a stamp is the last ticker row with that exchange time, so the imbalance is read
 on those rows only. I = (bid size - ask size) / (bid size + ask size).
-The threshold is the 90th percentile of |I| over those rows on the dev day. It is computed once
-here and stored with the results, then frozen for the test days.
+The threshold is the 90th percentile of |I| over those rows on the dev day. It was computed once on
+2026-11-19 and stored in results/taker/followups_dev_2026-09-01.json (signal.threshold_abs_imbalance).
+Every run, dev day included, reads that stored value. Nothing recomputes it.
 A decision fires at a row with |I| at or above the threshold, at that row's exchange time, with side
 equal to the sign of I. After a decision the next one can fire only at a row at least 1 s later.
 Decisions within 60 s of a feed gap over 1 s, or in the last 600 s of the file, are dropped, as for
 the random decisions.
 """
+import json
+
 import numpy as np
+
+from .paths import RESULTS
 
 QUANTILE = 0.9
 MIN_GAP_US = 10**6
+FROZEN_FILE = RESULTS / "taker" / "followups_dev_2026-09-01.json"
+FROZEN_KEY = ("signal", "threshold_abs_imbalance")
+
+
+def frozen_threshold(path=None):
+    """The dev day threshold as stored. Fails loudly if the file or the field is missing."""
+    p = FROZEN_FILE if path is None else path
+    if not p.exists():
+        raise FileNotFoundError(f"frozen signal threshold file missing: {p}. Refusing to recompute it.")
+    d = json.loads(p.read_text())
+    try:
+        v = d[FROZEN_KEY[0]][FROZEN_KEY[1]]
+    except KeyError:
+        raise KeyError(f"{p} has no {'.'.join(FROZEN_KEY)}. Refusing to recompute it.")
+    v = float(v)
+    if not (0.0 < v <= 1.0):
+        raise ValueError(f"stored signal threshold {v} is not a valid |I| quantile")
+    return v
 
 
 def last_row_per_stamp(ts):
@@ -58,10 +81,10 @@ def drop_near_gaps(book, t, margin_s=60, end_cut_s=600):
     return keep, len(gi)
 
 
-def make_signal_decisions(book, thr=None):
-    """Returns t, side, number of feed gaps, threshold used."""
+def make_signal_decisions(book, thr):
+    """Returns t, side, number of feed gaps, threshold used. thr must be given (the frozen value)."""
     if thr is None:
-        thr = threshold(book)
+        raise ValueError("signal decisions need the frozen dev day threshold, it is never recomputed")
     r = last_row_per_stamp(book.ts)
     I = imbalance(book.bid_qty[r], book.ask_qty[r])
     hit = r[(np.abs(I) >= thr) & (I != 0)]
