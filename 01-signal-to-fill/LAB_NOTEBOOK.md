@@ -428,3 +428,14 @@ The registered placebo (robustness item 7) doesn't say which leg it is for, and 
 - *One draw.* The placebo uses one fixed shuffle. The interval covers block resampling of that draw, not the spread across shuffles. A run over many shuffles would say how unusual this one is, but that wasn't registered and I haven't run it.
 - *Fill only.* H2 is a slope of fill probability, so that is all this shuffles. The post then cross cost has no placebo.
 - *Dev day.* A preview. On the test days the rule is the one in the Deviation, under each rule on each day.
+
+## 2026-11-20 (Fri, early) · how unusual is the H2 placebo draw (exploratory, rule written before running)
+Exploratory. The registered H2 placebo is one shuffle, and on the dev day its interval missed zero under random only. One draw can't tell bad luck from a bias in the shuffle or the interval, so I look at many draws. This rule is committed and pushed before any of it is computed. A short note in the Deviations of the prereg says the check exists.
+
+- *Shuffles.* 200 of them, seeds 20261116 + k for k = 0 to 199. Each works exactly like the registered one. A fresh generator per rule draws one permutation of the nine delays per decision, in decision order, so the three rules share the permutations of a given seed. k = 0 is the registered shuffle and should give back the numbers in `placebo_h2_dev_2026-09-01.json`.
+- *Data.* The saved primary passive arrays on the dev day, `passive_random_after_2026-09-01.npz`, the same 8,425 decisions, under front, random and back.
+- *Statistic.* The H2 slope of fill on `log(d)` with the 5 minute block bootstrap, 2,000 resamples, seed 20261115, 95% percentile interval, as in the registered placebo. With the bootstrap seed fixed, every shuffle gets the same block draws.
+- *Readout per rule.* How many of the 200 intervals exclude zero, and the mean placebo slope across the shuffles. I also give the standard deviation and the 2.5th and 97.5th percentiles of the slope across shuffles, as description only.
+- *Verdict per rule, fixed now.* Calibrated if 17 or fewer of the 200 intervals exclude zero. That is 8.5%, about the top of what chance gives if each interval misses zero 5% of the time (a binomial with 200 draws and 5% has mean 10 and standard deviation about 3.1). Biased if more than 17.
+- *What happens next.* If random comes out biased, H2 under random gets reported on the test days with that caveat next to it, and the cause goes into the write up as a limit. The same goes for front or back. The registered method does not change before the test days whatever this shows. The single shuffle placebo, its seed and its step in `run_test_day` stay as they are, and this check runs on the dev day only.
+- *Where.* `results/robustness/placebo_h2_calibration_dev_2026-09-01.json`, with the slope, interval and exclusion flag of every shuffle under each rule.
