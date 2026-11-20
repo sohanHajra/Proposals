@@ -1,0 +1,50 @@
+name: claimcheck
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # the preregistration check reads full git history
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: python -m pip install pyyaml==6.0.3
+
+      - name: Full history present
+        run: test "$(git rev-parse --is-shallow-repository)" = "false"
+
+      - name: claimcheck tests
+        run: python -m unittest discover claimcheck/tests
+
+      - name: claimcheck on every proposal
+        run: |
+          status=0
+          for dir in [0-9][0-9]-*/; do
+            p="${dir%/}"
+            echo "::group::$p"
+            set +e
+            python -m claimcheck "$p"
+            rc=$?
+            set -e
+            echo "::endgroup::"
+            if [ "$rc" -eq 1 ]; then
+              echo "::error::claimcheck failed on $p"
+              status=1
+            elif [ "$rc" -eq 2 ]; then
+              echo "::notice::claimcheck had nothing to check in $p"
+            else
+              echo "$p passed"
+            fi
+          done
+          exit $status

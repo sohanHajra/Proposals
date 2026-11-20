@@ -52,6 +52,8 @@ Then comes the list of numbers with no tag, each with its file, line and a bit o
 - Put `<!--cite-->` right after a number quoted from a paper, or `<!--nc-->` right after one that is not a result (a delay I chose, a count of book levels).
 - Add a phrase to `claimcheck_ignore.txt` in the proposal folder, one per line, for a setting that comes up again and again, like `500 ms`. Any number inside that phrase is skipped everywhere. A phrase only matches whole, so `1 ms` leaves `0.1 ms` and `21 ms` alone, and a longer phrase is tried before a shorter one inside it. Lines starting with `#` are comments.
 
+On GitHub the same run happens on every push, from `.github/workflows/claimcheck.yml`. It checks out the full history, runs the tests below, then runs claimcheck on every numbered proposal folder. The job fails if any proposal exits `1`. A folder that exits `2` gets a notice instead, so a new proposal with nothing to check yet doesn't turn the badge red.
+
 The checker has its own tests, also run from the repo root.
 
 ```bash
