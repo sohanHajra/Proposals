@@ -2332,3 +2332,60 @@ placebo2.back.hi:
   path: by_rule.back.placebo_H2_slope_fill_per_logms.ci95.1
   value: 0.00014
   tol: 0.000005
+
+# H2 placebo calibration over 200 shuffles (exploratory, lab notebook 2026-11-20), dev day
+placebo2cal.n:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: n_shuffles
+  value: 200
+  tol: 0.5
+placebo2cal.front.count:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.front.summary.count_excluding_zero
+  value: 6
+  tol: 0.5
+placebo2cal.front.mean:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.front.summary.mean_slope
+  value: -0.000016
+  tol: 0.0000005
+placebo2cal.front.sd:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.front.summary.sd_slope
+  value: 0.00021
+  tol: 0.000005
+placebo2cal.random.count:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.random.summary.count_excluding_zero
+  value: 8
+  tol: 0.5
+placebo2cal.random.mean:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.random.summary.mean_slope
+  value: 0.000010
+  tol: 0.0000005
+placebo2cal.random.sd:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.random.summary.sd_slope
+  value: 0.00026
+  tol: 0.000005
+placebo2cal.back.count:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.back.summary.count_excluding_zero
+  value: 8
+  tol: 0.5
+placebo2cal.back.mean:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.back.summary.mean_slope
+  value: -0.000007
+  tol: 0.0000005
+placebo2cal.back.sd:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.back.summary.sd_slope
+  value: 0.00017
+  tol: 0.000005
+placebo2cal.random.k0:
+  file: results/robustness/placebo_h2_calibration_dev_2026-09-01.json
+  path: by_rule.random.slope.0
+  value: -0.00065
+  tol: 0.000005

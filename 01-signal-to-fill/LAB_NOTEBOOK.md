@@ -439,3 +439,20 @@ Exploratory. The registered H2 placebo is one shuffle, and on the dev day its in
 - *Verdict per rule, fixed now.* Calibrated if 17 or fewer of the 200 intervals exclude zero. That is 8.5%, about the top of what chance gives if each interval misses zero 5% of the time (a binomial with 200 draws and 5% has mean 10 and standard deviation about 3.1). Biased if more than 17.
 - *What happens next.* If random comes out biased, H2 under random gets reported on the test days with that caveat next to it, and the cause goes into the write up as a limit. The same goes for front or back. The registered method does not change before the test days whatever this shows. The single shuffle placebo, its seed and its step in `run_test_day` stay as they are, and this check runs on the dev day only.
 - *Where.* `results/robustness/placebo_h2_calibration_dev_2026-09-01.json`, with the slope, interval and exclusion flag of every shuffle under each rule.
+
+**Results, run once.** `python -m s2f.placebo_calibration 2026-09-01`, code in `src/s2f/placebo_calibration.py`, written after the rule above was pushed. It reuses the saved primary arrays and works out the blocks and bootstrap draws once, so all 200<!--c:placebo2cal.n--> shuffles under three rules took a few seconds, with nothing cut from the numbers in the rule. Nothing was rerun or changed after seeing the output.
+
+- **Front.** 6<!--c:placebo2cal.front.count--> of 200 intervals exclude zero. Calibrated by the rule. Mean placebo slope negative 0.000016<!--c:placebo2cal.front.mean--> per log ms, standard deviation 0.00021<!--c:placebo2cal.front.sd--> across shuffles.
+- **Random.** 8<!--c:placebo2cal.random.count--> of 200. Calibrated. Mean 0.000010<!--c:placebo2cal.random.mean-->, standard deviation 0.00026<!--c:placebo2cal.random.sd-->.
+- **Back.** 8<!--c:placebo2cal.back.count--> of 200. Calibrated. Mean negative 0.000007<!--c:placebo2cal.back.mean-->, standard deviation 0.00017<!--c:placebo2cal.back.sd-->.
+- **The registered draw.** k = 0 gives back the registered file exactly, slope and interval, under all three rules. Under random its slope, negative 0.00065<!--c:placebo2cal.random.k0-->, is the second most negative of the 200. So the shuffle and the interval look fine on average and the registered draw sits far out in the tail under random. Bad luck fits that better than a bias, though one day can't rule a small bias out. The misses split both ways, some intervals below zero and some above, under each rule.
+- **What changes.** Nothing. The verdict is calibrated under all three rules, so by the rule set before the run there is no caveat to carry onto H2 under random. The registered single shuffle placebo still runs as written on the test days and its pass or fail is reported as it comes out. A failure there under one rule would now be read next to this check, not as a reason to change anything.
+- **Tests.** Two new ones on made up data. The first seed reproduces `shuffle_rows` and `slope_blocks` exactly under each rule, and later seeds give different permutations that keep each decision's nine values.
+
+**Limits and gaps.**
+- *Not independent draws.* All 200<!--nc--> shuffles reorder the same 8,425<!--nc--> decisions, and all use the same bootstrap draws, so the count of intervals excluding zero is not a binomial count of independent trials. The cutoff of 17<!--nc--> treats it roughly as one.
+- *Same bootstrap draws.* With the bootstrap seed fixed, any quirk in those particular block draws shows up in every shuffle at once. I didn't vary that seed.
+- *Rules share shuffles.* Front, random and back get the same permutations for each seed, so the three counts are not separate evidence.
+- *Size of the check.* If the true miss rate were 12%<!--nc--> the cutoff would flag it about nine times in ten, at 10%<!--nc--> about seven in ten, and a small excess over 5%<!--nc--> would mostly go unseen. Those odds treat the shuffles as independent, which they aren't.
+- *Dev day only.* This says the placebo behaves on the dev day. It wasn't registered for the test days and isn't run there.
+- *Fill only.* As with the placebo itself, only the H2 fill slope is covered.
