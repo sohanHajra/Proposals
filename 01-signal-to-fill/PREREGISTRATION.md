@@ -182,3 +182,11 @@ None of this changes H1 to H5 or how they are judged on the test days.
 - *8 15 minute blocks.* The same bootstrap, 2,000 resamples and seed 20261115, with 15 minute blocks, for the H1 slope under both fills, mean ΔS(500 ms) under both fills and the H2 slope and post then cross cost slope under all three rules, on the same per decision values as the primary run.
 
 Results go to `results/robustness/`, one file per check. None of this changes H1 or H2 or how they are judged.
+
+**2026-11-20, before any test day and before any code for it is written or run.** Robustness item 7, the placebo, applies to H2 as well as H1. The registered text says delay labels are shuffled within each decision and the slope should be indistinguishable from zero, but it does not name the leg, and so far it was built only for H1 (`shuffle_rows` in `src/s2f/taker.py`). I add the H2 leg now because the registration left the leg open, not because of anything I saw. I know the dev day H2 slopes already. No H2 placebo number has been computed on any day.
+
+- *Outcome and decisions.* H2 is tested on one outcome, whether the order fills in full within the horizon, so that is what gets shuffled. Same per decision values as the primary H2 run, the registered random decisions with the primary tie, under all three cancellation rules, front, random and back.
+- *Shuffle.* The same scheme as H1. A generator seeded 20261116 (the registered seed 20261115 plus one) draws one permutation of the nine delays per decision, in decision order, and the fill values of that decision are reordered by it. The generator starts fresh for each rule, so all three rules get the same permutations, as the H1 legs do. Each decision keeps its own nine values, only their delay labels move.
+- *Statistic.* The H2 slope of fill on `log(d)` with the same 5 minute block bootstrap, 2,000 resamples, seed 20261115, 95% percentile interval.
+- *Reading.* The placebo passes on a day if the interval covers zero under each of the three rules. It is reported on each test day after the primary tests, next to the H1 placebo, whatever it shows. It does not change H2 or how H2 is judged.
+- *Where.* It runs once per test day inside `python -m s2f.run_test_day`, right after the other robustness checks, and writes `results/robustness/placebo_h2_<date>.json`. On the dev day it runs now as a preview.
