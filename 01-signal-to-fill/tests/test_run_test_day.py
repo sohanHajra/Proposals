@@ -13,6 +13,7 @@ def test_refuses_any_date_that_is_not_registered(day, capsys):
 def test_takes_exactly_one_argument():
     assert R.main([]) == 2
     assert R.main(["2026-10-01", "--seed", "1"]) == 2
+    assert R.main(["2026-10-01", "--part"]) == 2
 
 
 def test_registered_days_and_steps():
@@ -54,3 +55,28 @@ def test_modules_refuse_a_test_day_unless_started_on_purpose(mod, monkeypatch):
     r = subprocess.run([sys.executable, "-m", f"s2f.{mod}", "2026-10-01", "summarize"], env=env,
                        capture_output=True, text=True, cwd=str(__import__("pathlib").Path(__file__).parents[1]))
     assert r.returncode != 0 and "dev day only" in (r.stderr + r.stdout)
+
+
+@pytest.mark.parametrize("day", ["2026-10-01", "2026-03-01"])
+def test_parts_cover_every_step_once_in_order(day):
+    flat = [u for part in R.parts(day) for u in part]
+    assert len(flat) == len(set(flat))
+    steps = []
+    for kind, _ in flat:
+        s = {"pf_config": "passive_followups", "pf_summary": "passive_followups", "rob": "robustness"}.get(kind, kind)
+        if not steps or steps[-1] != s:
+            steps.append(s)
+    assert tuple(steps) == R.steps_for(day)
+
+
+def test_a_part_refuses_when_an_earlier_part_is_missing(tmp_path):
+    with pytest.raises(R.Refused, match="earlier parts"):
+        R.run_part("2026-11-01", 2, root=tmp_path / "results", derived=tmp_path / "derived")
+
+
+def test_a_part_refuses_when_its_outputs_exist(tmp_path):
+    p = result_path("taker", "taker", "2026-11-01", tmp_path)
+    p.parent.mkdir(parents=True)
+    p.write_text("{}")
+    with pytest.raises(R.Refused, match="already exist"):
+        R.run_part("2026-11-01", 1, root=tmp_path, derived=tmp_path / "derived")
