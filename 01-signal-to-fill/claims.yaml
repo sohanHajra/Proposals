@@ -1661,3 +1661,560 @@ signal.threshold8:
   path: signal.threshold_abs_imbalance
   value: 0.98630194
   tol: 0.000000005
+rob.fees.front.c1:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.front.post_then_cross_cost_with_fees_by_delay.1
+  value: 3.21
+  tol: 0.005
+rob.fees.front.c500:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.front.post_then_cross_cost_with_fees_by_delay.500
+  value: 3.22
+  tol: 0.005
+rob.fees.random.c1:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.random.post_then_cross_cost_with_fees_by_delay.1
+  value: 3.74
+  tol: 0.005
+rob.fees.random.c500:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.random.post_then_cross_cost_with_fees_by_delay.500
+  value: 3.74
+  tol: 0.005
+rob.fees.back.c1:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.back.post_then_cross_cost_with_fees_by_delay.1
+  value: 4.05
+  tol: 0.005
+rob.fees.back.c500:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.back.post_then_cross_cost_with_fees_by_delay.500
+  value: 4.05
+  tol: 0.005
+rob.fees.front.slope:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.front.post_then_cross_cost_with_fees_slope_bps_per_logms.est
+  value: 0.0014
+  tol: 0.00005
+rob.fees.front.slope.lo:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.front.post_then_cross_cost_with_fees_slope_bps_per_logms.ci95.0
+  value: -0.0022
+  tol: 0.00005
+rob.fees.front.slope.hi:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.front.post_then_cross_cost_with_fees_slope_bps_per_logms.ci95.1
+  value: 0.0048
+  tol: 0.00005
+rob.fees.random.slope:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.random.post_then_cross_cost_with_fees_slope_bps_per_logms.est
+  value: -0.0005
+  tol: 0.00005
+rob.fees.random.slope.lo:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.random.post_then_cross_cost_with_fees_slope_bps_per_logms.ci95.0
+  value: -0.0035
+  tol: 0.00005
+rob.fees.random.slope.hi:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.random.post_then_cross_cost_with_fees_slope_bps_per_logms.ci95.1
+  value: 0.0024
+  tol: 0.00005
+rob.fees.back.slope:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.back.post_then_cross_cost_with_fees_slope_bps_per_logms.est
+  value: 0.0004
+  tol: 0.00005
+rob.fees.back.slope.lo:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.back.post_then_cross_cost_with_fees_slope_bps_per_logms.ci95.0
+  value: -0.0022
+  tol: 0.00005
+rob.fees.back.slope.hi:
+  file: results/robustness/fees_dev_2026-09-01.json
+  path: passive.back.post_then_cross_cost_with_fees_slope_bps_per_logms.ci95.1
+  value: 0.0031
+  tol: 0.00005
+rob.b15.walk.slope.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: taker_15min.H1_five_level_walk.slope_bps_per_logms.ci95.0
+  value: -0.00053
+  tol: 0.000005
+rob.b15.walk.slope.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: taker_15min.H1_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.00127
+  tol: 0.000005
+rob.b5.walk.slope.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: taker_5min_same_values.H1_five_level_walk.slope_bps_per_logms.ci95.0
+  value: -0.00056
+  tol: 0.000005
+rob.b5.walk.slope.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: taker_5min_same_values.H1_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.00131
+  tol: 0.000005
+rob.b15.top.slope.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: taker_15min.H1_top_of_book.slope_bps_per_logms.ci95.0
+  value: -0.00053
+  tol: 0.000005
+rob.b15.top.slope.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: taker_15min.H1_top_of_book.slope_bps_per_logms.ci95.1
+  value: 0.00127
+  tol: 0.000005
+rob.b15.walk.dS500.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: taker_15min.H1_five_level_walk.mean_dS_500ms.ci95.0
+  value: -0.0035
+  tol: 0.00005
+rob.b15.walk.dS500.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: taker_15min.H1_five_level_walk.mean_dS_500ms.ci95.1
+  value: 0.0113
+  tol: 0.00005
+rob.b15.front.fill.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_15min.front.H2_slope_fill_per_logms.ci95.0
+  value: -0.00062
+  tol: 0.000005
+rob.b15.front.fill.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_15min.front.H2_slope_fill_per_logms.ci95.1
+  value: 0.00103
+  tol: 0.000005
+rob.b15.random.fill.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_15min.random.H2_slope_fill_per_logms.ci95.0
+  value: -0.00055
+  tol: 0.000005
+rob.b15.random.fill.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_15min.random.H2_slope_fill_per_logms.ci95.1
+  value: 0.00109
+  tol: 0.000005
+rob.b15.back.fill.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_15min.back.H2_slope_fill_per_logms.ci95.0
+  value: -0.00077
+  tol: 0.000005
+rob.b15.back.fill.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_15min.back.H2_slope_fill_per_logms.ci95.1
+  value: 0.00064
+  tol: 0.000005
+rob.b5.front.fill.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_5min_same_values.front.H2_slope_fill_per_logms.ci95.0
+  value: -0.00068
+  tol: 0.000005
+rob.b5.front.fill.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_5min_same_values.front.H2_slope_fill_per_logms.ci95.1
+  value: 0.00103
+  tol: 0.000005
+rob.b5.random.fill.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_5min_same_values.random.H2_slope_fill_per_logms.ci95.0
+  value: -0.00049
+  tol: 0.000005
+rob.b5.random.fill.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_5min_same_values.random.H2_slope_fill_per_logms.ci95.1
+  value: 0.00108
+  tol: 0.000005
+rob.b5.back.fill.lo:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_5min_same_values.back.H2_slope_fill_per_logms.ci95.0
+  value: -0.00075
+  tol: 0.000005
+rob.b5.back.fill.hi:
+  file: results/robustness/blocks15_dev_2026-09-01.json
+  path: passive_5min_same_values.back.H2_slope_fill_per_logms.ci95.1
+  value: 0.00059
+  tol: 0.000005
+rob.z.walk.slope:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.slope_bps_per_logms.est
+  value: 0.00040
+  tol: 0.000005
+rob.z.walk.slope.lo:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.slope_bps_per_logms.ci95.0
+  value: -0.00054
+  tol: 0.000005
+rob.z.walk.slope.hi:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.00133
+  tol: 0.000005
+rob.z.walk.dS500:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.mean_dS_500ms.mean
+  value: 0.0040
+  tol: 0.00005
+rob.z.walk.dS500.lo:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.mean_dS_500ms.ci95.0
+  value: -0.0033
+  tol: 0.00005
+rob.z.walk.dS500.hi:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.mean_dS_500ms.ci95.1
+  value: 0.0115
+  tol: 0.00005
+rob.z.flagwalk1:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.flag_share_walk_by_delay_ms.1
+  value: 7.8
+  tol: 0.05
+  scale: 100
+rob.z.flagwalk500:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.flag_share_walk_by_delay_ms.500
+  value: 7.9
+  tol: 0.05
+  scale: 100
+rob.z.flagtop1:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.flag_share_top_by_delay_ms.1
+  value: 8.6
+  tol: 0.05
+  scale: 100
+rob.z.top.slope:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.H1_top_of_book.slope_bps_per_logms.est
+  value: 0.00038
+  tol: 0.000005
+rob.z.top.slope.lo:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.H1_top_of_book.slope_bps_per_logms.ci95.0
+  value: -0.00056
+  tol: 0.000005
+rob.z.top.slope.hi:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: taker.H1_top_of_book.slope_bps_per_logms.ci95.1
+  value: 0.00130
+  tol: 0.000005
+rob.z.front.fill1:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.front.fill_prob_by_delay.1
+  value: 48.3
+  tol: 0.05
+  scale: 100
+rob.z.random.fill1:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.random.fill_prob_by_delay.1
+  value: 46.0
+  tol: 0.05
+  scale: 100
+rob.z.back.fill1:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.back.fill_prob_by_delay.1
+  value: 43.2
+  tol: 0.05
+  scale: 100
+rob.z.front.slope:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.front.H2_slope_fill_per_logms.est
+  value: 0.00012
+  tol: 0.000005
+rob.z.front.slope.lo:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.front.H2_slope_fill_per_logms.ci95.0
+  value: -0.00059
+  tol: 0.000005
+rob.z.front.slope.hi:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.front.H2_slope_fill_per_logms.ci95.1
+  value: 0.00081
+  tol: 0.000005
+rob.z.random.slope:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.random.H2_slope_fill_per_logms.est
+  value: -0.00029
+  tol: 0.000005
+rob.z.random.slope.lo:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.random.H2_slope_fill_per_logms.ci95.0
+  value: -0.00104
+  tol: 0.000005
+rob.z.random.slope.hi:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.random.H2_slope_fill_per_logms.ci95.1
+  value: 0.00044
+  tol: 0.000005
+rob.z.back.slope:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.back.H2_slope_fill_per_logms.est
+  value: -0.00006
+  tol: 0.000005
+rob.z.back.slope.lo:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.back.H2_slope_fill_per_logms.ci95.0
+  value: -0.00073
+  tol: 0.000005
+rob.z.back.slope.hi:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.by_rule.back.H2_slope_fill_per_logms.ci95.1
+  value: 0.00060
+  tol: 0.000005
+rob.z.cross.front:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.cross_beyond_five_levels_share_by_rule.front
+  value: 4.6
+  tol: 0.05
+  scale: 100
+rob.z.cross.back:
+  file: results/robustness/size_1btc_dev_2026-09-01.json
+  path: passive.cross_beyond_five_levels_share_by_rule.back
+  value: 5.1
+  tol: 0.05
+  scale: 100
+rob.h1.front.fill1:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.front.fill_prob_by_delay.1
+  value: 22.0
+  tol: 0.05
+  scale: 100
+rob.h1.random.fill1:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.random.fill_prob_by_delay.1
+  value: 15.4
+  tol: 0.05
+  scale: 100
+rob.h1.back.fill1:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.back.fill_prob_by_delay.1
+  value: 13.5
+  tol: 0.05
+  scale: 100
+rob.h1.front.slope:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.front.H2_slope_fill_per_logms.est
+  value: -0.00006
+  tol: 0.000005
+rob.h1.front.slope.lo:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.front.H2_slope_fill_per_logms.ci95.0
+  value: -0.00115
+  tol: 0.000005
+rob.h1.front.slope.hi:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.front.H2_slope_fill_per_logms.ci95.1
+  value: 0.00111
+  tol: 0.000005
+rob.h1.random.slope:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.random.H2_slope_fill_per_logms.est
+  value: 0.00011
+  tol: 0.000005
+rob.h1.random.slope.lo:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.random.H2_slope_fill_per_logms.ci95.0
+  value: -0.00091
+  tol: 0.000005
+rob.h1.random.slope.hi:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.random.H2_slope_fill_per_logms.ci95.1
+  value: 0.00104
+  tol: 0.000005
+rob.h1.back.slope:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.back.H2_slope_fill_per_logms.est
+  value: 0.00006
+  tol: 0.000005
+rob.h1.back.slope.lo:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.back.H2_slope_fill_per_logms.ci95.0
+  value: -0.00088
+  tol: 0.000005
+rob.h1.back.slope.hi:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.1s.by_rule.back.H2_slope_fill_per_logms.ci95.1
+  value: 0.00099
+  tol: 0.000005
+rob.h60.front.fill1:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.front.fill_prob_by_delay.1
+  value: 72.2
+  tol: 0.05
+  scale: 100
+rob.h60.random.fill1:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.random.fill_prob_by_delay.1
+  value: 62.2
+  tol: 0.05
+  scale: 100
+rob.h60.back.fill1:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.back.fill_prob_by_delay.1
+  value: 55.9
+  tol: 0.05
+  scale: 100
+rob.h60.front.slope:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.front.H2_slope_fill_per_logms.est
+  value: 0.00025
+  tol: 0.000005
+rob.h60.front.slope.lo:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.front.H2_slope_fill_per_logms.ci95.0
+  value: -0.00057
+  tol: 0.000005
+rob.h60.front.slope.hi:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.front.H2_slope_fill_per_logms.ci95.1
+  value: 0.00108
+  tol: 0.000005
+rob.h60.random.slope:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.random.H2_slope_fill_per_logms.est
+  value: 0.00058
+  tol: 0.000005
+rob.h60.random.slope.lo:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.random.H2_slope_fill_per_logms.ci95.0
+  value: -0.00019
+  tol: 0.000005
+rob.h60.random.slope.hi:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.random.H2_slope_fill_per_logms.ci95.1
+  value: 0.00134
+  tol: 0.000005
+rob.h60.back.slope:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.back.H2_slope_fill_per_logms.est
+  value: 0.00027
+  tol: 0.000005
+rob.h60.back.slope.lo:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.back.H2_slope_fill_per_logms.ci95.0
+  value: -0.00034
+  tol: 0.000005
+rob.h60.back.slope.hi:
+  file: results/robustness/horizon_dev_2026-09-01.json
+  path: by_horizon.60s.by_rule.back.H2_slope_fill_per_logms.ci95.1
+  value: 0.00091
+  tol: 0.000005
+rob.l.walk.slope:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.slope_bps_per_logms.est
+  value: 0.00043
+  tol: 0.000005
+rob.l.walk.slope.lo:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.slope_bps_per_logms.ci95.0
+  value: -0.00051
+  tol: 0.000005
+rob.l.walk.slope.hi:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.00134
+  tol: 0.000005
+rob.l.walk.dS500:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.mean_dS_500ms.mean
+  value: 0.0042
+  tol: 0.00005
+rob.l.walk.dS500.lo:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.mean_dS_500ms.ci95.0
+  value: -0.0030
+  tol: 0.00005
+rob.l.walk.dS500.hi:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.H1_five_level_walk.mean_dS_500ms.ci95.1
+  value: 0.0116
+  tol: 0.00005
+rob.l.top.slope:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.H1_top_of_book.slope_bps_per_logms.est
+  value: 0.00040
+  tol: 0.000005
+rob.l.top.slope.lo:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.H1_top_of_book.slope_bps_per_logms.ci95.0
+  value: -0.00054
+  tol: 0.000005
+rob.l.top.slope.hi:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.H1_top_of_book.slope_bps_per_logms.ci95.1
+  value: 0.00133
+  tol: 0.000005
+rob.l.n:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: taker.n_decisions
+  value: 8425
+  tol: 0.5
+rob.l.gaps:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: feed_gaps_over_1s
+  value: 2
+  tol: 0.5
+rob.l.front.fill1:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.front.fill_prob_by_delay.1
+  value: 68.6
+  tol: 0.05
+  scale: 100
+rob.l.random.fill1:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.random.fill_prob_by_delay.1
+  value: 55.4
+  tol: 0.05
+  scale: 100
+rob.l.back.fill1:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.back.fill_prob_by_delay.1
+  value: 47.1
+  tol: 0.05
+  scale: 100
+rob.l.front.slope:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.front.H2_slope_fill_per_logms.est
+  value: 0.00024
+  tol: 0.000005
+rob.l.front.slope.lo:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.front.H2_slope_fill_per_logms.ci95.0
+  value: -0.00067
+  tol: 0.000005
+rob.l.front.slope.hi:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.front.H2_slope_fill_per_logms.ci95.1
+  value: 0.00115
+  tol: 0.000005
+rob.l.random.slope:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.random.H2_slope_fill_per_logms.est
+  value: 0.00036
+  tol: 0.000005
+rob.l.random.slope.lo:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.random.H2_slope_fill_per_logms.ci95.0
+  value: -0.00043
+  tol: 0.000005
+rob.l.random.slope.hi:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.random.H2_slope_fill_per_logms.ci95.1
+  value: 0.00114
+  tol: 0.000005
+rob.l.back.slope:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.back.H2_slope_fill_per_logms.est
+  value: -0.00018
+  tol: 0.000005
+rob.l.back.slope.lo:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.back.H2_slope_fill_per_logms.ci95.0
+  value: -0.00085
+  tol: 0.000005
+rob.l.back.slope.hi:
+  file: results/robustness/local_order_dev_2026-09-01.json
+  path: passive.by_rule.back.H2_slope_fill_per_logms.ci95.1
+  value: 0.00054
+  tol: 0.000005
