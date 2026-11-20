@@ -10,7 +10,7 @@ from dataclasses import dataclass
 import numpy as np
 import polars as pl
 
-from .paths import RAW
+from .paths import RAW, float_prices
 
 
 @dataclass
@@ -42,8 +42,8 @@ def load_day(day="2026-09-01", sym="BTCUSDT", clock="exchange"):
                     columns=[col, "bid_price", "bid_amount", "ask_price", "ask_amount"],
                     schema_overrides={col: pl.Int64, "bid_price": pl.Float64, "ask_price": pl.Float64,
                                       "bid_amount": pl.Float32, "ask_amount": pl.Float32})
-    t = pl.read_csv(d / f"binance-futures_trades_{day}_{sym}.csv.gz",
-                    columns=[col, "side", "price", "amount"])
+    ft = d / f"binance-futures_trades_{day}_{sym}.csv.gz"
+    t = pl.read_csv(ft, columns=[col, "side", "price", "amount"], schema_overrides=float_prices(ft))
     # stable sorts keep the file order inside one timestamp
     b = b.sort(col, maintain_order=True)
     t = t.sort(col, maintain_order=True)

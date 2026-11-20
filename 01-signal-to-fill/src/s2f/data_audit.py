@@ -1,16 +1,18 @@
 """Audit one Tardis day: row counts, feed latency, crossed books, gaps, spreads."""
 import json, sys
 import polars as pl
-from .paths import RAW, RESULTS
+from .paths import RAW, RESULTS, float_prices
 
 TICK = 0.1
 
 def audit(day: str, symbol: str = "BTCUSDT") -> dict:
     d = RAW / "tardis"
-    bt = pl.read_csv(d / f"binance-futures_book_ticker_{day}_{symbol}.csv.gz",
-                     columns=["timestamp", "local_timestamp", "ask_amount", "ask_price", "bid_price", "bid_amount"])
-    tr = pl.read_csv(d / f"binance-futures_trades_{day}_{symbol}.csv.gz",
-                     columns=["timestamp", "local_timestamp", "side", "price", "amount"])
+    fb = d / f"binance-futures_book_ticker_{day}_{symbol}.csv.gz"
+    ft = d / f"binance-futures_trades_{day}_{symbol}.csv.gz"
+    bt = pl.read_csv(fb, columns=["timestamp", "local_timestamp", "ask_amount", "ask_price", "bid_price", "bid_amount"],
+                     schema_overrides=float_prices(fb))
+    tr = pl.read_csv(ft, columns=["timestamp", "local_timestamp", "side", "price", "amount"],
+                     schema_overrides=float_prices(ft))
     out = {"day": day, "symbol": symbol}
     lat_bt = (bt["local_timestamp"] - bt["timestamp"]) / 1000.0  # ms
     lat_tr = (tr["local_timestamp"] - tr["timestamp"]) / 1000.0

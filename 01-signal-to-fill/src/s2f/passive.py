@@ -13,7 +13,7 @@ import sys
 import numpy as np
 import polars as pl
 
-from .paths import ROOT, RAW, result_path, guard_day
+from .paths import ROOT, RAW, result_path, guard_day, float_prices
 from .replay import load_day, book_index_at, CLOCKS
 from .taker import DELAYS_MS, SEED, make_decisions, slope_blocks, mean_ci
 
@@ -110,7 +110,8 @@ def prep_day(day, clock="exchange"):
     """clock="local" puts every file on local capture time (robustness 3)."""
     book, tr = load_day(day, clock=clock)
     col = CLOCKS[clock]
-    snap = pl.read_csv(RAW / "tardis" / f"binance-futures_book_snapshot_5_{day}_BTCUSDT.csv.gz")
+    fs = RAW / "tardis" / f"binance-futures_book_snapshot_5_{day}_BTCUSDT.csv.gz"
+    snap = pl.read_csv(fs, schema_overrides=float_prices(fs))
     snap = snap.sort(col, maintain_order=True)
     sts = snap[col].to_numpy()
     sd = {}

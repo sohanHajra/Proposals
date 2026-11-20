@@ -18,3 +18,14 @@ def guard_day(day):
     """Stop unless this is the dev day or a test day run was started on purpose."""
     if day != DEV_DAY and os.environ.get("S2F_ALLOW_TEST_DAY") != "1":
         raise SystemExit("dev day only until the test day run is started on purpose")
+
+
+def float_prices(path):
+    """Every price and amount column of a Tardis csv read as Float64. On some days the first rows
+    carry whole number prices, so polars would otherwise guess an integer column and stop at the
+    first decimal. On the dev and test days these columns were already read as Float64."""
+    import gzip
+    import polars as pl
+    with gzip.open(path, "rt") as f:
+        head = f.readline().strip().split(",")
+    return {c: pl.Float64 for c in head if "price" in c or "amount" in c}
