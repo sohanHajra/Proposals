@@ -298,3 +298,28 @@ My reading, not tested. In the one tick names a lot of cancelling seems to come 
   - *Old and different.* NASDAQ equities in 2007 and 2008, a different venue, tick and era from BTCUSDT in 2026.
   - *A proxy.* Their activity measure is inferred from message patterns, so it can't be checked against who actually sent the orders.
   - Not checked by a second reader. No test day data touched.
+
+## 2026-11-19 (Thu, late night) · jump moment split, written down before running it
+Exploratory, added 2026-11-19, not a registered test. This is the split I wrote about after reading Budish, Cramton and Shim, and it was the one thing left over from this afternoon. Everything below was fixed and committed with the code (`src/s2f/jumps.py`, tests in `tests/test_jumps.py`) before I ran any of it on the dev day. What I had seen of the dev day before writing it is what is already in these notes. Spread at one tick 95.5% of the time, the feed audit, the RQ3 volatility cut and the dev day taker numbers. I haven't counted mid moves at the ms scale or looked at anything after one.
+
+**What a jump is.** A ticker stamp where the mid has moved by at least K bps from the mid W ms earlier. In their model a quote gets picked off when the jump is bigger than half the spread plus what it costs to take it. Half a one tick spread is under 0.01 bps on BTCUSDT, so that part never binds. The cost does. The lowest USDT taker fee on the Binance USD-M schedule as I read it today is 0.017%, 1.7 bps, so a smaller move can't pay even the cheapest taker who hits the old quote. That gives three specs, all run and all reported.
+- *A, the main line.* K = 2 bps (1.7 rounded up), W = 10 ms (their 2011 median arbitrage duration of 7 ms, rounded up).
+- *B.* K = 5 bps, W = 10 ms. The regular taker fee, 0.05%.
+- *C.* K = 2 bps, W = 100 ms. Their example batch interval, for slower moves.
+
+**Decision window.** A decision counts as after a jump if a jump stamp falls in the 5 ms up to and including it. For one move to count once in the jump decisions and the stale count, jumps are thinned to the first stamp and nothing within 1 s after it, and the usual gap and end of day cuts apply.
+
+**What gets measured.** The H3 cost, top of book ΔS(100 ms) with the tie after, 5 minute block bootstrap.
+- Random decisions after a jump minus the rest, and the same for signal decisions. A random decision comes every 10 s on average, so I expect very few of them to land within 5 ms of a move. That is why there is a third line.
+- Jump decisions. One per thinned jump, at a time drawn uniformly in the 5 ms after it (seed 20261115 + 101). The side goes with the jump, a buy after an up move, which is what a sniper does. The same decisions with the side flipped are reported too. Each is set against the random decisions outside the window.
+- Stale top of book. At each thinned jump, the touch a taker going with the jump would hit, and whether that level is gone for that taker 1, 2 and 5 ms later. A second count also treats it as gone when the price is still there but less than 0.01 BTC shows. The other side of the book is done the same way, and the random decisions with their own side give the baseline.
+
+**Too small to read.** A group with under 30 decisions or spread over under 10 five minute blocks gets its numbers reported and no reading.
+
+**Frozen for the test days.** Specs A, B and C, the 5 ms window, the 1, 2 and 5 ms horizons, the 1 s thinning and the seed. On each test day it runs once, after the registered tests, with the signal threshold frozen at 0.9863. It changes nothing about H1 to H5, their tests or their verdicts.
+
+**The two papers I read tonight.** Hasbrouck and Saar touch this only through scale. Their fastest traders react to a better quote in about 2 to 3 ms, which sits inside the 5 ms window and the 1 to 5 ms horizons I had in mind already, so it supports the choice and doesn't change it. Cartea and Sánchez-Betancourt don't define jumps or stale liquidity. The one thing I take from them is a warning. They chose their volatility and fill windows because those made the link they were studying strongest (their footnote 4), which is exactly what I'm not doing here.
+
+**Limits and gaps.**
+- *Fee date.* The fee schedule is the one shown today. It may have been different on 2026-09-01, and fast firms may pay less than the top VIP tier through rebates I can't see.
+- *One venue.* Their jumps are in a related market. Mine are moves in the same book, which is the race already over, so this is a loose stand in for their idea.

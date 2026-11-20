@@ -18,9 +18,9 @@ sanity:
 test:
 	$(PY) -m pytest -q tests
 
-.PHONY: env data audit test sanity taker passive fixed_price followups_taker followups_passive followups lobster reproduce
+.PHONY: env data audit test sanity taker passive fixed_price followups_taker followups_passive followups lobster jump reproduce
 
-reproduce: env data audit test sanity taker passive fixed_price followups lobster
+reproduce: env data audit test sanity taker passive fixed_price followups lobster jump
 
 taker:
 	$(PY) -m s2f.taker 2026-09-01
@@ -44,3 +44,7 @@ followups: followups_taker followups_passive
 # RQ2 order lifecycles and where cancellations land (LOBSTER, Nasdaq 2012-06-21)
 lobster:
 	$(PY) -m s2f.lobster_rq2
+
+# jump moment split and stale top of book count (exploratory, added 2026-11-19)
+jump:
+	$(PY) -m s2f.jumps 2026-09-01
