@@ -173,3 +173,9 @@ I went back over this session myself. No second reader looked at it.
 - The reading that back of queue cancels come from quick in and out orders is untested and labelled so.
 
 **Bias check.** The queue result points to my back rule being nearer reality, which makes passive numbers look worse for me, and it's reported as found. H4 failing goes against my own hypothesis and is stated as plainly as the rest. No test day data was touched.
+
+## 2026-11-19 (Thu, night) · Cartea & Sánchez-Betancourt (2021) read
+- **Checked, no issue.** The one review row citing the paper was checked claim by claim against the journal article. Missed fills from latency, taker side only and proprietary LMAX data are all there (pp. 255, 260). "Concentrated in high volatility" holds in direction (Tables 5 and 8) and the row now carries the caveats. Depth raised to full text. The quartile shares of misses were recomputed from the tables and match the paper. No hypothesis, metric or test changed. No test day data touched.
+- **Found and fixed.** The Not found line was true as written, since their replay is on proprietary data, but it left out the nearest case. Section 7 is now named there, and the claim of what is new says public data.
+- **Bias check.** The paper's volatility result points the way H3 does, and it would be easy to lean on it. Its windows were tuned to that result and its closest test of extra delay splits between the two traders, so it is cited for the fill side only and the T2 result against H3 is written down beside the T1 one.
+- **Open.** Not checked by a second reader.
