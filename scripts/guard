@@ -15,10 +15,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 # whole words, matched case insensitive
-WORDS = ["AI", "LLM", "Hark", "Claude", "GPT", "rule", "style"]
+WORDS = ["AI", "LLM", "Hark", "Claude", "GPT", "style"]
 # words that also catch their longer forms (colons, hyphens, overstated, reviewers)
 STEMS = ["integrity", "hyphen", "colon", "overclaim", "overstat", "wording", "reviewer"]
-PHRASES = ["house style", "em dash", "en dash", "cold review", "claimcheck warning"]
+# "rule" alone is left out because tie rule and cancellation rule are terms of the study
+PHRASES = ["house style", "house rule", "style rule", "writing rule", "em dash", "en dash", "cold review", "claimcheck warning"]
 
 DASHES = "\u2014\u2013"
 
