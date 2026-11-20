@@ -204,3 +204,29 @@ I went back over this session myself. No second reader looked at it.
 - The spread refill reading is my subtraction of two means, not a direct measure.
 
 **Bias check.** The stale count came out the way my reading of Budish, Cramton and Shim led me to expect, which is a reason to be careful with it. The notebook says plainly that part of it is the move carrying on, that the baseline isn't like for like, and that the H3 split on random decisions came out empty. Nothing about H1 to H5 changed.
+
+## 2026-11-19 independent pass before test days
+A second reader went over tonight's work and the test day setup cold. No test day or breadth day file was downloaded or read.
+
+**Found and fixed**
+- LAB_NOTEBOOK, jump decisions. "Both sides gain from waiting" was stronger than the data, since the interval for going with the jump runs from negative 0.28 to 0.06. It now says both means are negative and that interval covers zero, and the spread refill stays marked as a reading.
+- LAB_NOTEBOOK, signal decisions after a jump. "Lower than the rest by negative 1.13" read as a double negative. It now says their ΔS(100 ms) minus that of the rest is negative 1.13. Same number, same tag.
+- LAB_NOTEBOOK, the Alpaca latency gaps and the breadth day limits. Seven labels written as a word and a colon now end in a full stop, as in the newer entries.
+
+**Open**
+- Signal threshold on the test days. `taker_followups.py` and `passive_followups.py` call `make_signal_decisions(book)` with no threshold, so on a test day they would take the 90th percentile of that day and not the dev day value. Only `jumps.py` passes the frozen value, and it passes 0.9863 where the dev day file stores 0.98630194. Needs a fix committed before any test day run.
+- Robustness checks 1, 3, 5, 6 and 8 in the preregistration (fees, local capture order, 1 BTC orders, passive horizon of 1 s and 60 s, 15 minute blocks) have no code yet. The tie flip, the placebo and signal decisions do. Either the code is written and committed on the dev day before the test days, or a dated Deviation says how they will be handled.
+- No single test day run. Every Makefile target is fixed to 2026-09-01, so the test day session runs each module by hand with `S2F_ALLOW_TEST_DAY=1`. `taker.py`, `passive.py`, `sanity.py` and `tie_share.py` have no dev day guard, and every results file name says dev even on a test day.
+- Which taker fill is primary for H1 on the test days, top of book as built (Deviation of 2026-11-17) or the five level walk (2026-11-19 afternoon), should be stated once before the run.
+- The jump count line says the day fell, so most thinned jumps are down moves. The share is in the file (33.5% up under A), but the day's fall doesn't imply it.
+- The breadth day Deviation has a prose colon before its list of dates. Registered text, left as is.
+- README lines 16 and 17 use a bold label and a colon, from an edit of 2026-11-18. Left as is.
+
+**Checked**
+- Jump split order. 281affd at 23:04:23 CST holds the code, thresholds and notebook entry. The results file was written at 23:04:54 CST, and fb5e645 followed at 23:09:48. `jumps.py` has not changed since 281affd. Specs A, B and C, the 5 ms window, the 1, 2 and 5 ms horizons, the 1 s thinning and seed 20261115 + 101 in the code match the notebook and the Deviation.
+- Jump numbers against `results/jump/jump_split_2026-09-01.json`. Spec A stale share at 1 ms 12.4% (8.0% to 16.9%) against 0.09%, 1 of 8,425 random decisions in the window, 39 signal decisions, 194 thinned jumps. All match. The entries are labelled exploratory and the reading is marked untested.
+- Preregistration order. 913347d on 2026-11-15. Everything above the Deviations heading is unchanged since then, and every later change sits under Deviations with a date. 2d31501 and 1a87f6e came before any test data, and none exists in `data/raw`, `results` or git history.
+- `get_data.py` fetches 2026-10-01 and 2026-11-01 for test and the six breadth days, each behind the preregistration check, and skips files already present. Bootstrap code uses 5 minute blocks, 2,000 resamples and seed 20261115 throughout.
+- Unit tests 39 passed, claimcheck tests 81 passed. claimcheck on 01 exits 0, 676 PASS lines, no failure, 33 untagged warnings.
+- Sources. Spot checks of the Cartea and Sánchez-Betancourt and Hasbrouck and Saar notes against the article text (the 36.5% and 40.0% shares, 20.02 ms to 2.34 ms, 9,483 misses, footnote 4, the 2 to 3 ms peak, footnote 22) all match. Both rows say full text and the PDFs are on file.
+- Dashes, prose hyphens and colons in prose added since 2026-11-19, and commit messages. Nothing else found.
