@@ -412,3 +412,18 @@ The Deviation putting H1 back on the five level walk went in first (commit 0ce79
   - *Breadth day cut.* The registered rule leaves out a breadth day whose gaps over 1 s add up to more than an hour. The script doesn't apply it. I'll read it off the audit and the gap list after each day runs and report any day left out.
   - *Downloads.* The script doesn't fetch data. `get_data test` and `get_data breadth` stay separate steps, run on purpose before it.
   - *Memory.* A test day held about 3<!--nc--> GB at its peak in the dry run on this machine, so the days run one after another, not side by side.
+
+## 2026-11-20 (Fri, early) · the placebo for H2 on the dev day
+The registered placebo (robustness item 7) doesn't say which leg it is for, and I had only built it for H1. The Deviation adding the H2 leg went in first (commit 1d53d67), then the code and its test (ff731eb), both before anything was run. Same scheme as H1. Each decision's nine fill values get reordered across delays with the H1 draws, seed 20261116, the same permutations under all three rules, and then the H2 slope and 5 minute block bootstrap as registered. It passes if the interval covers zero under each rule. Run once with `python -m s2f.passive_followups 2026-09-01 placebo` on the saved primary arrays, 8,425<!--c:placebo2.n--> decisions. Output in `results/robustness/placebo_h2_dev_2026-09-01.json`.
+
+- **Front.** Negative 0.00018<!--c:placebo2.front--> per log ms (interval negative 0.00068<!--c:placebo2.front.lo--> to 0.00033<!--c:placebo2.front.hi-->). Covers zero.
+- **Random.** Negative 0.00065<!--c:placebo2.random--> (negative 0.00125<!--c:placebo2.random.lo--> to negative 0.00007<!--c:placebo2.random.hi-->). This one does not cover zero. By the rule I wrote down before running it, the placebo fails on the dev day.
+- **Back.** Negative 0.00021<!--c:placebo2.back--> (negative 0.00055<!--c:placebo2.back.lo--> to 0.00014<!--c:placebo2.back.hi-->). Covers zero.
+- **Same arrays as H2.** Before shuffling, the slopes and intervals from these arrays equal the ones in `passive_dev_2026-09-01.json` exactly, under all three rules.
+- **What I make of it.** Not much yet. The miss is small, it is one shuffle draw under three rules that share it, and the upper end sits just under zero. A shuffled slope should be zero on average, so either this draw came out unlucky or something in the shuffle or the interval isn't doing what I think. I can't tell which from one day. I did not try another seed and won't, since picking one after seeing this would be tuning. Nothing was changed after the run. The test days run it as written and it gets reported next to the H1 placebo either way.
+- **Tests.** Four new ones. Every decision keeps its own nine values after the shuffle, the permutations are the H1 ones and the same under each rule, a built in negative slope goes away under the placebo, and the test day script runs it right after the robustness checks and never on breadth days. 68<!--nc--> tests pass.
+
+**Limits and gaps.**
+- *One draw.* The placebo uses one fixed shuffle. The interval covers block resampling of that draw, not the spread across shuffles. A run over many shuffles would say how unusual this one is, but that wasn't registered and I haven't run it.
+- *Fill only.* H2 is a slope of fill probability, so that is all this shuffles. The post then cross cost has no placebo.
+- *Dev day.* A preview. On the test days the rule is the one in the Deviation, under each rule on each day.

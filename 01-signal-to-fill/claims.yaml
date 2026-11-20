@@ -2280,3 +2280,55 @@ h1walk.placebo.hi:
   path: placebo_shuffled_five_level_walk.slope_bps_per_logms.ci95.1
   value: 0.00031
   tol: 0.000005
+
+# H2 placebo, robustness item 7 for H2 (Deviation of 2026-11-20), dev day
+placebo2.n:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: n_decisions
+  value: 8425
+  tol: 0.5
+placebo2.front:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: by_rule.front.placebo_H2_slope_fill_per_logms.est
+  value: -0.00018
+  tol: 0.000005
+placebo2.front.lo:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: by_rule.front.placebo_H2_slope_fill_per_logms.ci95.0
+  value: -0.00068
+  tol: 0.000005
+placebo2.front.hi:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: by_rule.front.placebo_H2_slope_fill_per_logms.ci95.1
+  value: 0.00033
+  tol: 0.000005
+placebo2.random:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: by_rule.random.placebo_H2_slope_fill_per_logms.est
+  value: -0.00065
+  tol: 0.000005
+placebo2.random.lo:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: by_rule.random.placebo_H2_slope_fill_per_logms.ci95.0
+  value: -0.00125
+  tol: 0.000005
+placebo2.random.hi:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: by_rule.random.placebo_H2_slope_fill_per_logms.ci95.1
+  value: -0.00007
+  tol: 0.000005
+placebo2.back:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: by_rule.back.placebo_H2_slope_fill_per_logms.est
+  value: -0.00021
+  tol: 0.000005
+placebo2.back.lo:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: by_rule.back.placebo_H2_slope_fill_per_logms.ci95.0
+  value: -0.00055
+  tol: 0.000005
+placebo2.back.hi:
+  file: results/robustness/placebo_h2_dev_2026-09-01.json
+  path: by_rule.back.placebo_H2_slope_fill_per_logms.ci95.1
+  value: 0.00014
+  tol: 0.000005
