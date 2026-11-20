@@ -285,3 +285,16 @@ My reading, not tested. In the one tick names a lot of cancelling seems to come 
   - *A tag checks the number, not the sentence.* A right number in a wrong claim still passes.
   - *Derived numbers.* A difference I compute in prose from two fields can't be tagged until the code writes it to a file.
 
+
+## 2026-11-19 (Thu, night) · Hasbrouck & Saar (2013) read in full
+- **What I read.** The journal article, pages 646 to 679, every table and figure included. There's no appendix. The robustness tables they say are available from the authors I haven't seen. Notes in the [library](../library/hasbrouck-saar-2013-low-latency-trading.md).
+- **What it is.** Two months of NASDAQ message data, October 2007 and June 2008, for the largest NASDAQ stocks. They link cancels to same size resubmits within 100 ms into "strategic runs" and use the count of long runs as a stand in for high frequency activity. More of it goes with narrower spreads, more depth and a smaller short term price range in both months (Tables 5 to 7). The fastest traders react to a better quote in about 2 to 3 ms (Figure 2, p. 654).
+- **What holds from my earlier line.** Both parts of the old row are right. The runs are built from NASDAQ message data, and the paper is about market quality, not the cost of one order. The authors say that last part themselves (footnote 22, p. 664). The row now says what the paper found and how far it can be pushed, and its depth is full text.
+- **What it changes.** Nothing in the preregistration or any test. It gives no evidence on the cost of delay for a fixed decision, and I don't use it as a benchmark.
+- **Correction.** None needed.
+- **Exploratory idea, not a registered test.** On my LOBSTER day, cancelled orders in INTC and MSFT sit near the back of the queue, and I guessed they are orders that join and leave quickly. Their Table 2 shows algorithms doing exactly that at the touch, every few ms. Their linking rule (same size, same side, within 100 ms of a cancel) could count how many of those back of queue cancels come straight back as a resubmit. If I do it, it is one descriptive count on the 2012 day, with the rule taken as they wrote it, and it stops there. It doesn't feed a hypothesis or the passive leg.
+- **Small things found in the paper.** The Table 4 caption gives 60 × 819 as 49,410 (it is 49,140). The Panel B run is said to last 78.5 s and add 0.129, but the times in Table 2 give about 77.4 s, which is what 0.129 matches. The message counts for Table 2 don't add up to the rows shown plus the ones described. With time of day dummies, the plain OLS volatility coefficient is not significant in either month (Table 5, Panel C), though the text calls the panels similar. The instrumented versions keep it.
+- **Limits and gaps.**
+  - *Old and different.* NASDAQ equities in 2007 and 2008, a different venue, tick and era from BTCUSDT in 2026.
+  - *A proxy.* Their activity measure is inferred from message patterns, so it can't be checked against who actually sent the orders.
+  - Not checked by a second reader. No test day data touched.

@@ -179,3 +179,9 @@ I went back over this session myself. No second reader looked at it.
 - **Found and fixed.** The Not found line was true as written, since their replay is on proprietary data, but it left out the nearest case. Section 7 is now named there, and the claim of what is new says public data.
 - **Bias check.** The paper's volatility result points the way H3 does, and it would be easy to lean on it. Its windows were tuned to that result and its closest test of extra delay splits between the two traders, so it is cited for the fill side only and the T2 result against H3 is written down beside the T1 one.
 - **Open.** Not checked by a second reader.
+
+## 2026-11-19 (Thu, night) · Hasbrouck & Saar (2013) read
+- **Checked, no issue.** The one review row citing the paper was checked against the journal article. Strategic runs from NASDAQ message data (pp. 658 to 659) and the market quality focus (pp. 647, 664) are both there. Depth raised to full text. The arithmetic behind the slips I list was redone by hand. No hypothesis, metric or test changed. No test day data touched.
+- **Found and fixed.** Nothing was wrong. The row was thin and now says what the paper found and where it stops.
+- **Bias check.** The paper's Table 2 makes my untested back of queue reading look plausible, and it would be easy to lean on that. It is written as one possible story, from 2007 data, and the idea that follows from it is a single descriptive count with its stop point set now. The paper's weaker spots (the volatility link without instruments, the effective spread coefficients bunched around zero stock by stock) are in the library note next to its headline.
+- **Open.** Not checked by a second reader.
