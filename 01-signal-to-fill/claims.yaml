@@ -2218,3 +2218,65 @@ rob.l.back.slope.hi:
   path: passive.by_rule.back.H2_slope_fill_per_logms.ci95.1
   value: 0.00054
   tol: 0.000005
+h1walk.slope:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: primary_five_level_walk.slope_bps_per_logms.est
+  value: 0.00038
+  tol: 0.000005
+h1walk.slope.lo:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: primary_five_level_walk.slope_bps_per_logms.ci95.0
+  value: -0.00056
+  tol: 0.000005
+h1walk.slope.hi:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: primary_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.00131
+  tol: 0.000005
+h1walk.dS500:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: primary_five_level_walk.by_delay.500.mean_dS_bps
+  value: 0.0040
+  tol: 0.00005
+h1walk.dS500.lo:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: primary_five_level_walk.by_delay.500.ci95.0
+  value: -0.0033
+  tol: 0.00005
+h1walk.dS500.hi:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: primary_five_level_walk.by_delay.500.ci95.1
+  value: 0.0114
+  tol: 0.00005
+h1walk.flag1:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: primary_five_level_walk.flagged_share_by_delay_ms.1
+  value: 0.09
+  tol: 0.005
+  scale: 100
+h1walk.flag500:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: primary_five_level_walk.flagged_share_by_delay_ms.500
+  value: 0.19
+  tol: 0.005
+  scale: 100
+h1walk.tieflip.slope:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: tie_before_five_level_walk.slope_bps_per_logms.est
+  value: 0.00038
+  tol: 0.000005
+h1walk.placebo:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: placebo_shuffled_five_level_walk.slope_bps_per_logms.est
+  value: -0.00018
+  tol: 0.000005
+h1walk.placebo.lo:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: placebo_shuffled_five_level_walk.slope_bps_per_logms.ci95.0
+  value: -0.00066
+  tol: 0.000005
+h1walk.placebo.hi:
+  file: results/taker/taker_dev_2026-09-01.json
+  path: placebo_shuffled_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.00031
+  tol: 0.000005

@@ -1,6 +1,8 @@
-"""Taker leg on the dev day. Paired design, every decision replayed at every delay.
+"""Taker leg. Paired design, every decision replayed at every delay.
 
-Shortfall S(d) = side * (fill px - mid at t) / mid at t * 1e4 (top of book fill, see flags).
+H1 is judged on the five level walk (registered, restored by the Deviation of 2026-11-19 near
+midnight). The top of book fill is reported next to it as a robustness line.
+Shortfall S(d) = side * (fill px - mid at t) / mid at t * 1e4.
 Drift = side * (mid at t+d - mid at t), arrival = side * (fill px - mid at t+d), both in bps.
 Latency cost dS(d) = S(d) - S(1 ms). Slope of dS on log(d), 5 minute block bootstrap.
 """
@@ -8,7 +10,7 @@ import json
 import sys
 import numpy as np
 
-from .paths import ROOT
+from .paths import ROOT, result_path, guard_day
 from .replay import load_day, mid_at, book_index_at
 
 DELAYS_MS = np.array([1, 2, 5, 10, 25, 50, 100, 250, 500])
@@ -118,13 +120,53 @@ def summarize(r, label):
     return out
 
 
-if __name__ == "__main__":
-    day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
+def shuffle_rows(dS):
+    """Placebo. Delay labels shuffled within each decision, same draws as in run()."""
+    out = dS.copy()
+    rng = np.random.default_rng(SEED + 1)
+    for i in range(len(out)):
+        out[i] = out[i, rng.permutation(out.shape[1])]
+    return out
+
+
+def walk_summary(dS, S, flag, t, label):
+    beta, ci = slope_blocks(dS, t)
+    out = dict(label=label, n_decisions=int(len(t)),
+               flagged_share_by_delay_ms={int(d): float(flag[:, j].mean()) for j, d in enumerate(DELAYS_MS)},
+               slope_bps_per_logms=dict(est=beta, ci95=ci), by_delay={})
+    for j, d in enumerate(DELAYS_MS):
+        m, c = mean_ci(dS[:, j], t)
+        out["by_delay"][int(d)] = dict(mean_dS_bps=m, ci95=c, mean_S_bps=float(S[:, j].mean()))
+    return out
+
+
+def walk_results(day):
+    """H1 under the five level walk, with the tie flip and the placebo on the same fill."""
+    from .passive import prep_day
+    from .taker_followups import taker_arrays
+    book, tr, S = prep_day(day)
+    t, side, _ = make_decisions(book)
+    a = taker_arrays(book, S, t, side, True)
+    b = taker_arrays(book, S, t, side, False)
+    return {"primary_five_level_walk": walk_summary(a["dS_walk"], a["S_walk"], a["flag_walk"], t, "five level walk, tie after (H1 primary)"),
+            "tie_before_five_level_walk": walk_summary(b["dS_walk"], b["S_walk"], b["flag_walk"], t, "five level walk, tie before (flipped)"),
+            "placebo_shuffled_five_level_walk": walk_summary(shuffle_rows(a["dS_walk"]), a["S_walk"], a["flag_walk"], t, "five level walk, delay labels shuffled")}
+
+
+def results(day):
     res = {}
-    res["primary_tie_after"] = summarize(run(day, True), "tie after (primary)")
+    res["primary_tie_after"] = summarize(run(day, True), "tie after (top of book, robustness since 2026-11-19)")
     res["tie_before"] = summarize(run(day, False), "tie before (flipped)")
     res["placebo_shuffled"] = summarize(run(day, True, shuffle=True), "delay labels shuffled")
-    out = ROOT / "results" / "taker"
-    out.mkdir(parents=True, exist_ok=True)
-    (out / f"taker_dev_{day}.json").write_text(json.dumps(res, indent=1))
+    res.update(walk_results(day))
+    return res
+
+
+if __name__ == "__main__":
+    day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-01"
+    guard_day(day)
+    res = results(day)
+    p = result_path("taker", "taker", day)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(res, indent=1))
     print(json.dumps({k: (v["slope_bps_per_logms"], v["by_delay"][500]["mean_dS_bps"], v["flagged_share_by_delay_ms"][500]) for k, v in res.items()}, indent=1))
