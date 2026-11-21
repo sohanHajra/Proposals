@@ -19,7 +19,7 @@ Robustness and the jump split were registered for the test days only, so breadth
 Outputs are named by the date, e.g. results/taker/taker_2026-10-01.json.
 
 Parts  python -m s2f.run_test_day DATE --part K
-The machine I run on stops any single job after 20 minutes, and a whole test day takes about half
+The remote worker I run on stops any single job after 20 minutes, and a whole test day takes about half
 an hour, so the first start on 2026-10-01 stopped inside the robustness step. A part runs a fixed
 slice of the same steps, in the same order, with the same code and seed, in its own process. Parts
 are fixed below and must run in order. Part K refuses unless every output of the parts before it

@@ -52,7 +52,7 @@ Raw data isn't committed. `make data` downloads it.
 - Nine crypto days (one dev, two test, six breadth) and one 2012 equity day. Enough to knock a claim down, not to show it holds generally.
 - The free crypto days are all the first of a month, two of them weekends, so any month start effect is baked in and news days are not covered.
 - One venue and one instrument. Nothing here says how another exchange or another queue would behave.
-- The first start on 2026-10-01 hit the machine's 20<!--nc--> minute limit on a single job, and the day was rerun from the start in fixed parts split by step. Only the dev day dry run checks that parts and one process agree.
+- The first start on 2026-10-01 hit the 20<!--nc--> minute job limit on the remote worker I run it on, so I reran the day from scratch in fixed stages split by step. Only the dev day dry run checks that stages and one process agree.
 - Fees are the base tier read on 2026-11-19 and frozen in the code for the test day runs, not read again on the day. An active trader pays less.
 - The decision to acknowledgement time was measured on a broker's paper venue over the internet, not on Binance and not colocated.
 - A positive result would still not prove faster routing improves trading performance.
