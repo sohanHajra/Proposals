@@ -359,3 +359,29 @@ I did this pass myself, in the same session that wrote the tags, the figures and
 
 **Checked**
 - `make verify` exits clean with no untagged numbers, every tag matching its file, sources clean and the preregistration order intact. The proposal tests and the checker's own tests pass.
+
+## 2026-11-21 (Sat, later) · independent cold read of the report, and what I changed after
+Someone who had not worked on the report read the report, both READMEs, the notebook, the preregistration and the code cold, at commit 7d1b87d. They changed nothing in the repo. Every change below was made after their read, by me. No analysis was run, no day, spec, threshold or seed changed, and PREREGISTRATION.md was not touched. Every new number in the report and README is an existing field in `results/`, now tied to it in `claims.yaml`.
+
+**Found and fixed**
+- The report left out H4 and the broker latency measurement, both registered. H4 (null by its registered rule, INTC and MSFT on the LOBSTER day) and the latency (median, 90th and 99th percentile over 200 orders, a broker paper venue and not Binance) are now in the report's results, the bottom line and the README results.
+- The Deviation of 2026-11-18 promised to say plainly next to H1 and H2 that random decisions which reprice on arrival make them uninformative by construction. The report didn't, and its bottom line read as a finding that delay costs nothing. That sentence now sits after both primary results, in the bottom line and in the README, and the old "my inference, not tested" line about the nulls is gone.
+- The signal headline had no caveat in the bottom line. It now says the number is an upper end, gives the test day share of decisions where the touch at 1 ms held less than the order, says the walk ran out of shares too and why (the five level snapshot can lag the touch), and says the S numbers are the top of book fill while the slope is the walk.
+- H5 sat under Secondary. It now sits under an exploratory heading, says why the cost falls with delay (orders that can trade on arrival get a free option in a replay with no race), and reports the fixed price fill slopes, below zero under all three rules on 2026-10-01 and mixed on 2026-11-01.
+- Robustness item 2, the tie flip, was not reported. It changed no cell on either test day, and the report now says so and why.
+- The Honesty box and README Limits now name the missing race, the modelled queue, the netting inside one update, the share of repricing orders lost when their price leaves the top five, the stale snapshot in the walk, the frozen fee tier and that the latency was a broker paper venue.
+- The repo said `make reproduce` reruns every number. It reruns the dev day work. The 01 README now says what it does and does not redo, and how a test day could be rerun. The root README line is narrowed to match.
+- The root README's "What I believe now" still called the passive side an untested hypothesis. It now says what the test days showed and what they can't show.
+- Smaller things. H1b split B on the test days, the H2c framing as my own inference, the |I| split and the tail share, the cancellation placement and jump split, the breadth verdict labels, that the signal intervals may be too narrow, a clause on the placebo intervals, a `pytest.ini` so the proposal tests run without setting the path by hand, the stale comment at the top of `claims.yaml`, two lines in the literature review (the LMAX fill rate, which is about 80% to 90% on p. 255, and the netting inside one update), and one wording line in the root README.
+
+**Open**
+- The report stays marked draft until one last read before release.
+- A heading in the Deviations of the preregistration was edited after it was committed. Commit 5483ec5 changed "2026-11-18 evening" to "2026-11-18, later in the afternoon", six minutes after 59a5cee first committed it. That was before any test day and only the time label changed, but it is an edit to registered text outside a new dated entry. I leave it as it is rather than edit registered text again, and note it here.
+- Whether the H1 and H2 files written by the cut first start on 2026-10-01 were opened before the rerun. I can't tell from the record. The rerun was byte identical, so nothing could have changed either way.
+- Figure 3 uses matplotlib's offset notation in a corner of most panels, which is easy to miss on a scaled image. Not changed.
+- The checker's own tests still need to be run from the repo root.
+- Test and breadth day results have not been regenerated to check them. Only the dev day has a dry run.
+
+**Checked**
+- The reader matched 22 values in the report against their results files by hand, found the preregistration history clean, and found every Deviation before the test data on disk. They saw no number that disagreed with its file.
+- After the changes, claimcheck reports every tag agreeing with its file and no untagged numbers, the source and preregistration checks pass, and the proposal and checker tests pass.
