@@ -313,3 +313,16 @@ I checked this myself. No second reader looked at it, because I couldn't start o
 - **Bias check.** The flattening fill probability in a deep queue would make a neat story for the H2 null. It's written up as my inference, consistent with the null and not evidence for it. The paper's weaker spots (impact borrowed from another paper, no standard errors, day counts that don't agree) sit in the library note next to the headline, and the abstract's "same order of magnitude as the spread" is set against the measured gaps of 0.03 to 0.22 ticks.
 - **Open.** Not checked by a second reader. No published version read.
 
+
+## 2026-11-21 (Sat) · first draft of the final report
+I checked this myself. No second reader looked at it. A cold read is still owed before release.
+
+**Found and fixed**
+- My first draft gave a source count for the literature review that I had not counted. The count is removed.
+
+**Open**
+- Numbers in FINAL_REPORT.md are not tagged for claimcheck yet, and the notebook still has untagged warnings from 2026-11-20. Both have to reach zero before release.
+- No cold review yet.
+
+**Checked**
+- Every number in the draft was compared with the 2026-11-20 notebook entries, which cite their results files. Tests (74) pass and claimcheck reports all tagged checks agree. No test or breadth day file was touched.

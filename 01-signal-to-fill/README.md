@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Status | 🟡 Test days run once on 2026-11-20. H1 and H2 are null on both days under every cancellation rule. On signal decisions a late taker pays about 0.5 to 0.66 bps at 500 ms. Six breadth days run as a secondary check. Write up and claim tags next |
+| Status | 🟡 Test days and breadth days run once on 2026-11-20. H1 and H2 are null on both test days under every cancellation rule. A taker acting on book imbalance pays about 0.5 to 0.66 bps by 500 ms. Draft report written, cold review and claim tags still to do |
 | Preregistration | [PREREGISTRATION.md](PREREGISTRATION.md) |
 | Proposal | [PROPOSAL.md](PROPOSAL.md) |
 | Literature review | [LITERATURE_REVIEW.md](LITERATURE_REVIEW.md) |
@@ -52,4 +52,4 @@ Raw data isn't committed. `make data` downloads it.
 - A positive result would still not prove faster routing improves trading performance.
 
 ## Results
-None yet. When numbers do go here, each one will come from a file in `results/`.
+A draft is in [FINAL_REPORT.md](FINAL_REPORT.md). It is not final until it has had a second reader.
