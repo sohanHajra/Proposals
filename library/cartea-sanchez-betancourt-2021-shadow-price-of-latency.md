@@ -61,4 +61,4 @@ A trader who takes liquidity with a price limit aims at the best quote she saw. 
 - Why does T2's retry cost fall from 20 ms to 100 ms when T1's rises? Order size, the partial fills of immediate or cancel orders, or something in when T2 trades?
 - How much of the volatility link survives windows that were fixed in advance rather than picked for the strongest correlation?
 - Does the T1 count in Table 1 (106,878 fills of 116,912, which is 91.4%) use a different fill measure from the 90.78% printed beside it?
-- Cartea and Sánchez-Betancourt (2023) treat latency as random. I have not read it yet.
+- Cartea and Sánchez-Betancourt (2023) treat latency as random. I have read it since, see [its note](cartea-sanchez-betancourt-2023-execution-stochastic-delay.md). In that setting a strategy built for fixed latency did about as well as one built for random latency.

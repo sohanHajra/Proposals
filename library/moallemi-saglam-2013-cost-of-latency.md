@@ -63,4 +63,4 @@ I found no difference in results, assumptions or numbers. The theorems, the figu
 - Is the drop in median implied latency about one order of magnitude or two? The figure and the formula suggest one.
 - How do they convert a daily volatility to the per second volatility the formula needs? The paper does not say.
 - Do the jump results hold with proofs, and for jump sizes that are not Gaussian?
-- With random latency instead of a fixed one, does the √(Δt log(1/Δt)) shape survive? Cartea and Sánchez-Betancourt (2023) study stochastic delay and may answer this. I have not read them yet.
+- With random latency instead of a fixed one, does the √(Δt log(1/Δt)) shape survive? Cartea and Sánchez-Betancourt (2023) study stochastic delay, but I have read them since and they don't derive a cost of latency curve, so they don't answer this ([note](cartea-sanchez-betancourt-2023-execution-stochastic-delay.md)).
