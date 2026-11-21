@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Status | 🟡 Test days and breadth days run once on 2026-11-20. H1 and H2 are null on both test days under every cancellation rule, though by design they could hardly be anything else. H4 on the Nasdaq day is null too. A taker acting on book imbalance pays 0.52<!--c:td1101.sig.S500--> to 0.66<!--c:td1001.sig.S500--> bps by 500 ms on the test days, an upper end. Draft report read by an independent reader on 2026-11-21, one last read before release |
+| Status | 🟡 Test days and breadth days run once on 2026-11-20. H1 and H2 are null on both test days under every cancellation rule, though by design they could hardly be anything else. H4 on the Nasdaq day is null too. A taker acting on book imbalance pays 0.52<!--c:td1101.sig.S500--> to 0.66<!--c:td1001.sig.S500--> bps by 500 ms on the test days, an upper end. Draft report, one last review before release |
 | Preregistration | [PREREGISTRATION.md](PREREGISTRATION.md) |
 | Proposal | [PROPOSAL.md](PROPOSAL.md) |
 | Literature review | [LITERATURE_REVIEW.md](LITERATURE_REVIEW.md) |
@@ -52,13 +52,13 @@ Raw data isn't committed. `make data` downloads it.
 - Nine crypto days (one dev, two test, six breadth) and one 2012 equity day. Enough to knock a claim down, not to show it holds generally.
 - The free crypto days are all the first of a month, two of them weekends, so any month start effect is baked in and news days are not covered.
 - One venue and one instrument. Nothing here says how another exchange or another queue would behave.
-- The first start on 2026-10-01 was cut off by the machine and the day was rerun in parts. Only the dev day dry run checks that parts and one process agree.
+- The first start on 2026-10-01 hit the machine's 20<!--nc--> minute limit on a single job, and the day was rerun from the start in fixed parts split by step. Only the dev day dry run checks that parts and one process agree.
 - Fees are the base tier read on 2026-11-19 and frozen in the code for the test day runs, not read again on the day. An active trader pays less.
 - The decision to acknowledgement time was measured on a broker's paper venue over the internet, not on Binance and not colocated.
 - A positive result would still not prove faster routing improves trading performance.
 
 ## Results
-The report is [FINAL_REPORT.md](FINAL_REPORT.md), still a draft. An independent reader went through it on 2026-11-21, and it goes out after one last read. In short, it finds the following.
+The report is [FINAL_REPORT.md](FINAL_REPORT.md), still a draft. It goes out after one last review. In short, it finds the following.
 - H1 and H2, the two primary tests, are null on both test days, and H2 is null under front, random and back cancellation. Random decisions that reprice on arrival have close to zero expected latency cost by construction (Deviation of 2026-11-18), so these nulls can't tell whether latency matters. They show the replay doesn't invent a cost.
 - H1b holds by its rule but is partly mechanical. H2b, H2c and H3 are not supported. H2c points the other way on decisions that fill at both delays, while the registered comparison of all fills covers zero everywhere.
 - H4, on real Nasdaq order lifecycles from 2012-06-21, is null by its registered rule. The link between rest time and markout loses its sign once controls go in.

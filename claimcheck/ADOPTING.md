@@ -106,4 +106,4 @@ I didn't edit the old entry to make it pass. It keeps its words with a pointer, 
 
 ## What adopting it does not give you
 
-A green run means the notes report what the code wrote. It says nothing about whether the code is right, whether the test answers the question, or whether my reading of the result is fair. Those still need someone reading cold, and that goes in the proposal's INTEGRITY_LOG.md.
+A green run means the notes report what the code wrote. It says nothing about whether the code is right, whether the test answers the question, or whether my reading of the result is fair. Those still need a cold read, and that goes in the proposal's INTEGRITY_LOG.md.
