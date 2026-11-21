@@ -326,3 +326,36 @@ I checked this myself. No second reader looked at it. A cold read is still owed 
 
 **Checked**
 - Every number in the draft was compared with the 2026-11-20 notebook entries, which cite their results files. Tests (74) pass and claimcheck reports all tagged checks agree. No test or breadth day file was touched.
+
+## 2026-11-21 (Sat) · numbers tied to files, report figures, my own pass
+I did this pass myself, in the same session that wrote the tags, the figures and the report changes. It is not an independent reading. A cold read by someone else is still owed before release.
+
+**Logic**
+- Every number in the report, the README and the notebook now either points at a field in a results file or is marked as not a result. The marked ones in old entries are listed in the notebook entry of today, sorted into hand worked and checked, design settings, and not in any file.
+- Each hand worked number in an old entry was recomputed today from the fields it came from, and each one holds. The tightest was the bound on unconditional markouts in the 18 Nov entry, which holds by a hair.
+- Two old remarks have no file behind them at all, the median update gap of the five level snapshot (19 Nov afternoon) and the stopped first broker run (19 Nov). They stay as written and marked. The report uses neither.
+- The figures read results files and nothing else. No statistic in them is new. Rerunning the script gives identical files.
+- No analysis was run, and no hypothesis, threshold, seed, spec or day changed. PREREGISTRATION.md was not touched.
+
+**Found and fixed**
+- README status gave the signal cost by 500 ms as from 0.5, which rounds the smaller test day too far. It now gives the file value.
+- README results said random decisions lose nothing measurable on any of the eight days. On 2026-07-01 the H1 interval sits just above zero, so that was too strong. It now says so.
+- README Limits counted three crypto days. There are nine.
+- In my own first edit of the report today I wrote that no two robustness misses shared a rule and a day, which I hadn't checked. It went back to what the 11-20 entry says, that none holds across rules or days.
+
+**Source fidelity**
+- No source was read or newly cited today. The report's literature paragraph is unchanged, and the source check finds every review row with a depth and no unread work cited.
+
+**Bias**
+- The two primary nulls lead the report and are stated as nulls. H2c and H5 are reported as pointing the wrong way where they point at all.
+- The signal decision result stays labelled secondary, and the report now says the 1 ms baseline makes it an upper end.
+- The breadth days and the dev day calibration appear in figures next to the test days. Captions and text say verdicts come from the test days only.
+- The fixed price exploration stays exploratory, with the reason (the kept set changes with delay) next to its range.
+
+**Open**
+- No second reader for anything since 2026-11-20.
+- The two untraceable remarks above.
+- Whether every results file regenerates exactly was last checked in the 11-20 dry run on the dev day, not on the test days.
+
+**Checked**
+- `make verify` exits clean with no untagged numbers, every tag matching its file, sources clean and the preregistration order intact. The proposal tests and the checker's own tests pass.

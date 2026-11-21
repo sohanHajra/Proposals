@@ -573,3 +573,31 @@ Fetched with `python -m s2f.get_data breadth` once both test days were done, the
   - *Working paper.* I don't know if a later version changed anything.
   - *Not rerunnable.* ITCH 2013 data aren't free, and Table 3 has no standard errors.
   - Not checked by a second reader. No test day data touched.
+
+## 2026-11-21 (Sat) · every number tied to a file, and the report figures
+Nothing new was run on any day today. No test, spec, threshold or day was added, and every number below was already in a results file before this entry.
+
+**Tags.** All of the 2026-11-20 numbers, the draft report and the README status line now point at their fields in `results/`, which took a little over a hundred and sixty new entries in `claims.yaml`. Every one matched its file at the precision I had printed. Nothing in an old entry was reworded to get there. The only change to old entries is a tag after a number.
+
+**Numbers in old entries that no file holds as written.** These are marked as not checked against a file, with their words left as they were.
+- *Worked out by hand, checked today against the fields they come from, and right.* The tick in bps and the BTCUSDT price behind it (14 Nov, 17 Nov, and again in the Moallemi & Yuan entry), the LOBSTER message total (15 Nov), the share of one tick spreads in the three wide names (15 Nov), the gap between front and back fill and the "within" bound on unconditional markouts (18 Nov), the order size in BTC on the broker account (19 Nov, the file stores it as text), the tie flip cell count, slope move and passive share (19 Nov afternoon), the share of orders at the best that filled, the share that set a new best, the share at the very front and the share of deletions passing the queue check (19 Nov evening), and half a spread in bps (19 Nov late night).
+- *Settings and arithmetic about the design, not results.* The placebo calibration rule, its seeds, resample count and binomial figures (20 Nov early), the robustness item number (20 Nov early), the uniform reference for queue position (19 Nov evening), the job limit on the machine and the run seed (20 Nov).
+- *Not in any file.* The median update gap of the five level snapshot, written in two places on 19 Nov afternoon. No results file holds it and the repo doesn't show where it was measured, so it stands as a remark, not a result, and nothing in the report uses it. The same goes for the stopped first broker run on 19 Nov, its order count and its acknowledgement range. Those orders are not in the result file, which holds only the full rerun.
+- *Rounded bounds now tied to the field that sets them.* The tenth of LOBSTER order lifetimes, the R² bound on H4 and the queue distances for random and front (15 Nov and 19 Nov).
+
+**Report.** The draft now has the H2 slopes as a table, the eight day table in full with every count, the signal decision range on the breadth days, the placebos and five figures. Two lines got corrected on the way. The README status gave the signal cost by 500 ms as from 0.5<!--nc-->, where the smaller day is 0.52<!--c:td1101.sig.S500-->. And its results summary said random decisions lose nothing measurable on any of the eight days, which skips 2026-07-01, where the H1 interval sits just above zero. Both now say what the files say. The README Limits still described three crypto days, and now count all nine.
+
+**Figures.** `python -m s2f.figures` (also `make figures`, and part of `make reproduce`) reads only results files and writes five PNGs to `figures/`. Running it twice gives the same bytes. I looked at each one at full size for clipped or overlapping labels and fixed two (a legend sitting on a breadth day line, and crowded axis numbers in the eight day panels).
+- `fig1_cost_by_delay.png`, mean top of book shortfall by delay for random and signal decisions on each day.
+- `fig2_passive_by_rule.png`, fill probability for H2 and fixed price cost for H5 by delay under each rule on each day.
+- `fig3_eight_day_table.png`, every row of the eight day table with its interval on each day.
+- `fig4_placebos.png`, H1 and H2 slopes against the registered placebo on the two test days.
+- `fig5_placebo_calibration.png`, the dev day placebo slopes over all shuffles with the registered draw marked.
+
+**Checks.** No untagged numbers left in the README, this notebook or the report, every tag agrees with its file, the source and preregistration checks pass, and the test suite passes as before.
+
+**Limits and gaps.**
+- *Old untraceable remarks stay.* The snapshot update gap and the stopped broker run are still in the notebook as written. They are marked, not deleted, so the history reads as it happened.
+- *A tag checks a number, not a sentence.* Ranges like "roughly half to three quarters of a bp" in the README sit next to tagged endpoints but aren't checked themselves.
+- *Figures add no new statistic,* but they show breadth days and dev day calibration next to the test days, which could make the breadth days look like part of the verdict. The captions and the report say they are not.
+- *No second reader.* I did the pass on today's work myself. A cold review is still owed before release.
