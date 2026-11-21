@@ -30,7 +30,7 @@ flowchart LR
 
 | # | Proposal | The question | Status | Headline |
 |---|---|---|---|---|
-| 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟡 In progress, test days run | H1 and H2 null on both test days |
+| 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟡 Draft report, one last read before release | H1, H2 and H4 null, H1 and H2 by design. A taker acting on book imbalance loses half to three quarters of a bp by 500 ms, an upper end |
 
 <details>
 <summary><b>01 · From Signal to Fill</b> · what I believed, what I tried, what broke, what I believe now</summary>
@@ -41,14 +41,14 @@ flowchart LR
 
 **What broke.** LOBSTER's main site serves an HTML shell where sample zips used to be. A 2025 live trading study on Binance and Bybit turned out to be close to my first research question, so I narrowed what I claim is new.
 
-**What I believe now.** I measured that BTCUSDT's spread is one tick on 95.5% of book updates on the dev day. My hypothesis, not yet tested, is that this makes queue position, and so the passive side, where delay should cost most. Full history in the [lab notebook](01-signal-to-fill/LAB_NOTEBOOK.md).
+**What I believe now.** I thought the passive side would be where delay costs most, since BTCUSDT's spread is one tick almost all the time and queue position should matter. On random decisions neither side shows a cost, but that test couldn't show one by design, so it doesn't settle the question. The cost that does show up is a taker acting on book imbalance, half to three quarters of a bp by 500 ms on every day I ran, and that is an upper end because my replay has no race for the touch. The [report](01-signal-to-fill/FINAL_REPORT.md) has the numbers and the full history is in the [lab notebook](01-signal-to-fill/LAB_NOTEBOOK.md).
 
 </details>
 
 ## Rules I hold this repo to
-- Every number comes from code in the repo, and `make reproduce` reruns it (pinned environment, fixed seeds).
+- Every number comes from code in the repo, with a pinned environment and fixed seeds. `make reproduce` reruns the dev day work. Locked test days rerun one at a time with their own command, as each proposal's README explains, and a live measurement like a broker latency can't be rerun.
 - Test data stays locked until the preregistration is committed. The download script refuses to fetch it before then.
 - No claim before out of sample checks, trading costs and a few alternative specifications.
 - A proposal that isn't good enough ships late rather than thin.
 - Every result number in a proposal's notes carries a hidden tag that points to the field in the results file it came from. [claimcheck](claimcheck/) rereads those files and fails when a number in the prose and the file disagree. It also checks that every source says how deeply I read it and that the preregistration was committed before any test day result. Run it with `make verify` in a proposal folder. It also runs on every push, and the badge at the top shows the last result. It can't tell whether a result is right, only that the notes report what the code wrote. Every new proposal uses it from the start, following [this guide](claimcheck/ADOPTING.md).
-- Each proposal keeps an [integrity log](01-signal-to-fill/INTEGRITY_LOG.md). After each work session I go back over the logic, the sources and any bias, and write down what I found and what I fixed.
+- Each proposal keeps an [integrity log](01-signal-to-fill/INTEGRITY_LOG.md). When I finish a piece of work I go back over the logic, the sources and any bias, and write down what I found and what I fixed.

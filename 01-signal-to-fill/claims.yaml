@@ -1,6 +1,6 @@
 # Claims for 01 From Signal to Fill. Each id is tagged in the notes as <!--c:id--> right after the number.
 # value is the number as written; tol is half a unit in its last printed digit; scale turns a stored share into a percent.
-# Dev day 2026-09-01 numbers only. Test day numbers get their own entries once those runs exist.
+# Dev day, test day, breadth day, LOBSTER and broker latency numbers, each pointing at its results file.
 
 taker.n:
   file: results/taker/taker_dev_2026-09-01.json
@@ -3230,3 +3230,198 @@ cancel.INTC.wfront:
   path: cancel_position.INTC.delete_at_best.w1_distance.front
   value: 0.80
   tol: 0.005
+td1001.sig.flagtop1:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.flag_share_top_by_delay_ms.1
+  value: 47
+  tol: 0.5
+  scale: 100
+td1101.sig.flagtop1:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.flag_share_top_by_delay_ms.1
+  value: 35
+  tol: 0.5
+  scale: 100
+td1001.sig.flagwalk1:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.flag_share_walk_by_delay_ms.1
+  value: 39
+  tol: 0.5
+  scale: 100
+td1101.sig.flagwalk1:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.flag_share_walk_by_delay_ms.1
+  value: 26
+  tol: 0.5
+  scale: 100
+td1001.sig.flagtop500:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.flag_share_top_by_delay_ms.500
+  value: 0.5
+  tol: 0.05
+  scale: 100
+td1101.sig.flagtop500:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.flag_share_top_by_delay_ms.500
+  value: 0.4
+  tol: 0.05
+  scale: 100
+td1001.sig.S250:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.mean_S_by_delay_ms.250
+  value: 0.58
+  tol: 0.005
+td1101.sig.S250:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.mean_S_by_delay_ms.250
+  value: 0.46
+  tol: 0.005
+td1001.h1bB:
+  file: results/taker/followups_2026-10-01.json
+  path: random.H1b_split_B_exploratory.diff
+  value: 0.030
+  tol: 0.0005
+td1001.h1bB.lo:
+  file: results/taker/followups_2026-10-01.json
+  path: random.H1b_split_B_exploratory.ci95.0
+  value: 0.015
+  tol: 0.0005
+td1001.h1bB.hi:
+  file: results/taker/followups_2026-10-01.json
+  path: random.H1b_split_B_exploratory.ci95.1
+  value: 0.044
+  tol: 0.0005
+td1101.h1bB:
+  file: results/taker/followups_2026-11-01.json
+  path: random.H1b_split_B_exploratory.diff
+  value: 0.020
+  tol: 0.0005
+td1101.h1bB.lo:
+  file: results/taker/followups_2026-11-01.json
+  path: random.H1b_split_B_exploratory.ci95.0
+  value: 0.009
+  tol: 0.0005
+td1101.h1bB.hi:
+  file: results/taker/followups_2026-11-01.json
+  path: random.H1b_split_B_exploratory.ci95.1
+  value: 0.033
+  tol: 0.0005
+td1001.tieflip.taker:
+  file: results/taker/followups_2026-10-01.json
+  path: tie_flip_random_us_decisions.share_cells_changed
+  value: 0
+  tol: 0.5
+  scale: 100
+td1101.tieflip.taker:
+  file: results/taker/followups_2026-11-01.json
+  path: tie_flip_random_us_decisions.share_cells_changed
+  value: 0
+  tol: 0.5
+  scale: 100
+td1001.left5:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.share_left_top_five_by_delay.1
+  value: 37
+  tol: 0.5
+  scale: 100
+td1101.left5:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.share_left_top_five_by_delay.1
+  value: 17
+  tol: 0.5
+  scale: 100
+latency.failures:
+  file: results/latency/alpaca_paper_latency.json
+  path: summary.failures
+  value: 0
+  tol: 0.5
+td1001.fpfill.front:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.front.fill_slope_per_logms.est
+  value: -0.0040
+  tol: 0.00005
+td1001.fpfill.front.lo:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.front.fill_slope_per_logms.ci95.0
+  value: -0.0046
+  tol: 0.00005
+td1001.fpfill.front.hi:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.front.fill_slope_per_logms.ci95.1
+  value: -0.0034
+  tol: 0.00005
+td1001.fpfill.random:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.random.fill_slope_per_logms.est
+  value: -0.0018
+  tol: 0.00005
+td1001.fpfill.random.lo:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.random.fill_slope_per_logms.ci95.0
+  value: -0.0024
+  tol: 0.00005
+td1001.fpfill.random.hi:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.random.fill_slope_per_logms.ci95.1
+  value: -0.0012
+  tol: 0.00005
+td1001.fpfill.back:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.back.fill_slope_per_logms.est
+  value: -0.00034
+  tol: 0.000005
+td1001.fpfill.back.lo:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.back.fill_slope_per_logms.ci95.0
+  value: -0.00070
+  tol: 0.000005
+td1001.fpfill.back.hi:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.back.fill_slope_per_logms.ci95.1
+  value: -0.000003
+  tol: 0.0000005
+td1101.fpfill.front:
+  file: results/passive/fixed_price_2026-11-01.json
+  path: random_decisions.by_rule.front.fill_slope_per_logms.est
+  value: -0.00081
+  tol: 0.000005
+td1101.fpfill.front.lo:
+  file: results/passive/fixed_price_2026-11-01.json
+  path: random_decisions.by_rule.front.fill_slope_per_logms.ci95.0
+  value: -0.00126
+  tol: 0.000005
+td1101.fpfill.front.hi:
+  file: results/passive/fixed_price_2026-11-01.json
+  path: random_decisions.by_rule.front.fill_slope_per_logms.ci95.1
+  value: -0.00036
+  tol: 0.000005
+td1101.fpfill.random:
+  file: results/passive/fixed_price_2026-11-01.json
+  path: random_decisions.by_rule.random.fill_slope_per_logms.est
+  value: -0.00056
+  tol: 0.000005
+td1101.fpfill.random.lo:
+  file: results/passive/fixed_price_2026-11-01.json
+  path: random_decisions.by_rule.random.fill_slope_per_logms.ci95.0
+  value: -0.00114
+  tol: 0.000005
+td1101.fpfill.random.hi:
+  file: results/passive/fixed_price_2026-11-01.json
+  path: random_decisions.by_rule.random.fill_slope_per_logms.ci95.1
+  value: 0.00005
+  tol: 0.000005
+td1101.fpfill.back:
+  file: results/passive/fixed_price_2026-11-01.json
+  path: random_decisions.by_rule.back.fill_slope_per_logms.est
+  value: 0.00049
+  tol: 0.000005
+td1101.fpfill.back.lo:
+  file: results/passive/fixed_price_2026-11-01.json
+  path: random_decisions.by_rule.back.fill_slope_per_logms.ci95.0
+  value: 0.00021
+  tol: 0.000005
+td1101.fpfill.back.hi:
+  file: results/passive/fixed_price_2026-11-01.json
+  path: random_decisions.by_rule.back.fill_slope_per_logms.ci95.1
+  value: 0.00078
+  tol: 0.000005
