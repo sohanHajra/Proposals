@@ -18,9 +18,9 @@ sanity:
 test:
 	$(PY) -m pytest -q tests
 
-.PHONY: env data audit test sanity taker passive fixed_price followups_taker followups_passive followups lobster jump robustness verify reproduce run_day dry_run
+.PHONY: env data audit test sanity taker passive fixed_price followups_taker followups_passive followups lobster jump robustness figures verify reproduce run_day dry_run
 
-reproduce: env data audit test sanity taker passive fixed_price followups robustness lobster jump verify
+reproduce: env data audit test sanity taker passive fixed_price followups robustness lobster jump figures verify
 
 taker:
 	$(PY) -m s2f.taker 2026-09-01
@@ -48,6 +48,10 @@ lobster:
 # jump moment split and stale top of book count (exploratory, added 2026-11-19)
 jump:
 	$(PY) -m s2f.jumps 2026-09-01
+
+# figures for the final report, drawn only from files already in results/
+figures:
+	$(PY) -m s2f.figures
 
 # every tagged number in the notes against its results file, plus the source and preregistration checks
 # (claimcheck lives at the top of the repo, so it runs from there; exits 1 on any mismatch)
