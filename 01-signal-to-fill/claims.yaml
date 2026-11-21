@@ -2389,3 +2389,844 @@ placebo2cal.random.k0:
   path: by_rule.random.slope.0
   value: -0.00065
   tol: 0.000005
+
+# Test days 2026-10-01 (td1001) and 2026-11-01 (td1101), the eight day table (breadth) and a few
+# dev day and LOBSTER fields from earlier entries. Added 2026-11-21 when the 11-20 numbers were tagged.
+td1001.h1.slope:
+  file: results/taker/taker_2026-10-01.json
+  path: primary_five_level_walk.slope_bps_per_logms.est
+  value: 0.00079
+  tol: 0.000005
+td1001.h1.slope.lo:
+  file: results/taker/taker_2026-10-01.json
+  path: primary_five_level_walk.slope_bps_per_logms.ci95.0
+  value: -0.00021
+  tol: 0.000005
+td1001.h1.slope.hi:
+  file: results/taker/taker_2026-10-01.json
+  path: primary_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.00183
+  tol: 0.000005
+td1001.h1.dS500:
+  file: results/taker/taker_2026-10-01.json
+  path: primary_five_level_walk.by_delay.500.mean_dS_bps
+  value: 0.0038
+  tol: 0.00005
+td1001.n:
+  file: results/taker/taker_2026-10-01.json
+  path: primary_five_level_walk.n_decisions
+  value: 8443
+  tol: 0.5
+td1001.h2.front:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.front.H2_slope_fill_per_logms.est
+  value: 0.00025
+  tol: 0.000005
+td1001.h2.front.lo:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.front.H2_slope_fill_per_logms.ci95.0
+  value: -0.00061
+  tol: 0.000005
+td1001.h2.front.hi:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.front.H2_slope_fill_per_logms.ci95.1
+  value: 0.00112
+  tol: 0.000005
+td1001.h2.random:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.random.H2_slope_fill_per_logms.est
+  value: 0.00004
+  tol: 0.000005
+td1001.h2.random.lo:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.random.H2_slope_fill_per_logms.ci95.0
+  value: -0.00083
+  tol: 0.000005
+td1001.h2.random.hi:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.random.H2_slope_fill_per_logms.ci95.1
+  value: 0.00091
+  tol: 0.000005
+td1001.h2.back:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.back.H2_slope_fill_per_logms.est
+  value: -0.00015
+  tol: 0.000005
+td1001.h2.back.lo:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.back.H2_slope_fill_per_logms.ci95.0
+  value: -0.00080
+  tol: 0.000005
+td1001.h2.back.hi:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.back.H2_slope_fill_per_logms.ci95.1
+  value: 0.00051
+  tol: 0.000005
+td1001.fill1.front:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.front.fill_prob_by_delay.1
+  value: 71
+  tol: 0.5
+  scale: 100
+td1001.fill1.back:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.by_rule.back.fill_prob_by_delay.1
+  value: 45
+  tol: 0.5
+  scale: 100
+td1001.h1b:
+  file: results/taker/followups_2026-10-01.json
+  path: random.H1b_registered.diff
+  value: 0.099
+  tol: 0.0005
+td1001.h1b.lo:
+  file: results/taker/followups_2026-10-01.json
+  path: random.H1b_registered.ci95.0
+  value: 0.084
+  tol: 0.0005
+td1001.h1b.hi:
+  file: results/taker/followups_2026-10-01.json
+  path: random.H1b_registered.ci95.1
+  value: 0.115
+  tol: 0.0005
+td1001.h2b:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.H2b_back_minus_front_drop.mean
+  value: 0.0019
+  tol: 0.00005
+td1001.h2b.lo:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.H2b_back_minus_front_drop.ci95.0
+  value: -0.0039
+  tol: 0.00005
+td1001.h2b.hi:
+  file: results/passive/passive_2026-10-01.json
+  path: primary.H2b_back_minus_front_drop.ci95.1
+  value: 0.0079
+  tol: 0.00005
+td1001.h2cm.front:
+  file: results/passive/followups_2026-10-01.json
+  path: H2c_matched_passive_random.m10.front.matched_500_minus_1.mean
+  value: 0.062
+  tol: 0.0005
+td1001.h2cm.back:
+  file: results/passive/followups_2026-10-01.json
+  path: H2c_matched_passive_random.m10.back.matched_500_minus_1.mean
+  value: 0.086
+  tol: 0.0005
+td1001.h3:
+  file: results/taker/followups_2026-10-01.json
+  path: random.RQ3_volatility.dS100_high_minus_rest.diff
+  value: -0.0037
+  tol: 0.00005
+td1001.h3.lo:
+  file: results/taker/followups_2026-10-01.json
+  path: random.RQ3_volatility.dS100_high_minus_rest.ci95.0
+  value: -0.0155
+  tol: 0.00005
+td1001.h3.hi:
+  file: results/taker/followups_2026-10-01.json
+  path: random.RQ3_volatility.dS100_high_minus_rest.ci95.1
+  value: 0.0083
+  tol: 0.00005
+td1001.tail:
+  file: results/taker/followups_2026-10-01.json
+  path: random.tail_share_worst10pct_dS100
+  value: 5.8
+  tol: 0.05
+td1001.h5.random:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.random.H5_post_then_cross_cost_slope_bps_per_logms.est
+  value: -0.0035
+  tol: 0.00005
+td1001.h5.random.lo:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.random.H5_post_then_cross_cost_slope_bps_per_logms.ci95.0
+  value: -0.0050
+  tol: 0.00005
+td1001.h5.random.hi:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.random.H5_post_then_cross_cost_slope_bps_per_logms.ci95.1
+  value: -0.0021
+  tol: 0.00005
+td1001.h5.back:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.back.H5_post_then_cross_cost_slope_bps_per_logms.est
+  value: -0.0042
+  tol: 0.00005
+td1001.h5.back.lo:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.back.H5_post_then_cross_cost_slope_bps_per_logms.ci95.0
+  value: -0.0055
+  tol: 0.00005
+td1001.h5.back.hi:
+  file: results/passive/fixed_price_2026-10-01.json
+  path: random_decisions.by_rule.back.H5_post_then_cross_cost_slope_bps_per_logms.ci95.1
+  value: -0.0029
+  tol: 0.00005
+td1001.fpx.dropped:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.n_dropped
+  value: 682
+  tol: 0.5
+td1001.fpx.kept:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.n_kept
+  value: 7761
+  tol: 0.5
+td1001.fpx.front:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.front.slope_bps_per_logms.est
+  value: 0.0058
+  tol: 0.00005
+td1001.fpx.front.lo:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.front.slope_bps_per_logms.ci95.0
+  value: 0.0043
+  tol: 0.00005
+td1001.fpx.front.hi:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.front.slope_bps_per_logms.ci95.1
+  value: 0.0074
+  tol: 0.00005
+td1001.fpx.random:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.random.slope_bps_per_logms.est
+  value: 0.0029
+  tol: 0.00005
+td1001.fpx.random.lo:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.random.slope_bps_per_logms.ci95.0
+  value: 0.0017
+  tol: 0.00005
+td1001.fpx.random.hi:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.random.slope_bps_per_logms.ci95.1
+  value: 0.0041
+  tol: 0.00005
+td1001.fpx.back:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.back.slope_bps_per_logms.est
+  value: 0.0022
+  tol: 0.00005
+td1001.fpx.back.lo:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.back.slope_bps_per_logms.ci95.0
+  value: 0.0012
+  tol: 0.00005
+td1001.fpx.back.hi:
+  file: results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.back.slope_bps_per_logms.ci95.1
+  value: 0.0033
+  tol: 0.00005
+td1001.sig.walk:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.est
+  value: 0.090
+  tol: 0.0005
+td1001.sig.walk.lo:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.ci95.0
+  value: 0.088
+  tol: 0.0005
+td1001.sig.walk.hi:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.093
+  tol: 0.0005
+td1001.sig.S1:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.mean_S_by_delay_ms.1
+  value: 0.085
+  tol: 0.0005
+td1001.sig.S500:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.mean_S_by_delay_ms.500
+  value: 0.66
+  tol: 0.005
+td1001.sig.n:
+  file: results/taker/followups_2026-10-01.json
+  path: signal.n_decisions
+  value: 16448
+  tol: 0.5
+td1001.rows:
+  file: results/audit/tardis_2026-10-01.json
+  path: book_ticker_rows
+  value: 35384160
+  tol: 0.5
+td1001.trades:
+  file: results/audit/tardis_2026-10-01.json
+  path: trade_rows
+  value: 3246752
+  tol: 0.5
+td1001.gaps:
+  file: results/audit/tardis_2026-10-01.json
+  path: gaps_over_1s_bt
+  value: 55
+  tol: 0.5
+td1001.maxgap:
+  file: results/audit/tardis_2026-10-01.json
+  path: max_gap_s_bt_local
+  value: 3.366
+  tol: 0.0005
+td1001.jump.n:
+  file: results/jump/jump_split_2026-10-01.json
+  path: specs.A.n_spaced_jumps
+  value: 194
+  tol: 0.5
+td1001.jump.gone1:
+  file: results/jump/jump_split_2026-10-01.json
+  path: specs.A.stale_top_of_book.1ms.with_jump.gone.mean
+  value: 21.6
+  tol: 0.05
+  scale: 100
+td1001.jump.base1:
+  file: results/jump/jump_split_2026-10-01.json
+  path: specs.A.stale_top_of_book.1ms.baseline_random.gone.mean
+  value: 0.07
+  tol: 0.005
+  scale: 100
+td1101.h1.slope:
+  file: results/taker/taker_2026-11-01.json
+  path: primary_five_level_walk.slope_bps_per_logms.est
+  value: 0.0000044
+  tol: 0.00000005
+td1101.h1.slope.lo:
+  file: results/taker/taker_2026-11-01.json
+  path: primary_five_level_walk.slope_bps_per_logms.ci95.0
+  value: -0.00041
+  tol: 0.000005
+td1101.h1.slope.hi:
+  file: results/taker/taker_2026-11-01.json
+  path: primary_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.00042
+  tol: 0.000005
+td1101.h1.dS500:
+  file: results/taker/taker_2026-11-01.json
+  path: primary_five_level_walk.by_delay.500.mean_dS_bps
+  value: -0.0004
+  tol: 0.00005
+td1101.n:
+  file: results/taker/taker_2026-11-01.json
+  path: primary_five_level_walk.n_decisions
+  value: 8323
+  tol: 0.5
+td1101.h2.front:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.front.H2_slope_fill_per_logms.est
+  value: 0.00002
+  tol: 0.000005
+td1101.h2.front.lo:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.front.H2_slope_fill_per_logms.ci95.0
+  value: -0.00045
+  tol: 0.000005
+td1101.h2.front.hi:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.front.H2_slope_fill_per_logms.ci95.1
+  value: 0.00052
+  tol: 0.000005
+td1101.h2.random:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.random.H2_slope_fill_per_logms.est
+  value: -0.00051
+  tol: 0.000005
+td1101.h2.random.lo:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.random.H2_slope_fill_per_logms.ci95.0
+  value: -0.00115
+  tol: 0.000005
+td1101.h2.random.hi:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.random.H2_slope_fill_per_logms.ci95.1
+  value: 0.00018
+  tol: 0.000005
+td1101.h2.back:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.back.H2_slope_fill_per_logms.est
+  value: 0.00027
+  tol: 0.000005
+td1101.h2.back.lo:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.back.H2_slope_fill_per_logms.ci95.0
+  value: -0.00010
+  tol: 0.000005
+td1101.h2.back.hi:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.back.H2_slope_fill_per_logms.ci95.1
+  value: 0.00062
+  tol: 0.000005
+td1101.fill1.front:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.front.fill_prob_by_delay.1
+  value: 59
+  tol: 0.5
+  scale: 100
+td1101.fill1.back:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.by_rule.back.fill_prob_by_delay.1
+  value: 22
+  tol: 0.5
+  scale: 100
+td1101.h1b:
+  file: results/taker/followups_2026-11-01.json
+  path: random.H1b_registered.diff
+  value: 0.060
+  tol: 0.0005
+td1101.h1b.lo:
+  file: results/taker/followups_2026-11-01.json
+  path: random.H1b_registered.ci95.0
+  value: 0.036
+  tol: 0.0005
+td1101.h1b.hi:
+  file: results/taker/followups_2026-11-01.json
+  path: random.H1b_registered.ci95.1
+  value: 0.088
+  tol: 0.0005
+td1101.h2b:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.H2b_back_minus_front_drop.mean
+  value: -0.0024
+  tol: 0.00005
+td1101.h2b.lo:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.H2b_back_minus_front_drop.ci95.0
+  value: -0.0065
+  tol: 0.00005
+td1101.h2b.hi:
+  file: results/passive/passive_2026-11-01.json
+  path: primary.H2b_back_minus_front_drop.ci95.1
+  value: 0.0023
+  tol: 0.00005
+td1101.h2cm.front:
+  file: results/passive/followups_2026-11-01.json
+  path: H2c_matched_passive_random.m10.front.matched_500_minus_1.mean
+  value: 0.013
+  tol: 0.0005
+td1101.h2cm.back:
+  file: results/passive/followups_2026-11-01.json
+  path: H2c_matched_passive_random.m10.back.matched_500_minus_1.mean
+  value: 0.042
+  tol: 0.0005
+td1101.h3:
+  file: results/taker/followups_2026-11-01.json
+  path: random.RQ3_volatility.dS100_high_minus_rest.diff
+  value: 0.0009
+  tol: 0.00005
+td1101.h3.lo:
+  file: results/taker/followups_2026-11-01.json
+  path: random.RQ3_volatility.dS100_high_minus_rest.ci95.0
+  value: -0.0040
+  tol: 0.00005
+td1101.h3.hi:
+  file: results/taker/followups_2026-11-01.json
+  path: random.RQ3_volatility.dS100_high_minus_rest.ci95.1
+  value: 0.0061
+  tol: 0.00005
+td1101.tail:
+  file: results/taker/followups_2026-11-01.json
+  path: random.tail_share_worst10pct_dS100
+  value: 5.2
+  tol: 0.05
+td1101.fpx.dropped:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.n_dropped
+  value: 160
+  tol: 0.5
+td1101.fpx.kept:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.n_kept
+  value: 8163
+  tol: 0.5
+td1101.fpx.front:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.front.slope_bps_per_logms.est
+  value: 0.0016
+  tol: 0.00005
+td1101.fpx.front.lo:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.front.slope_bps_per_logms.ci95.0
+  value: 0.0010
+  tol: 0.00005
+td1101.fpx.front.hi:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.front.slope_bps_per_logms.ci95.1
+  value: 0.0023
+  tol: 0.00005
+td1101.fpx.random:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.random.slope_bps_per_logms.est
+  value: 0.0013
+  tol: 0.00005
+td1101.fpx.random.lo:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.random.slope_bps_per_logms.ci95.0
+  value: 0.0008
+  tol: 0.00005
+td1101.fpx.random.hi:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.random.slope_bps_per_logms.ci95.1
+  value: 0.0019
+  tol: 0.00005
+td1101.fpx.back:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.back.slope_bps_per_logms.est
+  value: 0.0010
+  tol: 0.00005
+td1101.fpx.back.lo:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.back.slope_bps_per_logms.ci95.0
+  value: 0.0007
+  tol: 0.00005
+td1101.fpx.back.hi:
+  file: results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.back.slope_bps_per_logms.ci95.1
+  value: 0.0014
+  tol: 0.00005
+td1101.sig.walk:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.est
+  value: 0.070
+  tol: 0.0005
+td1101.sig.walk.lo:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.ci95.0
+  value: 0.065
+  tol: 0.0005
+td1101.sig.walk.hi:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.ci95.1
+  value: 0.075
+  tol: 0.0005
+td1101.sig.S1:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.mean_S_by_delay_ms.1
+  value: 0.071
+  tol: 0.0005
+td1101.sig.S500:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.mean_S_by_delay_ms.500
+  value: 0.52
+  tol: 0.005
+td1101.sig.n:
+  file: results/taker/followups_2026-11-01.json
+  path: signal.n_decisions
+  value: 4706
+  tol: 0.5
+td1101.rows:
+  file: results/audit/tardis_2026-11-01.json
+  path: book_ticker_rows
+  value: 13834893
+  tol: 0.5
+td1101.trades:
+  file: results/audit/tardis_2026-11-01.json
+  path: trade_rows
+  value: 1190743
+  tol: 0.5
+td1101.gaps:
+  file: results/audit/tardis_2026-11-01.json
+  path: gaps_over_1s_bt
+  value: 15
+  tol: 0.5
+td1101.maxgap:
+  file: results/audit/tardis_2026-11-01.json
+  path: max_gap_s_bt_local
+  value: 1.096
+  tol: 0.0005
+td1101.jump.n:
+  file: results/jump/jump_split_2026-11-01.json
+  path: specs.A.n_spaced_jumps
+  value: 80
+  tol: 0.5
+td1101.jump.gone1:
+  file: results/jump/jump_split_2026-11-01.json
+  path: specs.A.stale_top_of_book.1ms.with_jump.gone.mean
+  value: 15.0
+  tol: 0.05
+  scale: 100
+td1101.jump.base1:
+  file: results/jump/jump_split_2026-11-01.json
+  path: specs.A.stale_top_of_book.1ms.baseline_random.gone.mean
+  value: 0.01
+  tol: 0.005
+  scale: 100
+td1101.hz60.random:
+  file: results/robustness/horizon_2026-11-01.json
+  path: by_horizon.60s.by_rule.random.H2_slope_fill_per_logms.est
+  value: -0.00068
+  tol: 0.000005
+td1101.hz60.random.lo:
+  file: results/robustness/horizon_2026-11-01.json
+  path: by_horizon.60s.by_rule.random.H2_slope_fill_per_logms.ci95.0
+  value: -0.00120
+  tol: 0.000005
+td1101.hz60.random.hi:
+  file: results/robustness/horizon_2026-11-01.json
+  path: by_horizon.60s.by_rule.random.H2_slope_fill_per_logms.ci95.1
+  value: -0.00015
+  tol: 0.000005
+breadth.h1.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H1].counts.[registered]
+  value: 1
+  tol: 0.5
+breadth.h1.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H1].counts.[opposite]
+  value: 0
+  tol: 0.5
+breadth.h1.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H1].counts.[covers zero]
+  value: 7
+  tol: 0.5
+breadth.h1b.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H1b].counts.[registered]
+  value: 8
+  tol: 0.5
+breadth.h1b.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H1b].counts.[opposite]
+  value: 0
+  tol: 0.5
+breadth.h1b.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H1b].counts.[covers zero]
+  value: 0
+  tol: 0.5
+breadth.h3.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H3].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h3.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H3].counts.[opposite]
+  value: 0
+  tol: 0.5
+breadth.h3.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H3].counts.[covers zero]
+  value: 8
+  tol: 0.5
+breadth.h2front.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H2 front].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h2front.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H2 front].counts.[opposite]
+  value: 0
+  tol: 0.5
+breadth.h2front.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H2 front].counts.[covers zero]
+  value: 8
+  tol: 0.5
+breadth.h2random.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H2 random].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h2random.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H2 random].counts.[opposite]
+  value: 0
+  tol: 0.5
+breadth.h2random.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H2 random].counts.[covers zero]
+  value: 8
+  tol: 0.5
+breadth.h2back.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H2 back].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h2back.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H2 back].counts.[opposite]
+  value: 0
+  tol: 0.5
+breadth.h2back.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H2 back].counts.[covers zero]
+  value: 8
+  tol: 0.5
+breadth.h2b.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H2b].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h2b.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H2b].counts.[opposite]
+  value: 1
+  tol: 0.5
+breadth.h2b.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H2b].counts.[covers zero]
+  value: 7
+  tol: 0.5
+breadth.h2cfront.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H2c front].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h2cfront.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H2c front].counts.[opposite]
+  value: 0
+  tol: 0.5
+breadth.h2cfront.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H2c front].counts.[covers zero]
+  value: 8
+  tol: 0.5
+breadth.h2crandom.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H2c random].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h2crandom.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H2c random].counts.[opposite]
+  value: 0
+  tol: 0.5
+breadth.h2crandom.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H2c random].counts.[covers zero]
+  value: 8
+  tol: 0.5
+breadth.h2cback.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H2c back].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h2cback.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H2c back].counts.[opposite]
+  value: 0
+  tol: 0.5
+breadth.h2cback.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H2c back].counts.[covers zero]
+  value: 8
+  tol: 0.5
+breadth.h5front.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H5 front].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h5front.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H5 front].counts.[opposite]
+  value: 3
+  tol: 0.5
+breadth.h5front.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H5 front].counts.[covers zero]
+  value: 5
+  tol: 0.5
+breadth.h5random.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H5 random].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h5random.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H5 random].counts.[opposite]
+  value: 7
+  tol: 0.5
+breadth.h5random.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H5 random].counts.[covers zero]
+  value: 1
+  tol: 0.5
+breadth.h5back.reg:
+  file: results/breadth/breadth_table.json
+  path: table.[H5 back].counts.[registered]
+  value: 0
+  tol: 0.5
+breadth.h5back.opp:
+  file: results/breadth/breadth_table.json
+  path: table.[H5 back].counts.[opposite]
+  value: 7
+  tol: 0.5
+breadth.h5back.zero:
+  file: results/breadth/breadth_table.json
+  path: table.[H5 back].counts.[covers zero]
+  value: 1
+  tol: 0.5
+breadth.h1.0701:
+  file: results/breadth/breadth_table.json
+  path: table.H1.by_day.2026-07-01.est
+  value: 0.0015
+  tol: 0.00005
+breadth.h1.0701.lo:
+  file: results/breadth/breadth_table.json
+  path: table.H1.by_day.2026-07-01.ci95.0
+  value: 0.00004
+  tol: 0.000005
+breadth.h1.0701.hi:
+  file: results/breadth/breadth_table.json
+  path: table.H1.by_day.2026-07-01.ci95.1
+  value: 0.0029
+  tol: 0.00005
+breadth.gapbound.max:
+  file: results/breadth/breadth_table.json
+  path: gap_bound_s.2026-05-01
+  value: 235
+  tol: 0.5
+breadth.sig.walk.min:
+  file: results/taker/followups_2026-05-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.est
+  value: 0.068
+  tol: 0.0005
+breadth.sig.walk.max:
+  file: results/taker/followups_2026-07-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.est
+  value: 0.113
+  tol: 0.0005
+breadth.sig.S500.min:
+  file: results/taker/followups_2026-05-01.json
+  path: signal.mean_S_by_delay_ms.500
+  value: 0.47
+  tol: 0.005
+breadth.sig.S500.max:
+  file: results/taker/followups_2026-07-01.json
+  path: signal.mean_S_by_delay_ms.500
+  value: 0.76
+  tol: 0.005
+breadth.sig.S1.min:
+  file: results/taker/followups_2026-05-01.json
+  path: signal.mean_S_by_delay_ms.1
+  value: 0.04
+  tol: 0.005
+breadth.sig.S1.max:
+  file: results/taker/followups_2026-03-01.json
+  path: signal.mean_S_by_delay_ms.1
+  value: 0.07
+  tol: 0.005
+lobster.life10.MSFT:
+  file: results/audit/lobster_2012-06-21.json
+  path: MSFT.lifetime_ms_quantiles.[0.1]
+  value: 0.07
+  tol: 0.005
+rq2.INTC.ctrl.r2:
+  file: results/lobster/rq2_2012-06-21.json
+  path: rq2.INTC.controls.r2
+  value: 0.09
+  tol: 0.005
+cancel.INTC.wrandom:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.delete_at_best.w1_distance.random
+  value: 0.30
+  tol: 0.005
+cancel.INTC.wfront:
+  file: results/lobster/rq2_2012-06-21.json
+  path: cancel_position.INTC.delete_at_best.w1_distance.front
+  value: 0.80
+  tol: 0.005
