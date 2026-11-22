@@ -612,3 +612,9 @@ Nothing new was run on any day today. No test, spec, threshold or day was added,
 - **Limits and gaps.**
   - *Still not checked:* their interval method. I take the bars in Figure 1 by eye only.
   - *Missing:* the PDF has no appendix, and I haven't looked for a supplement.
+
+## 2026-11-21 (Sat, night) · Figure 3 shows its scale on the axis
+- Figure 3 had its scale as small text in the corner of most panels, which is easy to miss once the image is shrunk. The scale is now part of each axis label, so a panel reads "bps per log ms, ×10⁻³" where it used to say "1e−3" in the corner. Same points, same intervals, same tick values.
+- The other four figures came out byte identical when I ran the script again.
+- **Limits and gaps.**
+  - *Not changed:* Figures 4 and 5 still use the corner offset text. Only Figure 3 was raised as hard to read.

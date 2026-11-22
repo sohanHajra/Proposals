@@ -378,7 +378,7 @@ Someone who had not worked on the report read the report, both READMEs, the note
 - The report stays marked draft until one last read before release.
 - A heading in the Deviations of the preregistration was edited after it was committed. Commit 5483ec5 changed "2026-11-18 evening" to "2026-11-18, later in the afternoon", six minutes after 59a5cee first committed it. That was before any test day and only the time label changed, but it is an edit to registered text outside a new dated entry. I leave it as it is rather than edit registered text again, and note it here.
 - Whether the H1 and H2 files written by the cut first start on 2026-10-01 were opened before the rerun. I can't tell from the record. The rerun was byte identical, so nothing could have changed either way.
-- Figure 3 uses matplotlib's offset notation in a corner of most panels, which is easy to miss on a scaled image. Not changed.
+- Figure 3 uses matplotlib's offset notation in a corner of most panels, which is easy to miss on a scaled image. Not changed. *(Fixed 2026-11-21 night, see that entry.)*
 - The checker's own tests still need to be run from the repo root.
 - Test and breadth day results have not been regenerated to check them. Only the dev day has a dry run.
 
@@ -391,3 +391,8 @@ Someone who had not worked on the report read the report, both READMEs, the note
 - **Closed, from the 11-18 night entry.** The 11-16 entry's claim that the tables were read from the PDF. The PDF I have now is version 3, the same text as the web page the notes cite, and Table 1, Table 2 and Figure 1 on its pages match every number in that entry. Which copy I read on 11-16 isn't in my files, so that part can't be shown, and I don't claim it.
 - **Checked.** The version and every page reference in the library note against the PDF. The literature review row now names the version and says when it was read again.
 - No hypothesis, test or result changed. I did this myself, with no second reader.
+
+## 2026-11-21 (Sat, night) · Figure 3 scale on the axis
+- **Found and fixed.** Figure 3 showed its scale only as small offset text in the corner of each panel. The scale now sits in the axis label (for example "bps per log ms, ×10⁻³") and the corner text is gone. Only the drawing changed. The tick values, points and intervals are the same, and the script still reads nothing but the results files.
+- **Checked.** I ran the figure script again. Figures 1, 2, 4 and 5 came out byte identical to the committed files, and Figure 3 comes out the same on a second run. I looked at the new Figure 3 at full size, and no label is clipped or sits on another.
+

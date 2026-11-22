@@ -14,6 +14,7 @@ metadata carries no software version or date, so the same results give the same 
   fig5_placebo_calibration.png  the 200 H2 placebo slopes on the dev day, with the registered draw marked
 """
 import json
+import re
 
 import numpy as np
 import matplotlib
@@ -140,6 +141,17 @@ def fig3_eight_day_table():
         ax.axis("off")
     axes[len(names)].legend(handles=_legend_handles(), loc="center", fontsize=9, frameon=False)
     fig.suptitle("Eight day table, estimate and 95% block bootstrap interval for each day", fontsize=12)
+    # the scale goes into the axis label instead of the small offset text in the corner,
+    # which is easy to miss once GitHub shrinks the image. Tick values are unchanged.
+    fig.canvas.draw()
+    for ax, name in zip(axes, names):
+        offset = ax.xaxis.get_major_formatter().get_offset()
+        m = re.fullmatch(r"1e([\u2212-]?\d+)", offset)
+        assert offset == "" or m, f"unexpected axis offset {offset!r} on {name}"
+        ax.xaxis.get_offset_text().set_visible(False)
+        if m:
+            k = int(m.group(1).replace("\u2212", "-"))
+            ax.set_xlabel(f"{units[name.split()[0]]}, $\\times 10^{{{k}}}$", fontsize=8)
     _save(fig, "fig3_eight_day_table.png")
 
 
