@@ -77,7 +77,7 @@ These are warnings. They never change the exit code.
 
 The check reads the proposal's `LITERATURE_REVIEW.md`. With no such file the source checks are skipped and the report says so.
 
-Reading depth. Any table whose header has a column named `Read at`, `Reading depth` or `Depth` is a list of sources. Each row's depth cell must contain `full text`, `abstract` or `listing`. Words around it are fine, and the first of the three in the cell is the depth reported. An empty cell, or one like `skimmed`, fails. A review with no such table fails.
+Reading depth: Any table whose header has a column named `Read at`, `Reading depth` or `Depth` is a list of sources. Each row's depth cell must contain `full text`, `abstract` or `listing`. Words around it are fine, and the first of the three in the cell is the depth reported. An empty cell, or one like `skimmed`, fails. A review with no such table fails.
 
 ```markdown
 | Work | What it shows | Read at |
@@ -85,7 +85,7 @@ Reading depth. Any table whose header has a column named `Read at`, `Reading dep
 | Lee & Park (2020), *Queues* | Queue position matters | full text, appendix not read |
 ```
 
-Unverified. A heading with the word Unverified in it starts the list of works I have not opened. It runs until the next heading at the same level or higher. Each bullet must start with the authors and a year in brackets, as in `Smith & Jones (2019), *Title*`, so the check can take the first author's surname and the year. A bullet it can't read that way fails rather than being skipped. A review with no Unverified heading fails; an empty list under the heading is fine.
+Unverified: A heading with the word Unverified in it starts the list of works I have not opened. It runs until the next heading at the same level or higher. Each bullet must start with the authors and a year in brackets, as in `Smith & Jones (2019), *Title*`, so the check can take the first author's surname and the year. A bullet it can't read that way fails rather than being skipped. A review with no Unverified heading fails; an empty list under the heading is fine.
 
 ```markdown
 ## Unverified
@@ -100,13 +100,13 @@ The benchmark goes back to Smith (2019)<!--unread-->, which I have not read yet.
 
 A work that has a row in a depth table and also sits on the Unverified list fails, since it can't be both.
 
-What this can't catch. A mention by surname alone, a work cited under a second author's name, or a depth that is written down but not true.
+What this can't catch: A mention by surname alone, a work cited under a second author's name, or a depth that is written down but not true.
 
 ## Preregistration order
 
 The check reads the proposal's `PREREGISTRATION.md` and the git history of the repo it sits in. With no such file the check is skipped and the report says so. A preregistration that exists but has never been committed fails.
 
-Test day results. Files under `results/` in the proposal folder whose path holds one of the test dates. The dates are every ISO date on a table row whose first cell is `Test` or `Test days`.
+Test day results: Files under `results/` in the proposal folder whose path holds one of the test dates. The dates are every ISO date on a table row whose first cell is `Test` or `Test days`.
 
 ```markdown
 | Role | Data | Days |
@@ -122,8 +122,8 @@ Files the table can't name go in `claimcheck_tests.txt` next to the preregistrat
 results/breadth/*.json
 ```
 
-Order. The commit that first added PREREGISTRATION.md must be a strict ancestor of the commit that first added each test day results file. The same commit fails. A results file that is in the folder but not committed passes as long as the preregistration is committed.
+Order: The commit that first added PREREGISTRATION.md must be a strict ancestor of the commit that first added each test day results file. The same commit fails. A results file that is in the folder but not committed passes as long as the preregistration is committed.
 
-Edits after the lock. The lock is the first commit that brings in a test day result, or the working tree when the only results are uncommitted. Every line added, changed or removed in PREREGISTRATION.md from the lock on, in commits and in the working tree, must sit under a heading containing the word Deviations, at any depth below it. For a removed line that means where it sat before the change. Renaming a heading to start a Deviations section fails on the old heading line. When the order check already fails, edits are not listed, since the whole file came after the results.
+Edits after the lock: The lock is the first commit that brings in a test day result, or the working tree when the only results are uncommitted. Every line added, changed or removed in PREREGISTRATION.md from the lock on, in commits and in the working tree, must sit under a heading containing the word Deviations, at any depth below it. For a removed line that means where it sat before the change. Renaming a heading to start a Deviations section fails on the old heading line. When the order check already fails, edits are not listed, since the whole file came after the results.
 
-What this can't catch. It reads commit order, so a rewritten history can fool it. A results file is dated by the first commit at its current path, so a rename resets the date. A test day that was looked at but whose results never reached the folder leaves no trace here.
+What this can't catch: It reads commit order, so a rewritten history can fool it. A results file is dated by the first commit at its current path, so a rename resets the date. A test day that was looked at but whose results never reached the folder leaves no trace here.

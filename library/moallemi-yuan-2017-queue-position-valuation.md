@@ -50,7 +50,7 @@ The value of a sell order at the ask is written as fill probability times the pr
 - The day count doesn't line up. Table 2 says 21 trading days of August 2013, Section 5.1 and Table 3 say 30 trading days, and Table 1 lists 22 days for BAC.
 - The abstract says queue value can be of the same order of magnitude as the spread. The gaps measured are about a fifth of a tick at most, and for some names a few hundredths. A fifth of a spread is meaningful. "Same order of magnitude" reads generously.
 - Cancellations are uninformed and spread evenly by assumption, though in their own data they are about a hundred times more frequent than the trades they model.
-- Smaller slips. The spread column of Table 2 is labelled in dollars but shows values near 1. The EEM of Table 2 is EMM in Table 3. On p. 24 PFE is said to have a gap under 0.1 ticks, while its backtest gap works out at 0.10. Figure 2 is a slide from Quantitative Brokers on futures, pasted in with its own caption.
+- Smaller slips: The spread column of Table 2 is labelled in dollars but shows values near 1. The EEM of Table 2 is EMM in Table 3. On p. 24 PFE is said to have a gap under 0.1 ticks, while its backtest gap works out at 0.10. Figure 2 is a slide from Quantitative Brokers on futures, pasted in with its own caption.
 - Working paper. I don't know whether it changed later.
 
 ## What it means for my work (my own inference)

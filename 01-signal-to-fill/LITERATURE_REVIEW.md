@@ -19,14 +19,14 @@ What published work already shows, and where I think this project can add someth
 My plan for the passive leg used one queue rule. Queue ahead was the displayed size when my order arrives, and I fill once traded volume at my price exceeds it, with a pro rata cancellation variant as a side check. Their paper shows that this one choice can move passive fill rates by about 8 points on its own, on data with the same prices, sizes and trades. So a passive result from one rule would really be a result about the rule.
 
 What I am changing, before any passive result exists.
-1. Three matched cancellation rules. Front (cancels remove the oldest quantity, best case for me), quantity weighted random, and back (cancels remove the newest quantity, worst case). Same book path, same seeds, same trades for all three.
+1. Three matched cancellation rules: Front (cancels remove the oldest quantity, best case for me), quantity weighted random, and back (cancels remove the newest quantity, worst case). Same book path, same seeds, same trades for all three.
 2. A passive latency effect only counts as a finding if its sign is the same under all three rules. If the sign flips between rules, I report that the data cannot decide it.
 3. Every passive number is reported as a range across the three rules, not as one value.
 4. Inside one book update I apply trades first, then cancellations, then additions, as they do, and my simulated order never changes the book. (That was the plan. The code nets additions and cancellations inside one update, see the Deviations in the preregistration.)
 
 My own inference, not in their paper. Delay and the cancellation rule may interact. Under the back rule, cancellations never shrink the queue in front of me, so the cost of arriving late comes mostly from quantity that joined ahead during the delay. Under the front rule, early cancellations can partly undo that loss. If so, the queue part of my latency cost could be smallest under front and largest under back. This is a hypothesis to test, not a result.
 
-Limits of the transfer. Their numbers come from two Tokyo equities with proprietary data and zero latency. Binance BTCUSDT has a far larger queue relative to typical order size and a different tick regime, so I do not expect the same 8 point gap. Their front and back rules are endpoints of one reconstruction method, not true bounds on what the real queue did. LOBSTER has order IDs, so it may let me see where cancellations actually land in a queue and which rule is closer to reality. That is an idea, not yet checked.
+Limits of the transfer: Their numbers come from two Tokyo equities with proprietary data and zero latency. Binance BTCUSDT has a far larger queue relative to typical order size and a different tick regime, so I do not expect the same 8 point gap. Their front and back rules are endpoints of one reconstruction method, not true bounds on what the real queue did. LOBSTER has order IDs, so it may let me see where cancellations actually land in a queue and which rule is closer to reality. That is an idea, not yet checked.
 
 ## Unverified (not yet opened at the source)
 - Perold (1988), *The Implementation Shortfall: Paper versus Reality*, Journal of Portfolio Management. Origin of the decision price benchmark used here.

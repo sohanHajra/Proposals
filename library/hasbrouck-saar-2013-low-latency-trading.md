@@ -23,9 +23,9 @@ Public message data don't say who sent an order, but fast algorithms leave a tra
 NASDAQ TotalView ITCH with millisecond timestamps, CRSP for the stock list, TAQ for spreads on other venues, and NASDAQ's HFT dataset of 120 stocks for a validation check (pp. 649 to 650, 662). In 2007 the median stock had 26,862 limit order submissions, 24,015 cancellations and 2,482 marketable executions a day, with a median quoted spread of $0.025 (Table 1, p. 651). They find about 46.0 million runs in 2007 and 67.1 million in 2008 (Table 3, p. 660).
 
 ## Methods
-- Clock time periodicity. The millisecond within each second at which messages arrive, against a uniform line (Figure 1, p. 653).
-- Speed of response. Hazard rates of same side submissions, same side cancellations and executions in the 50 ms after a quote improves, with every other event treated as censoring (Figure 2, p. 655).
-- Validation. Correlation of RunsInProcess with four measures from the NASDAQ HFT dataset over 60 stocks in June 2008 (Table 4, p. 663).
+- Clock time periodicity: The millisecond within each second at which messages arrive, against a uniform line (Figure 1, p. 653).
+- Speed of response: Hazard rates of same side submissions, same side cancellations and executions in the 50 ms after a quote improves, with every other event treated as censoring (Figure 2, p. 655).
+- Validation: Correlation of RunsInProcess with four measures from the NASDAQ HFT dataset over 60 stocks in June 2008 (Table 4, p. 663).
 - Market quality regressions on ten minute intervals, every series standardised within stock. Quoted spread, effective spread, displayed depth within 10 cents, and the high low range of the midquote in bps. Three specifications with lagged volume, then market return and its absolute value, then morning and afternoon dummies. Each one is estimated by OLS, by 2SLS with the average activity in unrelated stocks as the instrument, and as a two equation system that also instruments market quality with the effective spread on other venues. Driscoll and Kraay standard errors (pp. 664 to 672).
 
 ## Main results
@@ -43,7 +43,7 @@ NASDAQ TotalView ITCH with millisecond timestamps, CRSP for the stock list, TAQ 
 - With time of day dummies, the plain OLS link to volatility disappears in both months (Table 5, Panel C, p. 666, coefficients −0.004 and −0.009 with p values 0.775 and 0.346). The text calls the OLS panels "generally similar" (p. 665). The 2SLS and system versions keep the link. In the 2SLS version with dummies the depth coefficient in 2008 is borderline (p value 0.051, Table 6, p. 668).
 - Stock by stock, effective spread coefficients pile up around zero, and a good share of stocks sit in the bin at or just above zero (Figure 3, p. 674, read off the chart). The pooled effective spread result is weaker in the cross section than the quoted spread one.
 - Two months on one venue, 2007 and 2008. They say the result does not cover flash crash type episodes (footnote 4, p. 648, and p. 677).
-- Small slips. The Table 4 caption gives 60 × 819 as 49,410 where the product is 49,140. The Panel B run is said to last 78.5 s and to add 0.129 to the measure, but 78.5/600 is 0.131, and the times in Table 2 give about 77.4 s, which does match 0.129. The message counts given for Table 2 don't add up to the rows shown plus the "additional" messages (132 against 137 in Panel A, 138 against 142 in Panel B). The effective spread carries a factor of two in Table 1 and not on p. 663. None of this changes a direction.
+- Small slips: The Table 4 caption gives 60 × 819 as 49,410 where the product is 49,140. The Panel B run is said to last 78.5 s and to add 0.129 to the measure, but 78.5/600 is 0.131, and the times in Table 2 give about 77.4 s, which does match 0.129. The message counts given for Table 2 don't add up to the rows shown plus the "additional" messages (132 against 137 in Panel A, 138 against 142 in Panel B). The effective spread carries a factor of two in Table 1 and not on p. 663. None of this changes a direction.
 
 ## What it means for my work (my own inference)
 - It confirms the two things my review row said and adds no evidence about the cost of delay for one order. I don't cite it for any number in my results.

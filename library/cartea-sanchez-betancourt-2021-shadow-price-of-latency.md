@@ -34,8 +34,8 @@ A trader who takes liquidity with a price limit aims at the best quote she saw. 
 - Misses rise with volatility. Across pooled volatility quartiles T1's fill rate goes 94.7%, 92.7%, 90.8%, 87.5% (Table 5, p. 273) and T2's 94.5%, 92.0%, 89.9%, 84.3% (Table 8, p. 275). The top quartile holds 36.5% of T1's misses and 40.0% of T2's (p. 255, and it matches the tables).
 - With the rule and a target discretion of zero, T1 would have filled 8,318 of its 9,483 misses at 1.76 ticks on average. A market order 20 ms or 100 ms later would have cost 2.01 or 2.58 ticks on those same trades (Table 4, p. 272). For T2 the numbers are 6,283 of 7,038 at 1.24 ticks against 2.82 and 2.75 (Table 7, p. 275).
 - In the top volatility quartile the gap is wider. T1 1.88 ticks against 3.04 for the 100 ms retry, T2 1.86 against 3.31 (Tables 5 and 8).
-- Implied latency. T1's naive orders fill as if her latency were 20.02 ms on average (median 18), and the rule's fills match a latency of about 2.34 ms (Table 9, p. 278). On one day the map runs from 100% at 0 ms to 89% at 50 ms (p. 277).
-- Shadow price. T1 would pay about 3 million JPY (about 30,000 USD) over the period to go from 20.02 ms to 2.34 ms, with about 5 million JPY as an upper bound (Table 10, p. 279). The authors say this is below what colocation and hardware cost, on the word of market participants (p. 279).
+- Implied latency: T1's naive orders fill as if her latency were 20.02 ms on average (median 18), and the rule's fills match a latency of about 2.34 ms (Table 9, p. 278). On one day the map runs from 100% at 0 ms to 89% at 50 ms (p. 277).
+- Shadow price: T1 would pay about 3 million JPY (about 30,000 USD) over the period to go from 20.02 ms to 2.34 ms, with about 5 million JPY as an upper bound (Table 10, p. 279). The authors say this is below what colocation and hardware cost, on the word of market participants (p. 279).
 - Results barely move with the horizon, the volatility model, or shocks of 20% to the volatility parameters (Tables 11 to 18, pp. 290 to 293).
 
 ## Limits

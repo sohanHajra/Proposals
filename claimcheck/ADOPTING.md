@@ -2,7 +2,7 @@
 
 This is how I set up a new proposal folder so claimcheck can check it from day one, with real examples from [01 From Signal to Fill](../01-signal-to-fill/), the first proposal it was used on. The format itself is in [SPEC.md](SPEC.md). What each check does and what it can't do is in the [README](README.md).
 
-The short version. Copy [`starter/`](starter/) into a new numbered folder, replace the example content, and keep `make verify` passing as the proposal grows. The starter passes as it stands, and its own test in `tests/test_starter.py` makes sure it keeps passing and fails when a number drifts.
+The short version: Copy [`starter/`](starter/) into a new numbered folder, replace the example content, and keep `make verify` passing as the proposal grows. The starter passes as it stands, and its own test in `tests/test_starter.py` makes sure it keeps passing and fails when a number drifts.
 
 ```bash
 cp -r claimcheck/starter 02-my-question

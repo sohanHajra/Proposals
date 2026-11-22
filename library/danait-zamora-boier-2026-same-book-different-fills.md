@@ -23,11 +23,11 @@ Level two data shows how much rests at each price but not the queue of orders be
 - Proprietary LSEG data for two Tokyo Stock Exchange names, 1301.T and 7911.T, from 6 January to 25 July 2025. Ten level L2 snapshots plus L1 trades, continuous session only (Section 4.1, p. 4).
 - Tick size 5 yen for 1301.T and 1 yen for 7911.T, 136 and 137 usable dates, 843,135 and 9,062,080 continuous L2 rows, 24,607 and 319,046 regular trades (Table 1, p. 4).
 - January to May for estimation, June for choosing settings, July as the held out month with 18 dates. Everything was fixed before any July FIFO outcome was looked at (Section 4.4, p. 4). Each name has 1,080 five minute episodes in July (Table 1, p. 4, Section 7.1, p. 6).
-- Data quality. Unresolved transitions are 4.14% to 6.11% of rows on 1301.T and 5.09% to 6.59% on 7911.T. Boundary transitions are 11.10% to 16.00% and 8.39% to 12.32% (Table 1, p. 4).
+- Data quality: Unresolved transitions are 4.14% to 6.11% of rows on 1301.T and 5.09% to 6.59% on 7911.T. Boundary transitions are 11.10% to 16.00% and 8.39% to 12.32% (Table 1, p. 4).
 
 ## Methods
 - A compiler turns each block into an order level message stream under each rule, with the same seeds, partitions, additions, trades and block boundaries. After every transition the live orders must add back to the observed L2 state (Section 5.2, p. 4). A sample of streams was replayed through JAX LOB, an outside matching engine, as a separate check (Section 5.2, p. 5, Section 7.1, p. 6).
-- Tagged probes. A virtual 100 share order at the best price every five seconds, lasting at most 15 seconds, paired across the three rules (Section 6.1, p. 5).
+- Tagged probes: A virtual 100 share order at the best price every five seconds, lasting at most 15 seconds, paired across the three rules (Section 6.1, p. 5).
 - Three policies over 300 second episodes on both sides. Aggressive TWAP, passive at touch, and a hybrid that crosses any shortfall against schedule at ten checkpoints. Parent size is 100 shares for 1301.T and 200 for 7911.T (Section 6.2, p. 5).
 - Implementation shortfall against the arrival mid in basis points, with any residual crossed against the terminal book (equation 10). They also report completion before the terminal cross and how often the cheapest policy changes when only the rule changes (Section 6.3, p. 5).
 - Outcomes are averaged within each date and the 18 dates weighted equally. Section 6.4 (p. 5) describes the intervals as resampling whole dates. Policy change shares are pooled and descriptive, with no intervals.
@@ -39,7 +39,7 @@ Level two data shows how much rests at each price but not the queue of orders be
 - Passive at touch shortfall on 1301.T runs from 8.008 bps (front) to 9.018 bps (back), and on 7911.T from 0.765 to 1.149 bps. The front minus back gaps are 1.010 and 0.384 bps (Table 2, p. 7, Section 7.2, p. 6). On 1301.T the front and back intervals do not overlap ([7.480, 8.531] against [8.656, 9.401]). On 7911.T they overlap a little ([0.547, 0.974] against [0.932, 1.357]).
 - Passive at touch is the cheapest policy for both names under every rule (Section 7.2, p. 6).
 - The cheapest policy changes in 0.83% to 4.49% of cross rule comparisons on 1301.T and 3.63% to 14.26% on 7911.T. When it changes, the extra cost is 14.277 to 17.354 bps on 1301.T and 2.366 to 3.723 bps on 7911.T (Section 7.2, p. 6).
-- Robustness. Fixed 100 share partitions leave the front minus back gaps unchanged. On stricter blocks the passive gap shrinks to −0.397 bps on 1301.T and to −0.325 bps on 7911.T, whose interval reaches zero. The authors call that strict sample not conclusive on its own (Section 7.2, p. 6).
+- Robustness: Fixed 100 share partitions leave the front minus back gaps unchanged. On stricter blocks the passive gap shrinks to −0.397 bps on 1301.T and to −0.325 bps on 7911.T, whose interval reaches zero. The authors call that strict sample not conclusive on its own (Section 7.2, p. 6).
 
 ## Limits
 - Two names, one held out month, the same 18 dates for both, so 36 instrument days in all (Section 9, p. 8).

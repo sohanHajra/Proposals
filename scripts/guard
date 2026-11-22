@@ -90,6 +90,9 @@ CODE = re.compile(r"`[^`]*`")
 LINK = re.compile(r"\[([^\]]*)\]\([^)]*\)|<[^>]+>|https?://\S+")
 TAG = re.compile(r"<!--.*?-->")
 TIME = re.compile(r"\b\d{1,2}:\d{2}(:\d{2})?\b")
+# a short label that opens a line or a list item, bold or italic or plain, up to four words,
+# ends in a colon ("- **Found and fixed:** ...", "*Still owed:* ...", "Reason: ..."). That colon is fine.
+LABEL_LEAD = re.compile(r"^(\s*(?:[-*+]\s+|\d+\.\s+)?)(?:\*\*|\*|_)?[^\s:*]+(?:\s+[^\s:*]+){0,3}:(?:\*\*|\*|_)?(?=\s|$)")
 
 
 def prose(line):
@@ -122,7 +125,7 @@ def scan_md(path):
         if skip_line(line):
             continue
         s = prose(line)
-        s2 = TIME.sub("", s)
+        s2 = LABEL_LEAD.sub(r"\1", TIME.sub("", s), count=1)
         if re.search(r"[A-Za-z)\]*_]:(\s|$)", s2):
             warns.append(f"{path}:{n}  colon in prose  {line.strip()[:70]}")
         for m in re.finditer(r"\b[A-Za-z]+(?:-[A-Za-z]+)+\b", s):

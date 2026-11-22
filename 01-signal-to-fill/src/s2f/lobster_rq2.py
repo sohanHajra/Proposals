@@ -3,7 +3,7 @@
 Built as written in PREREGISTRATION.md (RQ2 and the 2026-11-19 evening deviation entry),
 before its first run.
 
-Part A, H4. Orders submitted at the best price on their side (the book row of the
+Part A, H4: Orders submitted at the best price on their side (the book row of the
 submission) with at least one visible execution in the file. Rest time is submission to
 first visible execution in ms. Markout is dir x (mid 1 s after the first fill minus fill
 price) / fill price x 1e4, so positive is good for the resting order. Controls read on the
@@ -13,7 +13,7 @@ over the previous 60 s (1 s samples, bps), half hour of the day as fixed effects
 standard errors clustered by minute of submission. Run with and without controls.
 H4 is judged on INTC and MSFT only.
 
-Part B, exploratory. Every full deletion (type 3) of an order whose submission is in the
+Part B, exploratory: Every full deletion (type 3) of an order whose submission is in the
 file. The queue at its price is rebuilt from the messages in time priority. A deletion is
 used only when the rebuilt queue's total equals the displayed size at that price in the
 book just before it and holds at least two orders. Position p = shares ahead /
