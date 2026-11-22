@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Status | 🟡 Test days and breadth days run once on 2026-11-20. H1 and H2 are null on both test days under every cancellation rule, though by design they could hardly be anything else. H4 on the Nasdaq day is null too. A taker acting on book imbalance pays 0.52<!--c:td1101.sig.S500--> to 0.66<!--c:td1001.sig.S500--> bps by 500 ms on the test days, an upper end. Draft report, one last review before release |
+| Status | 🟢 Test days and breadth days run once on 2026-11-20. H1 and H2 are null on both test days under every cancellation rule, though by design they could hardly be anything else. H4 on the Nasdaq day is null too. A taker acting on book imbalance pays 0.52<!--c:td1101.sig.S500--> to 0.66<!--c:td1001.sig.S500--> bps by 500 ms on the test days, an upper end. Report released 2026-11-22 |
 | Preregistration | [PREREGISTRATION.md](PREREGISTRATION.md) |
 | Proposal | [PROPOSAL.md](PROPOSAL.md) |
 | Literature review | [LITERATURE_REVIEW.md](LITERATURE_REVIEW.md) |
@@ -58,7 +58,7 @@ Raw data isn't committed. `make data` downloads it.
 - A positive result would still not prove faster routing improves trading performance.
 
 ## Results
-The report is [FINAL_REPORT.md](FINAL_REPORT.md), still a draft. It goes out after one last review. In short, it finds the following.
+The report is [FINAL_REPORT.md](FINAL_REPORT.md). In short, it finds the following.
 - H1 and H2, the two primary tests, are null on both test days, and H2 is null under front, random and back cancellation. Random decisions that reprice on arrival have close to zero expected latency cost by construction (Deviation of 2026-11-18), so these nulls can't tell whether latency matters. They show the replay doesn't invent a cost.
 - H1b holds by its rule but is partly mechanical. H2b, H2c and H3 are not supported. H2c points the other way on decisions that fill at both delays, while the registered comparison of all fills covers zero everywhere.
 - H4, on real Nasdaq order lifecycles from 2012-06-21, is null by its registered rule. The link between rest time and markout loses its sign once controls go in.

@@ -628,4 +628,4 @@ Nothing new was run on any day today. No test, spec, threshold or day was added,
 - **What this changes:** Nothing registered. No hypothesis, test, threshold, seed or result moved, and no analysis or day was run.
 - **Limits and gaps.**
   - *Old lines:* The 11-20 entry still calls 2026-11-01 a Saturday and counts two weekend days. This entry is the correction.
-  - *Still owed:* The report stays a draft until one last review before release.
+  - *Released:* After a last read of my own the report is out of draft, tagged v0.1-signal-to-fill. Anything I find from here goes in a new dated entry.
