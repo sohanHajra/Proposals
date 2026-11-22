@@ -385,3 +385,9 @@ Someone who had not worked on the report read the report, both READMEs, the note
 **Checked**
 - The reader matched 22 values in the report against their results files by hand, found the preregistration history clean, and found every Deviation before the test data on disk. They saw no number that disagreed with its file.
 - After the changes, claimcheck reports every tag agreeing with its file and no untagged numbers, the source and preregistration checks pass, and the proposal and checker tests pass.
+
+## 2026-11-21 (Sat, night) · Danait et al. read again from the PDF
+- **Found and fixed.** I had written that the 7911.T front and back passive intervals touch. They overlap a little. The library note is fixed, the correction is in the notebook, and the 11-16 entry stays as written.
+- **Closed, from the 11-18 night entry.** The 11-16 entry's claim that the tables were read from the PDF. The PDF I have now is version 3, the same text as the web page the notes cite, and Table 1, Table 2 and Figure 1 on its pages match every number in that entry. Which copy I read on 11-16 isn't in my files, so that part can't be shown, and I don't claim it.
+- **Checked.** The version and every page reference in the library note against the PDF. The literature review row now names the version and says when it was read again.
+- No hypothesis, test or result changed. I did this myself, with no second reader.
