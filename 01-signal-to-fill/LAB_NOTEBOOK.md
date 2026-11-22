@@ -103,7 +103,7 @@ Dated entries, never edited after the fact. When a later entry corrects an earli
   - *Resources that would help:* order level data (Tardis incremental book) to see real queue positions, and live decision timestamps.
 
 ## 2026-11-18 (Wed, afternoon) · corrections after a second read
-A second reader went through the notes, the code and the results files today. These are the corrections. The earlier lines keep their words and point here.
+I went back over the notes, the code and the results files today in a separate sitting, against my review checklist. These are the corrections. The earlier lines keep their words and point here.
 - **Yueshen was not read in full.** The two files I saved on 11-15 as the paper are bot challenge pages from the publisher's site, not the paper. So the 11-15 entry's "Read in full" and its line about figure pages I did not view are wrong. All I have is the abstract (Crossref record). The year is 2026 (Management Science 72(6), pages 4760 to 4779, online September 2025). The "2025" in my 11-14 entry followed the online date that Danait et al. cite. The literature review now lists it as abstract only in the Unverified list. A claim I had attributed to it, that the cancel to add size ratio falls below one when fast makers are larger and sit at the front, is not in the abstract and is removed. H2c stays, because the abstract itself says end of queue limit orders always lose money.
 - **LOBSTER selection.** On 11-15 I wrote that I chose INTC and MSFT before computing anything about fills or markouts. The same audit computed fill shares and lifetimes, and the next line of that entry reports them. The choice came before any markout was computed, and that is all I can claim.
 - **Flag rate.** The taker flag for small displayed size fires on 0.13%<!--c:taker.flag5--> (at 5 ms) to 0.31%<!--c:taker.flag500--> (at 500 ms) of decisions, not 0.17%<!--nc--> to 0.31%<!--nc--> (`results/taker/taker_dev_2026-09-01.json`). Corrected in the Deviations section with a dated note.
@@ -252,7 +252,7 @@ My reading, not tested. In the one tick names a lot of cancelling seems to come 
 - *H4 is observational.* Rest time is chosen by the market and by whoever sent the order. The controls are the ones I registered, nothing more, and the R² is under 0.09<!--c:rq2.INTC.ctrl.r2-->.
 - *Markout reference.* The markout is against the first fill price only. Later partial fills of the same order aren't in it.
 - *Missing.* Order lifetimes for the back of queue cancellations, more days, and Nasdaq data from recent years, which would need a paid LOBSTER licence.
-- Not checked by a second reader.
+- Not reread in a separate sitting.
 
 ## 2026-11-19 (Thu, evening) · six breadth days written down before the test days
 - **Why.** Two test days are enough to knock a claim down and not enough to show it holds in general. Tardis gives one free day a month. I checked that the files for 2026-03-01 through 2026-08-01 exist (each returns a redirect to the file, and a non first of month day is refused). I read nothing in them.
@@ -274,7 +274,7 @@ My reading, not tested. In the one tick names a lot of cancelling seems to come 
   - *Not rerunnable.* Their data are proprietary, so none of their numbers can be checked against the book.
   - *Selected sample.* The retry comparison only covers missed trades, where the book had already moved away.
   - *Different volatility.* Theirs is 10<!--cite--> minutes of 500 ms microprice returns, pooled over days. Mine is 10 s of 100 ms mid changes within a day. Their quartiles aren't my fifths.
-  - Not checked by a second reader. No test day data touched.
+  - Not reread in a separate sitting. No test day data touched.
 
 ## 2026-11-19 (Thu, night) · dev day numbers tied to their results files
 - **What I did.** Every taker and passive number from the dev day in these notes now carries a hidden tag after it that points to a field in a results file. There are 191<!--nc--> of them in `claims.yaml`, and `python -m claimcheck 01-signal-to-fill` rereads each field and fails if the note and the file disagree. All 191<!--nc--> agree with the files as committed.
@@ -297,7 +297,7 @@ My reading, not tested. In the one tick names a lot of cancelling seems to come 
 - **Limits and gaps.**
   - *Old and different.* NASDAQ equities in 2007 and 2008, a different venue, tick and era from BTCUSDT in 2026.
   - *A proxy.* Their activity measure is inferred from message patterns, so it can't be checked against who actually sent the orders.
-  - Not checked by a second reader. No test day data touched.
+  - Not reread in a separate sitting. No test day data touched.
 
 ## 2026-11-19 (Thu, late night) · jump moment split, written down before running it
 Exploratory, added 2026-11-19, not a registered test. This is the split I wrote about after reading Budish, Cramton and Shim, and it was the one thing left over from this afternoon. Everything below was fixed and committed with the code (`src/s2f/jumps.py`, tests in `tests/test_jumps.py`) before I ran any of it on the dev day. What I had seen of the dev day before writing it is what is already in these notes. Spread at one tick 95.5%<!--c:audit.onetick--> of the time, the feed audit, the RQ3 volatility cut and the dev day taker numbers. I haven't counted mid moves at the ms scale or looked at anything after one.
@@ -468,7 +468,7 @@ claimcheck is finished for now, so I ran the whole thing on this folder once mor
 - **What it caught while I built it.** One real slip, the 0.067<!--nc--> bps I wrote on 11-18 for a gap the file gives as 0.0665<!--c:passive.front.m10diff.full-->, already corrected with a pointer. And two right numbers it called wrong, negative 0.082<!--c:rq2.INTC.bare--> and 0.646<!--c:cancel.MSFT.partial-->, which sit exactly half a unit from the stored value. Floating point put them a hair past the tolerance, so the checker now accepts a value on the edge. Nothing else in the notes disagreed with the files.
 
 **Limits and gaps.**
-- *A tag checks a number, not a sentence.* A right number in a wrong claim still passes, and so does a wrong reading of a right number. Logic and framing still need a second reader.
+- *A tag checks a number, not a sentence.* A right number in a wrong claim still passes, and so does a wrong reading of a right number. Logic and framing still need a careful reread.
 - *Reading depth is taken on trust.* The check sees that a depth is written down, not that it is true.
 - *Untagged numbers.* The 56<!--nc--> have to reach zero before 01 goes out, either by writing the derived values into results files or by rewording.
 - *Test days not covered yet.* Today's numbers get tagged when I write them up.
@@ -558,7 +558,7 @@ Fetched with `python -m s2f.get_data breadth` once both test days were done, the
   - *Not the journal version.* Anything changed after July 2022 isn't in my notes.
   - *Not rerunnable.* Proprietary data, one pair, no impact in the replay.
   - *Weak inference.* Optimality isn't proved, and their tests treat runs that share the same price paths as independent.
-  - Not checked by a second reader. No test day data touched.
+  - Not reread in a separate sitting. No test day data touched.
 
 ## 2026-11-20 (Fri, night) · Moallemi & Yuan (2017) read in full
 - **What I read.** The June 2017 working paper, all 33<!--cite--> pages, every table and figure and the proofs at the back. I know of no published version, so page numbers are the working paper's. Proofs followed for how they go and what they assume, not rederived. Notes in the [library](../library/moallemi-yuan-2017-queue-position-valuation.md). This comes after both test days and the breadth days were run, and it changes none of them.
@@ -572,7 +572,7 @@ Fetched with `python -m s2f.get_data breadth` once both test days were done, the
 - **Limits and gaps.**
   - *Working paper.* I don't know if a later version changed anything.
   - *Not rerunnable.* ITCH 2013 data aren't free, and Table 3 has no standard errors.
-  - Not checked by a second reader. No test day data touched.
+  - Not reread in a separate sitting. No test day data touched.
 
 ## 2026-11-21 (Sat) · every number tied to a file, and the report figures
 Nothing new was run on any day today. No test, spec, threshold or day was added, and every number below was already in a results file before this entry.
@@ -600,7 +600,7 @@ Nothing new was run on any day today. No test, spec, threshold or day was added,
 - *Old untraceable remarks stay.* The snapshot update gap and the stopped broker run are still in the notebook as written. They are marked, not deleted, so the history reads as it happened.
 - *A tag checks a number, not a sentence.* Ranges like "roughly half to three quarters of a bp" in the README sit next to tagged endpoints but aren't checked themselves.
 - *Figures add no new statistic,* but they show breadth days and dev day calibration next to the test days, which could make the breadth days look like part of the verdict. The captions and the report say they are not.
-- *No second reader.* I did the pass on today's work myself. A cold review is still owed before release.
+- *No separate reread.* I checked today's work myself, in the same sitting. A fresh read of my own is still owed before release.
 
 ## 2026-11-21 (Sat, night) · Danait et al. again, from the PDF
 - **Which copy.** I now have the arXiv PDF of version 3, nine pages, stamped 17 Oct 2026. Its text, tables and numbers are the same as the version 3 web page my notes were written from, so no citation changes version.
@@ -618,3 +618,14 @@ Nothing new was run on any day today. No test, spec, threshold or day was added,
 - The other four figures came out byte identical when I ran the script again.
 - **Limits and gaps.**
   - *Not changed:* Figures 4 and 5 still use the corner offset text. Only Figure 3 was raised as hard to read.
+
+## 2026-11-22 (Sun) · a weekend count, and small fixes before release
+- **Correction.** 2026-11-01 was a Sunday, not a Saturday as I wrote in the 11-20 entry, so three of the eight crypto days fall on weekends, 2026-03-01, 2026-08-01 and 2026-11-01, not two. The report and the README now say three. The 11-20 lines stay as I wrote them.
+- **Report.** It now says why the H2 placebo was rerun over many shuffles on the dev day (the single registered shuffle had missed zero under random), names the three horizon intervals that miss zero one by one, calls 2026-10-01 the clearest place random decisions show a stale price effect rather than the only one, and no longer points at Figure 2 for fixed price fill probability, which it doesn't plot. The Figure 1 caption gives the top of each panel instead of saying two orders of magnitude, which was too much. The cut run line says the json files came back byte identical and the saved arrays value for value, and that all of 2026-11-01 ran in stages.
+- **Figures 4 and 5.** Their scale now sits in the axis label, as in Figure 3, and the corner text is gone. Same points and intervals. Figures 1 to 3 came out byte identical.
+- **Elsewhere.** The root README says I write hypotheses down before any test results, since H5 came after the dev look, and its range of signal costs says roughly. The Danait note no longer says the gap between its two names isn't a liquidity effect. The paper only says the comparison is descriptive. The broker latency script's docstring gives the order size the code really uses.
+- **Who read what.** Older entries here and in the integrity log read as if another person had gone over the work. Those were my own rereads, done in a separate sitting against my review checklist, and the lines now say so. Nobody outside the project has read the work.
+- **What this changes.** Nothing registered. No hypothesis, test, threshold, seed or result moved, and no analysis or day was run.
+- **Limits and gaps.**
+  - *Old lines.* The 11-20 entry still calls 2026-11-01 a Saturday and counts two weekend days. This entry is the correction.
+  - *Still owed.* The report stays a draft until one last review before release.

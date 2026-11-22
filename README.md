@@ -3,7 +3,7 @@
 # Proposals
 
 **Research questions, each taken from a one page proposal to running code.**
-I write the hypotheses down before I look at any results. Dead ends stay in the log, and a null result gets published like any other.
+I write the hypotheses down before I look at any test results. Dead ends stay in the log, and a null result gets published like any other.
 
 *Sohan Hajra · UIUC B.S. Mathematics & Computer Science · [sohanhajra.github.io](https://sohanhajra.github.io)*
 
@@ -30,7 +30,7 @@ flowchart LR
 
 | # | Proposal | The question | Status | Headline |
 |---|---|---|---|---|
-| 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟡 Draft report, one last read before release | H1, H2 and H4 null, H1 and H2 by design. A taker acting on book imbalance loses half to three quarters of a bp by 500 ms, an upper end |
+| 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟡 Draft report, one last read before release | H1, H2 and H4 null, H1 and H2 by design. A taker acting on book imbalance loses roughly half to three quarters of a bp by 500 ms, an upper end |
 
 <details>
 <summary><b>01 · From Signal to Fill</b> · what I believed, what I tried, what broke, what I believe now</summary>
@@ -41,7 +41,7 @@ flowchart LR
 
 **What broke.** LOBSTER's main site serves an HTML shell where sample zips used to be. A 2025 live trading study on Binance and Bybit turned out to be close to my first research question, so I narrowed what I claim is new.
 
-**What I believe now.** I thought the passive side would be where delay costs most, since BTCUSDT's spread is one tick almost all the time and queue position should matter. On random decisions neither side shows a cost, but that test couldn't show one by design, so it doesn't settle the question. The cost that does show up is a taker acting on book imbalance, half to three quarters of a bp by 500 ms on every day I ran, and that is an upper end because my replay has no race for the touch. The [report](01-signal-to-fill/FINAL_REPORT.md) has the numbers and the full history is in the [lab notebook](01-signal-to-fill/LAB_NOTEBOOK.md).
+**What I believe now.** I thought the passive side would be where delay costs most, since BTCUSDT's spread is one tick almost all the time and queue position should matter. On random decisions neither side shows a cost, but that test couldn't show one by design, so it doesn't settle the question. The cost that does show up is a taker acting on book imbalance, roughly half to three quarters of a bp by 500 ms on every day I ran, and that is an upper end because my replay has no race for the touch. The [report](01-signal-to-fill/FINAL_REPORT.md) has the numbers and the full history is in the [lab notebook](01-signal-to-fill/LAB_NOTEBOOK.md).
 
 </details>
 

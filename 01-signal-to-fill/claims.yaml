@@ -3200,6 +3200,11 @@ breadth.sig.S500.max:
   path: signal.mean_S_by_delay_ms.500
   value: 0.76
   tol: 0.005
+breadth.rand.S500.max:
+  file: results/taker/followups_2026-07-01.json
+  path: random.mean_S_by_delay_ms.500
+  value: 0.018
+  tol: 0.0005
 breadth.sig.S1.min:
   file: results/taker/followups_2026-05-01.json
   path: signal.mean_S_by_delay_ms.1

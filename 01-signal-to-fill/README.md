@@ -50,7 +50,7 @@ Raw data isn't committed. `make data` downloads it.
 - Inside one book update the passive engine nets additions and cancellations into one change, instead of applying trades, then cancellations, then additions as first written.
 - The simulated order never races other traders for the same liquidity in the same millisecond. For signal decisions that makes the 1 ms baseline too kind, so their delay cost is an upper end.
 - Nine crypto days (one dev, two test, six breadth) and one 2012 equity day. Enough to knock a claim down, not to show it holds generally.
-- The free crypto days are all the first of a month, two of them weekends, so any month start effect is baked in and news days are not covered.
+- The free crypto days are all the first of a month, three of them weekends, so any month start effect is baked in and news days are not covered.
 - One venue and one instrument. Nothing here says how another exchange or another queue would behave.
 - The first start on 2026-10-01 hit the 20<!--nc--> minute job limit on the remote worker I run it on, so I reran the day from scratch in fixed stages split by step. Only the dev day dry run checks that stages and one process agree.
 - Fees are the base tier read on 2026-11-19 and frozen in the code for the test day runs, not read again on the day. An active trader pays less.

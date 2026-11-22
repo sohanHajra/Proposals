@@ -1,12 +1,12 @@
 """Real decision to acknowledgement latency on the Alpaca paper account.
 
 Exactly as in PREREGISTRATION.md. 200 limit buys on BTC/USD at half the best bid,
-smallest quantity the venue lists, one every 3 s, each cancelled right after its
+the smallest quantity that clears the venue's 10 USD minimum, one every 3 s, each cancelled right after its
 acknowledgement. Time is local monotonic from just before the request to the
 response. Fills from the paper account are never used for anything.
 
-The account secret is added by the sandbox for paper-api.alpaca.markets. The key
-id is read from the environment variable ALPACA_KEY_ID and is never stored here.
+The account secret is added to each request outside this script and is never
+stored here. The key id is read from the environment variable ALPACA_KEY_ID.
 """
 import json, os, statistics, sys, time
 import urllib.request, urllib.error

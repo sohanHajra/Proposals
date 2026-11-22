@@ -44,7 +44,7 @@ Level two data shows how much rests at each price but not the queue of orders be
 ## Limits
 - Two names, one held out month, the same 18 dates for both, so 36 instrument days in all (Section 9, p. 8).
 - Front and back are endpoints of their own reconstruction, not bounds on what the real queue did, and the latent partition is a modelling choice (Section 3.3, p. 3, Section 8.2, p. 6).
-- The two names differ in price, tick, activity and parent size, so the gap between them is not a liquidity effect (Section 4.1, p. 4, Section 8.2, p. 8).
+- The two names differ in price, tick, activity and parent size, so the gap between them can't be read as a liquidity effect (Section 4.1, p. 4, Section 8.2, p. 8).
 - No latency, fees, rebates or impact in the shadow policies (Section 9, p. 8).
 - Each cell allows a cancellation or an addition, not both. Cells that need both end the block, so the busiest moments may be the ones left out. That last point is my reading, not theirs.
 

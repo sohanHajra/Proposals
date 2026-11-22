@@ -31,7 +31,7 @@ After each work session I check three things and write down what I found, includ
 - Every number quoted from the paper (8.01 and 7.39 points, 18.15% and 10.14% completion, 1.010 and 0.384 bps) matches its abstract, Table 2 and Section 7 in v3.
 
 ## 2026-11-15
-No second reviewer was available this time, so I did it myself by rereading every changed file against its source (the two papers, `results/audit/lobster_2012-06-21.json`, `results/audit/tardis_2026-09-01.json`).
+This time I did it by rereading every changed file against its source (the two papers, `results/audit/lobster_2012-06-21.json`, `results/audit/tardis_2026-09-01.json`).
 
 **Found and fixed**
 - The lab notebook said AAPL, AMZN and GOOG have a one tick spread on 0.5% or less of updates. AMZN is 0.59%. Now reads under 1%.
@@ -63,29 +63,29 @@ No second reviewer was available this time, so I did it myself by rereading ever
 **Checked, no issue**
 - Table 7 slopes reproduce the 0.07 to 0.3 bps range used for the H1 bar (slope × 2 bps).
 - Table 6 R² is weighted per their text. Table 7 R² is not described, so the review does not call it weighted.
-- Self check. No second reviewer was available for this short session.
+- Self check. I did it in the same short sitting as the work.
 
 
 ## 2026-11-16
-I did this check myself. Nobody else was available to review it independently.
+I did this check myself.
 - **Found and fixed.** The first replay sanity wording implied a reason for the 58% exact print share. Rewritten as an untested guess.
 - **Open.** The 58% and 54% exact print shares are unexplained. Top of book only, so no walk through deeper levels.
 - **Checked, no issue.** Every number in today's notebook entry matches `results/replay/sanity_2026-09-01.json` and the audit row count. Tests pass. No test day touched. No Alpaca order sent.
 
 ## 2026-11-17
-I did this check myself. Nobody else was available to review it independently.
+I did this check myself.
 - **Found and fixed.** The first draft of the notebook entry called the tail share a result. It is a ratio over a near zero total (negative 170), so it is now labelled not interpretable. The prereg said a five level walk and the code does not walk. Logged under Deviations with the flag rate.
 - **Open.** Dev day only, so H1 is untested. The H1b split uses the future second of the book and is descriptive. Random decisions make a small cost likely by construction.
 - **Checked, no issue.** Every number in today's entry matches `results/taker/taker_dev_2026-09-01.json`. Tests pass. No test day touched, no Alpaca order sent.
 
 ## 2026-11-18
-I did this check myself. Nobody else was available to review it independently.
+I did this check myself.
 - **Found and fixed.** Added a note that flat fill probability across delay is partly built into the design, so it is not read as proof that delay is harmless for passive orders. Choices the prereg left open are logged under Deviations.
 - **Open.** Dev day only, so H2 and H2b are untested. Cancels are inferred from size drops and the rate of misclassified trade versus book timing is unmeasured.
 - **Checked, no issue.** Notebook numbers match `results/passive/passive_dev_2026-09-01.json`. Fifteen tests pass. No test day touched, no Alpaca order sent.
 
-## 2026-11-18 (second reader)
-A second reader went through the notes, the code and every results file at commit a16dd69. This is what they found and what I did about each.
+## 2026-11-18 (reread in a separate sitting)
+I went back over the notes, the code and every results file at commit a16dd69 in a separate sitting, against my review checklist. This is what I found and what I did about each.
 
 **Found and fixed**
 - Both primary tests reprice on arrival, so with random decisions H1 and H2 are close to zero by construction. Logged under Deviations before any test day, with a fixed price passive arm (H5) added as exploratory. H1 and H2 stay as registered.
@@ -109,7 +109,7 @@ A second reader went through the notes, the code and every results file at commi
 - The ranking reversal shares from Danait et al. are read off a chart. Their supplementary material and that of Albers et al. are unread.
 
 **Checked, no issue**
-- The second reader found no test day data on disk, and the preregistration commit comes before the replay engine and every taker and passive result.
+- The reread found no test day data on disk, and the preregistration commit comes before the replay engine and every taker and passive result.
 - All other audit, taker and passive numbers in the notes match their results files. Seventeen tests pass.
 - Later the same afternoon the full text of Yueshen (2026) was read, all pages viewed, the proofs for structure only and the online appendix not at all. It moves back into the main table of the literature review with that depth. The size ratio claim removed this morning is in Proposition 4(i) and is restored with its condition (fast and slow makers together). The delay to markout step in H2c is not in the paper. It is my inference, now said so in the notebook, the review and under Deviations.
 
@@ -119,8 +119,8 @@ A second reader went through the notes, the code and every results file at commi
 - No hypothesis, metric or test changed. No test day data touched. No Alpaca order sent.
 
 **Open**
-- On my reading of their Figure 9 the drop in median implied latency is about one order of magnitude, while their text says two. I do not cite the two orders figure. A cold reader should look at the same chart.
-- This session was not checked by a second reader.
+- On my reading of their Figure 9 the drop in median implied latency is about one order of magnitude, while their text says two. I do not cite the two orders figure. On a fresh read I should look at the same chart again.
+- I didn't reread this in a separate sitting.
 
 ## 2026-11-18 (Wed, evening) · edit to this log
 - I removed two formatting notes from earlier entries. They were about how the notes are written, not the research, and nothing else in those entries changed.
@@ -132,16 +132,16 @@ A second reader went through the notes, the code and every results file at commi
 
 
 ## 2026-11-18 (Wed, night) · Albers supplement read
-- Read the Albers supplement in full. Main paper page refs still match the journal pages, and the SSRN page mapping is recorded in the library note. One contradiction with my notes, the colocated 2 ms point, corrected with a pointer. The journal text's pointer to bootstrap standard errors in Supplementary Material E finds nothing there. No hypothesis, metric or test changed, and no test day data was touched. Not checked by a second reader.
+- Read the Albers supplement in full. Main paper page refs still match the journal pages, and the SSRN page mapping is recorded in the library note. One contradiction with my notes, the colocated 2 ms point, corrected with a pointer. The journal text's pointer to bootstrap standard errors in Supplementary Material E finds nothing there. No hypothesis, metric or test changed, and no test day data was touched. Not reread in a separate sitting.
 
 ## 2026-11-18 (Wed, late night) · Budish, Cramton & Shim read
 - **Checked, no issue.** The one review line citing the paper was checked claim by claim against the full manuscript. Sniping costs for stale quotes are there as a model result (Proposition 1, Remark 1), and the RQ3 motivation fits the comparative statics and the volatility link in the data, with "concentrated" marked as my framing. Reading depth raised to full text, with the version named. The companion is added with its own depth. No hypothesis, metric or test changed. No test day data touched.
 - **Found, noted.** The copy I hold is the February 2015 manuscript, not the journal article, so its pages are cited and the QJE pages are kept only from the DOI record. The paper's calibration product is misprinted by a factor of 1,000, while its stated bounds are right.
 - **Bias check.** The paper argues for a design, so its facts were not read as a neutral survey. What it adds against my own results went in plainly. The missing race likely inflates the replay's delay cost in jump moments, which would flatter H3 if it passes.
-- **Open.** Not checked by a second reader.
+- **Open.** Not reread in a separate sitting.
 
 ## 2026-11-19 (Thu, afternoon) · dev day follow ups
-I went back over this session myself. No second reader looked at it.
+I went back over this work myself, in the same sitting that did it.
 
 **Found and fixed**
 - The passive code's flipped tie rule changed only the book my order sees and quietly dropped every trade, ticker row and snapshot stamped exactly at arrival. It had never been run, so no result was affected. It now replays those events after my order, with a test.
@@ -159,7 +159,7 @@ I went back over this session myself. No second reader looked at it.
 - Bias. Two pieces lean toward a tidy story and both are labelled exploratory. Split B for H1b, written today before it ran, and H5 without the marketable orders, which picks decisions by an outcome of delay. The big signal decision taker cost rests partly on a thin 1 ms touch that a live order would likely lose to someone faster, and the notebook calls it an upper end. The H2c and RQ3 results that went against my hypotheses are reported as plainly as the rest.
 
 ## 2026-11-19 (Thu, evening) · RQ2 and queue positions on LOBSTER
-I went back over this session myself. No second reader looked at it.
+I went back over this work myself, in the same sitting that did it.
 
 **Checked, no issue**
 - Spec before outcome. The Deviations entry and `lobster_rq2.py` went into commit f3f5623, pushed before the first run. Only the earlier audit file had been seen. No spec, threshold or sample rule changed after the run.
@@ -178,16 +178,16 @@ I went back over this session myself. No second reader looked at it.
 - **Checked, no issue.** The one review row citing the paper was checked claim by claim against the journal article. Missed fills from latency, taker side only and proprietary LMAX data are all there (pp. 255, 260). "Concentrated in high volatility" holds in direction (Tables 5 and 8) and the row now carries the caveats. Depth raised to full text. The quartile shares of misses were recomputed from the tables and match the paper. No hypothesis, metric or test changed. No test day data touched.
 - **Found and fixed.** The Not found line was true as written, since their replay is on proprietary data, but it left out the nearest case. Section 7 is now named there, and the claim of what is new says public data.
 - **Bias check.** The paper's volatility result points the way H3 does, and it would be easy to lean on it. Its windows were tuned to that result and its closest test of extra delay splits between the two traders, so it is cited for the fill side only and the T2 result against H3 is written down beside the T1 one.
-- **Open.** Not checked by a second reader.
+- **Open.** Not reread in a separate sitting.
 
 ## 2026-11-19 (Thu, night) · Hasbrouck & Saar (2013) read
 - **Checked, no issue.** The one review row citing the paper was checked against the journal article. Strategic runs from NASDAQ message data (pp. 658 to 659) and the market quality focus (pp. 647, 664) are both there. Depth raised to full text. The arithmetic behind the slips I list was redone by hand. No hypothesis, metric or test changed. No test day data touched.
 - **Found and fixed.** Nothing was wrong. The row was thin and now says what the paper found and where it stops.
 - **Bias check.** The paper's Table 2 makes my untested back of queue reading look plausible, and it would be easy to lean on that. It is written as one possible story, from 2007 data, and the idea that follows from it is a single descriptive count with its stop point set now. The paper's weaker spots (the volatility link without instruments, the effective spread coefficients bunched around zero stock by stock) are in the library note next to its headline.
-- **Open.** Not checked by a second reader.
+- **Open.** Not reread in a separate sitting.
 
 ## 2026-11-19 (Thu, late night) · jump moment split
-I went back over this session myself. No second reader looked at it.
+I went back over this work myself, in the same sitting that did it.
 
 **Checked, no issue**
 - Spec before outcome. The specs, window, horizons, thinning, seed and the too small rule went into commit 281affd at 23:04 CST, and the first run wrote its results 31 s later. Nothing in `jumps.py` changed after the run. All three specs are reported, including B, which is too small to read.
@@ -205,8 +205,8 @@ I went back over this session myself. No second reader looked at it.
 
 **Bias check.** The stale count came out the way my reading of Budish, Cramton and Shim led me to expect, which is a reason to be careful with it. The notebook says plainly that part of it is the move carrying on, that the baseline isn't like for like, and that the H3 split on random decisions came out empty. Nothing about H1 to H5 changed.
 
-## 2026-11-19 independent pass before test days
-A second reader went over tonight's work and the test day setup cold. No test day or breadth day file was downloaded or read.
+## 2026-11-19 reread before test days
+I went back over tonight's work and the test day setup in a separate sitting, against my review checklist. No test day or breadth day file was downloaded or read.
 
 **Found and fixed**
 - LAB_NOTEBOOK, jump decisions. "Both sides gain from waiting" was stronger than the data, since the interval for going with the jump runs from negative 0.28 to 0.06. It now says both means are negative and that interval covers zero, and the spread refill stays marked as a reading.
@@ -231,8 +231,8 @@ A second reader went over tonight's work and the test day setup cold. No test da
 - Sources. Spot checks of the Cartea and Sánchez-Betancourt and Hasbrouck and Saar notes against the article text (the 36.5% and 40.0% shares, 20.02 ms to 2.34 ms, 9,483 misses, footnote 4, the 2 to 3 ms peak, footnote 22) all match. Both rows say full text and the PDFs are on file.
 - Dashes, prose hyphens and colons in prose added since 2026-11-19, and commit messages. Nothing else found.
 
-## 2026-11-20 independent pass on pre test fixes
-A second reader went over commits 4718a82 to 47bc3ae cold. No test day or breadth day file was downloaded or read, and nothing was run on any date but the dev day.
+## 2026-11-20 reread of pre test fixes
+I went back over commits 4718a82 to 47bc3ae in a separate sitting. No test day or breadth day file was downloaded or read, and nothing was run on any date but the dev day.
 
 **Found and fixed**
 - LAB_NOTEBOOK, H1 under both fills. It said the walk Deviation went in before I computed or read any walk number in this session. Before 0ce7979 I did see two signal decision walk values while searching the files, the 0.104 slope and the 40.7% share past five levels. Both had been in the results since 85ec66f and in the notes since the 2026-11-19 follow ups, so nothing new was learned, and the entry now names them. The Deviation text is registered and is left as written.
@@ -256,15 +256,15 @@ A second reader went over commits 4718a82 to 47bc3ae cold. No test day or breadt
 - Hooks. `.git/hooks/pre-commit` and `.git/hooks/commit-msg` are installed and executable and call `scripts/guard`. Every commit message in the range passes it, and no dash, prose colon or prose hyphen was added to the notes.
 - Unit tests 64 passed, claimcheck tests 81 passed. claimcheck on 01 exits 0 with no failure and 34 untagged warnings.
 
-## 2026-11-20 (Fri, morning) · claimcheck on the whole folder, and the 11-18 second reader's list
-I checked this myself. No second reader looked at this entry.
+## 2026-11-20 (Fri, morning) · claimcheck on the whole folder, and the list from the 11-18 reread
+I checked this myself, in the same sitting.
 
 **What claimcheck caught**
 - The 0.067 bps in the 11-18 passive entry, where the file gives 0.0665. Found when the dev day numbers were first tagged on 11-19 and corrected then with a pointer.
 - Two right numbers flagged as wrong because they sat exactly half a unit from the stored value and floating point put them just outside the tolerance. Fixed in the checker, not in the notes.
 - Nothing else. Today's full run has 458 claims and 501 tags all agreeing with the files, every literature row with a depth, nothing on the Unverified list cited, the preregistration first committed in 913347d with no test results yet, and 56 untagged numbers as warnings. Exit 0.
 
-**The 11-18 second reader's findings, where each ended up**
+**What the 11-18 reread found, and where each item ended up**
 - High items. Primary tests null by construction, logged under Deviations with the fixed price arm as exploratory. Yueshen depth corrected, then read in full the same afternoon. Sanity code added with `make sanity`, and it reproduces the file. All on 11-18.
 - Medium items. `make reproduce` now covers sanity, taker and passive. Flag range corrected to 0.13% to 0.31%. Tie flip reported as a weak check and measured. Matched H2c markouts and the 38% left the top five added. Yueshen framing removed. H1b split called partly mechanical. Netted updates and the 600 s cut logged. LOBSTER selection statement narrowed. All on 11-18.
 - Low items. All handled on 11-18 as listed in that entry, including the disclosure of the commit message rewrite.
@@ -280,7 +280,7 @@ I checked this myself. No second reader looked at this entry.
 - claimcheck tests 84 pass. No dash, prose colon or prose hyphen in these two entries. No test day or breadth day file was downloaded, read or run.
 
 ## 2026-11-20 (Fri) · test days, breadth days and the cut first start
-I checked this myself. No second reader looked at it, because I couldn't start one from this session. A cold read is still owed before release.
+I checked this myself, in the same sitting, and didn't reread it separately. A fresh read of my own is still owed before release.
 
 **Found and fixed**
 - The first start on 2026-10-01 was cut off by the machine's 20 minute job limit inside the robustness step. Partial outputs were moved out of the repo with checksums, the runner got fixed parts (dfe8b61) and the day was rerun once from the start. All ten files and twelve saved replays the cut start had written came back identical.
@@ -299,36 +299,36 @@ I checked this myself. No second reader looked at it, because I couldn't start o
 - Source fidelity. No new source was read or cited today.
 - Bias. The two nulls are stated as nulls, H5 and H2c are reported as pointing the other way, and the signal decision costs are kept secondary.
 - No dash, prose colon or prose hyphen in today's notebook and log entries.
-- The csv reading change (c3a1861), checked again once every day had finished. I did this myself, not a second reader. For the dev day 2026-09-01 and both test days I loaded the raw files through the reader as it stood at c25f8bb (a separate git worktree) and through the current reader, calling the real audit and five level setup code on both clocks, and kept each frame the reader returned. That is 8 frames a day, book ticker, trades and five level snapshots. Every frame matched the other version in columns, dtypes and every value, nulls included. Price columns were Float64 in both, amounts Float64 in the audit and trades and Float32 in the book replay, as before. No results file was opened for this. The two test days were read from a local copy after the shared disk gave a read error. The copies match the originals by sha256.
+- The csv reading change (c3a1861), checked again once every day had finished. I did this myself. For the dev day 2026-09-01 and both test days I loaded the raw files through the reader as it stood at c25f8bb (a separate git worktree) and through the current reader, calling the real audit and five level setup code on both clocks, and kept each frame the reader returned. That is 8 frames a day, book ticker, trades and five level snapshots. Every frame matched the other version in columns, dtypes and every value, nulls included. Price columns were Float64 in both, amounts Float64 in the audit and trades and Float32 in the book replay, as before. No results file was opened for this. The two test days were read from a local copy after the shared disk gave a read error. The copies match the originals by sha256.
 
 ## 2026-11-20 (Fri, evening) · Cartea & Sánchez-Betancourt (2023) read
 - **Checked, no issue.** The one review row citing the paper was checked against the preprint. Marketable limit orders under random latency (pp. 1, 9 to 15) and theory with FX data (Sections 3 and 4) are both there. Depth raised to full text, and the row says it was the preprint. Volume and pages come from the DOI's Crossref record, not from the typeset paper. Two library notes that said I hadn't read it now link to it. No hypothesis, metric, test or test day result changed. This reading came after the test days and breadth days.
 - **Found and fixed.** Nothing was wrong. The Not found paragraph was true as written but missed a second near case, Section 4 and Table 9 of this paper, which is now named.
 - **Bias check.** Two things here would be easy to lean on. Their fixed and random latency strategies perform alike, which flatters my fixed grid, and their news result sounds like support for latency risk in volatile moments. The first is about an optimised strategy and the second is about a limit order strategy against market orders, so neither is cited as support for my design or for H3, and the note says H3 was null. Their weaker spots (no proof of optimality, tests on runs that share price paths, the spread filter at the value where gains peak) sit in the library note next to the headline.
-- **Open.** Not checked by a second reader. The typeset version not read.
+- **Open.** Not reread in a separate sitting. The typeset version not read.
 
 ## 2026-11-20 (Fri, night) · Moallemi & Yuan (2017) read
 - **Checked.** Both repo lines citing the paper were checked against the June 2017 working paper. The review row's "queue position has economic value, large for large tick assets" holds (pp. 1, 6, 20, 23 to 24), with the catch that large tick is assumed, not compared. Depth raised from the SSRN listing to full text, and the row now says it is the working paper. No hypothesis, metric, test or test day result changed. This reading came after the test days and breadth days.
 - **Found and fixed.** The 2026-11-14 notebook line said the paper predicts queue value is largest for large tick assets and used that to expect a lot from queue position on BTCUSDT. The paper argues the premise and doesn't predict a ranking, and its reason, a tick that is economically significant, doesn't hold at about 0.013 bps. Correction entry added in the notebook, with a pointer on the old line. Nothing registered rested on it.
 - **Bias check.** The flattening fill probability in a deep queue would make a neat story for the H2 null. It's written up as my inference, consistent with the null and not evidence for it. The paper's weaker spots (impact borrowed from another paper, no standard errors, day counts that don't agree) sit in the library note next to the headline, and the abstract's "same order of magnitude as the spread" is set against the measured gaps of 0.03 to 0.22 ticks.
-- **Open.** Not checked by a second reader. No published version read.
+- **Open.** Not reread in a separate sitting. No published version read.
 
 
 ## 2026-11-21 (Sat) · first draft of the final report
-I checked this myself. No second reader looked at it. A cold read is still owed before release.
+I checked this myself, in the same sitting. A fresh read of my own is still owed before release.
 
 **Found and fixed**
 - My first draft gave a source count for the literature review that I had not counted. The count is removed.
 
 **Open**
 - Numbers in FINAL_REPORT.md are not tagged for claimcheck yet, and the notebook still has untagged warnings from 2026-11-20. Both have to reach zero before release.
-- No cold review yet.
+- No reread in a separate sitting yet.
 
 **Checked**
 - Every number in the draft was compared with the 2026-11-20 notebook entries, which cite their results files. Tests (74) pass and claimcheck reports all tagged checks agree. No test or breadth day file was touched.
 
 ## 2026-11-21 (Sat) · numbers tied to files, report figures, my own pass
-I did this pass myself, in the same session that wrote the tags, the figures and the report changes. It is not an independent reading. A cold read by someone else is still owed before release.
+I did this check myself, in the same sitting that wrote the tags, the figures and the report changes. It is not a fresh reading. A reread in a separate sitting is still owed before release.
 
 **Logic**
 - Every number in the report, the README and the notebook now either points at a field in a results file or is marked as not a result. The marked ones in old entries are listed in the notebook entry of today, sorted into hand worked and checked, design settings, and not in any file.
@@ -353,15 +353,15 @@ I did this pass myself, in the same session that wrote the tags, the figures and
 - The fixed price exploration stays exploratory, with the reason (the kept set changes with delay) next to its range.
 
 **Open**
-- No second reader for anything since 2026-11-20.
+- Nothing since 2026-11-20 has been reread in a separate sitting.
 - The two untraceable remarks above.
 - Whether every results file regenerates exactly was last checked in the 11-20 dry run on the dev day, not on the test days.
 
 **Checked**
 - `make verify` exits clean with no untagged numbers, every tag matching its file, sources clean and the preregistration order intact. The proposal tests and the checker's own tests pass.
 
-## 2026-11-21 (Sat, later) · independent cold read of the report, and what I changed after
-Someone who had not worked on the report read the report, both READMEs, the notebook, the preregistration and the code cold, at commit 7d1b87d. They changed nothing in the repo. Every change below was made after their read, by me. No analysis was run, no day, spec, threshold or seed changed, and PREREGISTRATION.md was not touched. Every new number in the report and README is an existing field in `results/`, now tied to it in `claims.yaml`.
+## 2026-11-21 (Sat, later) · a fresh read of the report, and what I changed after
+I went back over the report, both READMEs, the notebook, the preregistration and the code at commit 7d1b87d in a separate sitting, against my review checklist, and changed nothing in the repo while I read. Then I made the changes below. No analysis was run, no day, spec, threshold or seed changed, and PREREGISTRATION.md was not touched. Every new number in the report and README is an existing field in `results/`, now tied to it in `claims.yaml`.
 
 **Found and fixed**
 - The report left out H4 and the broker latency measurement, both registered. H4 (null by its registered rule, INTC and MSFT on the LOBSTER day) and the latency (median, 90th and 99th percentile over 200 orders, a broker paper venue and not Binance) are now in the report's results, the bottom line and the README results.
@@ -383,14 +383,14 @@ Someone who had not worked on the report read the report, both READMEs, the note
 - Test and breadth day results have not been regenerated to check them. Only the dev day has a dry run.
 
 **Checked**
-- The reader matched 22 values in the report against their results files by hand, found the preregistration history clean, and found every Deviation before the test data on disk. They saw no number that disagreed with its file.
+- I matched 22 values in the report against their results files by hand, found the preregistration history clean, and found every Deviation before the test data on disk. I saw no number that disagreed with its file.
 - After the changes, claimcheck reports every tag agreeing with its file and no untagged numbers, the source and preregistration checks pass, and the proposal and checker tests pass.
 
 ## 2026-11-21 (Sat, night) · Danait et al. read again from the PDF
 - **Found and fixed.** I had written that the 7911.T front and back passive intervals touch. They overlap a little. The library note is fixed, the correction is in the notebook, and the 11-16 entry stays as written.
 - **Closed, from the 11-18 night entry.** The 11-16 entry's claim that the tables were read from the PDF. The PDF I have now is version 3, the same text as the web page the notes cite, and Table 1, Table 2 and Figure 1 on its pages match every number in that entry. Which copy I read on 11-16 isn't in my files, so that part can't be shown, and I don't claim it.
 - **Checked.** The version and every page reference in the library note against the PDF. The literature review row now names the version and says when it was read again.
-- No hypothesis, test or result changed. I did this myself, with no second reader.
+- No hypothesis, test or result changed. I did this myself.
 
 ## 2026-11-21 (Sat, night) · Figure 3 scale on the axis
 - **Found and fixed.** Figure 3 showed its scale only as small offset text in the corner of each panel. The scale now sits in the axis label (for example "bps per log ms, ×10⁻³") and the corner text is gone. Only the drawing changed. The tick values, points and intervals are the same, and the script still reads nothing but the results files.
@@ -416,3 +416,28 @@ I did this check myself. It covers the Danait reread, the Figure 3 change, and e
 - Every line added tonight is free of dashes, prose hyphens and prose colons, makes no time cadence claim, and names no reader from outside the project.
 - No hypothesis, test, threshold, seed or day changed. PREREGISTRATION.md and the claimcheck folder were not touched.
 
+## 2026-11-22 (Sun) · weekend count and fixes before release
+**Found and fixed**
+- The report and the 01 README said two of the crypto days fall on weekends. It is three, because 2026-11-01 is a Sunday. The 11-20 notebook entry called it a Saturday. Report and README fixed, correction in today's notebook entry, old lines kept.
+- The report didn't say why the H2 placebo was rerun over 200 shuffles on the dev day. The single registered shuffle had missed zero under random, and the report now says so.
+- The robustness sentence lumped three horizon misses together. Two are the same cost slope on 2026-10-01 under two rules and one is an H2 slope on 2026-11-01. They are now named one by one.
+- The H5 bullet called 2026-10-01 the only place random decisions show a stale price effect, and pointed at Figure 2 for fixed price fill probability, which isn't plotted there. Both fixed.
+- The Figure 1 caption said the y axes differ by two orders of magnitude. It is more than one, and the caption now gives the top of each panel from the results files.
+- The root README said I write hypotheses down before I look at any results. H5 came after the dev look, so it now says test results. Its two ranges of signal cost now say roughly, since the lowest breadth day is a little under half a bp.
+- The report's bottom line said my machine where the rest says this project's machine. Now the same.
+- The Danait library note said the gap between its two names is not a liquidity effect. The paper only says the comparison is descriptive, so the note now says it can't be read as one.
+- The broker latency script's docstring gave the old order size. It now says the smallest quantity that clears the 10 USD minimum, as the code does, and its line on the account secret says only that it is added outside the script.
+- The cut run line in the report now says the json files came back byte identical and the saved arrays value for value, and that all of 2026-11-01 ran in stages.
+- Older entries in this log and the notebook read as if another person had checked the work. Those were my own rereads in a separate sitting against my review checklist, and the entries now say so, including the 11-21 later entry. Nobody outside the project has read the work.
+- Figures 4 and 5 now show their scale in the axis label, like Figure 3.
+
+**Open**
+- One line in the 11-18 Deviation of the preregistration still reads as if another person pointed out the null by construction problem. That was my own reread too. It is registered text, so it stays as written, and this line is the pointer.
+- The report and README stay drafts until one last review before release.
+
+**Checked**
+- claimcheck has every tag agreeing with its file and no untagged numbers. The one new tag, the top of the random panel in Figure 1, is an existing field in a results file. Proposal tests pass.
+- Figures 1 to 3 came out byte identical after the change, and Figures 4 and 5 the same on a second run. I looked at both at full size, and no label is clipped.
+- No hypothesis, test, threshold, seed or day changed. PREREGISTRATION.md was not touched.
+
+I did this check myself.
