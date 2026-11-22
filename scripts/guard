@@ -7,6 +7,7 @@
 Install both with `make hooks` from the repo root. Hooks in .git/hooks are not versioned,
 so this file is the copy that is kept.
 """
+import json
 import re
 import subprocess
 import sys
@@ -14,12 +15,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# whole words, matched case insensitive
-WORDS = ["AI", "LLM", "Hark", "Claude", "GPT", "style"]
-# words that also catch their longer forms (colons, hyphens, overstated, reviewers)
-STEMS = ["integrity", "hyphen", "colon", "overclaim", "overstat", "wording", "reviewer"]
-# "rule" alone is left out because tie rule and cancellation rule are terms of the study
-PHRASES = ["house style", "house rule", "style rule", "writing rule", "em dash", "en dash", "cold review", "claimcheck warning"]
+# Optional extra words to keep out of commit messages, read from .git/guard-words.json
+# when that file exists. It lives inside .git, so it stays on my machine.
+def extra_words():
+    f = ROOT / ".git" / "guard-words.json"
+    if not f.exists():
+        return [], [], []
+    d = json.loads(f.read_text(encoding="utf-8"))
+    return d.get("words", []), d.get("stems", []), d.get("phrases", [])
+
 
 DASHES = "\u2014\u2013"
 
@@ -27,6 +31,7 @@ DASHES = "\u2014\u2013"
 def bad_message_words(msg):
     """Return the banned words found in a commit message, in the order checked."""
     text = "\n".join(l for l in msg.splitlines() if not l.startswith("#"))
+    WORDS, STEMS, PHRASES = extra_words()
     found = []
     for p in PHRASES:
         if re.search(r"\b" + r"\s+".join(map(re.escape, p.split())) + r"e?s?\b", text, re.I):
