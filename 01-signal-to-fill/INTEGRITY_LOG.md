@@ -396,3 +396,23 @@ Someone who had not worked on the report read the report, both READMEs, the note
 - **Found and fixed.** Figure 3 showed its scale only as small offset text in the corner of each panel. The scale now sits in the axis label (for example "bps per log ms, ×10⁻³") and the corner text is gone. Only the drawing changed. The tick values, points and intervals are the same, and the script still reads nothing but the results files.
 - **Checked.** I ran the figure script again. Figures 1, 2, 4 and 5 came out byte identical to the committed files, and Figure 3 comes out the same on a second run. I looked at the new Figure 3 at full size, and no label is clipped or sits on another.
 
+## 2026-11-21 (Sat, late night) · tonight's changes and every Danait citation
+I did this check myself. It covers the Danait reread, the Figure 3 change, and every place in this folder and the library that cites Danait et al.
+
+**Found and fixed**
+- In tonight's notebook entry I first wrote that every Danait number I quote sits in Tables 1 and 2 or in Sections 7.1 and 7.2. Some come from Sections 4 and 6 (the sample dates, the probe and parent sizes, the resample count). The line now says so. All of them are on the PDF pages.
+
+**Open**
+- Figures 4 and 5 still show their scale as offset text in a corner, the same thing Figure 3 had. Left as they are tonight.
+- The literature review row for Danait gives sections, not pages. The pages are in the library note.
+- Which copy I read on 11-16 stays unknown. The item is closed on the numbers, as above.
+
+**Checked**
+- Logic. The interval correction makes the 7911.T rule gap look weaker, and the 11-16 line already called it marginal. Nothing registered rests on it. In the literature review, calling front my best case and back my worst case matches their finding that front is most favourable to passive orders and back least (Section 8.2, pp. 6 to 7), and the same section of my review says these are not true bounds.
+- Source fidelity. Version 3 everywhere a version is named (the literature review, the library note and its index row, the 11-14 entry). Every page reference in the library note against the PDF. Every Danait number in the library note, the literature review row and the 11-14, 11-16 and 11-18 notebook entries is on the PDF pages. The two bar readings on 11-16 are marked approximate and agree with the printed shares. Reading depth says only what I did. The whole paper read, the bars taken by eye, their interval method not checked, no supplement looked for. The preregistration line on applying trades, then cancellations, then additions matches Section 3.1 (p. 2). The report and the READMEs don't cite the paper by name.
+- Bias. Nothing tonight makes a result look better. The one correction cuts against the tidier story.
+- Figure 3. Only the drawing changed. The script reads the same results files, the other four figures are byte identical, and the new image has no clipped or overlapping text.
+- From the repo root, claimcheck has every check agreeing and no untagged numbers. Proposal tests 74 pass and the checker's tests 84 pass.
+- Every line added tonight is free of dashes, prose hyphens and prose colons, makes no time cadence claim, and names no reader from outside the project.
+- No hypothesis, test, threshold, seed or day changed. PREREGISTRATION.md and the claimcheck folder were not touched.
+
