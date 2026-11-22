@@ -63,6 +63,22 @@ def _save(fig, name):
     print(f"wrote figures/{name}")
 
 
+def _scale_to_label(fig, axes, labels, fontsize=8):
+    """Moves each axis's x scale from the small offset text in the corner into its label.
+
+    The corner text is easy to miss once GitHub shrinks the image. Tick values are unchanged.
+    """
+    fig.canvas.draw()
+    for ax, label in zip(axes, labels):
+        offset = ax.xaxis.get_major_formatter().get_offset()
+        m = re.fullmatch(r"1e([\u2212-]?\d+)", offset)
+        assert offset == "" or m, f"unexpected axis offset {offset!r} on {label}"
+        ax.xaxis.get_offset_text().set_visible(False)
+        if m:
+            k = int(m.group(1).replace("\u2212", "-"))
+            ax.set_xlabel(f"{label}, $\\times 10^{{{k}}}$", fontsize=fontsize)
+
+
 def fig1_cost_by_delay():
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.8), constrained_layout=True)
     for ax, key, title in ((axes[0], "random", "Random decisions (H1 sample)"),
@@ -141,17 +157,7 @@ def fig3_eight_day_table():
         ax.axis("off")
     axes[len(names)].legend(handles=_legend_handles(), loc="center", fontsize=9, frameon=False)
     fig.suptitle("Eight day table, estimate and 95% block bootstrap interval for each day", fontsize=12)
-    # the scale goes into the axis label instead of the small offset text in the corner,
-    # which is easy to miss once GitHub shrinks the image. Tick values are unchanged.
-    fig.canvas.draw()
-    for ax, name in zip(axes, names):
-        offset = ax.xaxis.get_major_formatter().get_offset()
-        m = re.fullmatch(r"1e([\u2212-]?\d+)", offset)
-        assert offset == "" or m, f"unexpected axis offset {offset!r} on {name}"
-        ax.xaxis.get_offset_text().set_visible(False)
-        if m:
-            k = int(m.group(1).replace("\u2212", "-"))
-            ax.set_xlabel(f"{units[name.split()[0]]}, $\\times 10^{{{k}}}$", fontsize=8)
+    _scale_to_label(fig, axes, [units[name.split()[0]] for name in names])
     _save(fig, "fig3_eight_day_table.png")
 
 
@@ -191,6 +197,7 @@ def fig4_placebos():
         ax.grid(alpha=0.3, axis="x")
     fig.suptitle("Slopes on log delay against the registered placebo (delay labels shuffled), 95% intervals",
                  fontsize=11)
+    _scale_to_label(fig, axes, [unit for _, unit in panels])
     _save(fig, "fig4_placebos.png")
 
 
@@ -213,6 +220,7 @@ def fig5_placebo_calibration():
     axes[0].set_ylabel("shuffles")
     axes[0].legend(fontsize=7, loc="upper left")
     fig.suptitle(f"H2 placebo over 200 shuffles on the dev day {DEV_DAY} (exploratory)", fontsize=11)
+    _scale_to_label(fig, axes, ["placebo H2 slope (fill share per log ms)"] * len(axes))
     _save(fig, "fig5_placebo_calibration.png")
 
 
