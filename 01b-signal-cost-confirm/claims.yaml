@@ -145,3 +145,13 @@ build.cs.mem:
   path: peak_memory_mb
   value: 4294
   tol: 0.5
+build.bybit.c1.n:
+  file: results/build/bybit_BTCUSDT_2026-09-01/c1.json
+  path: C1.n_decisions
+  value: 11178
+  tol: 0
+build.tz.c1.n:
+  file: results/build/tardis_BTCUSDT_2026-09-01/c1.json
+  path: C1.n_decisions
+  value: 16738
+  tol: 0
