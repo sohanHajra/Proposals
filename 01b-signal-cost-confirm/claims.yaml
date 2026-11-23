@@ -170,3 +170,8 @@ build.bybit.own.slope:
   path: C1.walk.slope_bps_per_logms.est
   value: 0.044
   tol: 0.0005
+build.bybit.old.n:
+  file: results/build/old/bybit_BTCUSDT_2026-09-01_rows_on_change_only/c1.json
+  path: C1.n_decisions
+  value: 6081
+  tol: 0

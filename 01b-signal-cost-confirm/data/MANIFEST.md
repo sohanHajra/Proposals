@@ -1,6 +1,6 @@
 # Data manifest, 01.b
 
-One row per data file, written when it first lands, after the preregistration (commit b81f5f6). The files themselves aren't in the repo. Each one was checked against the MD5 its source showed before the SHA256 was taken.
+One row per data file, written when it first lands, after the preregistration (commit b81f5f6). The files themselves aren't in the repo. Each CryptoStruct file was checked against the MD5 its source showed before the SHA256 was taken.
 
 | File | Source | Role | Landed | SHA256 |
 |---|---|---|---|---|
@@ -17,6 +17,23 @@ One row per data file, written when it first lands, after the preregistration (c
 
 2026-11-14 and 2026-11-15 were added under Deviations on 2026-11-22, before any file was opened.
 
-The twelve bought test days are in my Drive and stay there until the runner, the loader and the race sensitivity are built on 2026-09-01.
 
 Tardis and Bybit show no checksum on their sites, so the five files from 2026-11-23 have only my SHA256, taken when they landed.
+
+## Test files in my Drive, not copied in yet
+The twelve bought test days, with the MD5 and size my Drive reports for each, written down before any of them is copied in (Deviation of 2026-11-23, afternoon). A file is used only if its MD5 matches its row here. Its SHA256 goes in the table above when it lands.
+
+| File | MD5 | Bytes |
+|---|---|---|
+| binance_swap-BTCUSDT-2025-12-17.txt.zst | 91969d912ba93c1f03cb72be21472388 | 1,582,999,946 |
+| binance_swap-BTCUSDT-2026-01-14.txt.zst | 29daadbe420684f39bc9b4b9b16b4075 | 1,302,489,140 |
+| binance_swap-BTCUSDT-2026-02-18.txt.zst | ac662e6285ac348255666e82b4faf044 | 1,456,871,836 |
+| binance_swap-BTCUSDT-2026-03-18.txt.zst | 0eb09cc97deb637119f9d7e0318d9e40 | 1,473,270,668 |
+| binance_swap-BTCUSDT-2026-04-15.txt.zst | 8398757e5dda78c0dfaad6c3df88bd23 | 1,204,947,737 |
+| binance_swap-BTCUSDT-2026-05-13.txt.zst | 4f1463fcf6584faecdb870ce645212f5 | 1,137,539,284 |
+| binance_swap-BTCUSDT-2026-06-18.txt.zst | 6973b2e8caa0c3a48b1edeb23c535b98 | 1,505,822,847 |
+| binance_swap-BTCUSDT-2026-07-15.txt.zst | 2392142e5f7cf6435b4332c9f9304e98 | 1,115,429,729 |
+| binance_swap-BTCUSDT-2026-08-12.txt.zst | 1997a27c67f30165b49c4a9521bf006f | 855,852,243 |
+| binance_swap-BTCUSDT-2026-09-16.txt.zst | 9b7c384456c43076b95f7c5e27d61c21 | 1,537,392,617 |
+| binance_swap-BTCUSDT-2026-10-14.txt.zst | 47349ff9c74b837d3da7fbe8ad7a2226 | 1,613,530,298 |
+| binance_swap-BTCUSDT-2026-11-18.txt.zst | e01b7bfc82241c4a24cfb62e6c022691 | 2,096,390,969 |
