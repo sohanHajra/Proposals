@@ -1,0 +1,6 @@
+# Settings I chose, not results. One phrase per line.
+0.1 bps
+500 ms
+1 ms
+10 of 12
+EUR 13

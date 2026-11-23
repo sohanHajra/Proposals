@@ -1,0 +1,14 @@
+# 01.b Signal Cost Confirm
+
+A sequel to [01 From Signal to Fill](../01-signal-to-fill/). Two things in 01 looked real but weren't its main tests. A taker acting on top of book imbalance paid more the longer its order took to reach the book, and a fixed price passive order looked costlier with delay once the orders marketable on arrival were left out. 01.b checks both once, on twelve days I haven't seen, with the rules written first.
+
+## Status
+
+🟡 Preregistered 2026-11-22. No test day downloaded yet.
+
+- [Preregistration](PREREGISTRATION.md)
+- [Lab notebook](LAB_NOTEBOOK.md)
+
+## Limits
+
+Still one venue for the verdicts, and the replay still has no race for the touch. The preregistration lists the rest.

@@ -1,0 +1,47 @@
+# Claims for 01.b. Numbers in the preregistration that come from 01 point at 01's results files.
+# value is the number as written; tol is half a unit in its last printed digit.
+prior.sig.slope.min:
+  file: ../01-signal-to-fill/results/taker/followups_2026-05-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.est
+  value: 0.068
+  tol: 0.0005
+prior.sig.slope.max:
+  file: ../01-signal-to-fill/results/taker/followups_2026-07-01.json
+  path: signal.H1_five_level_walk.slope_bps_per_logms.est
+  value: 0.113
+  tol: 0.0005
+prior.sig.S1.min:
+  file: ../01-signal-to-fill/results/taker/followups_2026-05-01.json
+  path: signal.mean_S_by_delay_ms.1
+  value: 0.041
+  tol: 0.0005
+prior.sig.S1.max:
+  file: ../01-signal-to-fill/results/taker/followups_2026-10-01.json
+  path: signal.mean_S_by_delay_ms.1
+  value: 0.085
+  tol: 0.0005
+prior.sig.S500.min:
+  file: ../01-signal-to-fill/results/taker/followups_2026-05-01.json
+  path: signal.mean_S_by_delay_ms.500
+  value: 0.47
+  tol: 0.005
+prior.sig.S500.max:
+  file: ../01-signal-to-fill/results/taker/followups_2026-07-01.json
+  path: signal.mean_S_by_delay_ms.500
+  value: 0.76
+  tol: 0.005
+prior.fpx.min:
+  file: ../01-signal-to-fill/results/passive/followups_2026-11-01.json
+  path: fixed_price_drop_marketable_random_exploratory.back.slope_bps_per_logms.est
+  value: 0.0010
+  tol: 0.00005
+prior.fpx.max:
+  file: ../01-signal-to-fill/results/passive/followups_2026-10-01.json
+  path: fixed_price_drop_marketable_random_exploratory.front.slope_bps_per_logms.est
+  value: 0.0058
+  tol: 0.00005
+prior.threshold:
+  file: ../01-signal-to-fill/results/taker/followups_dev_2026-09-01.json
+  path: signal.threshold_abs_imbalance
+  value: 0.98630194
+  tol: 0.000000005
