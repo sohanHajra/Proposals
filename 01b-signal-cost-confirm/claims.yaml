@@ -175,3 +175,78 @@ build.bybit.old.n:
   path: C1.n_decisions
   value: 6081
   tol: 0
+cal.tz.front:
+  file: results/build/placebo_calibration/tardis_BTCUSDT_2026-09-01.json
+  path: by_rule.front.summary.count_excluding_zero
+  value: 13
+  tol: 0
+cal.tz.random:
+  file: results/build/placebo_calibration/tardis_BTCUSDT_2026-09-01.json
+  path: by_rule.random.summary.count_excluding_zero
+  value: 11
+  tol: 0
+cal.tz.back:
+  file: results/build/placebo_calibration/tardis_BTCUSDT_2026-09-01.json
+  path: by_rule.back.summary.count_excluding_zero
+  value: 12
+  tol: 0
+cal.cs.front:
+  file: results/build/placebo_calibration/cryptostruct_BTCUSDT_2026-09-01.json
+  path: by_rule.front.summary.count_excluding_zero
+  value: 17
+  tol: 0
+cal.cs.random:
+  file: results/build/placebo_calibration/cryptostruct_BTCUSDT_2026-09-01.json
+  path: by_rule.random.summary.count_excluding_zero
+  value: 10
+  tol: 0
+cal.cs.back:
+  file: results/build/placebo_calibration/cryptostruct_BTCUSDT_2026-09-01.json
+  path: by_rule.back.summary.count_excluding_zero
+  value: 19
+  tol: 0
+cal.cs.back.rank:
+  file: results/build/placebo_calibration/cryptostruct_BTCUSDT_2026-09-01.json
+  path: by_rule.back.summary.k0_rank_from_top
+  value: 4
+  tol: 0
+cal.eth.front:
+  file: results/build/placebo_calibration/tardis_ETHUSDT_2026-09-01.json
+  path: by_rule.front.summary.count_excluding_zero
+  value: 15
+  tol: 0
+cal.eth.random:
+  file: results/build/placebo_calibration/tardis_ETHUSDT_2026-09-01.json
+  path: by_rule.random.summary.count_excluding_zero
+  value: 7
+  tol: 0
+cal.eth.back:
+  file: results/build/placebo_calibration/tardis_ETHUSDT_2026-09-01.json
+  path: by_rule.back.summary.count_excluding_zero
+  value: 11
+  tol: 0
+cal.by.front:
+  file: results/build/placebo_calibration/bybit_BTCUSDT_2026-09-01.json
+  path: by_rule.front.summary.count_excluding_zero
+  value: 21
+  tol: 0
+cal.by.random:
+  file: results/build/placebo_calibration/bybit_BTCUSDT_2026-09-01.json
+  path: by_rule.random.summary.count_excluding_zero
+  value: 19
+  tol: 0
+cal.by.random.rank:
+  file: results/build/placebo_calibration/bybit_BTCUSDT_2026-09-01.json
+  path: by_rule.random.summary.k0_rank_from_top
+  value: 1
+  tol: 0
+cal.by.back:
+  file: results/build/placebo_calibration/bybit_BTCUSDT_2026-09-01.json
+  path: by_rule.back.summary.count_excluding_zero
+  value: 28
+  tol: 0
+cal.n:
+  file: results/build/placebo_calibration/cryptostruct_BTCUSDT_2026-09-01.json
+  path: n_shuffles
+  value: 200
+  tol: 0

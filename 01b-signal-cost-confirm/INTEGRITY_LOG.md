@@ -52,3 +52,20 @@ A separate reread of 01.b against my review checklist, done before any test day 
 - The ETHUSDT threshold was recomputed from the raw file and matches the stored value exactly.
 - No test day file is anywhere in the project, and nothing derived from the free samples exists.
 - Every raw file in the manifest matches its checksum.
+
+## 2026-11-23, afternoon · acting on the reread
+**Found and fixed**
+- The missing fetch guard. The MD5 and size of all twelve bought test files are committed, the runner checks each file against them, and the converters and loader refuse a test day outside the runner. Written under Deviations first.
+- A day whose file fails can now be left out through the runner, and it then counts for the ETHUSDT wait.
+- The verdict count is code with tests.
+- The Bybit reader change and its gap rule on Bybit's own message time are now under Deviations.
+- How a C2 placebo miss is read was fixed under Deviations, then the 200<!--c:cal.n--> shuffle check was run once per source on the build day. It fails the cut on CryptoStruct back and on every Bybit rule.
+- The C1 fee line, the race rule wording, the quoted 01 range, the loader rule timing, the burst note, the gap rule share, the memory figure, the README status, the MANIFEST wording and claimcheck's list of days are all fixed or said plainly.
+
+**Open**
+- The placebo can't back up C2 under back on CryptoStruct or on Bybit. The block interval may run a little narrow there, which would also make C2's own intervals under back slightly easier to clear. Reported with the results, method unchanged.
+- The copy from Drive is still by hand. The MD5 check catches a wrong file, not an early look.
+
+**Checked, no issue**
+- The first of the 200<!--c:cal.n--> shuffles gives back the registered placebo exactly on all four sources and rules.
+- 25 tests pass and claimcheck agrees. No test day file is in the project.
