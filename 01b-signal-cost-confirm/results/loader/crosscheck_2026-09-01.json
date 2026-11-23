@@ -1,0 +1,59 @@
+{
+ "day": "2026-09-01",
+ "symbol": "BTCUSDT",
+ "agreement_rule": "at least 99% matched each way on time, price and size",
+ "trades_tardis": 3602361,
+ "trades_cryptostruct": 3622828,
+ "count_difference": 20467,
+ "first_trade_tardis": {
+  "timestamp": 1788220800003000,
+  "id": "8038326171",
+  "side": "buy",
+  "price": 78549.6,
+  "amount": 0.024
+ },
+ "first_trade_cryptostruct": {
+  "timestamp": 1788220800003000,
+  "id": "8038326171",
+  "side": "buy",
+  "price": 78549.6,
+  "amount": 0.024
+ },
+ "last_trade_tardis": {
+  "timestamp": 1788307199987000,
+  "id": "8041965208",
+  "side": "sell",
+  "price": 77400.1,
+  "amount": 0.134
+ },
+ "last_trade_cryptostruct": {
+  "timestamp": 1788307199987000,
+  "id": "8041965208",
+  "side": "sell",
+  "price": 77400.1,
+  "amount": 0.134
+ },
+ "matched_time_price_size": 3602361,
+ "share_tardis_matched": 1.0,
+ "share_cryptostruct_matched": 0.9943505460375155,
+ "matched_time_price_size_side": 3602361,
+ "share_tardis_matched_with_side": 1.0,
+ "ids_in_both": 3602361,
+ "ids_only_tardis": 0,
+ "ids_only_cryptostruct": 20467,
+ "volume_tardis": 149388.338,
+ "volume_cryptostruct": 151357.832,
+ "agree": true,
+ "ticker_description": {
+  "rows_tardis": 36920623,
+  "rows_cryptostruct": 36927599,
+  "matched_all_five_fields": 28718194,
+  "share_tardis_matched": 0.7778361161457108,
+  "share_cryptostruct_matched": 0.7776891749718144,
+  "note": "matched on a 64 bit hash of the five fields, so a rare collision could add a match"
+ },
+ "five_level_rows_description": {
+  "rows_tardis": 2028349,
+  "rows_cryptostruct": 2028956
+ }
+}

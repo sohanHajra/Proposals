@@ -70,13 +70,19 @@ def compare(day=BUILD_DAY, sym="BTCUSDT"):
                ids_in_both=len(ids_t & ids_c), ids_only_tardis=len(ids_t - ids_c), ids_only_cryptostruct=len(ids_c - ids_t),
                volume_tardis=float(tz["amount"].sum()), volume_cryptostruct=float(cs["amount"].sum()))
     res["agree"] = bool(res["share_tardis_matched"] >= AGREE and res["share_cryptostruct_matched"] >= AGREE)
-    # description only
-    tk = tardis_ticker(day, sym)
-    ck = pl.read_parquet(out_file(day, sym, "ticker"))
+    p = RESULTS / "loader" / f"crosscheck_{day}.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(res, indent=1))
+    del tz, cs
+    # description only. Rows are reduced to one hash of the five fields to keep memory down
     k2 = ["timestamp", "bid_price", "bid_amount", "ask_price", "ask_amount"]
-    mt = multiset_match(tk, ck, k2)
+    h = lambda df: df.select(pl.struct(k2).hash(seed=0).alias("h"))
+    tk = h(tardis_ticker(day, sym))
+    ck = h(pl.read_parquet(out_file(day, sym, "ticker"), columns=k2))
+    mt = multiset_match(tk, ck, ["h"])
     res["ticker_description"] = dict(rows_tardis=tk.height, rows_cryptostruct=ck.height, matched_all_five_fields=mt,
-                                     share_tardis_matched=mt / tk.height, share_cryptostruct_matched=mt / ck.height)
+                                     share_tardis_matched=mt / tk.height, share_cryptostruct_matched=mt / ck.height,
+                                     note="matched on a 64 bit hash of the five fields, so a rare collision could add a match")
     snap_t = RAW / "tardis" / f"binance-futures_book_snapshot_5_{day}_{sym}.csv.gz"
     nt = pl.scan_csv(snap_t).select(pl.len()).collect().item()
     nc = pl.scan_parquet(out_file(day, sym, "snap5")).select(pl.len()).collect().item()
