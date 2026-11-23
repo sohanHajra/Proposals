@@ -3,6 +3,7 @@
 Usage
   python -m s2fb.run SOURCE SYM DAY next     run the next unit of that day
   python -m s2fb.run SOURCE SYM DAY status   list the units and which are done
+  python -m s2fb.run SOURCE SYM DAY leave_out "REASON"   a day whose file failed (copy, MD5 or read)
 
 SOURCE is cryptostruct, tardis or bybit. Only the days in s2fb.days are accepted, plus 2026-09-01
 for building. Every unit writes its own file under results/ROLE/SOURCE_SYM_DAY/ and refuses to start
@@ -24,7 +25,10 @@ process, because the machine I run on stops any job after 20 minutes.
 ETHUSDT days are refused until every BTCUSDT test day has finished or been left out by the gap rule.
 Any day other than 2026-09-01 is refused if the 01 code differs from tag v0.1-signal-to-fill.
 """
+import hashlib
 import json
+import os
+import re
 import resource
 import subprocess
 import sys
@@ -34,7 +38,7 @@ import numpy as np
 
 from .paths import RESULTS, DERIVED, REPO, S2F_TAG
 from .days import BUILD_DAY, TEST_DAYS
-from .guard import check_day_allowed, Refused
+from .guard import check_day_allowed, Refused, runner
 
 QTY_BTC = 0.01
 TICK = {"BTCUSDT": 0.1, "ETHUSDT": 0.01}
@@ -107,6 +111,54 @@ def threshold_and_size(sym, source="tardis", unit="c1", day=None):
     return d["threshold_abs_imbalance"], d["order_size_eth"]
 
 
+MANIFEST = REPO / "01b-signal-cost-confirm" / "data" / "MANIFEST.md"
+
+
+def manifest_md5(name):
+    """The MD5 written for a bought test file in data/MANIFEST.md before it was copied in."""
+    for line in MANIFEST.read_text().splitlines():
+        m = re.match(r"\|\s*(\S+)\s*\|\s*([0-9a-f]{32})\s*\|", line)
+        if m and m.group(1) == name:
+            return m.group(2)
+    return None
+
+
+def md5_ok(source, sym, day):
+    """CryptoStruct test files must match their MANIFEST MD5. Raises Refused otherwise."""
+    if source != "cryptostruct" or day == BUILD_DAY:
+        return True
+    from .cryptostruct import raw_file
+    f = raw_file(day, sym)
+    want = manifest_md5(f.name)
+    if want is None:
+        return True        # free samples, checked against the seller's MD5 when they landed
+    if not f.exists():
+        raise Refused(f"{f.name} is not copied in. If it can't be, use leave_out")
+    h = hashlib.md5()
+    with open(f, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 24), b""):
+            h.update(chunk)
+    if h.hexdigest() != want:
+        raise Refused(f"{f.name} MD5 {h.hexdigest()} differs from MANIFEST {want}. Use leave_out")
+    return True
+
+
+def leave_out(source, sym, day, reason):
+    """Write the day's audit as left out because its file failed (Deviation of 2026-11-23, afternoon, item 2)."""
+    role, us, done = state(source, sym, day)
+    a = unit_file(source, sym, day, role, "audit")
+    if a.exists():
+        raise Refused(f"{a} exists already")
+    if done:
+        raise Refused(f"units already ran for {day}: {done}")
+    res = dict(unit="audit", source=source, symbol=sym, day=day, role=role,
+               gap_rule=dict(left_out=True, reason=f"file failed: {reason}"))
+    a.parent.mkdir(parents=True, exist_ok=True)
+    a.write_text(json.dumps(res, indent=1))
+    print("wrote", a, flush=True)
+    return res
+
+
 def state(source, sym, day):
     role = check_day_allowed(day, sym, source)
     us = units(source, sym, day)
@@ -118,6 +170,8 @@ def run_next(source, sym, day):
     role, us, done = state(source, sym, day)
     if day != BUILD_DAY and not s2f_unchanged():
         raise Refused(f"the 01 code differs from {S2F_TAG}")
+    if day != BUILD_DAY and (os.environ.get("S2FB_DATA") or os.environ.get("S2FB_RESULTS")):
+        raise Refused("S2FB_DATA or S2FB_RESULTS is set. Test days run only on the project folders")
     if sym == "ETHUSDT" and day != BUILD_DAY:
         miss = btc_tests_done()
         if miss:
@@ -132,8 +186,11 @@ def run_next(source, sym, day):
         raise Refused(f"units done out of order: {done}")
     unit = todo[0]
     out = unit_file(source, sym, day, role, unit)
+    if not done:
+        md5_ok(source, sym, day)
     t0 = time.time()
-    res = do_unit(source, sym, day, unit)
+    with runner():
+        res = do_unit(source, sym, day, unit)
     res = {**res, **dict(unit=unit, source=source, symbol=sym, day=day, role=role, seconds=round(time.time() - t0, 1),
                         peak_memory_mb=round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024))}
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -215,11 +272,13 @@ def store_bybit_threshold():
 
 
 def main(argv):
-    if len(argv) != 4 or argv[3] not in ("next", "status"):
+    if not ((len(argv) == 4 and argv[3] in ("next", "status")) or (len(argv) == 5 and argv[3] == "leave_out")):
         print(__doc__); return 2
-    source, sym, day, what = argv
+    source, sym, day, what = argv[:4]
     try:
-        if what == "status":
+        if what == "leave_out":
+            leave_out(source, sym, day, argv[4])
+        elif what == "status":
             role, us, done = state(source, sym, day)
             print(json.dumps(dict(role=role, units=us, done=done)))
         else:

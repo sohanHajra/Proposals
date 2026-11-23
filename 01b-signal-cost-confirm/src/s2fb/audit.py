@@ -22,6 +22,8 @@ def day_bounds_us(day):
 
 
 def ticker_frame(source, day, sym):
+    from .guard import check_load_allowed
+    check_load_allowed(day, sym, source)
     cols = ["timestamp", "local_timestamp", "bid_price", "ask_price"]
     if source == "tardis":
         f = RAW / "tardis" / f"binance-futures_book_ticker_{day}_{sym}.csv.gz"

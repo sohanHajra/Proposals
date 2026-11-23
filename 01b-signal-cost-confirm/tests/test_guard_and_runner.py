@@ -29,6 +29,7 @@ def _fake(tmp_path, monkeypatch):
     monkeypatch.setattr(run, "RESULTS", tmp_path)
     monkeypatch.setattr(run, "DERIVED", tmp_path / "derived")
     monkeypatch.setattr(run, "s2f_unchanged", lambda: True)
+    monkeypatch.setattr(run, "md5_ok", lambda *a: True)
     calls = []
 
     def fake_unit(source, sym, day, unit):
@@ -99,3 +100,52 @@ def test_bybit_threshold_choice(tmp_path, monkeypatch):
     assert run.threshold_and_size("BTCUSDT", "bybit", "c1_frozen", "2026-01-14")[0] == fz
     assert run.threshold_and_size("BTCUSDT", "bybit", "c1", "2026-09-01")[0] == fz
     assert run.threshold_and_size("BTCUSDT", "bybit", "c1_own", "2026-09-01")[0] == 0.5
+
+
+def test_loads_outside_the_runner_refused():
+    from s2fb.guard import check_load_allowed, runner
+    assert check_load_allowed("2026-09-01", "BTCUSDT", "cryptostruct") == "build"
+    with pytest.raises(Refused, match="only through"):
+        check_load_allowed("2026-01-14", "BTCUSDT", "cryptostruct")
+    from s2fb import load, cryptostruct, bybit
+    for f in (lambda: load.prep("cryptostruct", "2026-01-14"), lambda: cryptostruct.convert_tt("2026-01-14"),
+              lambda: cryptostruct.convert_depth("2026-01-14"), lambda: bybit.convert("2026-01-14")):
+        with pytest.raises(Refused, match="only through"):
+            f()
+    with runner():
+        assert check_load_allowed("2026-01-14", "BTCUSDT", "cryptostruct") == "test"
+    with pytest.raises(Refused):
+        check_load_allowed("2026-01-14", "BTCUSDT", "cryptostruct")
+
+
+def test_env_folders_refused_for_test_days(tmp_path, monkeypatch):
+    _fake(tmp_path, monkeypatch)
+    monkeypatch.setenv("S2FB_RESULTS", str(tmp_path))
+    with pytest.raises(Refused, match="S2FB_"):
+        run.run_next("cryptostruct", "BTCUSDT", "2026-01-14")
+
+
+def test_md5_against_manifest(tmp_path, monkeypatch):
+    from s2fb import cryptostruct
+    assert run.manifest_md5("binance_swap-BTCUSDT-2026-01-14.txt.zst") == "29daadbe420684f39bc9b4b9b16b4075"
+    assert len([d for d in days.TEST_DAYS if run.manifest_md5(f"binance_swap-BTCUSDT-{d}.txt.zst")]) == 12
+    f = tmp_path / "binance_swap-BTCUSDT-2026-01-14.txt.zst"
+    monkeypatch.setattr(cryptostruct, "raw_file", lambda day, sym="BTCUSDT": f)
+    with pytest.raises(Refused, match="not copied"):
+        run.md5_ok("cryptostruct", "BTCUSDT", "2026-01-14")
+    f.write_bytes(b"not the file")
+    with pytest.raises(Refused, match="differs"):
+        run.md5_ok("cryptostruct", "BTCUSDT", "2026-01-14")
+    assert run.md5_ok("cryptostruct", "BTCUSDT", "2026-09-01")
+
+
+def test_leave_out_counts_for_eth_wait(tmp_path, monkeypatch):
+    _fake(tmp_path, monkeypatch)
+    run.leave_out("cryptostruct", "BTCUSDT", "2026-03-18", "MD5 mismatch")
+    a = json.loads(run.unit_file("cryptostruct", "BTCUSDT", "2026-03-18", "test", "audit").read_text())
+    assert a["gap_rule"]["left_out"] and "file failed" in a["gap_rule"]["reason"]
+    assert "2026-03-18" not in run.btc_tests_done()
+    with pytest.raises(Refused):
+        run.run_next("cryptostruct", "BTCUSDT", "2026-03-18")
+    with pytest.raises(Refused):
+        run.leave_out("cryptostruct", "BTCUSDT", "2026-03-18", "again")

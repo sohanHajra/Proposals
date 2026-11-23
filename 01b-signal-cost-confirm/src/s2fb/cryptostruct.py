@@ -128,6 +128,8 @@ def header(path):
 
 def convert_tt(day, sym="BTCUSDT"):
     """Top of book (type 6), trades (type 2) and state lines (type 5)."""
+    from .guard import check_load_allowed
+    check_load_allowed(day, sym, "cryptostruct")
     path = raw_file(day, sym)
     lo, hi = day_window_ns(day)
     tk = Sink(out_file(day, sym, "ticker"), TICKER)
@@ -231,6 +233,8 @@ class Side:
 
 def convert_depth(day, sym="BTCUSDT"):
     """Five level snapshots from the depth stream (types 0 and 1), plus state lines (type 5)."""
+    from .guard import check_load_allowed
+    check_load_allowed(day, sym, "cryptostruct")
     path = raw_file(day, sym)
     lo, hi = day_window_ns(day)
     hd = header(path)["instrument"]
@@ -308,7 +312,5 @@ if __name__ == "__main__":
     day = sys.argv[1]
     sym = sys.argv[2] if len(sys.argv) > 3 else "BTCUSDT"
     what = sys.argv[-1]
-    from .guard import check_day_allowed
-    check_day_allowed(day, sym, "cryptostruct")
     m = convert_tt(day, sym) if what == "tt" else convert_depth(day, sym)
     print(json.dumps({k: v for k, v in m.items() if k not in ("snapshots", "states", "chain_breaks", "header")}, indent=1))

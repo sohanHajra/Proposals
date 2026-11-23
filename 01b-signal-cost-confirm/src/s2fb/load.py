@@ -15,7 +15,7 @@ import numpy as np
 import polars as pl
 
 from .paths import RAW
-from .guard import check_day_allowed
+from .guard import check_load_allowed
 
 import s2f.paths  # noqa: F401  (01 code, put on the path by s2fb.paths)
 from s2f.paths import float_prices
@@ -79,7 +79,7 @@ def _sorted_columns(path, cols, f32=()):
 
 
 def prep(source, day, sym="BTCUSDT"):
-    check_day_allowed(day, sym, source)
+    check_load_allowed(day, sym, source)
     if source == "tardis":
         return _prep_frames(*frames(source, day, sym))
     mod = __import__(f"s2fb.{source}", fromlist=["out_file"])

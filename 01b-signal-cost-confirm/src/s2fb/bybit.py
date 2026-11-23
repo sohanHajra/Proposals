@@ -45,6 +45,8 @@ def trade_file(day, sym="BTCUSDT"):
 
 
 def convert(day, sym="BTCUSDT"):
+    from .guard import check_load_allowed
+    check_load_allowed(day, sym, "bybit")
     t0 = time.time()
     tk = Sink(out_file(day, sym, "ticker"), TICKER)
     sn = Sink(out_file(day, sym, "snap5"), SNAP5)
@@ -111,7 +113,5 @@ def converted(day, sym="BTCUSDT"):
 
 if __name__ == "__main__":
     day = sys.argv[1]
-    from .guard import check_day_allowed
-    check_day_allowed(day, "BTCUSDT", "bybit")
     m = convert(day)
     print(json.dumps({k: v for k, v in m.items() if k not in ("snapshots", "chain_breaks")}, indent=1))
