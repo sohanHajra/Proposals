@@ -44,15 +44,15 @@ def test_units_in_order_and_never_twice(tmp_path, monkeypatch):
     calls = _fake(tmp_path, monkeypatch)
     for _ in run.units("cryptostruct", "BTCUSDT", "2026-01-14"):
         run.run_next("cryptostruct", "BTCUSDT", "2026-01-14")
-    assert calls == ["convert", "audit", "c1", "c2_after", "c2_before", "c2"]
+    assert calls == ["convert_tt", "convert_depth", "audit", "c1", "c2_after", "c2_before", "c2"]
     with pytest.raises(Refused):
         run.run_next("cryptostruct", "BTCUSDT", "2026-01-14")
 
 
 def test_gap_rule_stops_the_day(tmp_path, monkeypatch):
     calls = _fake(tmp_path, monkeypatch)
-    run.run_next("cryptostruct", "BTCUSDT", "2026-02-18")
-    run.run_next("cryptostruct", "BTCUSDT", "2026-02-18")
+    for _ in range(3):
+        run.run_next("cryptostruct", "BTCUSDT", "2026-02-18")
     a = json.loads(run.unit_file("cryptostruct", "BTCUSDT", "2026-02-18", "test", "audit").read_text())
     assert a["gap_rule"]["left_out"] is True
     with pytest.raises(Refused):

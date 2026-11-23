@@ -1,0 +1,14 @@
+{
+ "day": "2026-09-01",
+ "threshold_abs_imbalance": 0.986305170471643,
+ "quantile": 0.9,
+ "median_mid_btcusdt": 77889.95,
+ "median_mid_ethusdt": 2443.435,
+ "order_size_eth": 0.319,
+ "lot": 0.001,
+ "unit": "threshold",
+ "source": "tardis",
+ "symbol": "ETHUSDT",
+ "role": "build",
+ "seconds": 25.3
+}

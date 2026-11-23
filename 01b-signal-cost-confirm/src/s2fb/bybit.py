@@ -9,8 +9,10 @@ Trades public.bybit.com/trading/BTCUSDT/BTCUSDTDAY.csv.gz, timestamp in seconds,
 
 Written as the same three parquet files as s2fb.cryptostruct, times in microseconds. The book's
 exchange time is cts, so book and trades sit on the matching engine clock. local_timestamp is ts,
-since the file holds no capture time. A top of book row is written each time the best bid or ask
-(price or size) changes after a message, a five level row each time the top five change.
+since the file holds no capture time. A top of book row is written for every message, changed or
+not, so a quiet book is not mistaken for a feed gap by the gap rule or by the 01 decision code,
+which both read gaps from the top of book times. A five level row is written each time the top five
+change.
 
 Usage  python -m s2fb.bybit DAY
 """
@@ -49,7 +51,7 @@ def convert(day, sym="BTCUSDT"):
     bids, asks = Side(1), Side(-1)
     meta = dict(day=day, symbol=sym, book_file=book_file(day, sym).name, trade_file=trade_file(day, sym).name,
                 messages=0, snapshots=[], chain_breaks=[], messages_untrusted=0, crossed_rows=0, rows_short_of_five=0)
-    last_u = None; trusted = False; prev_top = None; prev5 = None
+    last_u = None; trusted = False; prev5 = None
     z = zipfile.ZipFile(book_file(day, sym))
     with z.open(z.namelist()[0]) as f:
         for ln in f:
@@ -76,9 +78,7 @@ def convert(day, sym="BTCUSDT"):
             if not tb or not ta:
                 continue
             top = (bids.px[tb[0]], bids.q[tb[0]], asks.px[ta[0]], asks.q[ta[0]])
-            if top != prev_top:
-                prev_top = top
-                tk.add(ets, lts, top[0], top[1], top[2], top[3])
+            tk.add(ets, lts, top[0], top[1], top[2], top[3])
             cur = (tuple((bids.px[t], bids.q[t]) for t in tb), tuple((asks.px[t], asks.q[t]) for t in ta))
             if cur == prev5:
                 continue

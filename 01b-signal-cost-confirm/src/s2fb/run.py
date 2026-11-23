@@ -9,7 +9,9 @@ for building. Every unit writes its own file under results/ROLE/SOURCE_SYM_DAY/ 
 if that file is already there, so nothing is rerun. Units run in a fixed order, each in its own
 process, because the machine I run on stops any job after 20 minutes.
 
-  convert      CryptoStruct or Bybit raw file to parquet (none for Tardis)
+  convert_tt   CryptoStruct top of book and trades to parquet
+  convert_depth  CryptoStruct five levels from the depth stream
+  convert      Bybit book and trades to parquet (Tardis needs none)
   audit        checks and the gap rule decision. A day the rule leaves out stops here
   threshold    ETHUSDT on 2026-09-01 only. The ETHUSDT threshold and size, stored once
   c1           C1 with the drift and arrival split, race sensitivity and secondary checks
@@ -21,6 +23,7 @@ ETHUSDT days are refused until every BTCUSDT test day has finished or been left 
 Any day other than 2026-09-01 is refused if the 01 code differs from tag v0.1-signal-to-fill.
 """
 import json
+import resource
 import subprocess
 import sys
 import time
@@ -38,7 +41,9 @@ ETH_FILE = RESULTS / "eth" / "threshold_ETHUSDT_2026-09-01.json"
 
 def units(source, sym, day):
     u = []
-    if source in ("cryptostruct", "bybit"):
+    if source == "cryptostruct":
+        u += ["convert_tt", "convert_depth"]
+    elif source == "bybit":
         u.append("convert")
     u.append("audit")
     if sym == "ETHUSDT" and day == BUILD_DAY:
@@ -115,7 +120,8 @@ def run_next(source, sym, day):
     out = unit_file(source, sym, day, role, unit)
     t0 = time.time()
     res = do_unit(source, sym, day, unit)
-    res = dict(unit=unit, source=source, symbol=sym, day=day, role=role, seconds=round(time.time() - t0, 1), **res)
+    res = {**res, **dict(unit=unit, source=source, symbol=sym, day=day, role=role, seconds=round(time.time() - t0, 1),
+                        peak_memory_mb=round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024))}
     out.parent.mkdir(parents=True, exist_ok=True)
     if out.exists():
         raise Refused(f"{out} appeared during the run, not overwriting it")
@@ -126,13 +132,13 @@ def run_next(source, sym, day):
 
 def do_unit(source, sym, day, unit):
     from . import load, analysis, audit
+    if unit == "convert_tt":
+        from . import cryptostruct as cs
+        return dict(meta={k: v for k, v in cs.convert_tt(day, sym).items() if k != "header"})
+    if unit == "convert_depth":
+        from . import cryptostruct as cs
+        return dict(meta=cs.convert_depth(day, sym))
     if unit == "convert":
-        if source == "cryptostruct":
-            from . import cryptostruct as cs
-            m1 = cs.convert_tt(day, sym); m2 = cs.convert_depth(day, sym)
-            return dict(top_of_book_and_trades={k: v for k, v in m1.items() if k != "header"},
-                        five_levels={k: v for k, v in m2.items() if k not in ("snapshots",)},
-                        snapshots=len(m2["snapshots"]))
         from . import bybit
         return dict(meta=bybit.convert(day, sym))
     if unit == "audit":
@@ -140,6 +146,10 @@ def do_unit(source, sym, day, unit):
     if unit == "threshold":
         return store_eth_threshold()
     thr, qty = threshold_and_size(sym)
+    if unit == "c2":
+        ra = dict(np.load(array_file(source, sym, day, "c2_after")))
+        rb = dict(np.load(array_file(source, sym, day, "c2_before")))
+        return dict(order_size=qty, C2=analysis.c2(ra, rb))
     prepped = load.prep(source, day, sym)
     book = prepped[0]
     if unit == "c1":
@@ -153,10 +163,6 @@ def do_unit(source, sym, day, unit):
         f.parent.mkdir(parents=True, exist_ok=True)
         np.savez(f, **r)
         return dict(arrays=f.name, n_decisions=int(len(r["t"])), feed_gaps_over_1s=int(r["ngaps"]), order_size=qty)
-    if unit == "c2":
-        ra = dict(np.load(array_file(source, sym, day, "c2_after")))
-        rb = dict(np.load(array_file(source, sym, day, "c2_before")))
-        return dict(order_size=qty, C2=analysis.c2(ra, rb))
     raise ValueError(unit)
 
 
