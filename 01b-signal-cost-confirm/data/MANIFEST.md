@@ -6,5 +6,7 @@ One row per data file, written when it first lands, after the preregistration (c
 |---|---|---|---|---|
 | binance_swap-BTCUSDT-2026-07-06.txt.zst | CryptoStruct free sample, saved to my Drive 2026-11-20 | Stress day, secondary | 2026-11-22 | ddc90bbe64776315f9115b7bd51175608374075b8089a96f2aa6f63ac6558246 |
 | binance_swap-BTCUSDT-2026-11-13.txt.zst | CryptoStruct free rolling sample, saved to my Drive 2026-11-20 | Extra recent day, secondary | 2026-11-22 | 0d8132f3cbf30f6490386fb03b13680145060bee357810f3244547f9462361ee |
+| binance_swap-BTCUSDT-2026-11-14.txt.zst | CryptoStruct free rolling sample, saved to my Drive 2026-11-20 | Extra recent day, secondary, added under Deviations | 2026-11-22 | 090319017e644ea6b2dc6a7ec8ffa7fa3e701a3af512e2b395eb3581575f30fa |
+| binance_swap-BTCUSDT-2026-11-15.txt.zst | CryptoStruct free rolling sample, saved to my Drive 2026-11-20 | Extra recent day, secondary, added under Deviations | 2026-11-22 | f7e34d741543e9e282a86f99d44d19a349daab10ebfecd19158dac1078dd711e |
 
-2026-11-14 and 2026-11-15 were added under Deviations on 2026-11-22. Their rows go in when the files land.
+2026-11-14 and 2026-11-15 were added under Deviations on 2026-11-22, before any file was opened.
