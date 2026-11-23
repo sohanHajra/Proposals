@@ -11,3 +11,8 @@ Next is buying the twelve test days and the 2026-09-01 file, copying in the two 
 ### Limits and gaps
 
 Nothing run yet. If the purchase falls through, the test set falls back to free first of month days, which are weaker since four of them are weekends.
+
+## 2026-11-22, later
+Copied in the free samples for 2026-07-06 and 2026-11-13. Both MD5s matched the Drive listing, and the SHA256s are in data/MANIFEST.md. I also decided to use the free 2026-11-14 and 2026-11-15 days, and logged that under Deviations before opening anything. They're secondary, reported alone, like 2026-11-13.
+
+Limits and gaps. Three of the recent free days sit back to back, including a weekend, so they're not independent of each other and say little on their own. No file has been opened yet.

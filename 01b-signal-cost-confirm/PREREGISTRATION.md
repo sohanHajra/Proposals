@@ -78,3 +78,6 @@ Nothing else changes. No parameter, window, threshold or sample is chosen or cha
 - A paid Tardis month would give every day of a month instead of one day per month. That is out of budget for now.
 
 ## Deviations
+
+### 2026-11-22. Two more extra recent days
+The free CryptoStruct folder also holds 2026-11-14 and 2026-11-15, and I've decided to use them. They go in exactly like 2026-11-13. Each is reported alone and never in a verdict, since they also sit outside the Wednesday rule. 2026-11-14 is a Saturday and 2026-11-15 is a Sunday, so they're also weekend days. I'm adding this before any of the three recent days, or any test day, is opened. Nothing else changes. The runner's list of allowed days adds these two.
