@@ -155,3 +155,18 @@ build.tz.c1.n:
   path: C1.n_decisions
   value: 16738
   tol: 0
+build.bybit.own.thr:
+  file: results/bybit/threshold_bybit_BTCUSDT_2026-09-01.json
+  path: threshold_abs_imbalance
+  value: 0.9543
+  tol: 0.00005
+build.bybit.own.n:
+  file: results/build/bybit_BTCUSDT_2026-09-01/c1_own.json
+  path: C1.n_decisions
+  value: 18316
+  tol: 0
+build.bybit.own.slope:
+  file: results/build/bybit_BTCUSDT_2026-09-01/c1_own.json
+  path: C1.walk.slope_bps_per_logms.est
+  value: 0.044
+  tol: 0.0005

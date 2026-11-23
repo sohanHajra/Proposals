@@ -13,8 +13,10 @@ process, because the machine I run on stops any job after 20 minutes.
   convert_depth  CryptoStruct five levels from the depth stream
   convert      Bybit book and trades to parquet (Tardis needs none)
   audit        checks and the gap rule decision. A day the rule leaves out stops here
-  threshold    ETHUSDT on 2026-09-01 only. The ETHUSDT threshold and size, stored once
+  threshold    on 2026-09-01 only. The ETHUSDT threshold and size, or Bybit's threshold, stored once
   c1           C1 with the drift and arrival split, race sensitivity and secondary checks
+  c1_frozen    Bybit only. C1 again under the frozen 01 threshold, reported next to the main row
+  c1_own       Bybit 2026-09-01 only. C1 under Bybit's own threshold (its c1 ran under the frozen one)
   c2_after     fixed price replay, random decisions, primary tie rule (arrays kept in data/derived)
   c2_before    the same with the other tie rule
   c2           C2 and its secondary checks from the two replays
@@ -37,6 +39,7 @@ from .guard import check_day_allowed, Refused
 QTY_BTC = 0.01
 TICK = {"BTCUSDT": 0.1, "ETHUSDT": 0.01}
 ETH_FILE = RESULTS / "eth" / "threshold_ETHUSDT_2026-09-01.json"
+BYBIT_FILE = RESULTS / "bybit" / "threshold_bybit_BTCUSDT_2026-09-01.json"
 
 
 def units(source, sym, day):
@@ -48,7 +51,13 @@ def units(source, sym, day):
     u.append("audit")
     if sym == "ETHUSDT" and day == BUILD_DAY:
         u.append("threshold")
-    u += ["c1", "c2_after", "c2_before", "c2"]
+    if source == "bybit" and day == BUILD_DAY:
+        # built before the Deviation that gave Bybit its own threshold, so the two new units come last
+        return u + ["c1", "c2_after", "c2_before", "c2", "threshold", "c1_own"]
+    u.append("c1")
+    if source == "bybit":
+        u.append("c1_frozen")
+    u += ["c2_after", "c2_before", "c2"]
     return u
 
 
@@ -82,11 +91,16 @@ def btc_tests_done():
     return missing
 
 
-def threshold_and_size(sym):
-    """(threshold, order size) for the symbol. BTCUSDT on any venue uses the frozen 01 value."""
+def threshold_and_size(sym, source="tardis", unit="c1", day=None):
+    """(threshold, order size). Binance BTCUSDT uses the frozen 01 value. Bybit uses its own value
+    from 2026-09-01 (Deviation, later still, 2026-11-23), except c1_frozen and the build day c1."""
     from s2f.signals import frozen_threshold
     if sym == "BTCUSDT":
-        return frozen_threshold(), QTY_BTC
+        if source != "bybit" or unit == "c1_frozen" or (day == BUILD_DAY and unit == "c1"):
+            return frozen_threshold(), QTY_BTC
+        if not BYBIT_FILE.exists():
+            raise Refused("Bybit's threshold has not been stored yet (bybit BTCUSDT 2026-09-01, unit threshold)")
+        return json.loads(BYBIT_FILE.read_text())["threshold_abs_imbalance"], QTY_BTC
     if not ETH_FILE.exists():
         raise Refused("the ETHUSDT threshold has not been stored yet (tardis ETHUSDT 2026-09-01, unit threshold)")
     d = json.loads(ETH_FILE.read_text())
@@ -144,15 +158,15 @@ def do_unit(source, sym, day, unit):
     if unit == "audit":
         return audit.audit(source, day, sym, TICK[sym])
     if unit == "threshold":
-        return store_eth_threshold()
-    thr, qty = threshold_and_size(sym)
+        return store_bybit_threshold() if source == "bybit" else store_eth_threshold()
+    thr, qty = threshold_and_size(sym, source, unit, day)
     if unit == "c2":
         ra = dict(np.load(array_file(source, sym, day, "c2_after")))
         rb = dict(np.load(array_file(source, sym, day, "c2_before")))
         return dict(order_size=qty, C2=analysis.c2(ra, rb))
     prepped = load.prep(source, day, sym)
     book = prepped[0]
-    if unit == "c1":
+    if unit in ("c1", "c1_frozen", "c1_own"):
         t, side, ngaps = analysis.signal_decisions(book, thr)
         return dict(threshold_abs_imbalance=thr, feed_gaps_over_1s=int(ngaps), C1=analysis.c1(book, prepped[2], t, side, qty))
     if unit in ("c2_after", "c2_before"):
@@ -183,6 +197,20 @@ def store_eth_threshold():
              median_mid_ethusdt=m_eth, order_size_eth=round(size, 3), lot=0.001)
     ETH_FILE.parent.mkdir(parents=True, exist_ok=True)
     ETH_FILE.write_text(json.dumps(d, indent=1))
+    return d
+
+
+def store_bybit_threshold():
+    """Bybit's threshold, the 90th percentile of |I| on the last top of book row per stamp on
+    2026-09-01, with 01's own function, stored once."""
+    from . import load
+    from s2f.signals import threshold
+    if BYBIT_FILE.exists():
+        raise Refused(f"{BYBIT_FILE} exists. Bybit's threshold is computed once")
+    thr = threshold(load.prep("bybit", BUILD_DAY, "BTCUSDT")[0])
+    d = dict(day=BUILD_DAY, venue="bybit", symbol="BTCUSDT", threshold_abs_imbalance=thr, quantile=0.9)
+    BYBIT_FILE.parent.mkdir(parents=True, exist_ok=True)
+    BYBIT_FILE.write_text(json.dumps(d, indent=1))
     return d
 
 

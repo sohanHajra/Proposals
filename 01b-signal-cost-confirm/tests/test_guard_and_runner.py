@@ -79,3 +79,23 @@ def test_eth_waits_for_every_btc_test_day(tmp_path, monkeypatch):
 def test_eth_build_day_has_threshold_unit():
     assert "threshold" in run.units("tardis", "ETHUSDT", "2026-09-01")
     assert "threshold" not in run.units("tardis", "ETHUSDT", "2025-03-01")
+
+
+def test_bybit_threshold_units():
+    assert run.units("bybit", "BTCUSDT", "2026-09-01")[-2:] == ["threshold", "c1_own"]
+    u = run.units("bybit", "BTCUSDT", "2026-01-14")
+    assert "threshold" not in u and u.index("c1_frozen") == u.index("c1") + 1
+    assert "c1_frozen" not in run.units("cryptostruct", "BTCUSDT", "2026-01-14")
+
+
+def test_bybit_threshold_choice(tmp_path, monkeypatch):
+    from s2f.signals import frozen_threshold
+    f = tmp_path / "b.json"
+    f.write_text('{"threshold_abs_imbalance": 0.5}')
+    monkeypatch.setattr(run, "BYBIT_FILE", f)
+    fz = frozen_threshold()
+    assert run.threshold_and_size("BTCUSDT", "cryptostruct", "c1", "2026-01-14")[0] == fz
+    assert run.threshold_and_size("BTCUSDT", "bybit", "c1", "2026-01-14")[0] == 0.5
+    assert run.threshold_and_size("BTCUSDT", "bybit", "c1_frozen", "2026-01-14")[0] == fz
+    assert run.threshold_and_size("BTCUSDT", "bybit", "c1", "2026-09-01")[0] == fz
+    assert run.threshold_and_size("BTCUSDT", "bybit", "c1_own", "2026-09-01")[0] == 0.5

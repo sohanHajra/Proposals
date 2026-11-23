@@ -1,0 +1,12 @@
+{
+ "day": "2026-09-01",
+ "venue": "bybit",
+ "symbol": "BTCUSDT",
+ "threshold_abs_imbalance": 0.954302799113317,
+ "quantile": 0.9,
+ "unit": "threshold",
+ "source": "bybit",
+ "role": "build",
+ "seconds": 4.4,
+ "peak_memory_mb": 659
+}

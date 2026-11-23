@@ -25,3 +25,30 @@ After each work session I check three things and write down what I found.
 - No test day file is in the project. The runner refuses any day outside the list, and claimcheck finds no test day results.
 - Every number in today's notebook entry is tagged to a results file, and claimcheck agrees.
 - The 01 code is unchanged from tag `v0.1-signal-to-fill`.
+
+## 2026-11-23, later · full reread before any test data
+A separate reread of 01.b against my review checklist, done before any test day was copied in. It found one thing that has to be fixed first and seventeen smaller ones. Nothing here has been fixed yet unless it says so.
+
+**Must fix before any test day**
+- The preregistration says a data script refuses to fetch a listed day until the preregistration is in git. There's no such script. Files come from my Drive by hand, and the checksums of the twelve bought test days aren't in the repo.
+
+**Open**
+- The C2 placebo interval already sits above zero on the build day for Bybit under all three rules and for CryptoStruct under back. Every day and rule also reuses the same shuffle, since the seed is fixed. How a test day placebo miss is read needs writing down before any test result exists.
+- The 99% loader rule was set after the CryptoStruct trade count was known, and 01 had published Tardis's, so the count gap (0.56%<!--nc-->) was knowable when I chose 99%.
+- The Bybit reader changed on the build day after its first run, and on Bybit the gap rule runs on send time. That isn't under Deviations yet.
+- The C1 fee check adds a flat 5 bps, which cancels out of ΔS, so it can't change the slope.
+- The race rule is a sensitivity, not a bound, and the write up has to call it that.
+- The count of surviving days for the verdict isn't coded yet, and neither is leaving out a day whose download fails.
+- The converters can open a test day outside the runner.
+- The 01 shortfall range quoted in the preregistration is top of book, not the walk.
+- Smaller wording fixes in the notebook, README and MANIFEST, and claimcheck's guard knows only the twelve primary dates.
+
+**Found and fixed**
+- Bybit's threshold. The frozen Binance value picked far fewer moments on Bybit than on Binance, so Bybit now gets its own 90th percentile from 2026-09-01, like ETHUSDT. This came after I had seen Bybit's build day results under the frozen value, and the Deviation says so. It was pushed before Bybit's value was computed, and the frozen version runs next to it on every Bybit test day.
+
+**Checked, no issue**
+- The registered text is unchanged since b81f5f6, and every Deviation went in before the data it governs.
+- The 01 code is unchanged from its tag, and the runner matches the preregistration.
+- The ETHUSDT threshold was recomputed from the raw file and matches the stored value exactly.
+- No test day file is anywhere in the project, and nothing derived from the free samples exists.
+- Every raw file in the manifest matches its checksum.

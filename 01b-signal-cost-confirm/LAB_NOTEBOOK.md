@@ -44,3 +44,13 @@ Build day. Everything today used 2026-09-01 only. No test day was downloaded or 
 - The race rule is one simple version of a race. It can't say who would have won the touch.
 - The missing Tardis bursts mean 01's dev day differs a little from the full feed. I haven't measured how much that matters for 01.
 - The largest free sample may still be close to the memory limit even with the leaner reader.
+
+## 2026-11-23, later
+
+**Bybit's threshold.** Under the frozen Binance value Bybit 2026-09-01 gave 11,178<!--c:build.bybit.c1.n--> signal decisions against 16,738<!--c:build.tz.c1.n--> on Tardis BTCUSDT. Bybit's book moves in 100 ms steps, so its imbalance is spread differently and the same number doesn't pick the same top tenth of moments. ETHUSDT already gets its own 90th percentile from 2026-09-01, so I gave Bybit the same rule. I wrote that under Deviations and pushed it before computing Bybit's value, and it says I had already seen Bybit's build day results under the frozen value. The frozen value still runs on every Bybit test day as its own row.
+
+Bybit's own threshold is 0.9543<!--c:build.bybit.own.thr-->. On the build day it gives 18,316<!--c:build.bybit.own.n--> decisions and a C1 slope of 0.044<!--c:build.bybit.own.slope--> bps per log ms, a little lower than the 0.052<!--c:build.bybit.c1.slope--> under the frozen value. Same sign, and it's still the build day, so it says nothing about the test days.
+
+### Limits and gaps
+- The change came after a look at Bybit's build day results. Running both versions on every test day is the guard against that, but it isn't the same as having decided before looking.
+- Bybit is still a weak check below 100 ms and stays out of every verdict.
