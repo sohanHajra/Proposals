@@ -4,11 +4,12 @@ A sequel to [01 From Signal to Fill](../01-signal-to-fill/). Two things in 01 lo
 
 ## Status
 
-🟡 Preregistered 2026-11-22. No test day downloaded yet.
+🟡 Preregistered 2026-11-22. Loader, runner, race rule, ETHUSDT and Bybit readers built on 2026-09-01 on 2026-11-23. No test day downloaded yet.
 
 - [Preregistration](PREREGISTRATION.md)
 - [Lab notebook](LAB_NOTEBOOK.md)
+- [Integrity log](INTEGRITY_LOG.md)
 
 ## Limits
 
-Still one venue for the verdicts, and the replay still has no race for the touch. The preregistration lists the rest.
+Still one venue for the verdicts, and the replay still has no race for the touch. Bybit's free book only changes about every 100 ms, so it says little about delays below that. The preregistration lists the rest.

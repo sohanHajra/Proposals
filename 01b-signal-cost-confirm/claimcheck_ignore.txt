@@ -4,3 +4,9 @@
 1 ms
 10 of 12
 EUR 13
+100 ms
+50 ms
+200 level
+200 levels
+20 minutes
+10 s

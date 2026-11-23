@@ -45,3 +45,103 @@ prior.threshold:
   path: signal.threshold_abs_imbalance
   value: 0.98630194
   tol: 0.000000005
+# Build day, 2026-09-01 (2026-11-23)
+load.trades.tardis:
+  file: results/loader/crosscheck_2026-09-01.json
+  path: trades_tardis
+  value: 3602361
+  tol: 0.5
+load.trades.cs:
+  file: results/loader/crosscheck_2026-09-01.json
+  path: trades_cryptostruct
+  value: 3622828
+  tol: 0.5
+load.share.tardis:
+  file: results/loader/crosscheck_2026-09-01.json
+  path: share_tardis_matched
+  value: 100
+  scale: 100
+  tol: 0.05
+load.share.cs:
+  file: results/loader/crosscheck_2026-09-01.json
+  path: share_cryptostruct_matched
+  value: 99.4
+  scale: 100
+  tol: 0.05
+load.extra.cs:
+  file: results/loader/crosscheck_2026-09-01.json
+  path: ids_only_cryptostruct
+  value: 20467
+  tol: 0.5
+load.ticker.share:
+  file: results/loader/crosscheck_2026-09-01.json
+  path: ticker_description.share_tardis_matched
+  value: 78
+  scale: 100
+  tol: 0.5
+build.tz.c1.slope:
+  file: results/build/tardis_BTCUSDT_2026-09-01/c1.json
+  path: C1.walk.slope_bps_per_logms.est
+  value: 0.104
+  tol: 0.0005
+build.cs.c1.slope:
+  file: results/build/cryptostruct_BTCUSDT_2026-09-01/c1.json
+  path: C1.walk.slope_bps_per_logms.est
+  value: 0.103
+  tol: 0.0005
+build.tz.race.slope:
+  file: results/build/tardis_BTCUSDT_2026-09-01/c1.json
+  path: C1.race.slope_bps_per_logms.est
+  value: 0.097
+  tol: 0.0005
+build.tz.race.changed:
+  file: results/build/tardis_BTCUSDT_2026-09-01/c1.json
+  path: C1.race.share_cells_changed
+  value: 10
+  scale: 100
+  tol: 0.5
+build.tz.drift:
+  file: results/build/tardis_BTCUSDT_2026-09-01/c1.json
+  path: C1.split_dS_500ms.drift.mean
+  value: 0.65
+  tol: 0.005
+build.tz.arrival:
+  file: results/build/tardis_BTCUSDT_2026-09-01/c1.json
+  path: C1.split_dS_500ms.arrival.mean
+  value: -0.014
+  tol: 0.0005
+build.eth.thr:
+  file: results/eth/threshold_ETHUSDT_2026-09-01.json
+  path: threshold_abs_imbalance
+  value: 0.9863
+  tol: 0.00005
+build.eth.size:
+  file: results/eth/threshold_ETHUSDT_2026-09-01.json
+  path: order_size_eth
+  value: 0.319
+  tol: 0.0005
+build.bybit.c1.slope:
+  file: results/build/bybit_BTCUSDT_2026-09-01/c1.json
+  path: C1.walk.slope_bps_per_logms.est
+  value: 0.052
+  tol: 0.0005
+build.bybit.S1:
+  file: results/build/bybit_BTCUSDT_2026-09-01/c1.json
+  path: C1.walk.mean_S_by_delay_ms.50
+  value: 0.057
+  tol: 0.0005
+build.bybit.S100:
+  file: results/build/bybit_BTCUSDT_2026-09-01/c1.json
+  path: C1.walk.mean_S_by_delay_ms.100
+  value: 0.18
+  tol: 0.005
+build.bybit.old.gap:
+  file: results/build/old/bybit_BTCUSDT_2026-09-01_rows_on_change_only/audit.json
+  path: gap_rule.total_gap_s
+  value: 1760
+  tol: 0.5
+build.cs.mem:
+  file: results/build/cryptostruct_BTCUSDT_2026-09-01/c1.json
+  path: peak_memory_mb
+  value: 4294
+  tol: 0.5
