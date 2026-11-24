@@ -13,7 +13,7 @@ After each work session I check three things and write down what I found.
 - A first draft of the notebook said Binance's top of book stream skips updates, as the reason the two vendors' top of book rows differ. I hadn't checked that, so it now says it's a guess.
 
 **Open**
-- The full review after the preregistration and before any test data (a separate reread against my review checklist) has not been done. It has to happen before any test day is opened.
+- The full review after the preregistration and before any test data (a separate reread against my integrity checks) has not been done. It has to happen before any test day is opened.
 - The agreement rule for the loader (99% each way) was set by me on the build day, after looking at the file format and converting it, but before any comparison was run (commit 721f97f came before the comparison). It was not in the original preregistration.
 - Bybit uses the frozen BTCUSDT threshold because the text freezes it for the symbol. A venue with different top of book sizes might deserve its own threshold. I read the text literally and wrote that reading down. Bybit is secondary either way.
 - The ETHUSDT size rule (median mids) is my choice of how to read "the same notional", fixed before it was computed.
@@ -27,7 +27,7 @@ After each work session I check three things and write down what I found.
 - The 01 code is unchanged from tag `v0.1-signal-to-fill`.
 
 ## 2026-11-23, later · full reread before any test data
-A separate reread of 01.b against my review checklist, done before any test day was copied in. It found one thing that has to be fixed first and seventeen smaller ones. Nothing here has been fixed yet unless it says so.
+A separate reread of 01.b against my integrity checks, done before any test day was copied in. It found one thing that has to be fixed first and seventeen smaller ones. Nothing here has been fixed yet unless it says so.
 
 **Must fix before any test day**
 - The preregistration says a data script refuses to fetch a listed day until the preregistration is in git. There's no such script. Files come from my Drive by hand, and the checksums of the twelve bought test days aren't in the repo.
@@ -70,6 +70,18 @@ A separate reread of 01.b against my review checklist, done before any test day 
 - The first of the 200<!--c:cal.n--> shuffles gives back the registered placebo exactly on all four sources and rules.
 - 25 tests pass and claimcheck agrees. No test day file is in the project.
 
+## 2026-11-23, evening and late evening · test days and the back rule (written 2026-11-24)
+I didn't write an entry for these two sittings at the time. This is it, from the notebook and the results.
+
+**Checked, no issue**
+- Every test file matched its MD5 before its first step, and no day was left out.
+- The verdict comes from the verdict code, not a count by hand.
+- The look at C2 under back was written up as exploratory, dated, after the test day look, and it doesn't touch C2 or the verdict.
+
+**Open**
+- The c1 step on 2026-06-18 stopped once with no output. The rerun finished. The cause is unknown.
+- The widening in the late evening entry assumes near normal intervals and that the build day miss rate carries over. Neither is checked.
+
 ## 2026-11-24 · secondary days and the write up
 **Found and fixed**
 - The README said C1 "holds" on the secondary days. Holds is verdict language and those days aren't in a verdict, so it now says C1 shows up on every secondary day.
@@ -84,18 +96,6 @@ A separate reread of 01.b against my review checklist, done before any test day 
 - The secondary tally and the test day checks summary use the same per day rules as the verdict code, and neither feeds the verdict.
 - Every secondary day ran through the runner on its registered list. Nothing was left out by the gap rule.
 
-## 2026-11-23, evening and late evening · test days and the back rule (written 2026-11-24)
-I didn't write an entry for these two sittings at the time. This is it, from the notebook and the results.
-
-**Checked, no issue**
-- Every test file matched its MD5 before its first step, and no day was left out.
-- The verdict comes from the verdict code, not a count by hand.
-- The look at C2 under back was written up as exploratory, dated, after the test day look, and it doesn't touch C2 or the verdict.
-
-**Open**
-- The c1 step on 2026-06-18 stopped once with no output. The rerun finished. The cause is unknown.
-- The widening in the late evening entry assumes near normal intervals and that the build day miss rate carries over. Neither is checked.
-
 ## 2026-11-24, late morning · second full reread
 **Found and fixed**
 - The drift and arrival split for C1 was promised per day and missing. Now reported. It shows the C1 cost is drift.
@@ -109,8 +109,11 @@ I didn't write an entry for these two sittings at the time. This is it, from the
 
 **Open**
 - The MANIFEST rows for the secondary files can't show when each file was first seen, only what was read.
+- The gap counts in the data check and the C1 results differ slightly on five days, unexplained.
+- Commit times show the order of commits, not of the work. Where a Deviation and the code it governs landed minutes apart, "committed before" is all the record shows.
 - In the exploratory script the field for the smallest widened lower bound names 2026-09-16, the smallest of the eleven days still above zero. It isn't the smallest of all twelve. The field isn't quoted anywhere, so I've left it.
 
 **Checked, no issue**
 - The verdict counts recomputed from the per day intervals match the verdict file.
 - claimcheck agrees and the tests pass.
+- A later reread of the whole repo found the Bybit wording overstated (most intervals cover zero only under random and back), a root README line about a download script 01.b doesn't have, the secondary placebo count compared with chance despite one shared seed, and no rerun instructions. All fixed.

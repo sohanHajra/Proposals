@@ -4,7 +4,7 @@ A sequel to [01 From Signal to Fill](../01-signal-to-fill/). Two things in 01 lo
 
 ## Status
 
-🟡 Test days and secondary days run. C1 and C2 both hold. Write up in progress, not released.
+🟡 Test and secondary days run, write up done, not yet released. C1 and C2 both hold on the twelve test days.
 
 - [Preregistration](PREREGISTRATION.md)
 - [Lab notebook](LAB_NOTEBOOK.md)
@@ -21,7 +21,7 @@ C2 is small. From 1<!--nc--> ms to 500<!--nc--> ms it adds 0.021<!--c:chk.c2.sca
 
 ## Results on the test days
 
-The registered checks next to the main numbers, across the 12<!--c:chk.days--> test days.
+No day was left out by the gap rule, so all 12<!--c:chk.days--> test days count, and no C1 or C2 interval is below zero on any of them. The registered checks sit next to the main numbers.
 
 | C1 version | Slope, bps per log ms | Extra cost at 500<!--nc--> ms, bps | Days above zero |
 |---|---|---|---|
@@ -29,7 +29,7 @@ The registered checks next to the main numbers, across the 12<!--c:chk.days--> t
 | Race rule | 0.073<!--c:chk.c1.race.min--> to 0.103<!--c:chk.c1.race.max--> | 0.45<!--c:chk.c1.race.ds.min--> to 0.62<!--c:chk.c1.race.ds.max--> | 12<!--c:chk.c1.race.above--> |
 | Other tie rule | 0.082<!--c:chk.c1.tie.min--> to 0.117<!--c:chk.c1.tie.max--> | 0.51<!--c:chk.c1.tie.ds.min--> to 0.71<!--c:chk.c1.tie.ds.max--> | 12<!--c:chk.c1.tie.above--> |
 
-The race rule gives my order the touch only if it's still there 1<!--nc--> ms after arrival. It's a sensitivity, not a bound. It changes 9%<!--c:chk.c1.race.changed.min--> to 12%<!--c:chk.c1.race.changed.max--> of cells, 8.6%<!--c:chk.c1.race.worse.min--> to 11.7%<!--c:chk.c1.race.worse.max--> for the worse and 0.4%<!--c:chk.c1.race.better.min--> to 0.73%<!--c:chk.c1.race.better.max--> for the better, and takes a little off C1. The 15<!--nc--> minute blocks only change the intervals, and every day stays above zero. The fee check adds a flat 5<!--nc--> bps that cancels in ΔS, so it isn't a check on C1. It only moves the level, and mean S at 500<!--nc--> ms with fees is 5.54<!--c:chk.c1.fees.min--> to 5.75<!--c:chk.c1.fees.max--> bps. The C1 placebo covers zero on all 12<!--c:chk.c1.placebo--> days.
+The race rule gives my order the touch only if it's still there 1<!--nc--> ms after arrival. It's a sensitivity, not a bound. It changes 9%<!--c:chk.c1.race.changed.min--> to 12%<!--c:chk.c1.race.changed.max--> of cells, 8.6%<!--c:chk.c1.race.worse.min--> to 11.7%<!--c:chk.c1.race.worse.max--> for the worse and 0.40%<!--c:chk.c1.race.better.min--> to 0.73%<!--c:chk.c1.race.better.max--> for the better, and takes a little off C1. The 15<!--nc--> minute blocks only change the intervals, and every day stays above zero. The fee check adds a flat 5<!--nc--> bps that cancels in ΔS, so it isn't a check on C1. It only moves the level, and mean S at 500<!--nc--> ms with fees is 5.54<!--c:chk.c1.fees.min--> to 5.75<!--c:chk.c1.fees.max--> bps. The C1 placebo covers zero on all 12<!--c:chk.c1.placebo--> days. It's read on the slope only. The level field next to it in the results files isn't recentred after the shuffle, so it doesn't mean anything as a placebo.
 
 **Where the C1 cost comes from.** Drift is the mid moving while the order waits. Arrival is what the book adds or takes away when it gets there. Drift is larger than the whole ΔS on all 12<!--c:chk.c1.drift.above--> days.
 
@@ -52,10 +52,11 @@ The race rule gives my order the touch only if it's still there 1<!--nc--> ms af
 |---|---|---|---|
 | Days above zero, main | 12<!--c:chk.c2.main.front--> | 12<!--c:chk.c2.main.random--> | 11<!--c:chk.c2.main.back--> |
 | Days above zero, with fees | 12<!--c:chk.c2.fees.front--> | 12<!--c:chk.c2.fees.random--> | 11<!--c:chk.c2.fees.back--> |
+| Days above zero, other tie rule | 12<!--c:chk.c2.tie.front--> | 12<!--c:chk.c2.tie.random--> | 11<!--c:chk.c2.tie.back--> |
 | Days above zero, 15<!--nc--> minute blocks | 12<!--c:chk.c2.b15.front--> | 12<!--c:chk.c2.b15.random--> | 11<!--c:chk.c2.b15.back--> |
 | Placebo covers zero | 12<!--c:chk.c2.plac.front--> | 12<!--c:chk.c2.plac.random--> | 10<!--c:chk.c2.plac.back--> |
 
-The other tie rule gives exactly the main numbers on 10<!--c:chk.c2.tie.same--> of 12<!--nc--> days, because random decisions fall between whole milliseconds and rarely tie with the book. So it isn't much of a check on C2 and I've left it out of the table. The two placebo misses under back sit on opposite sides of zero. On the build day the placebo already missed too often under back, so I can't read much into them. The notebook has a rough, exploratory look at how much that matters.
+The other tie rule gives exactly the main numbers on 10<!--c:chk.c2.tie.same--> of 12<!--nc--> days, because random decisions fall between whole milliseconds and rarely tie with the book. So its row isn't much of a check on C2. The two placebo misses under back sit on opposite sides of zero. On the build day the placebo already missed too often under back, so I can't read much into them. The notebook has a rough, exploratory look at how much that matters.
 
 ## Secondary days
 
@@ -72,10 +73,10 @@ None of these is in the verdict. Each source and each CryptoStruct day is report
 |---|---|---|---|---|---|
 | Tardis BTCUSDT, first of month | 12<!--c:sec.tz.days--> | 12<!--c:sec.tz.c1--> | 12<!--c:sec.tz.front--> | 11<!--c:sec.tz.random--> | 10<!--c:sec.tz.back--> |
 | Tardis ETHUSDT, first of month | 12<!--c:sec.eth.days--> | 12<!--c:sec.eth.c1--> | 12<!--c:sec.eth.front--> | 11<!--c:sec.eth.random--> | 10<!--c:sec.eth.back--> |
-| Bybit BTCUSDT, test days | 12<!--c:sec.by.days--> | 12<!--c:sec.by.c1--> | 10<!--c:sec.by.front--> | 5<!--c:sec.by.random--> | 5<!--c:sec.by.back--> |
-| Bybit, frozen Binance threshold | 12<!--c:sec.by.days--> | 12<!--c:sec.by.frozen.holds--> | same | same | same |
+| Bybit BTCUSDT, on the twelve test dates | 12<!--c:sec.by.days--> | 12<!--c:sec.by.c1--> | 10<!--c:sec.by.front--> | 5<!--c:sec.by.random--> | 5<!--c:sec.by.back--> |
+| Bybit, frozen Binance threshold | 12<!--c:sec.by.days--> | 12<!--c:sec.by.frozen.holds--> | not rerun | not rerun | not rerun |
 
-C1 shows up on every secondary day. Bybit's slopes are 0.039<!--c:sec.by.c1.min--> to 0.060<!--c:sec.by.c1.max--> under its own threshold and 0.047<!--c:sec.by.frozen.min--> to 0.065<!--c:sec.by.frozen.max--> under the frozen one, higher on all 12<!--c:sec.by.frozen.higher--> days. So the threshold change I made after seeing Bybit's build day made Bybit's C1 smaller, not bigger. No C2 slope estimate is below zero on any secondary day, but C2 thins out under back, and on Bybit most intervals cover zero. Bybit's book moves in steps of about 100<!--nc--> ms and its placebo was already off. Across all secondary days 7<!--c:sec.plac.miss--> of 160<!--c:sec.plac.n--> placebo intervals miss zero, close to the 8<!--nc--> that chance would give for 95%<!--nc--> intervals.
+C1 shows up on every secondary day. Bybit's slopes are 0.039<!--c:sec.by.c1.min--> to 0.060<!--c:sec.by.c1.max--> under its own threshold and 0.047<!--c:sec.by.frozen.min--> to 0.065<!--c:sec.by.frozen.max--> under the frozen one, higher on all 12<!--c:sec.by.frozen.higher--> days. So the threshold change I made after seeing Bybit's build day made Bybit's C1 smaller, not bigger. No C2 slope estimate is below zero on any secondary day, but C2 thins out under back, and on Bybit most intervals cover zero under random and back. C2 uses random decisions, so Bybit's threshold doesn't touch it. Bybit's book moves in steps of about 100<!--nc--> ms and its placebo was already off. Across all secondary days 7<!--c:sec.plac.miss--> of 160<!--c:sec.plac.n--> placebo intervals miss zero. They all reuse one seed, so they aren't 160<!--c:sec.plac.n--> separate draws and I don't compare the count with chance.
 
 ## Limits
 
@@ -88,3 +89,9 @@ C1 shows up on every secondary day. Bybit's slopes are 0.039<!--c:sec.by.c1.min-
 - I changed Bybit's threshold after seeing its build day. Both versions ran on every test day.
 
 The preregistration and the notebook list the rest.
+
+## How to rerun
+
+From this folder, `make env` builds the 01 environment this reuses, `make test` runs the tests and `make verify` checks every number here against its results file. A listed day reruns one step at a time with `make next SRC=cryptostruct SYM=BTCUSDT DAY=2026-01-14`, and `make status` shows where it is. The data files aren't in the repo. data/MANIFEST.md says where each comes from and gives its checksum.
+
+Dates in the notes are US Central. Commit times on GitHub are UTC.

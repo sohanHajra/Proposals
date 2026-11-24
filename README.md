@@ -31,7 +31,7 @@ flowchart LR
 | # | Proposal | The question | Status | Headline |
 |---|---|---|---|---|
 | 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟢 Released 2026-11-22 | H1, H2 and H4 null, H1 and H2 by design. A taker acting on book imbalance loses roughly half to three quarters of a bp by 500 ms, an upper end |
-| 01.b | [Signal Cost Confirm](01b-signal-cost-confirm/) | Do the two leads from 01 hold on twelve days I haven't seen, with the rules written first? | 🟡 Test days run, write up in progress | C1 and C2 both hold on the twelve test days. C2 is small, weakest under the back rule, and its intervals mostly cover zero on Bybit |
+| 01.b | [Signal Cost Confirm](01b-signal-cost-confirm/) | Do the two leads from 01 hold on twelve days I haven't seen, with the rules written first? | 🟡 Test and secondary days run, write up done, not yet released | C1 and C2 both hold on the twelve test days. C2 is small and weakest under the back rule. On Bybit its intervals mostly cover zero under random and back |
 
 <details>
 <summary><b>01 · From Signal to Fill</b> · what I believed, what I tried, what broke, what I believe now</summary>
@@ -48,7 +48,7 @@ flowchart LR
 
 ## Rules I hold this repo to
 - Every number comes from code in the repo, with a pinned environment and fixed seeds. `make reproduce` reruns the dev day work. Locked test days rerun one at a time with their own command, as each proposal's README explains, and a live measurement like a broker latency can't be rerun.
-- Test data stays locked until the preregistration is committed. The download script refuses to fetch it before then.
+- Test data stays locked until the preregistration is committed. In 01 the download script refuses to fetch it before then. In 01.b the test files' checksums were committed before any was copied in, and the runner checks each one.
 - No claim before out of sample checks, trading costs and a few alternative specifications.
 - A proposal that isn't good enough ships late rather than thin.
 - Every result number in a proposal's notes carries a hidden tag that points to the field in the results file it came from. [claimcheck](claimcheck/) rereads those files and fails when a number in the prose and the file disagree. It also checks that every source says how deeply I read it and that the preregistration was committed before any test day result. Run it with `make verify` in a proposal folder. It also runs on every push, and the badge at the top shows the last result. It can't tell whether a result is right, only that the notes report what the code wrote. Every new proposal uses it from the start, following [this guide](claimcheck/ADOPTING.md).

@@ -970,3 +970,18 @@ chk.c1.arr.max:
   path: C1.split_arrival_range.1
   value: -0.011
   tol: 0.0005
+chk.c2.tie.front:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.tie_before.front.above
+  value: 12
+  tol: 0
+chk.c2.tie.random:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.tie_before.random.above
+  value: 12
+  tol: 0
+chk.c2.tie.back:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.tie_before.back.above
+  value: 11
+  tol: 0

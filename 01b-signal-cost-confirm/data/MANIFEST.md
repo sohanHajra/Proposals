@@ -1,6 +1,6 @@
 # Data manifest, 01.b
 
-One row per data file, written when it first lands, after the preregistration (commit b81f5f6). The files themselves aren't in the repo. Each CryptoStruct file was checked against the MD5 its source showed before the SHA256 was taken.
+One row per data file, after the preregistration (commit b81f5f6). Most rows were written when the file landed. The 96 secondary rows were added on 2026-11-24 from the hashes taken at fetch time, as the note below says. The files themselves aren't in the repo. Each CryptoStruct file was checked against the MD5 its source showed before the SHA256 was taken.
 
 | File | Source | Role | Landed | SHA256 |
 |---|---|---|---|---|

@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# Optional extra words to keep out of commit messages, read from .git/guard-words.json
+# More words I'd rather not see in a commit message can be listed in .git/guard-words.json on this clone
 # when that file exists. It lives inside .git, so it stays on my machine.
 def extra_words():
     f = ROOT / ".git" / "guard-words.json"

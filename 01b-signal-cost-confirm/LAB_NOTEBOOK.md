@@ -38,7 +38,7 @@ Build day. Everything today used 2026-09-01 only. No test day was downloaded or 
 **Memory.** The CryptoStruct day peaked at 4294<!--c:build.cs.mem--> MB in the C1 step. The biggest test day file is about 1.4<!--nc--> times the build day and the 2026-11-13 sample about 1.8<!--nc--> times, which wouldn't fit. I changed the parquet reader to load one column at a time, checked that it gives byte identical arrays, and a check run on the build day peaked around 3.2 GB<!--nc-->. That run's figure isn't stored in a results file. *(Corrected 2026-11-23, see the afternoon entry.)* Days still have to run one step at a time with nothing else going.
 
 ### Limits and gaps
-- The review against my review checklist hasn't happened yet. It needs a separate reread before any test day is opened.
+- The review against my integrity checks hasn't happened yet. It needs a separate reread before any test day is opened.
 - Bybit's 100 ms book makes it a weak check below 100 ms, and Bybit has no capture time, so its gap rule runs on message send times.
 - The C2 tie flip barely does anything on random decisions, since they fall between whole milliseconds and the book never ties with them. 01 saw the same. It's reported, but it isn't a real check of C2.
 - The race rule is one simple version of a race. It can't say who would have won the touch.
@@ -86,7 +86,7 @@ What follows from the rule I wrote first. On CryptoStruct back and on Bybit, a t
 
 ## 2026-11-23, evening. The twelve test days
 
-I copied the twelve bought test days in from my Drive one at a time and ran each through the runner, every step once. Every file matched its MD5. None was left out by the gap rule, so all 12<!--c:test.surviving--> days survive. The tally comes from `python -m s2fb.verdict`, which wrote results/verdict/verdict_BTCUSDT.json.
+I copied the twelve bought test days in from my Drive one at a time and ran each through the runner, every step once. *(Corrected 2026-11-24. One step was rerun, see below.)* Every file matched its MD5. None was left out by the gap rule, so all 12<!--c:test.surviving--> days survive. The tally comes from `python -m s2fb.verdict`, which wrote results/verdict/verdict_BTCUSDT.json.
 
 **C1 holds.** The slope interval is above zero on 12<!--c:test.c1.above--> of 12<!--nc--> days and below zero on none, and mean ΔS at 500 ms clears 0.1 bps on every day. Day slopes run from 0.077<!--c:test.c1.slope.min--> (2026-05-13) to 0.110<!--c:test.c1.slope.max--> (2026-06-18) bps per log ms, and mean ΔS at 500 ms from 0.48<!--c:test.c1.dS500.min--> to 0.68<!--c:test.c1.dS500.max--> bps. That sits inside the range 01 saw on Tardis. *(Corrected 2026-11-24, see the late morning entry.)*
 
@@ -115,7 +115,7 @@ How I'd put it. Delay raises passive cost under all three cancellation rules on 
 
 ## 2026-11-24, early morning. The secondary days
 
-I ran every secondary day through the runner, one day at a time, each step once. That's the CryptoStruct stress day and the three recent days, the twelve Tardis first of month days on BTCUSDT and on ETHUSDT, and Bybit on the twelve test days. That's 40<!--c:sec.days--> days in all. None was left out by the gap rule. None of this is in the verdict, and each source is reported on its own.
+I ran every secondary day through the runner, one day at a time, each step once. *(Corrected 2026-11-24. One step was rerun, see below.)* That's the CryptoStruct stress day and the three recent days, the twelve Tardis first of month days on BTCUSDT and on ETHUSDT, and Bybit on the twelve test days. That's 40<!--c:sec.days--> days in all. None was left out by the gap rule. None of this is in the verdict, and each source is reported on its own.
 
 **C1 holds on every one.** *(Corrected 2026-11-24, see the late morning entry.)* The slope interval is above zero and mean ΔS at 500<!--nc--> ms clears 0.1<!--nc--> bps on all 40<!--c:sec.c1.holds--> days. Bybit's slopes are the lowest, 0.039<!--c:sec.by.c1.min--> to 0.060<!--c:sec.by.c1.max--> bps per log ms, against 0.055<!--c:sec.tz.c1.min--> to 0.111<!--c:sec.tz.c1.max--> on Tardis BTCUSDT and 0.052<!--c:sec.eth.c1.min--> to 0.126<!--c:sec.eth.c1.max--> on ETHUSDT. Bybit under the frozen Binance threshold, the version I kept alongside after changing its threshold, comes out positive on all 12<!--c:sec.by.frozen.holds--> days too.
 
@@ -144,7 +144,7 @@ How I'd put it. Taker cost rising with delay shows up on every source, symbol an
 
 ## 2026-11-24, late morning. Corrections after a second full reread
 
-I reread all of 01.b against my review checklist before calling the write up done. The verdict counts came out the same when I recounted them from the per day intervals. What follows are the places where my write up said less, or more, than the results.
+I reread all of 01.b against my integrity checks before calling the write up done. The verdict counts came out the same when I recounted them from the per day intervals. What follows are the places where my write up said less, or more, than the results.
 
 **The drift and arrival split.** The preregistration promised it per day for C1 and I hadn't reported it. It's now a table in the README. Drift is larger than the whole ΔS at 500<!--nc--> ms on all 12<!--c:chk.c1.drift.above--> test days, running 0.50<!--c:chk.c1.drift.min--> to 0.69<!--c:chk.c1.drift.max--> bps, and arrival is a little negative, between −0.029<!--c:chk.c1.arr.min--> and −0.011<!--c:chk.c1.arr.max--> bps. So the C1 cost is the predicted move happening while the order waits. The book at arrival takes a hair of it back. That's the most useful thing in this entry, and I should have had it in last night.
 
@@ -167,3 +167,4 @@ The code that gathers these is src/s2fb/test_checks.py and src/s2fb/secondary_ta
 ### Limits and gaps
 - None of this changes C1, C2 or the verdict. It changes how much they say.
 - The MANIFEST hashes for the secondary files were taken at fetch time by the same runs that used them, so they show what was read, not when it was first seen.
+- The gap count in each test day's data check and the one in its C1 results differ by 1<!--nc--> or 2<!--nc--> on five<!--nc--> days. My guess is that they count at different stages of reading the feed, but I haven't checked.
