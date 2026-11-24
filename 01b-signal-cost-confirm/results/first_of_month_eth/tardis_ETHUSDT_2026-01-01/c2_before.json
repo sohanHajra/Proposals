@@ -1,0 +1,13 @@
+{
+ "arrays": "tardis_ETHUSDT_2026-01-01_c2_before.npz",
+ "n_decisions": 6852,
+ "feed_gaps_over_1s": 172,
+ "order_size": 0.319,
+ "unit": "c2_before",
+ "source": "tardis",
+ "symbol": "ETHUSDT",
+ "day": "2026-01-01",
+ "role": "first_of_month_eth",
+ "seconds": 174.2,
+ "peak_memory_mb": 6592
+}

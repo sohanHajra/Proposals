@@ -1,0 +1,38 @@
+{
+ "meta": {
+  "day": "2025-12-17",
+  "symbol": "BTCUSDT",
+  "book_file": "2025-12-17_BTCUSDT_ob200.data.zip",
+  "trade_file": "BTCUSDT2025-12-17.csv.gz",
+  "messages": 863874,
+  "snapshots": [
+   [
+    1765929601762,
+    641070
+   ],
+   [
+    1766016001761,
+    1504942
+   ]
+  ],
+  "chain_breaks": [],
+  "messages_untrusted": 0,
+  "crossed_rows": 0,
+  "rows_short_of_five": 0,
+  "ticker_rows": 863874,
+  "snap5_rows": 709577,
+  "trade_rows": 3701136,
+  "trade_sides": [
+   "buy",
+   "sell"
+  ],
+  "seconds": 91.2
+ },
+ "unit": "convert",
+ "source": "bybit",
+ "symbol": "BTCUSDT",
+ "day": "2025-12-17",
+ "role": "bybit",
+ "seconds": 95.8,
+ "peak_memory_mb": 928
+}

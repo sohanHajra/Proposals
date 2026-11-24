@@ -1,0 +1,13 @@
+{
+ "arrays": "tardis_ETHUSDT_2025-08-01_c2_before.npz",
+ "n_decisions": 8445,
+ "feed_gaps_over_1s": 1,
+ "order_size": 0.319,
+ "unit": "c2_before",
+ "source": "tardis",
+ "symbol": "ETHUSDT",
+ "day": "2025-08-01",
+ "role": "first_of_month_eth",
+ "seconds": 55.6,
+ "peak_memory_mb": 6425
+}

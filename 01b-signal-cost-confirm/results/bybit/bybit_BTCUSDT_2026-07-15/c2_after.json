@@ -1,0 +1,13 @@
+{
+ "arrays": "bybit_BTCUSDT_2026-07-15_c2_after.npz",
+ "n_decisions": 8432,
+ "feed_gaps_over_1s": 1,
+ "order_size": 0.01,
+ "unit": "c2_after",
+ "source": "bybit",
+ "symbol": "BTCUSDT",
+ "day": "2026-07-15",
+ "role": "bybit",
+ "seconds": 13.1,
+ "peak_memory_mb": 616
+}

@@ -1,0 +1,33 @@
+{
+ "source": "tardis",
+ "symbol": "ETHUSDT",
+ "day": "2025-08-01",
+ "top_of_book_rows": 58109522,
+ "gap_rule": {
+  "rows_in_day": 58109522,
+  "gaps_over_1s": 1,
+  "longest_gap_s": 1.052548,
+  "head_s": 0.012084,
+  "tail_s": 0.06208,
+  "total_gap_s": 1.052548,
+  "rule": "left out if total gap over 3600 s",
+  "left_out": false,
+  "reason": "kept"
+ },
+ "crossed_or_locked_rows": 0,
+ "spread_1tick_share": 0.9113098194130731,
+ "capture_minus_exchange_ms_quantiles": {
+  "0.01": 2.384,
+  "0.5": 3.6270000000000002,
+  "0.99": 10.326
+ },
+ "mid_open_close": [
+  3696.575,
+  3486.415
+ ],
+ "mid_median": 3620.0550000000003,
+ "unit": "audit",
+ "role": "first_of_month_eth",
+ "seconds": 14.1,
+ "peak_memory_mb": 4195
+}

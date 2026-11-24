@@ -1,0 +1,38 @@
+{
+ "meta": {
+  "day": "2026-02-18",
+  "symbol": "BTCUSDT",
+  "book_file": "2026-02-18_BTCUSDT_ob200.data.zip",
+  "trade_file": "BTCUSDT2026-02-18.csv.gz",
+  "messages": 863814,
+  "snapshots": [
+   [
+    1771372801069,
+    30851743
+   ],
+   [
+    1771459201068,
+    31715555
+   ]
+  ],
+  "chain_breaks": [],
+  "messages_untrusted": 0,
+  "crossed_rows": 0,
+  "rows_short_of_five": 0,
+  "ticker_rows": 863814,
+  "snap5_rows": 688173,
+  "trade_rows": 2216652,
+  "trade_sides": [
+   "buy",
+   "sell"
+  ],
+  "seconds": 64.1
+ },
+ "unit": "convert",
+ "source": "bybit",
+ "symbol": "BTCUSDT",
+ "day": "2026-02-18",
+ "role": "bybit",
+ "seconds": 64.4,
+ "peak_memory_mb": 789
+}

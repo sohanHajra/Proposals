@@ -1,0 +1,108 @@
+{
+ "cs_stress_recent": {
+  "days": 4,
+  "c1_holds": 4,
+  "c2_above": {
+   "front": 4,
+   "random": 4,
+   "back": 2
+  },
+  "c2_est_below_zero": 0,
+  "c2_covers_zero_days": {
+   "front": [],
+   "random": [],
+   "back": [
+    "2026-11-14",
+    "2026-11-15"
+   ]
+  },
+  "c1_slope_min": 0.109,
+  "c1_slope_max": 0.121,
+  "frozen_c1_holds": null
+ },
+ "tardis_btc": {
+  "days": 12,
+  "c1_holds": 12,
+  "c2_above": {
+   "front": 12,
+   "random": 11,
+   "back": 10
+  },
+  "c2_est_below_zero": 0,
+  "c2_covers_zero_days": {
+   "front": [],
+   "random": [
+    "2025-05-01"
+   ],
+   "back": [
+    "2025-05-01",
+    "2025-09-01"
+   ]
+  },
+  "c1_slope_min": 0.055,
+  "c1_slope_max": 0.111,
+  "frozen_c1_holds": null
+ },
+ "tardis_eth": {
+  "days": 12,
+  "c1_holds": 12,
+  "c2_above": {
+   "front": 12,
+   "random": 11,
+   "back": 10
+  },
+  "c2_est_below_zero": 0,
+  "c2_covers_zero_days": {
+   "front": [],
+   "random": [
+    "2025-05-01"
+   ],
+   "back": [
+    "2025-05-01",
+    "2025-09-01"
+   ]
+  },
+  "c1_slope_min": 0.052,
+  "c1_slope_max": 0.126,
+  "frozen_c1_holds": null
+ },
+ "bybit": {
+  "days": 12,
+  "c1_holds": 12,
+  "c2_above": {
+   "front": 10,
+   "random": 5,
+   "back": 5
+  },
+  "c2_est_below_zero": 0,
+  "c2_covers_zero_days": {
+   "front": [
+    "2026-03-18",
+    "2026-07-15"
+   ],
+   "random": [
+    "2025-12-17",
+    "2026-02-18",
+    "2026-03-18",
+    "2026-06-18",
+    "2026-07-15",
+    "2026-09-16",
+    "2026-11-18"
+   ],
+   "back": [
+    "2025-12-17",
+    "2026-02-18",
+    "2026-03-18",
+    "2026-06-18",
+    "2026-07-15",
+    "2026-09-16",
+    "2026-11-18"
+   ]
+  },
+  "c1_slope_min": 0.039,
+  "c1_slope_max": 0.06,
+  "frozen_c1_holds": 12
+ },
+ "all_days": 40,
+ "all_c1_holds": 40
+}

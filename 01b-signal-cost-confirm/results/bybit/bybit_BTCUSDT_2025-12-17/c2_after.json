@@ -1,0 +1,13 @@
+{
+ "arrays": "bybit_BTCUSDT_2025-12-17_c2_after.npz",
+ "n_decisions": 8449,
+ "feed_gaps_over_1s": 0,
+ "order_size": 0.01,
+ "unit": "c2_after",
+ "source": "bybit",
+ "symbol": "BTCUSDT",
+ "day": "2025-12-17",
+ "role": "bybit",
+ "seconds": 11.9,
+ "peak_memory_mb": 799
+}

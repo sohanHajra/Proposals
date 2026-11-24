@@ -310,3 +310,128 @@ test.placebo.miss.back:
   path: placebo_test_day_misses.back
   value: 2
   tol: 0
+sec.days:
+  file: results/secondary/summary.json
+  path: all_days
+  value: 40
+  tol: 0
+sec.c1.holds:
+  file: results/secondary/summary.json
+  path: all_c1_holds
+  value: 40
+  tol: 0
+sec.by.c1.min:
+  file: results/secondary/summary.json
+  path: bybit.c1_slope_min
+  value: 0.039
+  tol: 0.0005
+sec.by.c1.max:
+  file: results/secondary/summary.json
+  path: bybit.c1_slope_max
+  value: 0.06
+  tol: 0.0005
+sec.tz.c1.min:
+  file: results/secondary/summary.json
+  path: tardis_btc.c1_slope_min
+  value: 0.055
+  tol: 0.0005
+sec.tz.c1.max:
+  file: results/secondary/summary.json
+  path: tardis_btc.c1_slope_max
+  value: 0.111
+  tol: 0.0005
+sec.eth.c1.min:
+  file: results/secondary/summary.json
+  path: tardis_eth.c1_slope_min
+  value: 0.052
+  tol: 0.0005
+sec.eth.c1.max:
+  file: results/secondary/summary.json
+  path: tardis_eth.c1_slope_max
+  value: 0.126
+  tol: 0.0005
+sec.by.frozen.holds:
+  file: results/secondary/summary.json
+  path: bybit.frozen_c1_holds
+  value: 12
+  tol: 0
+sec.cs.days:
+  file: results/secondary/summary.json
+  path: cs_stress_recent.days
+  value: 4
+  tol: 0
+sec.cs.front:
+  file: results/secondary/summary.json
+  path: cs_stress_recent.c2_above.front
+  value: 4
+  tol: 0
+sec.cs.random:
+  file: results/secondary/summary.json
+  path: cs_stress_recent.c2_above.random
+  value: 4
+  tol: 0
+sec.cs.back:
+  file: results/secondary/summary.json
+  path: cs_stress_recent.c2_above.back
+  value: 2
+  tol: 0
+sec.tz.days:
+  file: results/secondary/summary.json
+  path: tardis_btc.days
+  value: 12
+  tol: 0
+sec.tz.front:
+  file: results/secondary/summary.json
+  path: tardis_btc.c2_above.front
+  value: 12
+  tol: 0
+sec.tz.random:
+  file: results/secondary/summary.json
+  path: tardis_btc.c2_above.random
+  value: 11
+  tol: 0
+sec.tz.back:
+  file: results/secondary/summary.json
+  path: tardis_btc.c2_above.back
+  value: 10
+  tol: 0
+sec.eth.days:
+  file: results/secondary/summary.json
+  path: tardis_eth.days
+  value: 12
+  tol: 0
+sec.eth.front:
+  file: results/secondary/summary.json
+  path: tardis_eth.c2_above.front
+  value: 12
+  tol: 0
+sec.eth.random:
+  file: results/secondary/summary.json
+  path: tardis_eth.c2_above.random
+  value: 11
+  tol: 0
+sec.eth.back:
+  file: results/secondary/summary.json
+  path: tardis_eth.c2_above.back
+  value: 10
+  tol: 0
+sec.by.days:
+  file: results/secondary/summary.json
+  path: bybit.days
+  value: 12
+  tol: 0
+sec.by.front:
+  file: results/secondary/summary.json
+  path: bybit.c2_above.front
+  value: 10
+  tol: 0
+sec.by.random:
+  file: results/secondary/summary.json
+  path: bybit.c2_above.random
+  value: 5
+  tol: 0
+sec.by.back:
+  file: results/secondary/summary.json
+  path: bybit.c2_above.back
+  value: 5
+  tol: 0

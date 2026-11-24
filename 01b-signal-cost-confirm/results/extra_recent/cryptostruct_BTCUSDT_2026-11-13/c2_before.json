@@ -1,0 +1,13 @@
+{
+ "arrays": "cryptostruct_BTCUSDT_2026-11-13_c2_before.npz",
+ "n_decisions": 8449,
+ "feed_gaps_over_1s": 0,
+ "order_size": 0.01,
+ "unit": "c2_before",
+ "source": "cryptostruct",
+ "symbol": "BTCUSDT",
+ "day": "2026-11-13",
+ "role": "extra_recent",
+ "seconds": 118.1,
+ "peak_memory_mb": 6308
+}

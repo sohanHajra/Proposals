@@ -1,0 +1,42 @@
+{
+ "meta": {
+  "day": "2026-07-15",
+  "symbol": "BTCUSDT",
+  "book_file": "2026-07-15_BTCUSDT_ob200.data.zip",
+  "trade_file": "BTCUSDT2026-07-15.csv.gz",
+  "messages": 861358,
+  "snapshots": [
+   [
+    1784073600728,
+    47163105
+   ],
+   [
+    1784112258728,
+    47548925
+   ],
+   [
+    1784160000728,
+    48024533
+   ]
+  ],
+  "chain_breaks": [],
+  "messages_untrusted": 0,
+  "crossed_rows": 0,
+  "rows_short_of_five": 0,
+  "ticker_rows": 861358,
+  "snap5_rows": 605566,
+  "trade_rows": 1672402,
+  "trade_sides": [
+   "buy",
+   "sell"
+  ],
+  "seconds": 43.3
+ },
+ "unit": "convert",
+ "source": "bybit",
+ "symbol": "BTCUSDT",
+ "day": "2026-07-15",
+ "role": "bybit",
+ "seconds": 43.6,
+ "peak_memory_mb": 697
+}

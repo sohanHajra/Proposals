@@ -1,0 +1,33 @@
+{
+ "source": "tardis",
+ "symbol": "BTCUSDT",
+ "day": "2026-02-01",
+ "top_of_book_rows": 42679707,
+ "gap_rule": {
+  "rows_in_day": 42679707,
+  "gaps_over_1s": 29,
+  "longest_gap_s": 1.639987,
+  "head_s": 0.02789,
+  "tail_s": 0.043789,
+  "total_gap_s": 34.426931,
+  "rule": "left out if total gap over 3600 s",
+  "left_out": false,
+  "reason": "kept"
+ },
+ "crossed_or_locked_rows": 0,
+ "spread_1tick_share": 0.9001432929237307,
+ "capture_minus_exchange_ms_quantiles": {
+  "0.01": 2.1630000000000003,
+  "0.5": 3.414,
+  "0.99": 14.401
+ },
+ "mid_open_close": [
+  78706.75,
+  76931.55
+ ],
+ "mid_median": 77997.05,
+ "unit": "audit",
+ "role": "first_of_month",
+ "seconds": 9.8,
+ "peak_memory_mb": 3085
+}

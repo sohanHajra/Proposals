@@ -1,0 +1,33 @@
+{
+ "source": "tardis",
+ "symbol": "ETHUSDT",
+ "day": "2026-01-01",
+ "top_of_book_rows": 61195867,
+ "gap_rule": {
+  "rows_in_day": 61195867,
+  "gaps_over_1s": 172,
+  "longest_gap_s": 1.748344,
+  "head_s": 0.009606,
+  "tail_s": 0.004845,
+  "total_gap_s": 196.036408,
+  "rule": "left out if total gap over 3600 s",
+  "left_out": false,
+  "reason": "kept"
+ },
+ "crossed_or_locked_rows": 0,
+ "spread_1tick_share": 0.9921852075402412,
+ "capture_minus_exchange_ms_quantiles": {
+  "0.01": 1.803,
+  "0.5": 2.813,
+  "0.99": 7.248
+ },
+ "mid_open_close": [
+  2970.395,
+  3002.495
+ ],
+ "mid_median": 2984.335,
+ "unit": "audit",
+ "role": "first_of_month_eth",
+ "seconds": 14.1,
+ "peak_memory_mb": 4335
+}

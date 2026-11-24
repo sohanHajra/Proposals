@@ -1,0 +1,33 @@
+{
+ "source": "tardis",
+ "symbol": "BTCUSDT",
+ "day": "2025-12-01",
+ "top_of_book_rows": 52633970,
+ "gap_rule": {
+  "rows_in_day": 52633970,
+  "gaps_over_1s": 3,
+  "longest_gap_s": 1.256029,
+  "head_s": 0.001282,
+  "tail_s": 0.111524,
+  "total_gap_s": 3.476801,
+  "rule": "left out if total gap over 3600 s",
+  "left_out": false,
+  "reason": "kept"
+ },
+ "crossed_or_locked_rows": 0,
+ "spread_1tick_share": 0.9231764010960982,
+ "capture_minus_exchange_ms_quantiles": {
+  "0.01": 2.369,
+  "0.5": 3.549,
+  "0.99": 14.307
+ },
+ "mid_open_close": [
+  90320.55,
+  86241.55
+ ],
+ "mid_median": 86087.35,
+ "unit": "audit",
+ "role": "first_of_month",
+ "seconds": 12.3,
+ "peak_memory_mb": 3782
+}

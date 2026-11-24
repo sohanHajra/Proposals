@@ -1,0 +1,13 @@
+{
+ "arrays": "tardis_BTCUSDT_2025-10-01_c2_after.npz",
+ "n_decisions": 8449,
+ "feed_gaps_over_1s": 0,
+ "order_size": 0.01,
+ "unit": "c2_after",
+ "source": "tardis",
+ "symbol": "BTCUSDT",
+ "day": "2025-10-01",
+ "role": "first_of_month",
+ "seconds": 132.9,
+ "peak_memory_mb": 4515
+}

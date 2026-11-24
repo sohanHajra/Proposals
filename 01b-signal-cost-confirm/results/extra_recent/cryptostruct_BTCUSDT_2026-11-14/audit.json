@@ -1,0 +1,33 @@
+{
+ "source": "cryptostruct",
+ "symbol": "BTCUSDT",
+ "day": "2026-11-14",
+ "top_of_book_rows": 66107025,
+ "gap_rule": {
+  "rows_in_day": 66107025,
+  "gaps_over_1s": 0,
+  "longest_gap_s": 0.0,
+  "head_s": 0.004414,
+  "tail_s": 0.00031,
+  "total_gap_s": 0.0,
+  "rule": "left out if total gap over 3600 s",
+  "left_out": false,
+  "reason": "kept"
+ },
+ "crossed_or_locked_rows": 0,
+ "spread_1tick_share": 0.931580584665548,
+ "capture_minus_exchange_ms_quantiles": {
+  "0.01": 0.739,
+  "0.5": 1.3820000000000001,
+  "0.99": 2.307
+ },
+ "mid_open_close": [
+  68279.85,
+  64130.55
+ ],
+ "mid_median": 65845.25,
+ "unit": "audit",
+ "role": "extra_recent",
+ "seconds": 9.8,
+ "peak_memory_mb": 4635
+}

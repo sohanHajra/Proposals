@@ -112,3 +112,32 @@ How I'd put it. Delay raises passive cost under all three cancellation rules on 
 ### Limits and gaps
 - The widening is a rough fix on a known problem, not a corrected bootstrap. A proper fix would rebuild the block bootstrap, and I haven't done that.
 - One calibration day per source.
+
+## 2026-11-24, early morning. The secondary days
+
+I ran every secondary day through the runner, one day at a time, each step once. That's the CryptoStruct stress day and the three recent days, the twelve Tardis first of month days on BTCUSDT and on ETHUSDT, and Bybit on the twelve test days. That's 40<!--c:sec.days--> days in all. None was left out by the gap rule. None of this is in the verdict, and each source is reported on its own.
+
+**C1 holds on every one.** The slope interval is above zero and mean ΔS at 500<!--nc--> ms clears 0.1<!--nc--> bps on all 40<!--c:sec.c1.holds--> days. Bybit's slopes are the lowest, 0.039<!--c:sec.by.c1.min--> to 0.060<!--c:sec.by.c1.max--> bps per log ms, against 0.055<!--c:sec.tz.c1.min--> to 0.111<!--c:sec.tz.c1.max--> on Tardis BTCUSDT and 0.052<!--c:sec.eth.c1.min--> to 0.126<!--c:sec.eth.c1.max--> on ETHUSDT. Bybit under the frozen Binance threshold, the version I kept alongside after changing its threshold, comes out positive on all 12<!--c:sec.by.frozen.holds--> days too.
+
+**C2 is weaker, and weakest on Bybit.** No slope estimate is below zero on any day or under any rule. The table counts the days where the interval sits above zero.
+
+| Source | Days | Front | Random | Back |
+|---|---|---|---|---|
+| CryptoStruct stress and recent | 4<!--c:sec.cs.days--> | 4<!--c:sec.cs.front--> | 4<!--c:sec.cs.random--> | 2<!--c:sec.cs.back--> |
+| Tardis BTCUSDT | 12<!--c:sec.tz.days--> | 12<!--c:sec.tz.front--> | 11<!--c:sec.tz.random--> | 10<!--c:sec.tz.back--> |
+| Tardis ETHUSDT | 12<!--c:sec.eth.days--> | 12<!--c:sec.eth.front--> | 11<!--c:sec.eth.random--> | 10<!--c:sec.eth.back--> |
+| Bybit BTCUSDT | 12<!--c:sec.by.days--> | 10<!--c:sec.by.front--> | 5<!--c:sec.by.random--> | 5<!--c:sec.by.back--> |
+
+On both Tardis symbols the misses fall on the same days, 2025-05-01 under random and back and 2025-09-01 under back. The placebo check behaved on Tardis under every rule, so I'd read these as days where the effect is too small to see. On CryptoStruct the two misses are 2026-11-14 and 2026-11-15, both under back, both weekend days. The stress day clears zero under all three rules.
+
+Bybit is the one I'd read most carefully. Front holds on most days, but random and back are above zero on fewer than half. Two things get in the way of saying more. Bybit's book moves in steps of about 100<!--nc--> ms, so most of the short delays see the same book. And the placebo check was already off on Bybit under every rule. So Bybit can't say much about C2 in either direction.
+
+**Steps that didn't go cleanly.** The machine restarted partway through converting the stress day, and I ran it again from the start. On 2026-11-13 the C1 step and on 2026-11-14 the data check each stopped with a read error and wrote nothing. I ran each again on its own and both finished. On 2026-11-14 the first conversion step had also started before 2026-11-13 was rerun. I stopped it after about two minutes, before it wrote anything, and redid it from the start. I think the read errors were the disk, but I haven't checked that.
+
+How I'd put it. Taker cost rising with delay shows up on every source, symbol and venue I tried. The passive side agrees in direction everywhere, but it's clear under front, thinner under back, and mostly lost in the noise on Bybit.
+
+### Limits and gaps
+- None of these days is in the verdict.
+- The Tardis days are one a month and include four weekends and New Year's Day. The recent CryptoStruct days include two weekend days.
+- Bybit's 100<!--nc--> ms book steps and its placebo problem make it a weak check on C2.
+- The read errors are a guess at a cause, not a finding.

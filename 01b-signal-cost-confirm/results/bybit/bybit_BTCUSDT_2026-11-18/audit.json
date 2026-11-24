@@ -1,0 +1,33 @@
+{
+ "source": "bybit",
+ "symbol": "BTCUSDT",
+ "day": "2026-11-18",
+ "top_of_book_rows": 863393,
+ "gap_rule": {
+  "rows_in_day": 863375,
+  "gaps_over_1s": 0,
+  "longest_gap_s": 0.0,
+  "head_s": 1.676,
+  "tail_s": 0.025,
+  "total_gap_s": 1.676,
+  "rule": "left out if total gap over 3600 s",
+  "left_out": false,
+  "reason": "kept"
+ },
+ "crossed_or_locked_rows": 0,
+ "spread_1tick_share": 0.9983622753485377,
+ "capture_minus_exchange_ms_quantiles": {
+  "0.01": 36.0,
+  "0.5": 37.0,
+  "0.99": 44.0
+ },
+ "mid_open_close": [
+  64903.350000000006,
+  63037.149999999994
+ ],
+ "mid_median": 64180.05,
+ "unit": "audit",
+ "role": "bybit",
+ "seconds": 0.3,
+ "peak_memory_mb": 163
+}
