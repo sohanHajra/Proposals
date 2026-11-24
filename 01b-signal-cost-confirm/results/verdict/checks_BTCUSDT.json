@@ -1,0 +1,173 @@
+{
+ "days": 12,
+ "C1": {
+  "walk": {
+   "slope_range": [
+    0.077,
+    0.11
+   ],
+   "dS500_range": [
+    0.48,
+    0.68
+   ],
+   "slope_above_zero": 12
+  },
+  "race": {
+   "slope_range": [
+    0.073,
+    0.103
+   ],
+   "dS500_range": [
+    0.45,
+    0.62
+   ],
+   "slope_above_zero": 12,
+   "share_cells_changed_range": [
+    0.09,
+    0.124
+   ],
+   "share_cells_worse_range": [
+    0.086,
+    0.117
+   ],
+   "pct_cells_changed_range": [
+    9,
+    12
+   ]
+  },
+  "tie_before": {
+   "slope_range": [
+    0.082,
+    0.117
+   ],
+   "dS500_range": [
+    0.51,
+    0.71
+   ],
+   "slope_above_zero": 12
+  },
+  "blocks15": {
+   "slope_range": [
+    0.077,
+    0.11
+   ],
+   "dS500_range": [
+    0.48,
+    0.68
+   ],
+   "slope_above_zero": 12
+  },
+  "placebo_covers_zero": 12
+ },
+ "C2": {
+  "primary": {
+   "front": {
+    "above": 12,
+    "below": 0,
+    "slope_range": [
+     0.003,
+     0.0132
+    ]
+   },
+   "random": {
+    "above": 12,
+    "below": 0,
+    "slope_range": [
+     0.0016,
+     0.006
+    ]
+   },
+   "back": {
+    "above": 11,
+    "below": 0,
+    "slope_range": [
+     0.0012,
+     0.004
+    ]
+   }
+  },
+  "fees": {
+   "front": {
+    "above": 12,
+    "below": 0,
+    "slope_range": [
+     0.0087,
+     0.0388
+    ]
+   },
+   "random": {
+    "above": 12,
+    "below": 0,
+    "slope_range": [
+     0.0028,
+     0.0175
+    ]
+   },
+   "back": {
+    "above": 11,
+    "below": 0,
+    "slope_range": [
+     0.0003,
+     0.0064
+    ]
+   }
+  },
+  "blocks15": {
+   "front": {
+    "above": 12,
+    "below": 0,
+    "slope_range": [
+     0.003,
+     0.0132
+    ]
+   },
+   "random": {
+    "above": 12,
+    "below": 0,
+    "slope_range": [
+     0.0016,
+     0.006
+    ]
+   },
+   "back": {
+    "above": 11,
+    "below": 0,
+    "slope_range": [
+     0.0012,
+     0.004
+    ]
+   }
+  },
+  "tie_before": {
+   "front": {
+    "above": 12,
+    "below": 0,
+    "slope_range": [
+     0.003,
+     0.0132
+    ]
+   },
+   "random": {
+    "above": 12,
+    "below": 0,
+    "slope_range": [
+     0.0016,
+     0.006
+    ]
+   },
+   "back": {
+    "above": 11,
+    "below": 0,
+    "slope_range": [
+     0.0012,
+     0.004
+    ]
+   }
+  },
+  "placebo_covers_zero": {
+   "front": 12,
+   "random": 12,
+   "back": 10
+  }
+ }
+}

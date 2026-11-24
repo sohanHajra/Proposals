@@ -69,3 +69,17 @@ A separate reread of 01.b against my review checklist, done before any test day 
 **Checked, no issue**
 - The first of the 200<!--c:cal.n--> shuffles gives back the registered placebo exactly on all four sources and rules.
 - 25 tests pass and claimcheck agrees. No test day file is in the project.
+
+## 2026-11-24 · secondary days and the write up
+**Found and fixed**
+- The README said C1 "holds" on the secondary days. Holds is verdict language and those days aren't in a verdict, so it now says C1 shows up on every secondary day.
+- "C2 never turns negative" was looser than what was checked. It now says no C2 slope estimate is below zero.
+
+**Open**
+- The two read errors during the secondary runs are a guess at the disk, not checked.
+- C2 under back still leans on intervals that are probably a little narrow.
+
+**Checked, no issue**
+- Every number in the README and the new notebook entry is tagged and matches its results file.
+- The secondary tally and the test day checks summary use the same per day rules as the verdict code, and neither feeds the verdict.
+- Every secondary day ran through the runner on its registered list. Nothing was left out by the gap rule.

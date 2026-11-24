@@ -435,3 +435,193 @@ sec.by.back:
   path: bybit.c2_above.back
   value: 5
   tol: 0
+chk.days:
+  file: results/verdict/checks_BTCUSDT.json
+  path: days
+  value: 12
+  tol: 0
+chk.c1.walk.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.walk.slope_range.0
+  value: 0.077
+  tol: 0.0005
+chk.c1.walk.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.walk.slope_range.1
+  value: 0.11
+  tol: 0.0005
+chk.c1.walk.ds.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.walk.dS500_range.0
+  value: 0.48
+  tol: 0.005
+chk.c1.walk.ds.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.walk.dS500_range.1
+  value: 0.68
+  tol: 0.005
+chk.c1.walk.above:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.walk.slope_above_zero
+  value: 12
+  tol: 0
+chk.c1.race.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.slope_range.0
+  value: 0.073
+  tol: 0.0005
+chk.c1.race.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.slope_range.1
+  value: 0.103
+  tol: 0.0005
+chk.c1.race.ds.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.dS500_range.0
+  value: 0.45
+  tol: 0.005
+chk.c1.race.ds.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.dS500_range.1
+  value: 0.62
+  tol: 0.005
+chk.c1.race.above:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.slope_above_zero
+  value: 12
+  tol: 0
+chk.c1.tie.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.tie_before.slope_range.0
+  value: 0.082
+  tol: 0.0005
+chk.c1.tie.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.tie_before.slope_range.1
+  value: 0.117
+  tol: 0.0005
+chk.c1.tie.ds.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.tie_before.dS500_range.0
+  value: 0.51
+  tol: 0.005
+chk.c1.tie.ds.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.tie_before.dS500_range.1
+  value: 0.71
+  tol: 0.005
+chk.c1.tie.above:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.tie_before.slope_above_zero
+  value: 12
+  tol: 0
+chk.c1.race.changed.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.pct_cells_changed_range.0
+  value: 9
+  tol: 0
+chk.c1.race.changed.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.pct_cells_changed_range.1
+  value: 12
+  tol: 0
+chk.c1.placebo:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.placebo_covers_zero
+  value: 12
+  tol: 0
+chk.c2.main.front:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.primary.front.above
+  value: 12
+  tol: 0
+chk.c2.main.random:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.primary.random.above
+  value: 12
+  tol: 0
+chk.c2.main.back:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.primary.back.above
+  value: 11
+  tol: 0
+chk.c2.fees.front:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.fees.front.above
+  value: 12
+  tol: 0
+chk.c2.fees.random:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.fees.random.above
+  value: 12
+  tol: 0
+chk.c2.fees.back:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.fees.back.above
+  value: 11
+  tol: 0
+chk.c2.b15.front:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.blocks15.front.above
+  value: 12
+  tol: 0
+chk.c2.b15.random:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.blocks15.random.above
+  value: 12
+  tol: 0
+chk.c2.b15.back:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.blocks15.back.above
+  value: 11
+  tol: 0
+chk.c2.tie.front:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.tie_before.front.above
+  value: 12
+  tol: 0
+chk.c2.tie.random:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.tie_before.random.above
+  value: 12
+  tol: 0
+chk.c2.tie.back:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.tie_before.back.above
+  value: 11
+  tol: 0
+chk.c2.plac.front:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.placebo_covers_zero.front
+  value: 12
+  tol: 0
+chk.c2.plac.random:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.placebo_covers_zero.random
+  value: 12
+  tol: 0
+chk.c2.plac.back:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.placebo_covers_zero.back
+  value: 10
+  tol: 0
+sec.cs.c1:
+  file: results/secondary/summary.json
+  path: cs_stress_recent.c1_holds
+  value: 4
+  tol: 0
+sec.tz.c1:
+  file: results/secondary/summary.json
+  path: tardis_btc.c1_holds
+  value: 12
+  tol: 0
+sec.eth.c1:
+  file: results/secondary/summary.json
+  path: tardis_eth.c1_holds
+  value: 12
+  tol: 0
+sec.by.c1:
+  file: results/secondary/summary.json
+  path: bybit.c1_holds
+  value: 12
+  tol: 0
