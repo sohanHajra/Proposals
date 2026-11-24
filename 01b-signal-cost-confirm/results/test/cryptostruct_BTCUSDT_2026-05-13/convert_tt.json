@@ -1,0 +1,45 @@
+{
+ "meta": {
+  "day": "2026-05-13",
+  "symbol": "BTCUSDT",
+  "file": "binance_swap-BTCUSDT-2026-05-13.txt.zst",
+  "window_adapter_ns": [
+   1778630400000000000,
+   1778716800000000000
+  ],
+  "lines_by_type": {
+   "5": 1,
+   "0": 1,
+   "6": 22279033,
+   "8": 60606,
+   "7": 57218,
+   "9": 1007,
+   "1": 3215719,
+   "2": 2916464,
+   "17": 1025
+  },
+  "ticker_lines_one_side": 0,
+  "ticker_lines_no_side": 0,
+  "ticker_rows_out_of_window": 60026,
+  "trade_lines_out_of_window": 9036,
+  "trade_fills": 2907428,
+  "states": [
+   [
+    1778629935585908350,
+    "READY",
+    ""
+   ]
+  ],
+  "exchange_ts_zero": {},
+  "ticker_rows": 22219007,
+  "trade_rows": 2907428,
+  "seconds": 128.7
+ },
+ "unit": "convert_tt",
+ "source": "cryptostruct",
+ "symbol": "BTCUSDT",
+ "day": "2026-05-13",
+ "role": "test",
+ "seconds": 128.9,
+ "peak_memory_mb": 1320
+}

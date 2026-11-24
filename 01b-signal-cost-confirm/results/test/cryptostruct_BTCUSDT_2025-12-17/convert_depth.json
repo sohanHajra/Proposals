@@ -1,0 +1,38 @@
+{
+ "meta": {
+  "day": "2025-12-17",
+  "symbol": "BTCUSDT",
+  "ticksize": 0.1,
+  "snapshots": [
+   [
+    1765929073914348060,
+    0,
+    10000,
+    10000
+   ]
+  ],
+  "chain_breaks": [],
+  "states": [
+   [
+    1765929073914348059,
+    "READY",
+    ""
+   ]
+  ],
+  "update_lines": 1660079,
+  "update_levels": 142672805,
+  "lines_no_row_untrusted": 0,
+  "lines_exchange_ts_zero": 0,
+  "rows": 1235586,
+  "crossed_rows": 0,
+  "levels_at_snapshot": [],
+  "seconds": 248.0
+ },
+ "unit": "convert_depth",
+ "source": "cryptostruct",
+ "symbol": "BTCUSDT",
+ "day": "2025-12-17",
+ "role": "test",
+ "seconds": 249.0,
+ "peak_memory_mb": 947
+}

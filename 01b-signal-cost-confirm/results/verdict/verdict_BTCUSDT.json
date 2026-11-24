@@ -1,0 +1,31 @@
+{
+ "test_days": 12,
+ "surviving": 12,
+ "left_out": [],
+ "underpowered": false,
+ "need": 10,
+ "C1": {
+  "above": 12,
+  "below": 0,
+  "dS500_at_least_0_1": 12,
+  "holds": true
+ },
+ "C2": {
+  "front": {
+   "above": 12,
+   "below": 0,
+   "ok": true
+  },
+  "random": {
+   "above": 12,
+   "below": 0,
+   "ok": true
+  },
+  "back": {
+   "above": 11,
+   "below": 0,
+   "ok": true
+  },
+  "holds": true
+ }
+}

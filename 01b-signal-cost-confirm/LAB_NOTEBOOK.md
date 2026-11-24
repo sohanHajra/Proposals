@@ -83,3 +83,18 @@ What follows from the rule I wrote first. On CryptoStruct back and on Bybit, a t
 - The placebo is off on CryptoStruct back and on Bybit, so it can't back up C2 there.
 - The guard is code that I wrote, and the copy from Drive is still by hand. The MD5 check catches a wrong file, not an early look.
 - The calibration is one day per source.
+
+## 2026-11-23, evening. The twelve test days
+
+I copied the twelve bought test days in from my Drive one at a time and ran each through the runner, every step once. Every file matched its MD5. None was left out by the gap rule, so all 12<!--c:test.surviving--> days survive. The tally comes from `python -m s2fb.verdict`, which wrote results/verdict/verdict_BTCUSDT.json.
+
+**C1 holds.** The slope interval is above zero on 12<!--c:test.c1.above--> of 12<!--nc--> days and below zero on none, and mean ΔS at 500 ms clears 0.1 bps on every day. Day slopes run from 0.077<!--c:test.c1.slope.min--> (2026-05-13) to 0.110<!--c:test.c1.slope.max--> (2026-06-18) bps per log ms, and mean ΔS at 500 ms from 0.48<!--c:test.c1.dS500.min--> to 0.68<!--c:test.c1.dS500.max--> bps. That sits inside the range 01 saw on Tardis.
+
+**C2 holds, with a catch under back.** Under front and random the slope interval is above zero on every day. Under back it is above zero on 11<!--c:test.c2.back.above--> days and covers zero on 2026-02-18, which the 10 of 12 rule allows. The back slopes are the smallest of the three rules on every day. This is the rule where the build day placebo check ran a little hot, so the back intervals may be slightly too narrow. I'm not changing the verdict for that, but I'd read C2 under back as the weakest part of the result.
+
+One step didn't go cleanly. On 2026-06-18 the c1 step stopped once with no output and wrote no file. I ran it again on its own and it finished. Its peak memory, in its result file, is well under what the machine has, so I don't know what stopped it. Nothing was read from the first try.
+
+### Limits and gaps
+- The verdict is one source (CryptoStruct), one symbol, one day a month for a year.
+- The C2 back intervals carry the placebo caveat above.
+- Bybit, the free CryptoStruct samples, the Tardis first of month days and ETHUSDT are still to run. None of them is in the verdict.

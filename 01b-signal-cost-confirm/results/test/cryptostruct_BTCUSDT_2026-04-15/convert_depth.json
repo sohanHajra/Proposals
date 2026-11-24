@@ -1,0 +1,38 @@
+{
+ "meta": {
+  "day": "2026-04-15",
+  "symbol": "BTCUSDT",
+  "ticksize": 0.1,
+  "snapshots": [
+   [
+    1776210819646471972,
+    0,
+    10000,
+    10000
+   ]
+  ],
+  "chain_breaks": [],
+  "states": [
+   [
+    1776210819646471971,
+    "READY",
+    ""
+   ]
+  ],
+  "update_lines": 1669941,
+  "update_levels": 116161697,
+  "lines_no_row_untrusted": 0,
+  "lines_exchange_ts_zero": 0,
+  "rows": 1262616,
+  "crossed_rows": 0,
+  "levels_at_snapshot": [],
+  "seconds": 167.3
+ },
+ "unit": "convert_depth",
+ "source": "cryptostruct",
+ "symbol": "BTCUSDT",
+ "day": "2026-04-15",
+ "role": "test",
+ "seconds": 167.8,
+ "peak_memory_mb": 950
+}

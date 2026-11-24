@@ -1,0 +1,33 @@
+{
+ "source": "cryptostruct",
+ "symbol": "BTCUSDT",
+ "day": "2025-12-17",
+ "top_of_book_rows": 40110426,
+ "gap_rule": {
+  "rows_in_day": 40110426,
+  "gaps_over_1s": 28,
+  "longest_gap_s": 1.721389,
+  "head_s": 0.000834,
+  "tail_s": 0.103627,
+  "total_gap_s": 32.633635,
+  "rule": "left out if total gap over 3600 s",
+  "left_out": false,
+  "reason": "kept"
+ },
+ "crossed_or_locked_rows": 0,
+ "spread_1tick_share": 0.91691469444877,
+ "capture_minus_exchange_ms_quantiles": {
+  "0.01": 0.969,
+  "0.5": 2.02,
+  "0.99": 3.27
+ },
+ "mid_open_close": [
+  87826.25,
+  86201.55
+ ],
+ "mid_median": 86805.65,
+ "unit": "audit",
+ "role": "test",
+ "seconds": 15.2,
+ "peak_memory_mb": 2877
+}

@@ -4,7 +4,7 @@ A sequel to [01 From Signal to Fill](../01-signal-to-fill/). Two things in 01 lo
 
 ## Status
 
-🟡 Preregistered 2026-11-22 Central time (the commit reads 2026-11-23 01:45 UTC). Loader, runner, race rule, ETHUSDT and Bybit readers built on 2026-09-01 on 2026-11-23. No test day copied in or opened yet.
+🟡 Preregistered 2026-11-22 Central time (the commit reads 2026-11-23 01:45 UTC). Loader, runner, race rule, ETHUSDT and Bybit readers built on 2026-09-01 on 2026-11-23. The twelve test days ran on 2026-11-23. C1 and C2 both hold on CryptoStruct BTCUSDT, with C2 weakest under the back rule. Secondary sources and the write up are still to come.
 
 - [Preregistration](PREREGISTRATION.md)
 - [Lab notebook](LAB_NOTEBOOK.md)

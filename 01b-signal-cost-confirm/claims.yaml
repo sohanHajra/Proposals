@@ -250,3 +250,38 @@ cal.n:
   path: n_shuffles
   value: 200
   tol: 0
+test.surviving:
+  file: results/verdict/verdict_BTCUSDT.json
+  path: surviving
+  value: 12
+  tol: 0
+test.c1.above:
+  file: results/verdict/verdict_BTCUSDT.json
+  path: C1.above
+  value: 12
+  tol: 0
+test.c2.back.above:
+  file: results/verdict/verdict_BTCUSDT.json
+  path: C2.back.above
+  value: 11
+  tol: 0
+test.c1.slope.min:
+  file: results/test/cryptostruct_BTCUSDT_2026-05-13/c1.json
+  path: C1.walk.slope_bps_per_logms.est
+  value: 0.077
+  tol: 0.0005
+test.c1.slope.max:
+  file: results/test/cryptostruct_BTCUSDT_2026-06-18/c1.json
+  path: C1.walk.slope_bps_per_logms.est
+  value: 0.110
+  tol: 0.0005
+test.c1.dS500.min:
+  file: results/test/cryptostruct_BTCUSDT_2026-05-13/c1.json
+  path: C1.walk.mean_dS_500ms.mean
+  value: 0.48
+  tol: 0.005
+test.c1.dS500.max:
+  file: results/test/cryptostruct_BTCUSDT_2026-06-18/c1.json
+  path: C1.walk.mean_dS_500ms.mean
+  value: 0.68
+  tol: 0.005
