@@ -98,3 +98,17 @@ One step didn't go cleanly. On 2026-06-18 the c1 step stopped once with no outpu
 - The verdict is one source (CryptoStruct), one symbol, one day a month for a year.
 - The C2 back intervals carry the placebo caveat above.
 - Bybit, the free CryptoStruct samples, the Tardis first of month days and ETHUSDT are still to run. None of them is in the verdict.
+
+## 2026-11-23, late evening. A closer look at C2 under back, exploratory
+
+I came back to the back rule after writing up the tally, because it's the weakest part of C2. Everything below came after I had seen the test day results, so it's exploratory. It doesn't change C2 or its verdict.
+
+**The registered placebo on the test days.** Of the 36<!--c:test.placebo.intervals--> placebo intervals (twelve days, three rules), 2<!--c:test.placebo.miss.total--> miss zero, and both are under back (2<!--c:test.placebo.miss.back-->). One sits just above zero on 2026-04-15 and one just below on 2026-10-14. Misses on both sides fit intervals that are a little too narrow better than they fit a hidden effect. Under the rule I wrote before the test days, back is the rule where the placebo can't back up C2 anyway, so I read these two as saying nothing either way.
+
+**A rough widening.** The build day calibration had back missing zero on 19<!--c:cal.cs.back--> of 200<!--c:cal.n--> shuffles, which makes its 95%<!--nc--> intervals behave more like 90%<!--nc--> ones. As a rough check I widened each back interval around its estimate by the ratio of the two normal quantiles, about 1.17<!--c:expl.widen.ratio-->. The interval still sits above zero on 11<!--c:expl.widen.above--> days, the same days as before. On 2026-09-16 it now only just clears zero. This assumes the intervals are close to normal and that the build day miss rate carries over to the test days. Neither is checked, so I'd treat it as a sense of scale and nothing more. The code is src/s2fb/explore_back_widen.py.
+
+How I'd put it. Delay raises passive cost under all three cancellation rules on this year of days. Front and random carry that. Under back the effect is the smallest of the three, close to the noise, and its intervals are probably a bit tight, so I'd lean on it less.
+
+### Limits and gaps
+- The widening is a rough fix on a known problem, not a corrected bootstrap. A proper fix would rebuild the block bootstrap, and I haven't done that.
+- One calibration day per source.

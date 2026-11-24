@@ -285,3 +285,28 @@ test.c1.dS500.max:
   path: C1.walk.mean_dS_500ms.mean
   value: 0.68
   tol: 0.005
+expl.widen.ratio:
+  file: results/exploratory/c2_back_widened.json
+  path: ratio
+  value: 1.17
+  tol: 0.005
+expl.widen.above:
+  file: results/exploratory/c2_back_widened.json
+  path: back_above_zero_widened
+  value: 11
+  tol: 0
+test.placebo.miss.total:
+  file: results/exploratory/c2_back_widened.json
+  path: placebo_test_day_misses_total
+  value: 2
+  tol: 0
+test.placebo.intervals:
+  file: results/exploratory/c2_back_widened.json
+  path: placebo_intervals
+  value: 36
+  tol: 0
+test.placebo.miss.back:
+  file: results/exploratory/c2_back_widened.json
+  path: placebo_test_day_misses.back
+  value: 2
+  tol: 0
