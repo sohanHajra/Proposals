@@ -83,3 +83,34 @@ A separate reread of 01.b against my review checklist, done before any test day 
 - Every number in the README and the new notebook entry is tagged and matches its results file.
 - The secondary tally and the test day checks summary use the same per day rules as the verdict code, and neither feeds the verdict.
 - Every secondary day ran through the runner on its registered list. Nothing was left out by the gap rule.
+
+## 2026-11-23, evening and late evening · test days and the back rule (written 2026-11-24)
+I didn't write an entry for these two sittings at the time. This is it, from the notebook and the results.
+
+**Checked, no issue**
+- Every test file matched its MD5 before its first step, and no day was left out.
+- The verdict comes from the verdict code, not a count by hand.
+- The look at C2 under back was written up as exploratory, dated, after the test day look, and it doesn't touch C2 or the verdict.
+
+**Open**
+- The c1 step on 2026-06-18 stopped once with no output. The rerun finished. The cause is unknown.
+- The widening in the late evening entry assumes near normal intervals and that the build day miss rate carries over. Neither is checked.
+
+## 2026-11-24, late morning · second full reread
+**Found and fixed**
+- The drift and arrival split for C1 was promised per day and missing. Now reported. It shows the C1 cost is drift.
+- The README draft called the race rule pessimistic, which the preregistration says it isn't, and left out the shares made worse and better. Fixed.
+- The stress day and the three recent days were pooled. Each now has its own row.
+- The secondary data files had no SHA256 in data/MANIFEST.md. Added from the hashes taken at fetch time.
+- Causal wording for C2 in the late evening entry, and verdict wording for C1 on the secondary days, are marked corrected in place.
+- The comparison with 01's range held for the slope only. Marked in place.
+- Bybit under the frozen threshold, the secondary placebo misses, the C1 fee level and a sense of scale for C2 are now reported.
+- The C2 tie flip row is out of the README table, with the reason.
+
+**Open**
+- The MANIFEST rows for the secondary files can't show when each file was first seen, only what was read.
+- In the exploratory script the field for the smallest widened lower bound names 2026-09-16, the smallest of the eleven days still above zero. It isn't the smallest of all twelve. The field isn't quoted anywhere, so I've left it.
+
+**Checked, no issue**
+- The verdict counts recomputed from the per day intervals match the verdict file.
+- claimcheck agrees and the tests pass.

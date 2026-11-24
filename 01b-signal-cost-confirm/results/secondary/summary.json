@@ -104,5 +104,48 @@
   "frozen_c1_holds": 12
  },
  "all_days": 40,
- "all_c1_holds": 40
+ "all_c1_holds": 40,
+ "per_day_cs": {
+  "2026-07-06": {
+   "c1_holds": 1,
+   "front": 1,
+   "random": 1,
+   "back": 1
+  },
+  "2026-11-13": {
+   "c1_holds": 1,
+   "front": 1,
+   "random": 1,
+   "back": 1
+  },
+  "2026-11-14": {
+   "c1_holds": 1,
+   "front": 1,
+   "random": 1,
+   "back": 0
+  },
+  "2026-11-15": {
+   "c1_holds": 1,
+   "front": 1,
+   "random": 1,
+   "back": 0
+  }
+ },
+ "bybit_frozen": {
+  "slope_min": 0.047,
+  "slope_max": 0.065,
+  "days_frozen_higher": 12,
+  "days": 12
+ },
+ "placebo_misses": [
+  "cs_stress_recent 2026-11-13 C2 back",
+  "cs_stress_recent 2026-11-15 C2 random",
+  "tardis_btc 2025-11-01 C2 random",
+  "tardis_eth 2025-12-01 C1",
+  "tardis_eth 2025-12-01 C2 random",
+  "bybit 2026-03-18 C2 random",
+  "bybit 2026-06-18 C2 random"
+ ],
+ "placebo_miss_count": 7,
+ "placebo_intervals": 160
 }

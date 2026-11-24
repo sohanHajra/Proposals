@@ -575,21 +575,6 @@ chk.c2.b15.back:
   path: C2.blocks15.back.above
   value: 11
   tol: 0
-chk.c2.tie.front:
-  file: results/verdict/checks_BTCUSDT.json
-  path: C2.tie_before.front.above
-  value: 12
-  tol: 0
-chk.c2.tie.random:
-  file: results/verdict/checks_BTCUSDT.json
-  path: C2.tie_before.random.above
-  value: 12
-  tol: 0
-chk.c2.tie.back:
-  file: results/verdict/checks_BTCUSDT.json
-  path: C2.tie_before.back.above
-  value: 11
-  tol: 0
 chk.c2.plac.front:
   file: results/verdict/checks_BTCUSDT.json
   path: C2.placebo_covers_zero.front
@@ -604,11 +589,6 @@ chk.c2.plac.back:
   file: results/verdict/checks_BTCUSDT.json
   path: C2.placebo_covers_zero.back
   value: 10
-  tol: 0
-sec.cs.c1:
-  file: results/secondary/summary.json
-  path: cs_stress_recent.c1_holds
-  value: 4
   tol: 0
 sec.tz.c1:
   file: results/secondary/summary.json
@@ -625,3 +605,368 @@ sec.by.c1:
   path: bybit.c1_holds
   value: 12
   tol: 0
+split.d20251217.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.0.dS500
+  value: 0.631
+  tol: 0.0005
+split.d20251217.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.0.drift
+  value: 0.654
+  tol: 0.0005
+split.d20251217.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.0.arrival
+  value: -0.023
+  tol: 0.0005
+split.d20260114.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.1.dS500
+  value: 0.543
+  tol: 0.0005
+split.d20260114.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.1.drift
+  value: 0.564
+  tol: 0.0005
+split.d20260114.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.1.arrival
+  value: -0.021
+  tol: 0.0005
+split.d20260218.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.2.dS500
+  value: 0.606
+  tol: 0.0005
+split.d20260218.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.2.drift
+  value: 0.635
+  tol: 0.0005
+split.d20260218.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.2.arrival
+  value: -0.029
+  tol: 0.0005
+split.d20260318.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.3.dS500
+  value: 0.638
+  tol: 0.0005
+split.d20260318.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.3.drift
+  value: 0.658
+  tol: 0.0005
+split.d20260318.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.3.arrival
+  value: -0.02
+  tol: 0.0005
+split.d20260415.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.4.dS500
+  value: 0.551
+  tol: 0.0005
+split.d20260415.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.4.drift
+  value: 0.565
+  tol: 0.0005
+split.d20260415.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.4.arrival
+  value: -0.014
+  tol: 0.0005
+split.d20260513.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.5.dS500
+  value: 0.484
+  tol: 0.0005
+split.d20260513.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.5.drift
+  value: 0.496
+  tol: 0.0005
+split.d20260513.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.5.arrival
+  value: -0.011
+  tol: 0.0005
+split.d20260618.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.6.dS500
+  value: 0.676
+  tol: 0.0005
+split.d20260618.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.6.drift
+  value: 0.693
+  tol: 0.0005
+split.d20260618.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.6.arrival
+  value: -0.017
+  tol: 0.0005
+split.d20260715.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.7.dS500
+  value: 0.493
+  tol: 0.0005
+split.d20260715.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.7.drift
+  value: 0.509
+  tol: 0.0005
+split.d20260715.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.7.arrival
+  value: -0.016
+  tol: 0.0005
+split.d20260812.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.8.dS500
+  value: 0.525
+  tol: 0.0005
+split.d20260812.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.8.drift
+  value: 0.537
+  tol: 0.0005
+split.d20260812.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.8.arrival
+  value: -0.012
+  tol: 0.0005
+split.d20260916.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.9.dS500
+  value: 0.623
+  tol: 0.0005
+split.d20260916.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.9.drift
+  value: 0.637
+  tol: 0.0005
+split.d20260916.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.9.arrival
+  value: -0.014
+  tol: 0.0005
+split.d20261014.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.10.dS500
+  value: 0.543
+  tol: 0.0005
+split.d20261014.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.10.drift
+  value: 0.556
+  tol: 0.0005
+split.d20261014.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.10.arrival
+  value: -0.014
+  tol: 0.0005
+split.d20261118.ds:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.11.dS500
+  value: 0.639
+  tol: 0.0005
+split.d20261118.drift:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.11.drift
+  value: 0.656
+  tol: 0.0005
+split.d20261118.arr:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_by_day.11.arrival
+  value: -0.017
+  tol: 0.0005
+chk.c2.scale.front.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms.front.0
+  value: 0.021
+  tol: 0.0005
+chk.c2.scale.front.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms.front.1
+  value: 0.09
+  tol: 0.0005
+chk.c2.scale.back.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms.back.0
+  value: 0.009
+  tol: 0.0005
+chk.c2.scale.back.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms.back.1
+  value: 0.028
+  tol: 0.0005
+chk.c1.race.worse.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.pct_cells_worse_range.0
+  value: 8.6
+  tol: 0.05
+chk.c1.race.worse.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.pct_cells_worse_range.1
+  value: 11.7
+  tol: 0.05
+chk.c1.race.better.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.pct_cells_better_range.0
+  value: 0.4
+  tol: 0.005
+chk.c1.race.better.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.race.pct_cells_better_range.1
+  value: 0.73
+  tol: 0.005
+chk.c1.fees.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.fees_mean_S500_range.0
+  value: 5.54
+  tol: 0.005
+chk.c1.fees.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.fees_mean_S500_range.1
+  value: 5.75
+  tol: 0.005
+chk.c1.drift.above:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.drift_above_dS500_days
+  value: 12
+  tol: 0
+chk.c2.tie.same:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2.tie_identical_days
+  value: 10
+  tol: 0
+sec.by.frozen.min:
+  file: results/secondary/summary.json
+  path: bybit_frozen.slope_min
+  value: 0.047
+  tol: 0.0005
+sec.by.frozen.max:
+  file: results/secondary/summary.json
+  path: bybit_frozen.slope_max
+  value: 0.065
+  tol: 0.0005
+sec.by.frozen.higher:
+  file: results/secondary/summary.json
+  path: bybit_frozen.days_frozen_higher
+  value: 12
+  tol: 0
+sec.plac.miss:
+  file: results/secondary/summary.json
+  path: placebo_miss_count
+  value: 7
+  tol: 0
+sec.plac.n:
+  file: results/secondary/summary.json
+  path: placebo_intervals
+  value: 160
+  tol: 0
+sec.cs.0706.c1:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-07-06.c1_holds
+  value: 1
+  tol: 0
+sec.cs.0706.front:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-07-06.front
+  value: 1
+  tol: 0
+sec.cs.0706.random:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-07-06.random
+  value: 1
+  tol: 0
+sec.cs.0706.back:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-07-06.back
+  value: 1
+  tol: 0
+sec.cs.1113.c1:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-13.c1_holds
+  value: 1
+  tol: 0
+sec.cs.1113.front:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-13.front
+  value: 1
+  tol: 0
+sec.cs.1113.random:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-13.random
+  value: 1
+  tol: 0
+sec.cs.1113.back:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-13.back
+  value: 1
+  tol: 0
+sec.cs.1114.c1:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-14.c1_holds
+  value: 1
+  tol: 0
+sec.cs.1114.front:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-14.front
+  value: 1
+  tol: 0
+sec.cs.1114.random:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-14.random
+  value: 1
+  tol: 0
+sec.cs.1114.back:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-14.back
+  value: 0
+  tol: 0
+sec.cs.1115.c1:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-15.c1_holds
+  value: 1
+  tol: 0
+sec.cs.1115.front:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-15.front
+  value: 1
+  tol: 0
+sec.cs.1115.random:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-15.random
+  value: 1
+  tol: 0
+sec.cs.1115.back:
+  file: results/secondary/summary.json
+  path: per_day_cs.2026-11-15.back
+  value: 0
+  tol: 0
+chk.c1.drift.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_drift_range.0
+  value: 0.5
+  tol: 0.005
+chk.c1.drift.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_drift_range.1
+  value: 0.69
+  tol: 0.005
+chk.c1.arr.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_arrival_range.0
+  value: -0.029
+  tol: 0.0005
+chk.c1.arr.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C1.split_arrival_range.1
+  value: -0.011
+  tol: 0.0005

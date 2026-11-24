@@ -88,7 +88,7 @@ What follows from the rule I wrote first. On CryptoStruct back and on Bybit, a t
 
 I copied the twelve bought test days in from my Drive one at a time and ran each through the runner, every step once. Every file matched its MD5. None was left out by the gap rule, so all 12<!--c:test.surviving--> days survive. The tally comes from `python -m s2fb.verdict`, which wrote results/verdict/verdict_BTCUSDT.json.
 
-**C1 holds.** The slope interval is above zero on 12<!--c:test.c1.above--> of 12<!--nc--> days and below zero on none, and mean ΔS at 500 ms clears 0.1 bps on every day. Day slopes run from 0.077<!--c:test.c1.slope.min--> (2026-05-13) to 0.110<!--c:test.c1.slope.max--> (2026-06-18) bps per log ms, and mean ΔS at 500 ms from 0.48<!--c:test.c1.dS500.min--> to 0.68<!--c:test.c1.dS500.max--> bps. That sits inside the range 01 saw on Tardis.
+**C1 holds.** The slope interval is above zero on 12<!--c:test.c1.above--> of 12<!--nc--> days and below zero on none, and mean ΔS at 500 ms clears 0.1 bps on every day. Day slopes run from 0.077<!--c:test.c1.slope.min--> (2026-05-13) to 0.110<!--c:test.c1.slope.max--> (2026-06-18) bps per log ms, and mean ΔS at 500 ms from 0.48<!--c:test.c1.dS500.min--> to 0.68<!--c:test.c1.dS500.max--> bps. That sits inside the range 01 saw on Tardis. *(Corrected 2026-11-24, see the late morning entry.)*
 
 **C2 holds, with a catch under back.** Under front and random the slope interval is above zero on every day. Under back it is above zero on 11<!--c:test.c2.back.above--> days and covers zero on 2026-02-18, which the 10 of 12 rule allows. The back slopes are the smallest of the three rules on every day. This is the rule where the build day placebo check ran a little hot, so the back intervals may be slightly too narrow. I'm not changing the verdict for that, but I'd read C2 under back as the weakest part of the result.
 
@@ -107,7 +107,7 @@ I came back to the back rule after writing up the tally, because it's the weakes
 
 **A rough widening.** The build day calibration had back missing zero on 19<!--c:cal.cs.back--> of 200<!--c:cal.n--> shuffles, which makes its 95%<!--nc--> intervals behave more like 90%<!--nc--> ones. As a rough check I widened each back interval around its estimate by the ratio of the two normal quantiles, about 1.17<!--c:expl.widen.ratio-->. The interval still sits above zero on 11<!--c:expl.widen.above--> days, the same days as before. On 2026-09-16 it now only just clears zero. This assumes the intervals are close to normal and that the build day miss rate carries over to the test days. Neither is checked, so I'd treat it as a sense of scale and nothing more. The code is src/s2fb/explore_back_widen.py.
 
-How I'd put it. Delay raises passive cost under all three cancellation rules on this year of days. Front and random carry that. Under back the effect is the smallest of the three, close to the noise, and its intervals are probably a bit tight, so I'd lean on it less.
+How I'd put it. Delay raises passive cost under all three cancellation rules on this year of days. Front and random carry that. Under back the effect is the smallest of the three, close to the noise, and its intervals are probably a bit tight, so I'd lean on it less. *(Corrected 2026-11-24, see the late morning entry.)*
 
 ### Limits and gaps
 - The widening is a rough fix on a known problem, not a corrected bootstrap. A proper fix would rebuild the block bootstrap, and I haven't done that.
@@ -117,7 +117,7 @@ How I'd put it. Delay raises passive cost under all three cancellation rules on 
 
 I ran every secondary day through the runner, one day at a time, each step once. That's the CryptoStruct stress day and the three recent days, the twelve Tardis first of month days on BTCUSDT and on ETHUSDT, and Bybit on the twelve test days. That's 40<!--c:sec.days--> days in all. None was left out by the gap rule. None of this is in the verdict, and each source is reported on its own.
 
-**C1 holds on every one.** The slope interval is above zero and mean ΔS at 500<!--nc--> ms clears 0.1<!--nc--> bps on all 40<!--c:sec.c1.holds--> days. Bybit's slopes are the lowest, 0.039<!--c:sec.by.c1.min--> to 0.060<!--c:sec.by.c1.max--> bps per log ms, against 0.055<!--c:sec.tz.c1.min--> to 0.111<!--c:sec.tz.c1.max--> on Tardis BTCUSDT and 0.052<!--c:sec.eth.c1.min--> to 0.126<!--c:sec.eth.c1.max--> on ETHUSDT. Bybit under the frozen Binance threshold, the version I kept alongside after changing its threshold, comes out positive on all 12<!--c:sec.by.frozen.holds--> days too.
+**C1 holds on every one.** *(Corrected 2026-11-24, see the late morning entry.)* The slope interval is above zero and mean ΔS at 500<!--nc--> ms clears 0.1<!--nc--> bps on all 40<!--c:sec.c1.holds--> days. Bybit's slopes are the lowest, 0.039<!--c:sec.by.c1.min--> to 0.060<!--c:sec.by.c1.max--> bps per log ms, against 0.055<!--c:sec.tz.c1.min--> to 0.111<!--c:sec.tz.c1.max--> on Tardis BTCUSDT and 0.052<!--c:sec.eth.c1.min--> to 0.126<!--c:sec.eth.c1.max--> on ETHUSDT. Bybit under the frozen Binance threshold, the version I kept alongside after changing its threshold, comes out positive on all 12<!--c:sec.by.frozen.holds--> days too.
 
 **C2 is weaker, and weakest on Bybit.** No slope estimate is below zero on any day or under any rule. The table counts the days where the interval sits above zero.
 
@@ -128,7 +128,7 @@ I ran every secondary day through the runner, one day at a time, each step once.
 | Tardis ETHUSDT | 12<!--c:sec.eth.days--> | 12<!--c:sec.eth.front--> | 11<!--c:sec.eth.random--> | 10<!--c:sec.eth.back--> |
 | Bybit BTCUSDT | 12<!--c:sec.by.days--> | 10<!--c:sec.by.front--> | 5<!--c:sec.by.random--> | 5<!--c:sec.by.back--> |
 
-On both Tardis symbols the misses fall on the same days, 2025-05-01 under random and back and 2025-09-01 under back. The placebo check behaved on Tardis under every rule, so I'd read these as days where the effect is too small to see. On CryptoStruct the two misses are 2026-11-14 and 2026-11-15, both under back, both weekend days. The stress day clears zero under all three rules.
+On both Tardis symbols the misses fall on the same days, 2025-05-01 under random and back and 2025-09-01 under back. The placebo check behaved on Tardis under every rule, so I'd read these as days where the effect is too small to see. *(Corrected 2026-11-24, see the late morning entry.)* On CryptoStruct the two misses are 2026-11-14 and 2026-11-15, both under back, both weekend days. The stress day clears zero under all three rules.
 
 Bybit is the one I'd read most carefully. Front holds on most days, but random and back are above zero on fewer than half. Two things get in the way of saying more. Bybit's book moves in steps of about 100<!--nc--> ms, so most of the short delays see the same book. And the placebo check was already off on Bybit under every rule. So Bybit can't say much about C2 in either direction.
 
@@ -141,3 +141,29 @@ How I'd put it. Taker cost rising with delay shows up on every source, symbol an
 - The Tardis days are one a month and include four weekends and New Year's Day. The recent CryptoStruct days include two weekend days.
 - Bybit's 100<!--nc--> ms book steps and its placebo problem make it a weak check on C2.
 - The read errors are a guess at a cause, not a finding.
+
+## 2026-11-24, late morning. Corrections after a second full reread
+
+I reread all of 01.b against my review checklist before calling the write up done. The verdict counts came out the same when I recounted them from the per day intervals. What follows are the places where my write up said less, or more, than the results.
+
+**The drift and arrival split.** The preregistration promised it per day for C1 and I hadn't reported it. It's now a table in the README. Drift is larger than the whole ΔS at 500<!--nc--> ms on all 12<!--c:chk.c1.drift.above--> test days, running 0.50<!--c:chk.c1.drift.min--> to 0.69<!--c:chk.c1.drift.max--> bps, and arrival is a little negative, between −0.029<!--c:chk.c1.arr.min--> and −0.011<!--c:chk.c1.arr.max--> bps. So the C1 cost is the predicted move happening while the order waits. The book at arrival takes a hair of it back. That's the most useful thing in this entry, and I should have had it in last night.
+
+**Corrections to earlier entries, marked in place.**
+- The test day entry says C1 sits inside the range 01 saw. That holds for the slope. 01's 0.47<!--c:prior.sig.S500.min--> to 0.76<!--c:prior.sig.S500.max--> bps at 500 ms was a top of book level, not walk ΔS, so the two aren't the same thing.
+- The late evening entry says delay raises passive cost. C2 describes the orders that were kept, and which ones are kept depends on delay. The better wording is that among the orders kept, passive cost is higher at longer delays.
+- This morning's entry says C1 holds on every secondary day. Holds is the word for the verdict, and these days aren't in it. C1's day rule passes on every one.
+- This morning's entry also says the placebo behaved on Tardis under every rule. That was the build day check. On the secondary days themselves 7<!--c:sec.plac.miss--> of 160<!--c:sec.plac.n--> placebo intervals miss zero, one of them on Tardis BTCUSDT (2025-11-01 random) and two on ETHUSDT (2025-12-01, C1 and random). That's close to what chance gives, but it isn't nothing.
+
+**Things now reported that weren't.**
+- Each CryptoStruct secondary day gets its own row. I had pooled the stress day with the recent days, and the preregistration says each is reported alone.
+- Bybit under the frozen Binance threshold has its own row. Its slopes are higher on all 12<!--c:sec.by.frozen.higher--> days than under Bybit's own threshold. So the threshold change I made after seeing Bybit's build day made its C1 smaller.
+- The race rule's share of cells made worse and made better. I had called the rule pessimistic in the README draft, and the preregistration already says it isn't a bound.
+- The C1 fee level, and a sense of scale for C2. From 1 ms to 500 ms C2 adds a few hundredths of a bp, small next to fees.
+- The C2 tie flip gives exactly the main numbers on 10<!--c:chk.c2.tie.same--> of 12<!--nc--> days, so I took it out of the README table and said why.
+- data/MANIFEST.md now has the SHA256 of every Tardis and Bybit file the secondary days read. Those hashes were taken when the files were fetched during last night's runs. The files themselves aren't kept, so I can't hash them again from here.
+
+The code that gathers these is src/s2fb/test_checks.py and src/s2fb/secondary_tally.py. Neither feeds the verdict.
+
+### Limits and gaps
+- None of this changes C1, C2 or the verdict. It changes how much they say.
+- The MANIFEST hashes for the secondary files were taken at fetch time by the same runs that used them, so they show what was read, not when it was first seen.

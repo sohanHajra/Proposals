@@ -60,10 +60,51 @@ def tally(folders):
     return out
 
 
+def per_day(folders):
+    rows = {}
+    for d in day_dirs(folders):
+        w = json.loads((d / "c1.json").read_text())["C1"]["walk"]
+        p = json.loads((d / "c2.json").read_text())["C2"]["primary"]
+        rows[d.name[-10:]] = {
+            "c1_holds": int(w["slope_bps_per_logms"]["ci95"][0] > 0 and w["mean_dS_500ms"]["mean"] >= 0.1),
+            **{k: int(p[k]["slope_bps_per_logms"]["ci95"][0] > 0) for k in ("front", "random", "back")},
+        }
+    return rows
+
+
+def placebo_misses():
+    out = []
+    for g, folders in GROUPS.items():
+        for d in day_dirs(folders):
+            c1 = json.loads((d / "c1.json").read_text())["C1"]["placebo"]["interval_covers_zero"]
+            if not c1:
+                out.append(f"{g} {d.name[-10:]} C1")
+            c2 = json.loads((d / "c2.json").read_text())["C2"]["placebo"]["interval_covers_zero"]
+            for k in ("front", "random", "back"):
+                if not c2[k]:
+                    out.append(f"{g} {d.name[-10:]} C2 {k}")
+    return out
+
+
+def bybit_frozen():
+    own, frozen = [], []
+    for d in day_dirs(GROUPS["bybit"]):
+        own.append(json.loads((d / "c1.json").read_text())["C1"]["walk"]["slope_bps_per_logms"]["est"])
+        frozen.append(json.loads((d / "c1_frozen.json").read_text())["C1"]["walk"]["slope_bps_per_logms"]["est"])
+    return {"slope_min": round(min(frozen), 3), "slope_max": round(max(frozen), 3),
+            "days_frozen_higher": sum(f > o for f, o in zip(frozen, own)), "days": len(own)}
+
+
 def main():
     res = {g: tally(f) for g, f in GROUPS.items()}
     res["all_days"] = sum(r["days"] for r in res.values())
     res["all_c1_holds"] = sum(r["c1_holds"] for k, r in res.items() if isinstance(r, dict))
+    res["per_day_cs"] = per_day(GROUPS["cs_stress_recent"])
+    res["bybit_frozen"] = bybit_frozen()
+    pm = placebo_misses()
+    res["placebo_misses"] = pm
+    res["placebo_miss_count"] = len(pm)
+    res["placebo_intervals"] = res["all_days"] * 4
     dest = ROOT / "secondary" / "summary.json"
     dest.parent.mkdir(exist_ok=True)
     dest.write_text(json.dumps(res, indent=1) + "\n")

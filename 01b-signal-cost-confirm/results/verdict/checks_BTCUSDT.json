@@ -33,6 +33,14 @@
    "pct_cells_changed_range": [
     9,
     12
+   ],
+   "pct_cells_worse_range": [
+    8.6,
+    11.7
+   ],
+   "pct_cells_better_range": [
+    0.4,
+    0.73
    ]
   },
   "tie_before": {
@@ -57,9 +65,97 @@
    ],
    "slope_above_zero": 12
   },
-  "placebo_covers_zero": 12
+  "placebo_covers_zero": 12,
+  "split_by_day": [
+   {
+    "day": "2025-12-17",
+    "dS500": 0.631,
+    "drift": 0.654,
+    "arrival": -0.023
+   },
+   {
+    "day": "2026-01-14",
+    "dS500": 0.543,
+    "drift": 0.564,
+    "arrival": -0.021
+   },
+   {
+    "day": "2026-02-18",
+    "dS500": 0.606,
+    "drift": 0.635,
+    "arrival": -0.029
+   },
+   {
+    "day": "2026-03-18",
+    "dS500": 0.638,
+    "drift": 0.658,
+    "arrival": -0.02
+   },
+   {
+    "day": "2026-04-15",
+    "dS500": 0.551,
+    "drift": 0.565,
+    "arrival": -0.014
+   },
+   {
+    "day": "2026-05-13",
+    "dS500": 0.484,
+    "drift": 0.496,
+    "arrival": -0.011
+   },
+   {
+    "day": "2026-06-18",
+    "dS500": 0.676,
+    "drift": 0.693,
+    "arrival": -0.017
+   },
+   {
+    "day": "2026-07-15",
+    "dS500": 0.493,
+    "drift": 0.509,
+    "arrival": -0.016
+   },
+   {
+    "day": "2026-08-12",
+    "dS500": 0.525,
+    "drift": 0.537,
+    "arrival": -0.012
+   },
+   {
+    "day": "2026-09-16",
+    "dS500": 0.623,
+    "drift": 0.637,
+    "arrival": -0.014
+   },
+   {
+    "day": "2026-10-14",
+    "dS500": 0.543,
+    "drift": 0.556,
+    "arrival": -0.014
+   },
+   {
+    "day": "2026-11-18",
+    "dS500": 0.639,
+    "drift": 0.656,
+    "arrival": -0.017
+   }
+  ],
+  "split_drift_range": [
+   0.5,
+   0.69
+  ],
+  "split_arrival_range": [
+   -0.029,
+   -0.011
+  ],
+  "drift_above_dS500_days": 12,
+  "fees_mean_S500_range": [
+   5.54,
+   5.75
+  ]
  },
  "C2": {
+  "tie_identical_days": 10,
   "primary": {
    "front": {
     "above": 12,
@@ -169,5 +265,19 @@
    "random": 12,
    "back": 10
   }
+ },
+ "C2_cost_1_to_500ms": {
+  "front": [
+   0.021,
+   0.09
+  ],
+  "random": [
+   0.009,
+   0.045
+  ],
+  "back": [
+   0.009,
+   0.028
+  ]
  }
 }
