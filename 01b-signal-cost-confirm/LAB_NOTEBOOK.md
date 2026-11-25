@@ -152,7 +152,7 @@ I reread all of 01.b against my integrity checks before calling the write up don
 - The test day entry says C1 sits inside the range 01 saw. That holds for the slope. 01's 0.47<!--c:prior.sig.S500.min--> to 0.76<!--c:prior.sig.S500.max--> bps at 500 ms was a top of book level, not walk ΔS, so the two aren't the same thing.
 - The late evening entry says delay raises passive cost. C2 describes the orders that were kept, and which ones are kept depends on delay. The better wording is that among the orders kept, passive cost is higher at longer delays.
 - This morning's entry says C1 holds on every secondary day. Holds is the word for the verdict, and these days aren't in it. C1's day rule passes on every one.
-- This morning's entry also says the placebo behaved on Tardis under every rule. That was the build day check. On the secondary days themselves 7<!--c:sec.plac.miss--> of 160<!--c:sec.plac.n--> placebo intervals miss zero, one of them on Tardis BTCUSDT (2025-11-01 random) and two on ETHUSDT (2025-12-01, C1 and random). That's close to what chance gives, but it isn't nothing.
+- This morning's entry also says the placebo behaved on Tardis under every rule. That was the build day check. On the secondary days themselves 7<!--c:sec.plac.miss--> of 160<!--c:sec.plac.n--> placebo intervals miss zero, one of them on Tardis BTCUSDT (2025-11-01 random) and two on ETHUSDT (2025-12-01, C1 and random). That's close to what chance gives, but it isn't nothing. *(Corrected 2026-11-25. They all reuse one seed, so they aren't 160<!--c:sec.plac.n--> separate draws and the count can't be compared with chance.)*
 
 **Things now reported that weren't.**
 - Each CryptoStruct secondary day gets its own row. I had pooled the stress day with the recent days, and the preregistration says each is reported alone.
@@ -171,10 +171,29 @@ The code that gathers these is src/s2fb/test_checks.py and src/s2fb/secondary_ta
 
 ## 2026-11-25. Released
 
-I read the write up once more and put 01.b out, tagged v0.1-signal-cost-confirm. Nothing was run today. No hypothesis, threshold, day or result moved. The verdict is the one in the README. C1 and C2 both hold on the twelve test days, and C2 is small and weakest under the back rule.
+I read the write up once more and put 01.b out, tagged `v0.1-signal-cost-confirm`. No analysis was run today. No hypothesis, threshold, day or result moved. The verdict is the one in the README. C1 and C2 both hold on the twelve test days, and C2 is small and weakest under the back rule.
 
 ### Limits and gaps
 - The verdict rests on twelve days of one symbol on one venue. The secondary days back it up but aren't in it.
 - C2 describes the passive orders that were kept, so it isn't a causal cost of delay.
 - Bybit's 100<!--nc--> ms book steps and its placebo problem leave C2 there mostly unread.
+- The replay still has no real race for the touch. The race rule is a sensitivity, not a bound.
+- Under back the C2 intervals are probably a little narrow.
 - Anything I find from here goes in a new dated entry.
+
+## 2026-11-25, afternoon. Reread after release
+
+I went through the released folder once more and recomputed the headline numbers from the twelve per day files rather than the summaries. They all match. A few things were said less clearly than they should be, so I fixed them without touching the tag.
+
+The biggest is C2 with fees. I'd written that C2 is small next to fees, which is true, but it hid that fees make C2 larger. A longer wait turns some maker fills into taker crossings, so with fees the 1<!--nc--> to 500<!--nc--> ms cost is 0.063<!--c:chk.c2.feescale.front.min--> to 0.281<!--c:chk.c2.feescale.front.max--> bps under front, 0.014<!--c:chk.c2.feescale.random.min--> to 0.126<!--c:chk.c2.feescale.random.max--> under random and 0.002<!--c:chk.c2.feescale.back.min--> to 0.045<!--c:chk.c2.feescale.back.max--> under back. Without fees front was 0.021<!--c:chk.c2.scale.front.min--> to 0.090<!--c:chk.c2.scale.front.max--> bps. It's still well under a bp.
+
+I hadn't noticed that the back day under the line moves. With fees it's 2026-08-12 and 2026-02-18 clears. In every other check it's 2026-02-18. Same count, different day, and it fits back sitting at the edge.
+
+Smaller things. The rerun line in the README now says to move a day's results aside first, since the runner won't overwrite a step. The secondary C1 line uses the day rule wording. The placebo limit now says it comes from the build day check. The earlier comparison of the 7<!--c:sec.plac.miss--> of 160<!--c:sec.plac.n--> placebo misses with chance is marked in place, since they share one seed.
+
+src/s2fb/test_checks.py now also writes the fee inclusive cost range and the days not above zero for each check. Nothing else in its output changed, and it still doesn't feed the verdict.
+
+### Limits and gaps
+- The fee inclusive C2 ranges come from the registered fee check. I haven't looked at how much of the change is fees moving versus fills moving.
+- The release tag points at the text before these fixes. The fixes are in the commit after it.
+

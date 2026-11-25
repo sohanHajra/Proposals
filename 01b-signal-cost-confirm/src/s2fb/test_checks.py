@@ -23,9 +23,10 @@ def main():
     split = []
     fee_level = []
     scale = {r: [] for r in RULES}
+    scale_fees = {r: [] for r in RULES}
     tie_same = 0
     c1_placebo_cover = 0
-    c2 = {v: {r: {"above": 0, "below": 0, "est": []} for r in RULES} for v in ("primary", "fees", "blocks15", "tie_before")}
+    c2 = {v: {r: {"above": 0, "below": 0, "est": [], "not_above": []} for r in RULES} for v in ("primary", "fees", "blocks15", "tie_before")}
     c2_placebo_cover = {r: 0 for r in RULES}
     n = 0
     for day in TEST_DAYS:
@@ -54,9 +55,11 @@ def main():
                 c2[v][r]["est"].append(s["est"])
                 c2[v][r]["above"] += s["ci95"][0] > 0
                 c2[v][r]["below"] += s["ci95"][1] < 0
-                if v == "primary":
+                if not s["ci95"][0] > 0:
+                    c2[v][r]["not_above"].append(day)
+                if v in ("primary", "fees"):
                     cb = b[v][r]["cost_by_delay"]
-                    scale[r].append(cb["500"] - cb["1"])
+                    (scale if v == "primary" else scale_fees)[r].append(cb["500"] - cb["1"])
         tie_same += all(b["tie_before"][r]["slope_bps_per_logms"] == b["primary"][r]["slope_bps_per_logms"] for r in RULES)
         for r in RULES:
             c2_placebo_cover[r] += bool(b["placebo"]["interval_covers_zero"][r])
@@ -77,8 +80,10 @@ def main():
     out["C1"]["fees_mean_S500_range"] = rng(fee_level, 2)
     out["C2"]["tie_identical_days"] = tie_same
     out["C2_cost_1_to_500ms"] = {r: rng(x, 3) for r, x in scale.items()}
+    out["C2_cost_1_to_500ms_with_fees"] = {r: rng(x, 3) for r, x in scale_fees.items()}
     for v, rr in c2.items():
-        out["C2"][v] = {r: {"above": x["above"], "below": x["below"], "slope_range": rng(x["est"], 4)} for r, x in rr.items()}
+        out["C2"][v] = {r: {"above": x["above"], "below": x["below"], "slope_range": rng(x["est"], 4),
+                         "days_not_above": x["not_above"]} for r, x in rr.items()}
     out["C2"]["placebo_covers_zero"] = c2_placebo_cover
     dest = ROOT / "verdict" / "checks_BTCUSDT.json"
     dest.write_text(json.dumps(out, indent=1) + "\n")

@@ -1,6 +1,6 @@
 # 01.b Signal Cost Confirm
 
-A sequel to [01 From Signal to Fill](../01-signal-to-fill/). Two things in 01 looked real but weren't its main tests. A taker acting on top of book imbalance paid more the longer its order took to reach the book, and a fixed price passive order looked costlier with delay once the orders marketable on arrival were left out. 01.b checks both once, on twelve days I haven't seen, with the rules written first.
+A sequel to [01 From Signal to Fill](../01-signal-to-fill/). Two things in 01 looked real but weren't its main tests. A taker acting on top of book imbalance paid more the longer its order took to reach the book, and a fixed price passive order looked costlier at longer delays once the orders marketable on arrival were left out. 01.b checks both once, on twelve days I haven't seen, with the rules written first.
 
 ## Status
 
@@ -17,7 +17,7 @@ Both leads hold on the twelve CryptoStruct BTCUSDT test days, under the rules I 
 - **C1 holds.** A taker acting on extreme imbalance pays more the longer its order takes. The slope interval is above zero on 12<!--c:test.c1.above--> of 12<!--nc--> days. Slopes run 0.077<!--c:test.c1.slope.min--> to 0.110<!--c:test.c1.slope.max--> bps per log ms, and the extra cost at 500<!--nc--> ms is 0.48<!--c:test.c1.dS500.min--> to 0.68<!--c:test.c1.dS500.max--> bps. All of it comes from the predicted move happening while the order waits. The book at arrival takes a hair back.
 - **C2 holds, but only just under back.** Among the passive orders kept, with the ones marketable on arrival left out, cost is higher at longer delays. Under front and random every day is above zero. Under back 11<!--c:test.c2.back.above--> days are, and 2026-02-18 covers zero. Back is the smallest effect on every day, and its intervals are probably a little too narrow.
 
-C2 is small. From 1<!--nc--> ms to 500<!--nc--> ms it adds 0.021<!--c:chk.c2.scale.front.min--> to 0.090<!--c:chk.c2.scale.front.max--> bps under front and 0.009<!--c:chk.c2.scale.back.min--> to 0.028<!--c:chk.c2.scale.back.max--> bps under back, next to fees of 2<!--nc--> and 5<!--nc--> bps. It also describes these orders rather than a causal effect of delay, because which orders get left out depends on delay.
+C2 is small. From 1<!--nc--> ms to 500<!--nc--> ms it adds 0.021<!--c:chk.c2.scale.front.min--> to 0.090<!--c:chk.c2.scale.front.max--> bps under front and 0.009<!--c:chk.c2.scale.back.min--> to 0.028<!--c:chk.c2.scale.back.max--> bps under back, next to fees of 2<!--nc--> and 5<!--nc--> bps. Counting fees makes it bigger, not smaller, because a longer wait turns some maker fills into taker crossings. With fees the 1<!--nc--> to 500<!--nc--> ms cost is 0.063<!--c:chk.c2.feescale.front.min--> to 0.281<!--c:chk.c2.feescale.front.max--> bps under front and 0.002<!--c:chk.c2.feescale.back.min--> to 0.045<!--c:chk.c2.feescale.back.max--> bps under back, still well under a bp. It also describes these orders rather than a causal effect of delay, because which orders get left out depends on delay.
 
 ## Results on the test days
 
@@ -56,7 +56,7 @@ The race rule gives my order the touch only if it's still there 1<!--nc--> ms af
 | Days above zero, 15<!--nc--> minute blocks | 12<!--c:chk.c2.b15.front--> | 12<!--c:chk.c2.b15.random--> | 11<!--c:chk.c2.b15.back--> |
 | Placebo covers zero | 12<!--c:chk.c2.plac.front--> | 12<!--c:chk.c2.plac.random--> | 10<!--c:chk.c2.plac.back--> |
 
-The other tie rule gives exactly the main numbers on 10<!--c:chk.c2.tie.same--> of 12<!--nc--> days, because random decisions fall between whole milliseconds and rarely tie with the book. So its row isn't much of a check on C2. The two placebo misses under back sit on opposite sides of zero. On the build day the placebo already missed too often under back, so I can't read much into them. The notebook has a rough, exploratory look at how much that matters.
+The other tie rule gives exactly the main numbers on 10<!--c:chk.c2.tie.same--> of 12<!--nc--> days, because random decisions fall between whole milliseconds and rarely tie with the book. So its row isn't much of a check on C2. The two placebo misses under back sit on opposite sides of zero. On the build day the placebo already missed too often under back, so I can't read much into them. The notebook has a rough, exploratory look at how much that matters. With fees the back day that covers zero is 2026-08-12, not 2026-02-18. So which day slips under back depends on the check, which is another sign back sits right at the edge.
 
 ## Secondary days
 
@@ -74,9 +74,9 @@ None of these is in the verdict. Each source and each CryptoStruct day is report
 | Tardis BTCUSDT, first of month | 12<!--c:sec.tz.days--> | 12<!--c:sec.tz.c1--> | 12<!--c:sec.tz.front--> | 11<!--c:sec.tz.random--> | 10<!--c:sec.tz.back--> |
 | Tardis ETHUSDT, first of month | 12<!--c:sec.eth.days--> | 12<!--c:sec.eth.c1--> | 12<!--c:sec.eth.front--> | 11<!--c:sec.eth.random--> | 10<!--c:sec.eth.back--> |
 | Bybit BTCUSDT, on the twelve test dates | 12<!--c:sec.by.days--> | 12<!--c:sec.by.c1--> | 10<!--c:sec.by.front--> | 5<!--c:sec.by.random--> | 5<!--c:sec.by.back--> |
-| Bybit, frozen Binance threshold | 12<!--c:sec.by.days--> | 12<!--c:sec.by.frozen.holds--> | not rerun | not rerun | not rerun |
+| Bybit, frozen Binance threshold | 12<!--c:sec.by.days--> | 12<!--c:sec.by.frozen.holds--> | doesn't apply | doesn't apply | doesn't apply |
 
-C1 shows up on every secondary day. Bybit's slopes are 0.039<!--c:sec.by.c1.min--> to 0.060<!--c:sec.by.c1.max--> under its own threshold and 0.047<!--c:sec.by.frozen.min--> to 0.065<!--c:sec.by.frozen.max--> under the frozen one, higher on all 12<!--c:sec.by.frozen.higher--> days. So the threshold change I made after seeing Bybit's build day made Bybit's C1 smaller, not bigger. No C2 slope estimate is below zero on any secondary day, but C2 thins out under back, and on Bybit most intervals cover zero under random and back. C2 uses random decisions, so Bybit's threshold doesn't touch it. Bybit's book moves in steps of about 100<!--nc--> ms and its placebo was already off. Across all secondary days 7<!--c:sec.plac.miss--> of 160<!--c:sec.plac.n--> placebo intervals miss zero. They all reuse one seed, so they aren't 160<!--c:sec.plac.n--> separate draws and I don't compare the count with chance.
+C1's day rule passes on all 40<!--c:sec.c1.holds--> secondary days. Bybit's slopes are 0.039<!--c:sec.by.c1.min--> to 0.060<!--c:sec.by.c1.max--> under its own threshold and 0.047<!--c:sec.by.frozen.min--> to 0.065<!--c:sec.by.frozen.max--> under the frozen one, higher on all 12<!--c:sec.by.frozen.higher--> days. So the threshold change I made after seeing Bybit's build day made Bybit's C1 smaller, not bigger. No C2 slope estimate is below zero on any secondary day, but C2 thins out under back, and on Bybit most intervals cover zero under random and back. C2 uses random decisions, so Bybit's threshold doesn't touch it. Bybit's book moves in steps of about 100<!--nc--> ms and its placebo was already off. Across all secondary days 7<!--c:sec.plac.miss--> of 160<!--c:sec.plac.n--> placebo intervals miss zero. They all reuse one seed, so they aren't 160<!--c:sec.plac.n--> separate draws and I don't compare the count with chance.
 
 ## Limits
 
@@ -84,7 +84,7 @@ C1 shows up on every secondary day. Bybit's slopes are 0.039<!--c:sec.by.c1.min-
 - The replay still has no real race for the touch. The race rule is a sensitivity, not a bound.
 - C1 is the cost of waiting on a signal that already predicts the move. It says nothing about weaker signals.
 - C2 is a description of the orders kept, not a causal effect, and it is small.
-- The C2 placebo is off under back on CryptoStruct and under every rule on Bybit, so it can't back C2 there. The likely cause is the 5<!--nc--> minute block interval running a little narrow on those arrays.
+- On the build day check the C2 placebo was off under back on CryptoStruct and under every rule on Bybit, so it can't back C2 there. My guess at the cause is the 5<!--nc--> minute block interval running a little narrow on those arrays.
 - Bybit's book changes about every 100<!--nc--> ms, so it says little about delays below that.
 - I changed Bybit's threshold after seeing its build day. Both versions ran on every test day.
 
@@ -92,6 +92,6 @@ The preregistration and the notebook list the rest.
 
 ## How to rerun
 
-From this folder, `make env` builds the 01 environment this reuses, `make test` runs the tests and `make verify` checks every number here against its results file. A listed day reruns one step at a time with `make next SRC=cryptostruct SYM=BTCUSDT DAY=2026-01-14`, and `make status` shows where it is. The data files aren't in the repo. data/MANIFEST.md says where each comes from and gives its checksum.
+From this folder, `make env` builds the 01 environment this reuses, `make test` runs the tests and `make verify` checks every number here against its results file. A listed day reruns one step at a time with `make next SRC=cryptostruct SYM=BTCUSDT DAY=2026-01-14`, and `make status` with the same three settings shows where it is. The runner won't overwrite a step that already has a results file, and every listed day's results are committed, so move that day's folder under results/test aside first. The data files aren't in the repo. [data/MANIFEST.md](data/MANIFEST.md) says where each comes from and gives its checksum.
 
 Dates in the notes are US Central. Commit times on GitHub are UTC.

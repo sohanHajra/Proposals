@@ -117,3 +117,21 @@ I didn't write an entry for these two sittings at the time. This is it, from the
 - The verdict counts recomputed from the per day intervals match the verdict file.
 - claimcheck agrees and the tests pass.
 - A later reread of the whole repo found the Bybit wording overstated (most intervals cover zero only under random and back), a root README line about a download script 01.b doesn't have, the secondary placebo count compared with chance despite one shared seed, and no rerun instructions. All fixed.
+
+## 2026-11-25 · release and reread after it
+**Found and fixed**
+- The README said C2 is small next to fees without saying fees make C2 bigger. The fee inclusive 1 to 500 ms range is now reported.
+- Under fees the back day that covers zero is 2026-08-12, not 2026-02-18. Now said.
+- The notebook still compared the secondary placebo count with chance. Marked corrected in place, so the line above about it being fixed is now true everywhere.
+- The rerun instructions would have hit the runner's refusal to overwrite. Fixed.
+- "C1 shows up on every secondary day" now uses the day rule wording. The placebo limit now says it rests on the build day check. The release entry's limits add the race rule and the narrow back intervals.
+
+**Open**
+- The root README has a longer what I believed, what broke block for 01 and only a table row for 01.b.
+- The notebook mixes two minus signs. Harmless.
+
+**Checked, no issue**
+- Every README and notebook headline number recomputed from the per day files matches.
+- PREREGISTRATION.md has only additions under Deviations since its first commit, the last before any test day result.
+- claimcheck agrees on 01 and 01.b, and the tests pass. No secrets in tracked files.
+

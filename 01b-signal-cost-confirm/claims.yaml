@@ -985,3 +985,33 @@ chk.c2.tie.back:
   path: C2.tie_before.back.above
   value: 11
   tol: 0
+chk.c2.feescale.front.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms_with_fees.front.0
+  value: 0.063
+  tol: 0.0005
+chk.c2.feescale.front.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms_with_fees.front.1
+  value: 0.281
+  tol: 0.0005
+chk.c2.feescale.random.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms_with_fees.random.0
+  value: 0.014
+  tol: 0.0005
+chk.c2.feescale.random.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms_with_fees.random.1
+  value: 0.126
+  tol: 0.0005
+chk.c2.feescale.back.min:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms_with_fees.back.0
+  value: 0.002
+  tol: 0.0005
+chk.c2.feescale.back.max:
+  file: results/verdict/checks_BTCUSDT.json
+  path: C2_cost_1_to_500ms_with_fees.back.1
+  value: 0.045
+  tol: 0.0005

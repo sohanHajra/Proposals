@@ -163,7 +163,8 @@
     "slope_range": [
      0.003,
      0.0132
-    ]
+    ],
+    "days_not_above": []
    },
    "random": {
     "above": 12,
@@ -171,7 +172,8 @@
     "slope_range": [
      0.0016,
      0.006
-    ]
+    ],
+    "days_not_above": []
    },
    "back": {
     "above": 11,
@@ -179,6 +181,9 @@
     "slope_range": [
      0.0012,
      0.004
+    ],
+    "days_not_above": [
+     "2026-02-18"
     ]
    }
   },
@@ -189,7 +194,8 @@
     "slope_range": [
      0.0087,
      0.0388
-    ]
+    ],
+    "days_not_above": []
    },
    "random": {
     "above": 12,
@@ -197,7 +203,8 @@
     "slope_range": [
      0.0028,
      0.0175
-    ]
+    ],
+    "days_not_above": []
    },
    "back": {
     "above": 11,
@@ -205,6 +212,9 @@
     "slope_range": [
      0.0003,
      0.0064
+    ],
+    "days_not_above": [
+     "2026-08-12"
     ]
    }
   },
@@ -215,7 +225,8 @@
     "slope_range": [
      0.003,
      0.0132
-    ]
+    ],
+    "days_not_above": []
    },
    "random": {
     "above": 12,
@@ -223,7 +234,8 @@
     "slope_range": [
      0.0016,
      0.006
-    ]
+    ],
+    "days_not_above": []
    },
    "back": {
     "above": 11,
@@ -231,6 +243,9 @@
     "slope_range": [
      0.0012,
      0.004
+    ],
+    "days_not_above": [
+     "2026-02-18"
     ]
    }
   },
@@ -241,7 +256,8 @@
     "slope_range": [
      0.003,
      0.0132
-    ]
+    ],
+    "days_not_above": []
    },
    "random": {
     "above": 12,
@@ -249,7 +265,8 @@
     "slope_range": [
      0.0016,
      0.006
-    ]
+    ],
+    "days_not_above": []
    },
    "back": {
     "above": 11,
@@ -257,6 +274,9 @@
     "slope_range": [
      0.0012,
      0.004
+    ],
+    "days_not_above": [
+     "2026-02-18"
     ]
    }
   },
@@ -278,6 +298,20 @@
   "back": [
    0.009,
    0.028
+  ]
+ },
+ "C2_cost_1_to_500ms_with_fees": {
+  "front": [
+   0.063,
+   0.281
+  ],
+  "random": [
+   0.014,
+   0.126
+  ],
+  "back": [
+   0.002,
+   0.045
   ]
  }
 }
