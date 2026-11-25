@@ -168,3 +168,13 @@ The code that gathers these is src/s2fb/test_checks.py and src/s2fb/secondary_ta
 - None of this changes C1, C2 or the verdict. It changes how much they say.
 - The MANIFEST hashes for the secondary files were taken at fetch time by the same runs that used them, so they show what was read, not when it was first seen.
 - The gap count in each test day's data check and the one in its C1 results differ by 1<!--nc--> or 2<!--nc--> on five<!--nc--> days. My guess is that they count at different stages of reading the feed, but I haven't checked.
+
+## 2026-11-25. Released
+
+I read the write up once more and put 01.b out, tagged v0.1-signal-cost-confirm. Nothing was run today. No hypothesis, threshold, day or result moved. The verdict is the one in the README. C1 and C2 both hold on the twelve test days, and C2 is small and weakest under the back rule.
+
+### Limits and gaps
+- The verdict rests on twelve days of one symbol on one venue. The secondary days back it up but aren't in it.
+- C2 describes the passive orders that were kept, so it isn't a causal cost of delay.
+- Bybit's 100<!--nc--> ms book steps and its placebo problem leave C2 there mostly unread.
+- Anything I find from here goes in a new dated entry.

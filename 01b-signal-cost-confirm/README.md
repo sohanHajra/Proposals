@@ -4,7 +4,7 @@ A sequel to [01 From Signal to Fill](../01-signal-to-fill/). Two things in 01 lo
 
 ## Status
 
-🟡 Test and secondary days run, write up done, not yet released. C1 and C2 both hold on the twelve test days.
+🟢 Released 2026-11-25. C1 and C2 both hold on the twelve test days.
 
 - [Preregistration](PREREGISTRATION.md)
 - [Lab notebook](LAB_NOTEBOOK.md)
