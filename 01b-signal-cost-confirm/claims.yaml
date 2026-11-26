@@ -1065,3 +1065,48 @@ exp.lr.front.chg.max:
   path: front.change_1_to_500.1
   value: -0.023
   tol: 0.0005
+exp.fs.front.share.min:
+  file: results/exploratory/c2_fee_split/summary_BTCUSDT.json
+  path: front.fee_share_pct.0
+  value: 66
+  tol: 0
+exp.fs.front.share.max:
+  file: results/exploratory/c2_fee_split/summary_BTCUSDT.json
+  path: front.fee_share_pct.1
+  value: 73
+  tol: 0
+exp.fs.front.price.min:
+  file: results/exploratory/c2_fee_split/summary_BTCUSDT.json
+  path: front.price.0
+  value: 0.021
+  tol: 0.0005
+exp.fs.front.price.max:
+  file: results/exploratory/c2_fee_split/summary_BTCUSDT.json
+  path: front.price.1
+  value: 0.09
+  tol: 0.0005
+exp.fs.front.fee.min:
+  file: results/exploratory/c2_fee_split/summary_BTCUSDT.json
+  path: front.fee.0
+  value: 0.042
+  tol: 0.0005
+exp.fs.front.fee.max:
+  file: results/exploratory/c2_fee_split/summary_BTCUSDT.json
+  path: front.fee.1
+  value: 0.19
+  tol: 0.0005
+exp.fs.random.share.min:
+  file: results/exploratory/c2_fee_split/summary_BTCUSDT.json
+  path: random.fee_share_pct.0
+  value: 34
+  tol: 0
+exp.fs.random.share.max:
+  file: results/exploratory/c2_fee_split/summary_BTCUSDT.json
+  path: random.fee_share_pct.1
+  value: 72
+  tol: 0
+exp.fs.back.total.min:
+  file: results/exploratory/c2_fee_split/summary_BTCUSDT.json
+  path: back.total.0
+  value: 0.0015
+  tol: 0.00005

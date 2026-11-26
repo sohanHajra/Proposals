@@ -227,3 +227,15 @@ I'm not trying a harsher rule. The stop point was one run.
 ### Limits and gaps
 - The reason the sign flips is my guess. I haven't split the marketable cells' costs to check it.
 - The data was seen before the rule was written, so this is a description, not a test.
+
+## 2026-11-26. How much of C2 with fees is fees
+
+Also exploratory, and from numbers already in the released results, so nothing was rerun. I wrote the split down this morning before computing it. For each test day and rule, the price part is the 1<!--nc--> to 500<!--nc--> ms change without fees, and the fee part is the change with fees minus that.
+
+Under front, fees are 66<!--c:exp.fs.front.share.min-->% to 73<!--c:exp.fs.front.share.max-->% of the change with fees on every day. The price part is 0.021<!--c:exp.fs.front.price.min--> to 0.090<!--c:exp.fs.front.price.max--> bps and the fee part 0.042<!--c:exp.fs.front.fee.min--> to 0.190<!--c:exp.fs.front.fee.max--> bps. Under random the share moves more, 34<!--c:exp.fs.random.share.min-->% to 72<!--c:exp.fs.random.share.max-->%. Under back the fee part is tiny and goes below zero on two days, 2026-05-13 and 2026-08-12. On 2026-08-12 the whole change with fees is only 0.0015<!--c:exp.fs.back.total.min--> bps, so a share means nothing there.
+
+So under front, most of what makes C2 bigger with fees is the switch from maker fills to taker crossings, not prices moving. That fits what I guessed on release day, now with a number.
+
+### Limits and gaps
+- This splits the kept orders' cost into two parts. It doesn't show why the fills switch.
+- The fee rates are one tier read on one date, so the fee part scales with them.
