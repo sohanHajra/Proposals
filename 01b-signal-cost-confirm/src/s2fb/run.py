@@ -273,7 +273,7 @@ def store_bybit_threshold():
     return d
 
 
-EXPLORE = ("c2_lose_race",)
+EXPLORE = ("c2_lose_race", "c2_lose_race_split")
 
 
 def run_explore(source, sym, day, name):

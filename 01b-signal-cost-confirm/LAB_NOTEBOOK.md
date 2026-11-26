@@ -239,3 +239,14 @@ So under front, most of what makes C2 bigger with fees is the switch from maker 
 ### Limits and gaps
 - This splits the kept orders' cost into two parts. It doesn't show why the fills switch.
 - The fee rates are one tier read on one date, so the fee part scales with them.
+
+## 2026-11-26, afternoon. Checking why the sign flipped
+
+Above I guessed that the lose the race cost falls with delay because an order that arrives marketable has already had the price move its way, and crossing 10 s later keeps most of that move. I want to see if that's actually it before I lean on it.
+
+The check. The mean cost at each delay is a sum over orders, so I can split the 1<!--nc--> to 500<!--nc--> ms change into the part that comes from cells arriving marketable and the part from every other cell. The two add up to the total. For each test day and rule I'll also note the mean cost of the marketable cells at 500<!--nc--> ms.
+
+I'll say the guess holds under a rule if, on at least 10<!--nc--> of the 12<!--nc--> days, the marketable part is below zero, it's more than half of the total drop, and the marketable cells' mean cost at 500<!--nc--> ms is below zero. If it holds on fewer days, the guess is wrong or only part of the story, and I'll say so. It runs once, through the same explore step, under the name c2_lose_race_split. I tried it on 2026-09-01 first to check the code. There the marketable part is bigger than the whole drop and the other cells push the other way.
+
+### Limits and gaps
+- Even if it holds, this shows where the drop comes from, not why those orders are cheap. The price moving their way is still my reading.
