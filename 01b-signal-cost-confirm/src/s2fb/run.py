@@ -4,6 +4,8 @@ Usage
   python -m s2fb.run SOURCE SYM DAY next     run the next unit of that day
   python -m s2fb.run SOURCE SYM DAY status   list the units and which are done
   python -m s2fb.run SOURCE SYM DAY leave_out "REASON"   a day whose file failed (copy, MD5 or read)
+  python -m s2fb.run SOURCE SYM DAY explore NAME   an exploratory follow up from s2fb.explore, once,
+                                                   only after the day's c2 has run (results/exploratory/NAME/)
 
 SOURCE is cryptostruct, tardis or bybit. Only the days in s2fb.days are accepted, plus 2026-09-01
 for building. Every unit writes its own file under results/ROLE/SOURCE_SYM_DAY/ and refuses to start
@@ -271,13 +273,45 @@ def store_bybit_threshold():
     return d
 
 
+EXPLORE = ("c2_lose_race",)
+
+
+def run_explore(source, sym, day, name):
+    """Exploratory, after release. Reads the stored c2_after arrays and the day's book. Writes once."""
+    from . import load, explore
+    if name not in EXPLORE:
+        raise Refused(f"{name} is not an exploratory step")
+    role, us, done = state(source, sym, day)
+    if "c2" not in done:
+        raise Refused(f"c2 has not run for {source} {sym} {day}")
+    if day != BUILD_DAY and not s2f_unchanged():
+        raise Refused(f"the 01 code differs from {S2F_TAG}")
+    if day != BUILD_DAY and (os.environ.get("S2FB_DATA") or os.environ.get("S2FB_RESULTS")):
+        raise Refused("S2FB_DATA or S2FB_RESULTS is set. Test days run only on the project folders")
+    out = RESULTS / "exploratory" / name / f"{source}_{sym}_{day}.json"
+    if out.exists():
+        raise Refused(f"{out} exists, not overwriting it")
+    t0 = time.time()
+    with runner():
+        r = dict(np.load(array_file(source, sym, day, "c2_after")))
+        book = load.prep(source, day, sym)[0]
+        res = getattr(explore, name)(r, book)
+    res = {**res, **dict(step=name, source=source, symbol=sym, day=day, role=role, seconds=round(time.time() - t0, 1))}
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(res, indent=1, default=float))
+    print("wrote", out, flush=True)
+    return res
+
+
 def main(argv):
-    if not ((len(argv) == 4 and argv[3] in ("next", "status")) or (len(argv) == 5 and argv[3] == "leave_out")):
+    if not ((len(argv) == 4 and argv[3] in ("next", "status")) or (len(argv) == 5 and argv[3] in ("leave_out", "explore"))):
         print(__doc__); return 2
     source, sym, day, what = argv[:4]
     try:
         if what == "leave_out":
             leave_out(source, sym, day, argv[4])
+        elif what == "explore":
+            run_explore(source, sym, day, argv[4])
         elif what == "status":
             role, us, done = state(source, sym, day)
             print(json.dumps(dict(role=role, units=us, done=done)))

@@ -197,3 +197,19 @@ src/s2fb/test_checks.py now also writes the fee inclusive cost range and the day
 - The fee inclusive C2 ranges come from the registered fee check. I haven't looked at how much of the change is fees moving versus fills moving.
 - The release tag points at the text before these fixes. The fixes are in the commit after it.
 
+
+## 2026-11-26. A rule for one more look at C2, written before it runs
+
+This is exploratory and comes after release. It doesn't touch C1, C2 or the verdict.
+
+C2 keeps only the random decisions that are never marketable on arrival at any delay. That takes out the free option the replay hands a stale order, but it picks orders by where the price goes next. 01's H5 keeps every order and keeps the free option, which pulls its cost down at longer delays. I wanted the third reading, where every order stays in and the free option goes the other way.
+
+The rule. Every random decision is kept. A cell that arrives marketable is treated as if a faster trader took the stale price. It gets no fill at arrival and crosses at the far touch 10 s after arrival, the same cross price the replay already uses for anything left unfilled. Every other cell keeps its stored cost. I take the slope on log d under front, random and back with the same block bootstrap and seed, on the twelve test days with the primary tie rule, once each, through `python -m s2fb.run cryptostruct BTCUSDT DAY explore c2_lose_race`. The step reads the stored replay arrays and the day's book and writes results/exploratory/c2_lose_race/.
+
+How I'll read it. Next to C2 and H5 it shows how much of C2 comes from which orders are kept. It isn't a bound, since a real order would sometimes win that race. One run, one table, reported whatever it shows. I first wrote a filter on distance from the far touch at decision time, then saw that our price always starts at its own touch, so the filter would keep every order. I replaced it before running anything.
+
+It ran on the build day only, to check the code. Other cells match the stored cost exactly.
+
+### Limits and gaps
+- Losing every race is as unrealistic as winning every race. The truth sits somewhere between, and this doesn't say where.
+- The data was seen before this rule was written, so whatever it shows is a description, not a test.
