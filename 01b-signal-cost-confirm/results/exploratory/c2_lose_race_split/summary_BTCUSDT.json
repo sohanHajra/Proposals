@@ -1,0 +1,61 @@
+{
+ "days": 12,
+ "cells_without_cost": 0,
+ "front": {
+  "marketable_part_below_zero": 12,
+  "over_half_of_drop": 12,
+  "marketable_mean_500_below_zero": 12,
+  "all_three": 12,
+  "holds": true,
+  "marketable_part": [
+   -0.22424277763883557,
+   -0.043141618552165834
+  ],
+  "other_part": [
+   0.019825343389414246,
+   0.08192723599387092
+  ],
+  "marketable_mean_500": [
+   -1.5357745533346399,
+   -0.9169988250094336
+  ]
+ },
+ "random": {
+  "marketable_part_below_zero": 12,
+  "over_half_of_drop": 12,
+  "marketable_mean_500_below_zero": 12,
+  "all_three": 12,
+  "holds": true,
+  "marketable_part": [
+   -0.22424277763883557,
+   -0.043141618552165834
+  ],
+  "other_part": [
+   0.008164046587243956,
+   0.04752073473845958
+  ],
+  "marketable_mean_500": [
+   -1.5357745533346399,
+   -0.9169988250094336
+  ]
+ },
+ "back": {
+  "marketable_part_below_zero": 12,
+  "over_half_of_drop": 12,
+  "marketable_mean_500_below_zero": 12,
+  "all_three": 12,
+  "holds": true,
+  "marketable_part": [
+   -0.22424277763883557,
+   -0.043141618552165834
+  ],
+  "other_part": [
+   0.007873792953482284,
+   0.03977840738036481
+  ],
+  "marketable_mean_500": [
+   -1.5357745533346399,
+   -0.9169988250094336
+  ]
+ }
+}

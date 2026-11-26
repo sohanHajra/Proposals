@@ -1,0 +1,30 @@
+{
+ "cells_without_cost": 0,
+ "front": {
+  "change_marketable": -0.08380088485262088,
+  "change_other": 0.04765495785290835,
+  "change_total": -0.03614592699971253,
+  "mean_marketable_cost_500": -1.075598979602069,
+  "mean_other_cost_500": 0.31254486986767105
+ },
+ "random": {
+  "change_marketable": -0.08380088485262088,
+  "change_other": 0.03164583135263743,
+  "change_total": -0.05215505349998345,
+  "mean_marketable_cost_500": -1.075598979602069,
+  "mean_other_cost_500": 0.42628754971307925
+ },
+ "back": {
+  "change_marketable": -0.08380088485262088,
+  "change_other": 0.01949392644181719,
+  "change_total": -0.0643069584108037,
+  "mean_marketable_cost_500": -1.075598979602069,
+  "mean_other_cost_500": 0.4817199893097116
+ },
+ "step": "c2_lose_race_split",
+ "source": "cryptostruct",
+ "symbol": "BTCUSDT",
+ "day": "2026-10-14",
+ "role": "test",
+ "seconds": 3.6
+}

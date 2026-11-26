@@ -250,3 +250,15 @@ I'll say the guess holds under a rule if, on at least 10<!--nc--> of the 12<!--n
 
 ### Limits and gaps
 - Even if it holds, this shows where the drop comes from, not why those orders are cheap. The price moving their way is still my reading.
+
+## 2026-11-26, afternoon. The guess holds
+
+The split ran once on each test day. It holds on all 12<!--c:exp.lrs.front.all--> days under front, and the same under random and back. The marketable part is below zero every time, from −0.224<!--c:exp.lrs.mk.min--> to −0.043<!--c:exp.lrs.mk.max--> bps, and it's bigger than the whole drop. The other cells push the other way, by 0.020<!--c:exp.lrs.front.other.min--> to 0.082<!--c:exp.lrs.front.other.max--> bps under front. The marketable cells' mean cost at 500<!--nc--> ms is −1.54<!--c:exp.lrs.mk500.min--> to −0.92<!--c:exp.lrs.mk500.max--> bps, so even crossing late they get a better price than the mid at decision.
+
+Three rules agreeing here isn't three separate checks. A marketable cell gets the same cost under every queue rule, so only the other part differs between them.
+
+What I take from it. Taking the stale fill away isn't enough to make these orders expensive, because the move that made them marketable is still there 10 s later. Every other order gets more expensive with delay under all three rules, which is the same direction C2 found. So C2's sign rests on the orders that didn't arrive marketable, and what happens to the ones that did depends on how they're treated.
+
+### Limits and gaps
+- This shows where the drop comes from. That the price moved their way is the plain reading of a negative cost, but I didn't track the move itself.
+- 10 s is the replay's existing cross time. A faster cross would keep less of the move. I'm not running that.

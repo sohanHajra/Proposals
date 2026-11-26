@@ -1110,3 +1110,38 @@ exp.fs.back.total.min:
   path: back.total.0
   value: 0.0015
   tol: 0.00005
+exp.lrs.front.all:
+  file: results/exploratory/c2_lose_race_split/summary_BTCUSDT.json
+  path: front.all_three
+  value: 12
+  tol: 0
+exp.lrs.mk.min:
+  file: results/exploratory/c2_lose_race_split/summary_BTCUSDT.json
+  path: front.marketable_part.0
+  value: -0.224
+  tol: 0.0005
+exp.lrs.mk.max:
+  file: results/exploratory/c2_lose_race_split/summary_BTCUSDT.json
+  path: front.marketable_part.1
+  value: -0.043
+  tol: 0.0005
+exp.lrs.front.other.min:
+  file: results/exploratory/c2_lose_race_split/summary_BTCUSDT.json
+  path: front.other_part.0
+  value: 0.02
+  tol: 0.0005
+exp.lrs.front.other.max:
+  file: results/exploratory/c2_lose_race_split/summary_BTCUSDT.json
+  path: front.other_part.1
+  value: 0.082
+  tol: 0.0005
+exp.lrs.mk500.min:
+  file: results/exploratory/c2_lose_race_split/summary_BTCUSDT.json
+  path: front.marketable_mean_500.0
+  value: -1.54
+  tol: 0.005
+exp.lrs.mk500.max:
+  file: results/exploratory/c2_lose_race_split/summary_BTCUSDT.json
+  path: front.marketable_mean_500.1
+  value: -0.92
+  tol: 0.005

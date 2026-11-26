@@ -56,6 +56,29 @@ def fee_split():
     return out
 
 
+def lose_race_split():
+    """Tally of c2_lose_race_split against the mark written before it ran (at least 10 of 12 days)."""
+    rows = [json.load(open(f)) for f in sorted(glob.glob(str(RESULTS / "exploratory" / "c2_lose_race_split" / "cryptostruct_BTCUSDT_*.json")))]
+    rows = [r for r in rows if r["role"] == "test"]
+    out = dict(days=len(rows), cells_without_cost=sum(r["cells_without_cost"] for r in rows))
+    for q in ("front", "random", "back"):
+        x = [r[q] for r in rows]
+        a = sum(v["change_marketable"] < 0 for v in x)
+        b = sum(v["change_total"] < 0 and v["change_marketable"] < 0.5 * v["change_total"] for v in x)
+        c = sum(v["mean_marketable_cost_500"] < 0 for v in x)
+        allthree = sum(v["change_marketable"] < 0 and v["change_total"] < 0 and v["change_marketable"] < 0.5 * v["change_total"]
+                       and v["mean_marketable_cost_500"] < 0 for v in x)
+        out[q] = dict(marketable_part_below_zero=a, over_half_of_drop=b, marketable_mean_500_below_zero=c, all_three=allthree,
+                      holds=allthree >= 10,
+                      marketable_part=[min(v["change_marketable"] for v in x), max(v["change_marketable"] for v in x)],
+                      other_part=[min(v["change_other"] for v in x), max(v["change_other"] for v in x)],
+                      marketable_mean_500=[min(v["mean_marketable_cost_500"] for v in x), max(v["mean_marketable_cost_500"] for v in x)])
+    p = RESULTS / "exploratory" / "c2_lose_race_split" / "summary_BTCUSDT.json"
+    p.write_text(json.dumps(out, indent=1))
+    return out
+
+
 if __name__ == "__main__":
     main()
     fee_split()
+    lose_race_split()
