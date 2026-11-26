@@ -213,3 +213,17 @@ It ran on the build day only, to check the code. Other cells match the stored co
 ### Limits and gaps
 - Losing every race is as unrealistic as winning every race. The truth sits somewhere between, and this doesn't say where.
 - The data was seen before this rule was written, so whatever it shows is a description, not a test.
+
+## 2026-11-26, later. The lose the race look, run once
+
+It ran once on each of the twelve test days. Other cells matched the stored cost on every day. The share of cells that arrive marketable goes from 0.03<!--c:exp.lr.mk1.min-->% to 0.2<!--c:exp.lr.mk1.max-->% at 1<!--nc--> ms to 4.7<!--c:exp.lr.mk500.min-->% to 14.5<!--c:exp.lr.mk500.max-->% at 500<!--nc--> ms.
+
+The sign flips. Under this rule cost falls with delay. Below zero on 11<!--c:exp.lr.front.below--> of 12<!--c:exp.lr.days--> days under front (one covers zero), and on all twelve under random and back. Under front the slope runs from −0.025<!--c:exp.lr.front.slope.min--> to −0.003<!--c:exp.lr.front.slope.max--> bps per log ms, and the 1<!--nc--> to 500<!--nc--> ms change from −0.174<!--c:exp.lr.front.chg.min--> to −0.023<!--c:exp.lr.front.chg.max--> bps. C2 had all three rules above zero on most days.
+
+My reading, not checked. An order that arrives marketable does so because the price moved its way. Crossing 10 s later still keeps most of that move, so the rule doesn't take the free option away the way I meant it to. It hands it over late. So this isn't the pessimistic side I described this morning, and it doesn't bracket C2 with H5. What it does show is that C2's sign depends on which orders are kept. That is the weak spot already listed for C2, now with a number on it.
+
+I'm not trying a harsher rule. The stop point was one run.
+
+### Limits and gaps
+- The reason the sign flips is my guess. I haven't split the marketable cells' costs to check it.
+- The data was seen before the rule was written, so this is a description, not a test.

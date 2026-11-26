@@ -1015,3 +1015,53 @@ chk.c2.feescale.back.max:
   path: C2_cost_1_to_500ms_with_fees.back.1
   value: 0.045
   tol: 0.0005
+exp.lr.mk1.min:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: marketable_pct_1ms.0
+  value: 0.03
+  tol: 0.005
+exp.lr.mk1.max:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: marketable_pct_1ms.1
+  value: 0.2
+  tol: 0.005
+exp.lr.mk500.min:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: marketable_pct_500ms.0
+  value: 4.7
+  tol: 0.05
+exp.lr.mk500.max:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: marketable_pct_500ms.1
+  value: 14.5
+  tol: 0.05
+exp.lr.front.below:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: front.below
+  value: 11
+  tol: 0
+exp.lr.days:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: days
+  value: 12
+  tol: 0
+exp.lr.front.slope.min:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: front.slope.0
+  value: -0.025
+  tol: 0.0005
+exp.lr.front.slope.max:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: front.slope.1
+  value: -0.003
+  tol: 0.0005
+exp.lr.front.chg.min:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: front.change_1_to_500.0
+  value: -0.174
+  tol: 0.0005
+exp.lr.front.chg.max:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: front.change_1_to_500.1
+  value: -0.023
+  tol: 0.0005
