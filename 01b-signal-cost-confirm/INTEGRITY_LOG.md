@@ -135,3 +135,17 @@ I didn't write an entry for these two sittings at the time. This is it, from the
 - PREREGISTRATION.md has only additions under Deviations since its first commit, the last before any test day result.
 - claimcheck agrees on 01 and 01.b, and the tests pass. No secrets in tracked files.
 
+
+## 2026-11-26 · the two looks after release
+**Found and fixed**
+- The entry on the split check said the guess "holds". That's the verdict word. Changed to "passes" in place, with a note.
+- The split check reuses the twelve test days that raised the question. The entry now says it explains those days and doesn't confirm anything new.
+
+**Open**
+- Two commit messages from today say more than the work showed at the time. 61658ba says the extra cost "mostly comes from maker fills turning into taker crossings". That was never measured, and the notebook calls it my reading. adc2c48 states why the lose the race cost falls before I had checked it. The later check (7fc2fae) fits that reading, but the message came first. Both are pushed and I'm leaving history alone. The notebook entries are the record.
+- The three queue rules agree on the split check, but they aren't separate checks there. Said in the notebook.
+
+**Checked, no issue**
+- Both looks were written down and committed before they ran on any test day (faaeec0, 940881f). The fee split only reads released results.
+- Each look ran once per day through the runner. Nothing was tuned after a result, and no second or harsher rule was tried.
+- None of it touches C1, C2, the verdict or PREREGISTRATION.md. claimcheck agrees and the tests pass.
