@@ -31,7 +31,7 @@ flowchart LR
 | # | Proposal | The question | Status | Headline |
 |---|---|---|---|---|
 | 01 | [From Signal to Fill](01-signal-to-fill/) | When market conditions are the same, does extra delay between decision and order outcome cost price or fills? | 🟢 Released 2026-11-22 | H1, H2 and H4 null, H1 and H2 by design. A taker acting on book imbalance loses roughly half to three quarters of a bp by 500 ms, an upper end |
-| 01.b | [Signal Cost Confirm](01b-signal-cost-confirm/) | Do the two leads from 01 hold on twelve days I haven't seen, with the rules written first? | 🟢 Released 2026-11-25 | C1 and C2 both hold on the twelve test days. C2 is small and weakest under the back rule. On Bybit its intervals mostly cover zero under random and back |
+| 01.b | [Signal Cost Confirm](01b-signal-cost-confirm/) | Do the two leads from 01 hold on twelve days I haven't seen, with the rules written first? | 🟢 Released 2026-11-25, revisited 2026-11-26 | C1 and C2 both hold on the twelve test days. C2 is small and weakest under the back rule. On Bybit its intervals mostly cover zero under random and back |
 
 <details>
 <summary><b>01 · From Signal to Fill</b> · what I believed, what I tried, what broke, what I believe now</summary>

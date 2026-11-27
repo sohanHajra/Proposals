@@ -4,11 +4,20 @@ A sequel to [01 From Signal to Fill](../01-signal-to-fill/). Two things in 01 lo
 
 ## Status
 
-🟢 Released 2026-11-25. C1 and C2 both hold on the twelve test days.
+🟢 Released 2026-11-25, revisited 2026-11-26. C1 and C2 both hold on the twelve test days.
 
 - [Preregistration](PREREGISTRATION.md)
 - [Lab notebook](LAB_NOTEBOOK.md)
 - [Integrity log](INTEGRITY_LOG.md)
+
+## Revisited 2026-11-26
+
+I went back to C2 a day after release with two questions I'd left open. Both are exploratory and were run after release. Neither changes C1, C2 or the verdict. The details are in the notebook entries dated 2026-11-26.
+
+- **How much of C2 with fees is fees.** Under front, fees are 66<!--c:exp.fs.front.share.min--> to 73<!--c:exp.fs.front.share.max--> percent of the 1<!--nc--> to 500<!--nc--> ms change on every test day. The bottom line below says that's because maker fills turn into taker crossings. That's my reading. I didn't measure it.
+- **What if a faster trader takes the stale price.** I kept every passive order and treated any that arrived marketable as losing the race, so it crosses 10<!--nc--> s later instead. Cost then falls with delay, below zero on 11<!--c:exp.lr.front.below--> of 12<!--c:exp.lr.days--> days under front, 12<!--c:exp.lr.random.below--> of 12<!--nc--> under random and 12<!--c:exp.lr.back.below--> of 12<!--nc--> under back. A follow up split shows why. Those orders still beat the decision mid when they cross late, by 0.92<!--c:exp.lrs.mk500.max.abs--> to 1.54<!--c:exp.lrs.mk500.min.abs--> bps at 500<!--nc--> ms, because most of the move that made them marketable is still there. Every other order gets dearer with delay, as in C2.
+
+So C2's sign rests on which orders are kept. I already said it describes the kept orders rather than a causal effect. This shows how much that matters. The split reuses the same twelve days, so it explains them and doesn't confirm anything new.
 
 ## Bottom line
 

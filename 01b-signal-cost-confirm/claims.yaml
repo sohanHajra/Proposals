@@ -1145,3 +1145,25 @@ exp.lrs.mk500.max:
   path: front.marketable_mean_500.1
   value: -0.92
   tol: 0.005
+exp.lr.random.below:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: random.below
+  value: 12
+  tol: 0
+exp.lr.back.below:
+  file: results/exploratory/c2_lose_race/summary_BTCUSDT.json
+  path: back.below
+  value: 12
+  tol: 0
+exp.lrs.mk500.max.abs:
+  file: results/exploratory/c2_lose_race_split/summary_BTCUSDT.json
+  path: front.marketable_mean_500.1
+  scale: -1
+  value: 0.92
+  tol: 0.005
+exp.lrs.mk500.min.abs:
+  file: results/exploratory/c2_lose_race_split/summary_BTCUSDT.json
+  path: front.marketable_mean_500.0
+  scale: -1
+  value: 1.54
+  tol: 0.005
